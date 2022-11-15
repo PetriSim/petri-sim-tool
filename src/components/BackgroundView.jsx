@@ -5,10 +5,11 @@ import {
     Box
   } from '@chakra-ui/react'
 
-function BackgroundView() {
-  return (
-   
-        <BpmnView />
+function BackgroundView(props) {
+  return (<>
+    
+        {props.current === "BPMN" ?  <BpmnView /> : ""}
+       </>
    
     
   )

@@ -11,7 +11,7 @@ import Navigation from './components/Navigation/Navigation';
 import Parameditor from './components/Parameditor';
 
 function App() {
-  const [current, setCurrent] = useState("Scenario Parameters")
+  const [current, setCurrent] = useState("BPMN")
 
   return (
     <ChakraProvider theme={theme}>
@@ -23,7 +23,7 @@ function App() {
           <Parameditor current={current}/>
         </Box>
         <Box>
-          <BackgroundView zIndex={-5}/>
+          <BackgroundView current={current} zIndex={-5}/>
         </Box>
       </Flex>
     </ChakraProvider>

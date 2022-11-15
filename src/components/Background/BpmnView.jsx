@@ -120,9 +120,9 @@ function BpmnView() {
           <Box id="container" w="100%" pos="absolute" h="95vh">
           </Box>
 
-            <ButtonGroup size='sm' isAttached variant='outline' position="absolute" justifyContent="center" bottom="10px" left="0px" right="0px">
-                <IconButton onClick={zoomIn} aria-label='Add to friends' icon={<AddIcon />}  bg="white" />
-                <IconButton onClick={zoomOut} aria-label='Add to friends' icon={<MinusIcon />} bg="white" />
+            <ButtonGroup size='md' spacing='6' variant='unstyled' position="absolute" justifyContent="center" bottom="20px" left="0px" right="0px">
+                <IconButton onClick={zoomIn}  icon={<AddIcon />}  bg="white"  rounded="20" shadow="sm"/>
+                <IconButton onClick={zoomOut} icon={<MinusIcon />} bg="white" rounded="20" shadow="sm" />
             </ButtonGroup>
       
           </Flex>

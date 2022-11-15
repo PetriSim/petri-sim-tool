@@ -24,9 +24,7 @@ import {
   const LinkItems = [
     { name: 'Scenario Parameters', icon: FiSettings },
     { name: 'Resource Parameters', icon: FiTrendingUp },
-    { name: 'Timetable', icon: TimeIcon },
-    { name: 'Activity', icon: FiStar },
-    { name: 'Gateway Logic', icon: FiStar },
+    { name: 'BPMN', icon: FiStar },
   ];
 
 
@@ -38,13 +36,14 @@ function NavigationItem(props) {
         {LinkItems.map((link) => (
            <>
             <Flex w="100%">
-                <Menu placement="right">
+                <Menu placement="right"  w="100%">
                     <Link
                         backgroundColor={link.name === props.current? "#AEC8CA" : "#FFFF" }
                         p={3}
                         borderRadius={8}
                         _hover={{ backgroundColor: "#AEC8CA" }}
                         transition="background-color 400ms linear"
+                        w="100%"
                     >
                         <MenuButton w="100%" onClick={() => props.setCurrent(link.name)}>
                             <Flex alignItems='center' >
