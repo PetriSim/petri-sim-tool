@@ -2,14 +2,21 @@
 
 2. Install npm 
 
-3. Clone Git
+3. Clone the git rep
 
 4. Go to the project directory
 
-5. run:
+```console
+cd petri-sim-tool
+```
 
-### npm install
+5. run: 
 
-6. run
+```console
+npm install
+```
 
-### npm start
+6. run:
+```console
+npm start
+```
