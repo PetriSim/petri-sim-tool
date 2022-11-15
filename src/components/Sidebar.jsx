@@ -5,7 +5,7 @@ import {
     Flex,
     Text,
     Divider,
-    Button
+    IconButton
     
   } from '@chakra-ui/react'
 
@@ -22,26 +22,32 @@ function Sidebar(props) {
   return (
         <Flex
             boxShadow='sm' 
-            p='6' 
-            rounded='2xl'
             backgroundColor={props.backgroundColor}
-            w="30vh"
+            alignItems="baseline"
             flexDir="column"
             gap="5"
+        
             position="absolute"
-            h={hidden ? "10px" : "95vh"}
+            w={hidden ? "" : "30vh"}
+            h={hidden ? "" : "95vh"}
+            p={hidden ? "0" : "6"}
+            rounded={hidden ? "xl" : "2xl"}
             left={props.side === "left" ? "2vh" : ""}
             right={props.side === "right" ? "2vh" : ""}
+
+          
         
         >
-            <Button onClick={() => setHidden(!hidden)}>
-                <FiMenu />
-            </Button>
+        <Flex alignItems="center">
+            <IconButton onClick={() => setHidden(!hidden)} icon={<FiMenu />} fontSize="19" variant="unstyled" />
+            {!hidden? props.title : ""}
+            
+        </Flex>
+      
+        <Divider display={hidden ? "none" : "block"}/>
 
 
         {!hidden? props.content : ""}
-
-         
 
         
 

@@ -3,25 +3,25 @@ import Sidebar from './Sidebar';
 
 import {
     Divider, 
-    Text
+    Text,
+    Flex
   } from '@chakra-ui/react'
 
 
-function Parameditor() {
+function Parameditor(props) {
 
 
-      const Editor = () => {
-        return <>
-                    <Text fontSize="md" textAlign="center" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold">SCENARIO PARAMETERS</Text>
-                    <Divider />
-                </>
-      };
+    const Editor = () => {
+    return <Text fontSize="sm" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" textTransform="uppercase">{props.current}</Text>
+                
+            
+    };
 
-  return (
+    return (
         <>
-            <Sidebar side="right" backgroundColor="#F0F0F1" content={<Editor/>} />
+            <Sidebar side="right" backgroundColor="#F0F0F1" title={<Editor/>}  />
         </>
-  )
+    )
 }
 
 export default Parameditor;

@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useState} from 'react';
 import './styles/globals.css'
 import {
   ChakraProvider,
@@ -11,14 +11,16 @@ import Navigation from './components/Navigation/Navigation';
 import Parameditor from './components/Parameditor';
 
 function App() {
+  const [current, setCurrent] = useState("Scenario Parameters")
+
   return (
     <ChakraProvider theme={theme}>
       <Flex bg="#F9FAFC" p="6"  h="100vh" zIndex={-3}>
         <Box zIndex={2}>
-          <Navigation />
+          <Navigation setCurrent={setCurrent} current={current} />
         </Box>
         <Box zIndex={2}>
-          <Parameditor />
+          <Parameditor current={current}/>
         </Box>
         <Box>
           <BackgroundView zIndex={-5}/>
