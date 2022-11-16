@@ -2,7 +2,7 @@ import React from 'react'
 import Sidebar from '../Sidebar';
 
 import {
-    Divider, 
+    Button,
     Text
   } from '@chakra-ui/react'
 import NavigationItem from './NavigationItem';
@@ -21,7 +21,15 @@ function Navigation(props) {
 
   return (
         <>
-            <Sidebar side="left" backgroundColor="white" title={<Nav/>} content={<NavigationItem current={props.current} setCurrent={props.setCurrent} />} />
+            <Sidebar side="left" backgroundColor="white" title={<Nav/>} 
+            content={
+                    <>
+                    <NavigationItem current={props.current} setCurrent={props.setCurrent} />
+                    <Button colorScheme='teal' variant='solid' onClick={() => props.setStarted("false")}>
+                        Exit
+                    </Button>
+                    </>
+                } />
         </>
   )
 }
