@@ -12,7 +12,7 @@ import Parameditor from './components/Parameditor';
 import StartView from './components/StartView';
 
 function App() {
-  const [current, setCurrent] = useState("BPMN")
+  const [current, setCurrent] = useState("Modelbased Parameters")
   const [projectStarted, setStarted] = useState(sessionStorage.getItem('st') || false)
   const [bpmns, setBpmns] = useState([{
                                         name: "Warenversand",

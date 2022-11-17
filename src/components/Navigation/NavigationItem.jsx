@@ -24,7 +24,7 @@ import {
   const LinkItems = [
     { name: 'Scenario Parameters', icon: FiSettings },
     { name: 'Resource Parameters', icon: FiTrendingUp },
-    { name: 'BPMN', icon: FiStar },
+    { name: 'Modelbased Parameters', icon: FiStar },
   ];
 
 
@@ -52,7 +52,7 @@ function NavigationItem(props) {
                                     <Icon as={link.icon} fontSize="md" color={"RGBA(0, 0, 0, 0.64)"} />
                                 </Flex>
                                 
-                                <Text ml={5} fontSize="sm" color="RGBA(0, 0, 0, 0.64)" fontWeight="bold" display="flex">{link.name}</Text>
+                                <Text ml={2} fontSize="sm" textAlign="left" color="RGBA(0, 0, 0, 0.64)" fontWeight="bold" display="flex">{link.name}</Text>
                             </Flex>
                         </MenuButton>
                     </Link>

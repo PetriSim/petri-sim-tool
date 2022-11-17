@@ -17,7 +17,7 @@ function BackgroundView(props) {
     console.log(props.currentBpmn)
 
   return (<>
-        {props.current === "BPMN" ?  
+        {props.current === "Modelbased Parameters" ?  
         <>
 
         {
