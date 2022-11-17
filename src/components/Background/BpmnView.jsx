@@ -14,18 +14,30 @@ import {
 
 import { MinusIcon, AddIcon } from '@chakra-ui/icons'
 
-function BpmnView() {
+function BpmnView(props) {
+
+
+
         const [diagram, diagramSet] = useState("");
-        const container = document.getElementById("container");
+        var container = document.getElementById("container");
         const [clickedElement, clickedSet] = useState({});
         const [modelerRef, setModeler] = useState(null)
         
+        useEffect(() =>{
+          if (container){
+            container.innerHTML = ""
+            container = document.getElementById("container");
+            diagramSet("")
+            setModeler("")
+          }
+
+        },[props.currentBpmn])
        
         useEffect(() => {
           if (diagram.length === 0) {
             axios
               .get(
-                "https://cdn.staticaly.com/gh/bpmn-io/bpmn-js-examples/master/colors/resources/pizza-collaboration.bpmn"
+                props.currentBpmn.file
               )
               .then((r) => {
                 diagramSet(r.data)
