@@ -4,13 +4,8 @@ import Sidebar from '../Sidebar';
 import {
     Button,
     Text,
-    MenuButton,
-    Menu,
-    MenuItem,
-    MenuList,
-    Flex,
-    Input,
-    Divider
+    Divider,
+    Spacer
     
   } from '@chakra-ui/react'
 import NavigationItem from './NavigationItem';
@@ -19,10 +14,28 @@ import {
     FiTrendingUp,
     FiStar,
     FiSettings,
+    FiFileText,
+    FiTrash2,
+    FiDownload,
+    FiLock
 
   } from 'react-icons/fi';
+import BPMNSwitcher from './BPMNSwitcher';
 
 function Navigation(props) {
+
+    const LinkItems = [
+        { name: 'Scenario Parameters', icon: FiSettings },
+        { name: 'Resource Parameters', icon: FiTrendingUp },
+        { name: 'Modelbased Parameters', icon: FiStar },
+      ];
+
+      const LinkItems2 = [
+        { name: 'Add BPMN', icon: FiFileText },
+        { name: 'Reset parameters', icon: FiTrash2 },
+        { name: 'Export XML files', icon: FiDownload },
+        { name: 'Save parameters', icon: FiLock },
+      ];
 
     const Nav = () => {
         return <>
@@ -38,35 +51,17 @@ function Navigation(props) {
             <Sidebar side="left" backgroundColor="white" title={<Nav/>} 
             content={
                     <>
-                    <NavigationItem current={props.current} setCurrent={props.setCurrent} />
-
-
-                    <Divider/>
-                    <Menu>
-                    <Text ml={2} fontSize="sm" textAlign="left" color="RGBA(0, 0, 0, 0.64)" fontWeight="bold" display="flex">Current BPMN Model:</Text>      
-                        <Flex justifyContent="space-between">                      
-                            <Input placeholder={props.bpmns[props.currentBpmn].name} variant="filled" isDisabled w="65%" bg="blackAlpha.200" _hover="blackAlpha.200" />
-
-                            <MenuButton as={Button} variant="outline" textAlign="left" p={3} borderRadius={8} w="30%">
-                                    <Text fontSize="sm" color="RGBA(0, 0, 0, 0.64)" fontWeight="bold">Change</Text>
-                            </MenuButton>
-                        </Flex>
-                        <MenuList>
-                            {props.bpmns.map((bpmn, index) => {
-                                return  <MenuItem onClick={() =>  props.setBpmn(index)}>{bpmn.name + " " + index}</MenuItem>
-                            })
-
-                            }
-                        </MenuList>
-                    </Menu>
-                    <Divider/>
-
-
-                    <Button colorScheme='teal' variant='solid' onClick={() => props.setStarted("false")}>
-                        Exit
-                    </Button>
-
+                    <NavigationItem current={props.current} setCurrent={props.setCurrent} items={LinkItems} clickedColor="#AEC8CA" color="#FFFF" exitButton={false} />
                     
+                    <Divider/>
+                        <BPMNSwitcher bpmns={props.bpmns} currentBpmn={props.currentBpmn} setBpmn={props.setBpmn} />
+                    <Divider/>
+
+
+                    <Spacer/>
+
+
+                    <NavigationItem items={LinkItems2} clickedColor="blackAlpha.400" color="blackAlpha.00" bottom="0" setStarted={props.setStarted} exitButton={true} />                    
                     </>
                 } />
         </>

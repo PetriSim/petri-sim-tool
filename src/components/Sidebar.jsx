@@ -28,7 +28,7 @@ function Sidebar(props) {
             gap="5"
         
             position="absolute"
-            w={hidden ? "" : "35vh"}
+            w={hidden ? "" : "20vw"}
             h={hidden ? "" : "95vh"}
             p={hidden ? "0" : "6"}
             rounded={hidden ? "xl" : "2xl"}
