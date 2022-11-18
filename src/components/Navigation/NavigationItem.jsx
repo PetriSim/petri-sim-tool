@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import {
     Flex,
@@ -9,23 +9,6 @@ import {
     MenuButton,
   } from '@chakra-ui/react'
 
-  import {
-    FiTrendingUp,
-    FiStar,
-    FiSettings,
-
-  } from 'react-icons/fi';
-
-
-  import { TimeIcon } from '@chakra-ui/icons'
-
-  
-
-  const LinkItems = [
-    { name: 'Scenario Parameters', icon: FiSettings },
-    { name: 'Resource Parameters', icon: FiTrendingUp },
-    { name: 'Modelbased Parameters', icon: FiStar },
-  ];
 
 
 function NavigationItem(props) {
@@ -33,19 +16,21 @@ function NavigationItem(props) {
 
   return (
         <>
-        {LinkItems.map((link) => (
+        {props.items.map((link) => (
            <>
             <Flex w="100%">
                 <Menu placement="right"  w="100%">
                     <Link
-                        backgroundColor={link.name === props.current? "#AEC8CA" : "#FFFF" }
+                        backgroundColor={link.name === props.current? props.clickedColor : props.color }
                         p={3}
                         borderRadius={8}
-                        _hover={{ backgroundColor: "#AEC8CA" }}
+                        _hover={{ backgroundColor: props.clickedColor }}
                         transition="background-color 400ms linear"
                         w="100%"
+                        
+
                     >
-                        <MenuButton w="100%" onClick={() => props.setCurrent(link.name)}>
+                        <MenuButton  w="100%"  onClick={() => {props.exitButton? props.setStarted("false") :  props.setCurrent(link.name)}}>
                             <Flex alignItems='center' >
                                 <Flex 
                                 borderRadius='lg' bg="#FFFF" color='white' h={7} w={7} justifyContent='center' alignItems='center' >
