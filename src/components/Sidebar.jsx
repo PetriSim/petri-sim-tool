@@ -39,6 +39,7 @@ function Sidebar(props) {
         
         >
         <Flex alignItems="center">
+          
             <IconButton onClick={() => setHidden(!hidden)} icon={<FiMenu />} fontSize="19" variant="unstyled" />
             {!hidden? props.title : ""}
             

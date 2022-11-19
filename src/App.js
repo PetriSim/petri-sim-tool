@@ -29,6 +29,7 @@ function App() {
 
                                       
   const [currentBpmn, setBpmn] = useState(0)
+  const [currentObject, setObject] = useState({})
   
   
   useEffect(() => {
@@ -42,7 +43,7 @@ function App() {
     <ChakraProvider theme={theme}>
       <Flex bg="#F9FAFC" p="6"  h="100vh" zIndex={-3}>
 
-    {projectStarted == "false" ?
+    {projectStarted === "false" ?
       <StartView setStarted={setStarted}/>
     :
     <>
@@ -50,10 +51,10 @@ function App() {
         <Navigation setCurrent={setCurrent}  setStarted={setStarted} current={current} bpmns={bpmns} currentBpmn={currentBpmn} setBpmn={setBpmn} />
       </Box>
       <Box zIndex={2}>
-        <Parameditor current={current}/>
+        <Parameditor current={current} selectedObject={currentObject}  />
       </Box>
       <Box>
-        <BackgroundView current={current} currentBpmn={currentBpmn} bpmns={bpmns} zIndex={-5}/>
+        <BackgroundView current={current} currentBpmn={currentBpmn} bpmns={bpmns} setObject={setObject} zIndex={-5}/>
       </Box>
     </>
     }
