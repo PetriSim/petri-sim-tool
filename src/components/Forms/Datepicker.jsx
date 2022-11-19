@@ -9,8 +9,6 @@ import {
 
 
 
-
-
 function Datepicker(props) {
     const [currentValue, setValue] = useState(props.value)
 
