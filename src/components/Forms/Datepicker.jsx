@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useState} from 'react'
 
 
 import {
@@ -12,11 +12,13 @@ import {
 
 
 function Datepicker(props) {
+    const [currentValue, setValue] = useState(props.value)
+
     return (
         <>
         <FormControl>
             <FormLabel>{props.title}</FormLabel>
-            <Input type="date" value={props.value} variant="outline" bg="whiteAlpha.900" />
+            <Input type="date" value={currentValue} onChange={(e) => setValue(e.target.value)} variant="outline" bg="whiteAlpha.900" />
         </FormControl>
             
         </>

@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useState} from 'react'
 
 
 import {
@@ -12,11 +12,12 @@ import {
 
 
 function Time(props) {
+    const [currentValue, setValue] = useState(props.value)
     return (
         <>
         <FormControl>
             <FormLabel>{props.title}</FormLabel>
-            <Input type="time" value={props.value} variant="outline" bg="whiteAlpha.900" />
+            <Input type="time" value={currentValue}  onChange={(e) => setValue(e.target.value)}  variant="outline" bg="whiteAlpha.900" />
         </FormControl>
             
         </>

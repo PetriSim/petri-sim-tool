@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 
 import {
@@ -17,15 +17,17 @@ import {
 
 
 function Time(props) {
+    const [currentValue, setValue] = useState(props.value)
+    
     return (
         <>
         <FormControl>
             <FormLabel>{props.title}</FormLabel>
-            <NumberInput value={props.value}>
-            <NumberInputField variant="outline" bg="whiteAlpha.900"/>
+            <NumberInput value={currentValue} >
+            <NumberInputField variant="outline" bg="whiteAlpha.900" onChange={(e) => setValue(e.target.value)} />
             <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
+                <NumberIncrementStepper onClick={() => setValue(Number(currentValue) + 1)} />
+                <NumberDecrementStepper onClick={() => setValue(Number(currentValue) - 1)} />
             </NumberInputStepper>
             </NumberInput>
         </FormControl>
