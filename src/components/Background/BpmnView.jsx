@@ -101,8 +101,8 @@ function BpmnView({currentBpmn, setObject }) {
           }
         }, [diagram, modelerRef])
       
-      
-      
+    
+
         useEffect(() => {
           if(modelerRef){
     
@@ -124,6 +124,22 @@ function BpmnView({currentBpmn, setObject }) {
         }, [clickedElement, setObject]);
       
       
+        useEffect(() => {
+          let timeoutId = null;
+          const resizeListener = () => {
+        
+            clearTimeout(timeoutId);
+    
+            console.log("Resize")
+            timeoutId = setTimeout(() => modelerRef.get('canvas').zoom('fit-viewport', 'auto'), 500);
+          };
+          window.addEventListener('resize', resizeListener);
+      
+          return () => {
+            window.removeEventListener('resize', resizeListener);
+          }
+        }, [diagram, modelerRef])
+
         function zoomIn(){
           modelerRef.get('zoomScroll').stepZoom(1)
         }
@@ -136,7 +152,7 @@ function BpmnView({currentBpmn, setObject }) {
         return (
          
          <Flex>
-          <Box id="container" w="100%" pos="absolute" h="95vh">
+          <Box id="container" w="100vw" pos="absolute" h="100vh">
           </Box>
 
             <ButtonGroup 
