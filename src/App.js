@@ -41,28 +41,22 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <Flex bg="#F9FAFC" p="6"  h="100vh" zIndex={-3}>
-
-    {projectStarted === "false" ?
-      <StartView setStarted={setStarted}/>
-    :
-    <>
-      <Box zIndex={2}>
-        <Navigation setCurrent={setCurrent}  setStarted={setStarted} current={current} bpmns={bpmns} currentBpmn={currentBpmn} setBpmn={setBpmn} />
-      </Box>
-      <Box zIndex={2}>
-        <Parameditor current={current} selectedObject={currentObject}  />
-      </Box>
-      <Box>
-        <BackgroundView current={current} currentBpmn={currentBpmn} bpmns={bpmns} setObject={setObject} zIndex={-5}/>
-      </Box>
-    </>
-    }
-
-
-
-
-
+      <Flex bg="#F9FAFC" p="6" h="100vh" zIndex={-3}>
+        {projectStarted === "false" ?
+          <StartView setStarted={setStarted}/>
+        :
+        <>
+          <Box zIndex={2}>
+            <Navigation setCurrent={setCurrent}  setStarted={setStarted} current={current} bpmns={bpmns} currentBpmn={currentBpmn} setBpmn={setBpmn} />
+          </Box>
+          <Box zIndex={2}>
+            <Parameditor current={current} selectedObject={currentObject}  />
+          </Box>
+          <Box>
+            <BackgroundView current={current} currentBpmn={currentBpmn} bpmns={bpmns} setObject={setObject} zIndex={-5}/>
+          </Box>
+        </>
+        }
       </Flex>
     </ChakraProvider>
   );

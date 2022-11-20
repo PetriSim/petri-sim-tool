@@ -19,8 +19,8 @@ function createWindow() {
 
     win = new BrowserWindow({
         show: false,
-        minWidth: 1100,
-        minHeight: 800,
+        minWidth: 600,
+        minHeight: 400,
     });
     win.maximize();
     win.show();

@@ -139,9 +139,28 @@ function BpmnView({currentBpmn, setObject }) {
           <Box id="container" w="100%" pos="absolute" h="95vh">
           </Box>
 
-            <ButtonGroup size='md' spacing='6' variant='unstyled' position="absolute" justifyContent="center" bottom="20px" left="0px" right="0px">
-                <IconButton onClick={zoomIn}  icon={<AddIcon />}  bg="white"  rounded="20" shadow="sm"/>
-                <IconButton onClick={zoomOut} icon={<MinusIcon />} bg="white" rounded="20" shadow="sm" />
+            <ButtonGroup 
+                size='md' 
+                spacing='6' 
+                variant='unstyled' 
+                position="absolute" 
+                justifyContent="center" 
+                bottom="20px" 
+                left="0px" 
+                right="0px">
+                <IconButton onClick={zoomIn} 
+                    icon={<AddIcon color="RGBA(0, 0, 0, 0.64)" />}  
+                    bg="white"  
+                    _hover={{bg: "blackAlpha.100"}}
+                    rounded="20" 
+                    shadow="md"/>
+                <IconButton 
+                    onClick={zoomOut} 
+                    icon={<MinusIcon color="RGBA(0, 0, 0, 0.64)" />} 
+                    bg="white" 
+                    _hover={{bg: "blackAlpha.100", color: "RGBA(0, 0, 0, 0.94)"}}
+                    rounded="20"
+                    shadow="md" />
             </ButtonGroup>
       
           </Flex>
