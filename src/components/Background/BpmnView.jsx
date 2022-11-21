@@ -101,8 +101,8 @@ function BpmnView({currentBpmn, setObject }) {
           }
         }, [diagram, modelerRef])
       
-      
-      
+    
+
         useEffect(() => {
           if(modelerRef){
     
@@ -124,6 +124,22 @@ function BpmnView({currentBpmn, setObject }) {
         }, [clickedElement, setObject]);
       
       
+        useEffect(() => {
+          let timeoutId = null;
+          const resizeListener = () => {
+        
+            clearTimeout(timeoutId);
+    
+            console.log("Resize")
+            timeoutId = setTimeout(() => modelerRef.get('canvas').zoom('fit-viewport', 'auto'), 500);
+          };
+          window.addEventListener('resize', resizeListener);
+      
+          return () => {
+            window.removeEventListener('resize', resizeListener);
+          }
+        }, [diagram, modelerRef])
+
         function zoomIn(){
           modelerRef.get('zoomScroll').stepZoom(1)
         }
@@ -136,12 +152,31 @@ function BpmnView({currentBpmn, setObject }) {
         return (
          
          <Flex>
-          <Box id="container" w="100%" pos="absolute" h="95vh">
+          <Box id="container" w="100vw" pos="absolute" h="100vh">
           </Box>
 
-            <ButtonGroup size='md' spacing='6' variant='unstyled' position="absolute" justifyContent="center" bottom="20px" left="0px" right="0px">
-                <IconButton onClick={zoomIn}  icon={<AddIcon />}  bg="white"  rounded="20" shadow="sm"/>
-                <IconButton onClick={zoomOut} icon={<MinusIcon />} bg="white" rounded="20" shadow="sm" />
+            <ButtonGroup 
+                size='md' 
+                spacing='6' 
+                variant='unstyled' 
+                position="absolute" 
+                justifyContent="center" 
+                bottom="20px" 
+                left="0px" 
+                right="0px">
+                <IconButton onClick={zoomIn} 
+                    icon={<AddIcon color="RGBA(0, 0, 0, 0.64)" />}  
+                    bg="white"  
+                    _hover={{bg: "blackAlpha.100"}}
+                    rounded="20" 
+                    shadow="md"/>
+                <IconButton 
+                    onClick={zoomOut} 
+                    icon={<MinusIcon color="RGBA(0, 0, 0, 0.64)" />} 
+                    bg="white" 
+                    _hover={{bg: "blackAlpha.100", color: "RGBA(0, 0, 0, 0.94)"}}
+                    rounded="20"
+                    shadow="md" />
             </ButtonGroup>
       
           </Flex>
