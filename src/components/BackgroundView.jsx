@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BpmnView from './Background/BpmnView'
 
 import {
-    Box
+    
   } from '@chakra-ui/react'
 
 function BackgroundView(props) {
@@ -11,8 +11,8 @@ function BackgroundView(props) {
 
 
     useEffect(() => {
-        setViews(props.bpmns.map((x) =><BpmnView currentBpmn={x} />))
-    },[props.bpmns])
+        setViews(props.bpmns.map((x) =><BpmnView currentBpmn={x} setObject={props.setObject} />))
+    },[props.bpmns, props.setObject])
 
     console.log(props.currentBpmn)
 

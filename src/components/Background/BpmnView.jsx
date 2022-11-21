@@ -8,36 +8,41 @@ import {
   ButtonGroup,
   IconButton,
   Flex,
-  Center,
   Box
 } from '@chakra-ui/react'
 
 import { MinusIcon, AddIcon } from '@chakra-ui/icons'
 
-function BpmnView(props) {
+function BpmnView({currentBpmn, setObject }) {
 
 
 
         const [diagram, diagramSet] = useState("");
-        var container = document.getElementById("container");
+        const [container, setContainer] = useState(null)
+        //var container = document.getElementById("container");
         const [clickedElement, clickedSet] = useState({});
         const [modelerRef, setModeler] = useState(null)
         
+
+        useEffect(() => {
+          setContainer(document.getElementById("container"))
+        }, [])
+
         useEffect(() =>{
           if (container){
             container.innerHTML = ""
-            container = document.getElementById("container");
+            setContainer(document.getElementById("container"))
             diagramSet("")
             setModeler("")
           }
 
-        },[props.currentBpmn])
+        },[currentBpmn, container])
        
         useEffect(() => {
           if (diagram.length === 0) {
             axios
               .get(
-                props.currentBpmn.file
+                currentBpmn.file
               )
               .then((r) => {
                 diagramSet(r.data)
@@ -46,11 +51,13 @@ function BpmnView(props) {
                 console.log(e);
               });
           }
-        }, [diagram, container]);
+        }, [diagram, container, currentBpmn.file]);
       
       
         useEffect(() =>{
+
           if(diagram.length > 0){
+
             var mod = new Modeler({
               container,
               keyboard: {
@@ -105,7 +112,7 @@ function BpmnView(props) {
             var eventBus = modelerRef.get('eventBus');
             
             eventBus.on("element.click", (event) => {
-              clickedSet(event.element.businessObject.name)
+              clickedSet(event.element.businessObject)
               event.stopPropagation()
             });
           }
@@ -113,8 +120,8 @@ function BpmnView(props) {
       
       
           useEffect(() => {
-            console.log(clickedElement)
-        }, [clickedElement]);
+            setObject(clickedElement)
+        }, [clickedElement, setObject]);
       
       
         function zoomIn(){
