@@ -32,6 +32,8 @@ function App() {
   const [currentObject, setObject] = useState({})
   
   
+
+
   useEffect(() => {
     sessionStorage.setItem('st', projectStarted);
   }, [projectStarted]);
@@ -42,7 +44,7 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Flex bg="#F9FAFC" h="100vh" zIndex={-3}>
-        {projectStarted === "false" ?
+        {projectStarted === "false"?
           <StartView setStarted={setStarted}/>
         :
         <>

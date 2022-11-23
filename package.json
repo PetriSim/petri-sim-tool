@@ -17,6 +17,7 @@
         "@testing-library/user-event": "^14.4.3",
         "axios": "^0.20.0",
         "bpmn-js": "7.3.0",
+        "bpmn-moddle": "^8.0.0",
         "concurrently": "^7.5.0",
         "electron": "^21.3.0",
         "electron-builder": "^23.6.0",
