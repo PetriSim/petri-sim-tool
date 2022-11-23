@@ -16,17 +16,35 @@ a {
 }
 
 .bjs-powered-by {
-    right: unset !important;
-    display: none;
+    position: absolute;
+    bottom: 25px;
+    right: 0px;
+    z-index: 100;
+    color: #404040;
+    justify-content: center;
+    left: 0px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+.djs-shape:hover {
+    cursor: pointer;
+}
+
+.djs-connection:hover {
+    cursor: pointer;
 }
 
 input[type='file'] {
     display: none;
 }
-.custom-file-upload{
+
+.custom-file-upload {
     border: 1px solid #ccc;
     display: inline-block;
-    color:darkgrey;
+    color: darkgrey;
     background-color: white;
     width: 90%;
     padding: 6px 12px;

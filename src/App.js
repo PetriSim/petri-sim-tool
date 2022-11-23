@@ -13,7 +13,7 @@ import StartView from './components/StartView';
 
 function App() {
   const [current, setCurrent] = useState("Modelbased Parameters")
-  const [projectStarted, setStarted] = useState(sessionStorage.getItem('st') || false)
+  const [projectStarted, setStarted] = useState(sessionStorage.getItem('st') || "false")
   const [bpmns, setBpmns] = useState([{
                                         name: "Warenversand",
                                         file : "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn" 
