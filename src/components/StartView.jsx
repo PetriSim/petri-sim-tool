@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 
 import {
-    Flex, Button, Divider, Text, IconButton, Input, InputGroup, InputRightElement, FormLabel
+    Flex, Button, Divider, Text, IconButton, Input, InputGroup, InputRightElement, FormLabel, Select, Icon
      
   } from '@chakra-ui/react'
-import { FiFile, FiFilePlus, FiMenu } from 'react-icons/fi';
+import { FiChevronDown, FiChevronsDown, FiFile, FiFilePlus, FiMenu, FiUnderline } from 'react-icons/fi';
 
 function StartView(props) {
   const [addExistingBPMN, setExistingBPMN] = useState(false);
@@ -20,6 +20,7 @@ function StartView(props) {
     setNewProject(false)
     setExistingProject(true)
   }
+  
     
   return (
     <Flex
@@ -38,15 +39,20 @@ function StartView(props) {
       <gap />
       <Text fontSize="3xl" textAlign="left" color="H5C5C5C" fontWeight="bold" >PetriSim</Text>
       <Divider />
-      <gap /><gap /><gap /><gap /><gap />
 
-    
-    
+      {startNewProject || startExistingProject ? <></>
+      :
+      <>
+      <gap /><gap /><gap /><gap /><gap />
+      </>
+    }
+      
+
       <Flex
         backgroundColor="white"
         alignItems="center"
         flexDir="column"
-        gap="100"
+        gap="50"
                 
       >
         {startNewProject ? <>
@@ -57,60 +63,76 @@ function StartView(props) {
           alignItems="center"
           flexDir="column"
           gap="5"
-          height={addNewBPMN ? 500 : 350}          
+          height={addNewBPMN ? 580 : 430}          
           width={400} 
           >
             
             <gap />
-            <Text fontSize="xl" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" > Start new project</Text>
+            <Text fontSize="xl" textAlign="left" color="#485152" fontWeight="bold" > Start new project</Text>
             <gap />
-            <gap />
-            
-            <InputGroup width = "90%">
-            <label for='file-upload' class = 'custom-file-upload'>
-            Select file 1
-            </label>
-            <Input id = 'file-upload' type = 'file'/>            
-            <InputRightElement pointerEvents='none' children={<FiFile />} />
-            </InputGroup>
-            
-            <InputGroup width = "90%">
-            <label for='file-upload' class = 'custom-file-upload'>
-            Select file 2
-            </label>
-            <Input id = 'file-upload' type = 'file'/>            
-            <InputRightElement pointerEvents='none' children={<FiFile />} />
-            </InputGroup>
 
-            {addNewBPMN ? <span></span> :
-            <Button color = 'grey' alignSelf= 'end' backgroundColor= '#F0F0F1' onClick={(()=> setNewBPMN(true))}> 
-              + add BPMN
-            </Button>
-            }
+            <Flex width = '90%' flexDir = 'column'>
+            <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Event log:</Text>
+            <InputGroup width = "100%">
+            <label for='file-upload' class = 'custom-file-upload'>
+            Select file 
+            </label>
+            <Input id = 'file-upload' type = 'file'/>         
+            <InputRightElement pointerEvents='none' children={<FiFile />} />   
+            </InputGroup>
+            </Flex>
+
+            <Flex width = '90%' flexDir = 'column'>
+            <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select Discovery Tool:</Text>
+            <Select placeholder = 'choose discovery tool' width = '100%' focusBorderColor='teal' color="darkgrey" backgroundColor= 'white' icon={<FiChevronDown />}>
+              <option value='Simod'>Simod</option>
+              <option value='option2'>Option 2</option>
+              <option value='option3'>Option 3</option>
+            </Select>
+            </Flex>
+             
+            <Flex width = '90%' flexDir = 'column'>
+            <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select Simulator:</Text>
+            <Select placeholder = 'choose simulator' width = '100%' color="darkgrey" focusBorderColor='teal' backgroundColor= 'white' icon={<FiChevronDown />}>
+              <option value='BIMP'>BIMP</option>
+              <option value='Prosimus'>Prosimus</option>
+              <option value='Scylla'>Scylla</option>
+            </Select>
+            </Flex>
 
             {addNewBPMN ?
             <>
-            <InputGroup width = "90%">
+            <Divider color = '#485152' width= '90%' />
+
+            <Flex width = '90%' flexDir = 'column'>
+            <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Parameter file:</Text>
+            <InputGroup width = "100%">
             <label for='file-upload' class = 'custom-file-upload'>
-            Select file 1
+            Select file 
             </label>
             <Input id = 'file-upload' type = 'file'/>            
             <InputRightElement pointerEvents='none' children={<FiFile />} />
             </InputGroup>
-            <InputGroup width = "90%">
+            </Flex>
+
+            <Flex width = '90%' flexDir = 'column'>
+            <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > BPMN file:</Text>
+            <InputGroup width = "100%">
             <label for='file-upload' class = 'custom-file-upload'>
-            Select file 2
+            Select file 
             </label>
             <Input id = 'file-upload' type = 'file'/>            
             <InputRightElement pointerEvents='none' children={<FiFile />} />
             </InputGroup>
-            <Button color = 'grey' alignSelf= 'end' backgroundColor= '#F0F0F1' onClick={(()=> setNewBPMN(false))}> 
+            </Flex>
+
+            <Button color = 'grey' alignSelf= 'end' backgroundColor= '#F0F0F1' as = 'u' onClick={(()=> setNewBPMN(false))}> 
               - remove BPMN
             </Button>
             </>
             : <span></span>}
             
-            <Button colorScheme='teal' variant='solid' width='90%' onClick={() => props.setStarted("true")}>
+            <Button color = 'white' colorScheme='teal' variant='solid' width='90%' onClick={() => props.setStarted("true")}>
               Start parametrization
             </Button>
           </Flex>
@@ -139,7 +161,7 @@ function StartView(props) {
           alignItems="center"
           flexDir="column"
           gap="5"
-          height={addExistingBPMN ? 500 : 350}
+          height={addExistingBPMN ? 580 : 400}          
           width={400} 
         >
           
@@ -147,50 +169,66 @@ function StartView(props) {
           <Text fontSize="xl" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" > Open existing project</Text>
           <gap />
           <gap />
-          
-          <InputGroup width = "90%">
-          <label for='file-upload' class = 'custom-file-upload'>
-           Select file 1
-          </label>
-          <Input id = 'file-upload' type = 'file'/>            
-          <InputRightElement pointerEvents='none' children={<FiFile />} />
-          </InputGroup>
-          
-          <InputGroup width = "90%">
-          <label for='file-upload' class = 'custom-file-upload'>
-           Select file 2
-          </label>
-          <Input id = 'file-upload' type = 'file'/>            
-          <InputRightElement pointerEvents='none' children={<FiFile />} />
-          </InputGroup>
 
-          {addExistingBPMN ? <Divider width = '90%'/> :
-          <Button color = 'grey' alignSelf= 'end' backgroundColor= '#F0F0F1' onClick={(()=> setExistingBPMN(true))}> 
-            + add BPMN
+
+          <Flex width = '90%' flexDir = 'column'>
+            <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Parameter file:</Text>
+            <InputGroup width = "100%">
+            <label for='file-upload' class = 'custom-file-upload'>
+            Select file 
+            </label>
+            <Input id = 'file-upload' type = 'file'/>            
+            <InputRightElement pointerEvents='none' children={<FiFile />} />
+            </InputGroup>
+            </Flex>
+          
+            <Flex width = '90%' flexDir = 'column'>
+            <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > BPMN file:</Text>
+            <InputGroup width = "100%">
+            <label for='file-upload' class = 'custom-file-upload'>
+            Select file 
+            </label>
+            <Input id = 'file-upload' type = 'file'/>            
+            <InputRightElement pointerEvents='none' children={<FiFile />} />
+            </InputGroup>
+            </Flex>
+
+          {addExistingBPMN ? <></> :
+          <Button color = 'grey' alignSelf= 'end' backgroundColor= '#F0F0F1' as = 'u' onClick={(()=> setExistingBPMN(true))}> 
+            + add extra BPMN
           </Button>
           }         
           
           {addExistingBPMN ?
           <>
-          <InputGroup width = "90%">
-          <label for='file-upload' class = 'custom-file-upload'>
-           Select file 1
-          </label>
-          <Input id = 'file-upload' type = 'file'/>            
-          <InputRightElement pointerEvents='none' children={<FiFile />} />
-          </InputGroup>
-          <InputGroup width = "90%">
-          <label for='file-upload' class = 'custom-file-upload'>
-           Select file 2
-          </label>
-          <Input id = 'file-upload' type = 'file'/>            
-          <InputRightElement pointerEvents='none' children={<FiFile />} />
-          </InputGroup>
-          <Button color = 'grey' alignSelf= 'end' backgroundColor= '#F0F0F1' onClick={(()=> setExistingBPMN(false))}> 
+          <Divider borderColor="#485152" width = '90%'/>
+          <Flex width = '90%' flexDir = 'column'>
+            <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Parameter file:</Text>
+            <InputGroup width = "100%">
+            <label for='file-upload' class = 'custom-file-upload'>
+            Select file 
+            </label>
+            <Input id = 'file-upload' type = 'file'/>            
+            <InputRightElement pointerEvents='none' children={<FiFile />} />
+            </InputGroup>
+            </Flex>
+
+          <Flex width = '90%' flexDir = 'column'>
+            <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > BPMN file:</Text>
+            <InputGroup width = "100%">
+            <label for='file-upload' class = 'custom-file-upload'>
+            Select file 
+            </label>
+            <Input id = 'file-upload' type = 'file'/>            
+            <InputRightElement pointerEvents='none' children={<FiFile />} />
+            </InputGroup>
+            </Flex>
+
+          <Button color = 'grey' alignSelf= 'end' backgroundColor= '#F0F0F1' as = 'u' onClick={(()=> setExistingBPMN(false))}> 
             - remove BPMN
           </Button>
           </>
-          : <span></span>}
+          : <></>}
          
           <Button colorScheme='teal' variant='solid' width='90%' onClick={() => props.setStarted("true")}>
             Start parametrization
@@ -209,7 +247,7 @@ function StartView(props) {
           width={400} 
           onClick={startExistingProjectNow}
           fontSize="xl" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold">
-            Start existing project
+            Open existing project
           </Button>
         }
         

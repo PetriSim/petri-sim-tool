@@ -28,7 +28,7 @@ input[type='file'] {
     display: inline-block;
     color:darkgrey;
     background-color: white;
-    width: 90%;
+    width: 100%;
     padding: 6px 12px;
     cursor: pointer;
     border-radius: 8px;
