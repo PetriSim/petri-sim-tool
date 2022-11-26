@@ -5,14 +5,14 @@ import axios from "axios";
 
 
 
-function BpmnParser({currentBpmn, bpmns }) {
+function BpmnParser({currentBpmn, bpmns, data, setData }) {
 
         const [diagram, diagramSet] = useState("");
         const [modelerRef, setModeler] = useState(null)
         
        
         useEffect(() => {
-          if (diagram.length === 0) {
+         
             axios
               .get(
                 bpmns[currentBpmn].file
@@ -23,8 +23,8 @@ function BpmnParser({currentBpmn, bpmns }) {
               .catch((e) => {
                 console.log(e);
               });
-          }
-        }, [diagram, bpmns[currentBpmn].file]);
+          
+        }, [bpmns, currentBpmn]);
       
       
         useEffect(() =>{
@@ -58,7 +58,6 @@ function BpmnParser({currentBpmn, bpmns }) {
 
               var elements = elementRegistry.getAll()
               
-              console.log(elements)
 
               elements.forEach(element => {
                 if(element.type.includes("Gateway")){
@@ -113,14 +112,13 @@ function BpmnParser({currentBpmn, bpmns }) {
                 }
               )
                 
-              console.log(internal)
-
+              setData(internal)
             })
             .catch((err) => {
               console.log("error", err);
             });
           }
-        }, [diagram, modelerRef])
+        }, [diagram, modelerRef, setData])
 
         return (
          

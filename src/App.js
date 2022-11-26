@@ -39,6 +39,8 @@ function App() {
   const [currentBpmn, setBpmn] = useState(0)
   const [currentScenario, setScenario] = useState(0)
   const [currentObject, setObject] = useState({})
+
+  const [data, setData] = useState({})
   
   
 
@@ -47,6 +49,9 @@ function App() {
     sessionStorage.setItem('st', projectStarted);
   }, [projectStarted]);
 
+  useEffect(() => {
+    console.log(data)
+  }, [data])
 
 
 
@@ -81,7 +86,7 @@ function App() {
               zIndex={-5}/>
           </Box>
 
-          <BpmnParser currentBpmn={currentBpmn} bpmns={bpmns} />
+          <BpmnParser currentBpmn={currentBpmn} bpmns={bpmns} data={data} setData={setData} />
         </>
         }
       </Flex>
