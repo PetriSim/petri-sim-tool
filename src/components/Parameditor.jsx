@@ -18,19 +18,19 @@ function Parameditor(props) {
             
     };
 
+
+    const SelectEditor = () =>{
+        switch (props.current) {
+            case "Scenario Parameters": return <ResourceParameters/>
+            case "Resource Parameters": return <ResourceParameters/>
+            case "Modelbased Parameters": return <ModelbasedParameters selectedObject={props.selectedObject}/>
+            default:
+                break;
+        }
+    }
     return (
         <>
-            <Sidebar side="right" backgroundColor="#F0F0F1" title={<Editor/>} content={
-           
-           
-                {
-                    'Scenario Parameters':  <ResourceParameters/>,
-                    'Resource Parameters':  <ResourceParameters/>,
-                    'Modelbased Parameters': <ModelbasedParameters selectedObject={props.selectedObject}/>
-                }[props.current]
-            
-                
-            } />
+            <Sidebar side="right" backgroundColor="#F0F0F1" title={<Editor/>} content={<SelectEditor/>} />
                
               
         </>

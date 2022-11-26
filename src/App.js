@@ -5,14 +5,13 @@ import {
   Box,
   theme,
   Flex,
-  Text
+  Container
 } from '@chakra-ui/react';
-import BackgroundView from './components/BackgroundView'
 import Navigation from './components/Navigation/Navigation';
 import Parameditor from './components/Parameditor';
 import StartView from './components/StartView';
 import BpmnParser from './BpmnParser';
-import TabBar from './components/Background/TabBar'
+import Page from './components/Page';
 
 
 
@@ -45,19 +44,6 @@ function App() {
 
   const [data, setData] = useState({})
   
-  const [tabs, setTabs] = useState([
-    {
-    tabname: "Organisational Chart",
-    content: <Text>Organisational Chart content</Text> 
-    },
-    {
-      tabname: "Timetabel",
-      content: <Text>Timetable content</Text> 
-      },
-
-])
-  
-
 
   useEffect(() => {
     sessionStorage.setItem('st', projectStarted);
@@ -71,12 +57,14 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
+      <BpmnParser currentBpmn={currentBpmn} bpmns={bpmns} data={data} setData={setData} />
+
       <Flex bg="#F9FAFC" h="100vh" zIndex={-3}>
         {projectStarted === "false"?
           <StartView setStarted={setStarted}/>
         :
         <>
-          <Box zIndex={2} p={{base: "0", md:"6"}} >
+          <Box zIndex={2} paddingTop={{base: "0", md:"6"}} >
             <Navigation 
               setCurrent={setCurrent}  
               setStarted={setStarted} 
@@ -92,24 +80,12 @@ function App() {
           </Box>
 
         
-
-
-        <TabBar items={tabs}/>
-{
-  /*
-          <Box h="100vh">
-            <BackgroundView 
-              current={current} 
-              currentBpmn={currentBpmn} 
-              bpmns={bpmns} 
-              setObject={setObject} 
-              zIndex={-5}/>
-          </Box>
-  */
-}
-
-
-          <BpmnParser currentBpmn={currentBpmn} bpmns={bpmns} data={data} setData={setData} />
+          <Container maxW={current === "Modelbased Parameters"? '' : '60vw'} >
+            
+              <Page current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} />
+            
+         </Container>
+        
         </>
         }
       </Flex>

@@ -13,13 +13,9 @@ import {
 
 import { MinusIcon, AddIcon } from '@chakra-ui/icons'
 
-function BpmnView({currentBpmn, setObject }) {
-
-
-
+function BpmnView({currentBpmn, setObject}) {
         const [diagram, diagramSet] = useState("");
         const [container, setContainer] = useState(null)
-        //var container = document.getElementById("container");
         const [clickedElement, clickedSet] = useState({});
         const [modelerRef, setModeler] = useState(null)
         
@@ -36,7 +32,7 @@ function BpmnView({currentBpmn, setObject }) {
             setModeler("")
           }
 
-        },[currentBpmn, container])
+        },[container])
        
         useEffect(() => {
           if (diagram.length === 0) {
@@ -73,7 +69,7 @@ function BpmnView({currentBpmn, setObject }) {
                   dragging: ["value", {}],
                   move: ["value", {}],
                   create: ["value", {}],
-                  // ...
+            
                 }
               ],
             });
@@ -92,9 +88,7 @@ function BpmnView({currentBpmn, setObject }) {
               if (warnings.length) {
                 console.log("Warnings", warnings);
               }
- 
               modelerRef.get('canvas').zoom('fit-viewport', 'auto');
-          
             })
             .catch((err) => {
               console.log("error", err);
@@ -106,26 +100,27 @@ function BpmnView({currentBpmn, setObject }) {
 
         useEffect(() => {
           if(modelerRef){
-    
             modelerRef.get('zoomScroll').stepZoom(-1);
 
-    
             var eventBus = modelerRef.get('eventBus');
             
             eventBus.on("element.click", (event) => {
               clickedSet(event.element.businessObject)
-              event.stopPropagation()
+
             });
           }
-      }, [modelerRef]);
+      }, [diagram,modelerRef]);
       
       
-          useEffect(() => {
-            setObject(clickedElement)
+        useEffect(() => {
+            if(Object.keys(clickedElement).length !== 0){
+              setObject(clickedElement)
+            }
         }, [clickedElement, setObject]);
       
       
         useEffect(() => {
+    
           let timeoutId = null;
           const resizeListener = () => {
         
