@@ -55,6 +55,8 @@ function App() {
 
 
 
+
+
   return (
     <ChakraProvider theme={theme}>
       <BpmnParser currentBpmn={currentBpmn} bpmns={bpmns} data={data} setData={setData} />
@@ -80,7 +82,7 @@ function App() {
           </Box>
 
         
-          <Container maxW={current === "Modelbased Parameters"? '' : '60vw'} >
+          <Container maxW={current === "Modelbased Parameters"? '' : '60vw'}>
             
               <Page current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} />
             

@@ -4,13 +4,13 @@ import BpmnView from './BpmnView'
 function BpmnViewSelector(props) {
     const [bpmnViews, setViews] = useState(<></>)
 
-
-
-    useEffect(() => {
-        console.log(props.currentBpmn)
+    useEffect(() => {      
+       
+        console.log("current:" + props.currentBpmn)
         setViews(props.bpmns.map((x) => <BpmnView currentBpmn={x} setObject={props.setObject} />))
-     
-    },[props.bpmns, props.setObject, props.currentBpmn])
+    },[props.currentBpmn])
+
+
 
   return (
         <>

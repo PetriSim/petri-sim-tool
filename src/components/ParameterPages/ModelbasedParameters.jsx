@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import Activity from './Modelbased/Activity';
 import Gateway from './Modelbased/Gateway';
 
 
 function ModelbasedParameters(props) {
-
-    useEffect(()=>{
-        console.log(props.selectedObject.id)
-    }, [props.selectedObject])
-
     return (
         <>
           {props.selectedObject.id === undefined  ?
@@ -26,7 +21,6 @@ function ModelbasedParameters(props) {
           <Activity selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
           : <></>
           }
-            
         </>
     )
 }
