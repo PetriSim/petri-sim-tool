@@ -92,10 +92,7 @@ function BpmnView({currentBpmn, setObject }) {
               if (warnings.length) {
                 console.log("Warnings", warnings);
               }
-
-              /*var definitions = modelerRef.get('canvas').getRootElement().businessObject.$parent;
-              console.log(JSON.stringify(definitions));*/
-
+ 
               modelerRef.get('canvas').zoom('fit-viewport', 'auto');
           
             })

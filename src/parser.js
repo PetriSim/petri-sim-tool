@@ -10,6 +10,7 @@ const xmlStr =
     '</bpmn2:definitions>';
 
 
+
 const {
     rootElement: definitions
 } = await moddle.fromXML(xmlStr);

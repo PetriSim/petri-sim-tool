@@ -21,6 +21,7 @@ import {
 
   } from 'react-icons/fi';
 import BPMNSwitcher from './BPMNSwitcher';
+import ScenarioSwitcher from './ScenarioSwitcher';
 
 function Navigation(props) {
 
@@ -54,6 +55,8 @@ function Navigation(props) {
                     
                     <Divider/>
                         <BPMNSwitcher bpmns={props.bpmns} currentBpmn={props.currentBpmn} setBpmn={props.setBpmn} />
+
+                        <ScenarioSwitcher currentScenario={props.currentScenario} setScenario={props.setScenario} scenarios={props.scenarios}/>
                     <Divider/>
 
 

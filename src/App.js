@@ -10,6 +10,9 @@ import BackgroundView from './components/BackgroundView'
 import Navigation from './components/Navigation/Navigation';
 import Parameditor from './components/Parameditor';
 import StartView from './components/StartView';
+import BpmnParser from './BpmnParser';
+
+
 
 function App() {
   const [current, setCurrent] = useState("Modelbased Parameters")
@@ -26,9 +29,15 @@ function App() {
                                         name: "Selbstbedienung",
                                         file : "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/04-Selbstbedienungsrestaurant/03-Musterl%C3%B6sung/selbstbedienungsrestaurant.bpmn"
                                       }])
-
+  const [scenarios, setscenarios] = useState([{
+                                        name: "Scenario 1",
+                                      },
+                                      {
+                                        name: "Scenario 2",
+                                      }])
                                       
   const [currentBpmn, setBpmn] = useState(0)
+  const [currentScenario, setScenario] = useState(0)
   const [currentObject, setObject] = useState({})
   
   
@@ -49,13 +58,30 @@ function App() {
         :
         <>
           <Box zIndex={2} p={{base: "0", md:"6"}} >
-            <Navigation setCurrent={setCurrent}  setStarted={setStarted} current={current} bpmns={bpmns} currentBpmn={currentBpmn} setBpmn={setBpmn} />
+            <Navigation 
+              setCurrent={setCurrent}  
+              setStarted={setStarted} 
+              current={current} 
+              bpmns={bpmns} 
+              currentBpmn={currentBpmn} 
+              setBpmn={setBpmn} 
+              currentScenario={currentScenario}
+              setScenario={setScenario}
+              scenarios={scenarios}
+              />
             <Parameditor current={current} selectedObject={currentObject}  />
           </Box>
 
           <Box h="100vh">
-            <BackgroundView current={current} currentBpmn={currentBpmn} bpmns={bpmns} setObject={setObject} zIndex={-5}/>
+            <BackgroundView 
+              current={current} 
+              currentBpmn={currentBpmn} 
+              bpmns={bpmns} 
+              setObject={setObject} 
+              zIndex={-5}/>
           </Box>
+
+          <BpmnParser currentBpmn={currentBpmn} bpmns={bpmns} />
         </>
         }
       </Flex>
