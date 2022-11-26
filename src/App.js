@@ -5,17 +5,20 @@ import {
   Box,
   theme,
   Flex,
+  Text
 } from '@chakra-ui/react';
 import BackgroundView from './components/BackgroundView'
 import Navigation from './components/Navigation/Navigation';
 import Parameditor from './components/Parameditor';
 import StartView from './components/StartView';
 import BpmnParser from './BpmnParser';
+import TabBar from './components/Background/TabBar'
 
 
 
 function App() {
-  const [current, setCurrent] = useState("Modelbased Parameters")
+  const [current, setCurrent] = useState("Scenario Parameters")
+
   const [projectStarted, setStarted] = useState(sessionStorage.getItem('st') || "false")
   const [bpmns, setBpmns] = useState([{
                                         name: "Warenversand",
@@ -42,6 +45,17 @@ function App() {
 
   const [data, setData] = useState({})
   
+  const [tabs, setTabs] = useState([
+    {
+    tabname: "Organisational Chart",
+    content: <Text>Organisational Chart content</Text> 
+    },
+    {
+      tabname: "Timetabel",
+      content: <Text>Timetable content</Text> 
+      },
+
+])
   
 
 
@@ -74,9 +88,15 @@ function App() {
               setScenario={setScenario}
               scenarios={scenarios}
               />
-            <Parameditor current={current} selectedObject={currentObject}  />
+            <Parameditor data={data} current={current} selectedObject={currentObject}  />
           </Box>
 
+        
+
+
+        <TabBar items={tabs}/>
+{
+  /*
           <Box h="100vh">
             <BackgroundView 
               current={current} 
@@ -85,6 +105,9 @@ function App() {
               setObject={setObject} 
               zIndex={-5}/>
           </Box>
+  */
+}
+
 
           <BpmnParser currentBpmn={currentBpmn} bpmns={bpmns} data={data} setData={setData} />
         </>
