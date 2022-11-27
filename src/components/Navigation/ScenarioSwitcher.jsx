@@ -45,7 +45,7 @@ function ScenarioSwitcher(props) {
         
         <MenuList>
             {props.scenarios.map((scenario, index) => {
-                return  <MenuItem onClick={() =>  props.setScenario(index)}>{scenario.name}</MenuItem>
+                return  <MenuItem key={index} onClick={() =>  props.setScenario(index)}>{scenario.name}</MenuItem>
             })
 
             }

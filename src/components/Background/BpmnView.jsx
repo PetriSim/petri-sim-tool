@@ -38,7 +38,7 @@ function BpmnView({currentBpmn, setObject}) {
           if (diagram.length === 0) {
             axios
               .get(
-                currentBpmn.file
+                currentBpmn.BPMN
               )
               .then((r) => {
                 diagramSet(r.data)
@@ -47,7 +47,7 @@ function BpmnView({currentBpmn, setObject}) {
                 console.log(e);
               });
           }
-        }, [diagram, container, currentBpmn.file]);
+        }, [diagram, container, currentBpmn.BPMN]);
       
       
         useEffect(() =>{
@@ -81,7 +81,6 @@ function BpmnView({currentBpmn, setObject}) {
       
         useEffect(() =>{
           if(modelerRef && diagram.length > 0){
-            console.log(31)
             modelerRef
             .importXML(diagram)
             .then(({ warnings }) => {

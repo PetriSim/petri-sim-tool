@@ -5,7 +5,7 @@ import axios from "axios";
 
 
 
-function BpmnParser({currentBpmn, bpmns, data, setData }) {
+ function BpmnParser({currentBpmn, bpmns, data, setData }) {
 
         const [diagram, diagramSet] = useState("");
         const [modelerRef, setModeler] = useState(null)
@@ -112,7 +112,7 @@ function BpmnParser({currentBpmn, bpmns, data, setData }) {
                 }
               )
                 
-              setData(internal)
+              setData(data.modelParameter = internal)
             })
             .catch((err) => {
               console.log("error", err);

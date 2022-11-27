@@ -5,10 +5,18 @@ import Gateway from './Modelbased/Gateway';
 
 
 function ModelbasedParameters(props) {
+  
+
+
     return (
         <>
           {props.selectedObject.id === undefined  ?
-            <>Select Activity or Gateway</>
+            <>
+            {props.data[props.currentScenario].scenario.models[props.currentBpmn].name}
+            
+            
+            </>
+
           : <></>
           }
 

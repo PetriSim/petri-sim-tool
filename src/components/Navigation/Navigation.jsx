@@ -54,9 +54,9 @@ function Navigation(props) {
                     <NavigationItem current={props.current} setCurrent={props.setCurrent} items={LinkItems} clickedColor="#AEC8CA" color="#FFFF" exitButton={false} />
                     
                     <Divider/>
-                        <BPMNSwitcher bpmns={props.bpmns} currentBpmn={props.currentBpmn} setBpmn={props.setBpmn} />
+                        <BPMNSwitcher bpmns={props.bpmns} currentBpmn={props.currentBpmn} setBpmn={props.setBpmn} scenarios={props.scenarios} data={props.data} currentScenario={props.currentScenario}/>
 
-                        <ScenarioSwitcher currentScenario={props.currentScenario} setScenario={props.setScenario} scenarios={props.scenarios}/>
+                        <ScenarioSwitcher currentScenario={props.currentScenario} setScenario={props.setScenario} scenarios={props.scenarios} data={props.data}  />
                     <Divider/>
 
 

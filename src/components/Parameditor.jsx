@@ -23,7 +23,7 @@ function Parameditor(props) {
         switch (props.current) {
             case "Scenario Parameters": return <ResourceParameters/>
             case "Resource Parameters": return <ResourceParameters/>
-            case "Modelbased Parameters": return <ModelbasedParameters selectedObject={props.selectedObject}/>
+            case "Modelbased Parameters": return <ModelbasedParameters selectedObject={props.selectedObject} data={props.data} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario}/>
             default:
                 break;
         }

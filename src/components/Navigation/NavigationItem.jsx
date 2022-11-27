@@ -16,9 +16,9 @@ function NavigationItem(props) {
 
   return (
         <>
-        {props.items.map((link) => (
-           <>
-            <Flex w="100%">
+        {props.items.map((link, index) => (
+        
+            <Flex w="100%" key={index}>
                 <Menu placement="right"  w="100%">
                     <Link
                         backgroundColor={link.name === props.current? props.clickedColor : props.color }
@@ -54,7 +54,7 @@ function NavigationItem(props) {
                     </Link>
                     </Menu>
                 </Flex>
-            </>
+        
       ))}
       </>    
   )
