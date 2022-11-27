@@ -2,13 +2,14 @@
 import {React} from 'react'
 
 
-function ScenarioPage() {
+function ScenarioPage(props) {
 
  
 
     return (
         <>
-            Scenario 
+        
+            {props.data[props.currentScenario].scenarioName}
         </>
     )
 }

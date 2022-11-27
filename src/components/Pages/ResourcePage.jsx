@@ -1,8 +1,8 @@
 import { Text } from '@chakra-ui/react';
-import {React, useState, UseEffect} from 'react'
+import {React, useState} from 'react'
 import TabBar from '../Background/TabBar';
 
-function ResourcePage() {
+function ResourcePage(props) {
     const [tabs, setTabs] = useState([
         {
         tabname: "Organisational Chart",
@@ -19,6 +19,7 @@ function ResourcePage() {
     return (
         <>
             <TabBar items={tabs}/>
+            {props.data[props.currentScenario].scenario.models[props.currentBpmn].parameters.resource[0].role}
         </>
     )
 }
