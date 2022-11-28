@@ -2,7 +2,6 @@ import React from 'react'
 import Sidebar from '../Sidebar';
 
 import {
-    Button,
     Text,
     Divider,
     Spacer
@@ -26,16 +25,16 @@ import ScenarioSwitcher from './ScenarioSwitcher';
 function Navigation(props) {
 
     const LinkItems = [
-        { name: 'Scenario Parameters', icon: FiSettings },
-        { name: 'Resource Parameters', icon: FiTrendingUp },
-        { name: 'Modelbased Parameters', icon: FiStar },
+        { name: 'Scenario Parameters', icon: FiSettings, path: '/scenario' },
+        { name: 'Resource Parameters', icon: FiTrendingUp, path: '/resource' },
+        { name: 'Modelbased Parameters', icon: FiStar, path: '/modelbased' },
       ];
 
       const LinkItems2 = [
-        { name: 'Add BPMN', icon: FiFileText },
-        { name: 'Reset parameters', icon: FiTrash2 },
-        { name: 'Export XML files', icon: FiDownload },
-        { name: 'Save parameters', icon: FiLock },
+        { name: 'Add BPMN', icon: FiFileText, path: '/scenario' },
+        { name: 'Reset parameters', icon: FiTrash2, path: '/scenario' },
+        { name: 'Export XML files', icon: FiDownload, path: '/scenario' },
+        { name: 'Save parameters', icon: FiLock, path: '/scenario' },
       ];
 
     const Nav = () => {
@@ -51,7 +50,7 @@ function Navigation(props) {
             <Sidebar side="left" backgroundColor="white" title={<Nav/>} 
             content={
                     <>
-                    <NavigationItem current={props.current} setCurrent={props.setCurrent} items={LinkItems} clickedColor="#AEC8CA" color="#FFFF" exitButton={false} />
+                    <NavigationItem current={props.current}  items={LinkItems} clickedcolor="#AEC8CA" color="#FFFF" exitButton={false} setCurrent={props.setCurrent}  />
                     
                     <Divider/>
                         <BPMNSwitcher bpmns={props.bpmns} currentBpmn={props.currentBpmn} setBpmn={props.setBpmn} scenarios={props.scenarios} data={props.data} currentScenario={props.currentScenario}/>

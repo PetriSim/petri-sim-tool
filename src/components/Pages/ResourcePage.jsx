@@ -1,8 +1,14 @@
 import { Text } from '@chakra-ui/react';
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import TabBar from '../Background/TabBar';
 
 function ResourcePage(props) {
+
+    useEffect(() =>{
+        props.setCurrent("Resource Parameters")
+      },[props])
+
+
     const [tabs, setTabs] = useState([
         {
         tabname: "Organisational Chart",
