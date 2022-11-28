@@ -21,7 +21,7 @@ function ModelbasedParameters(props) {
           }
 
           {props.selectedObject.id && props.selectedObject.id.includes("Gateway")  ?
-          <Gateway selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
+          <Gateway setData={props.setData} getData={props.getData}  selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
           : <></>
           }
 
