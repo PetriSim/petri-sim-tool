@@ -18,15 +18,11 @@ a {
 .bjs-powered-by {
     position: absolute;
     bottom: 25px;
-    right: 0px;
     z-index: 100;
     color: #404040;
     justify-content: center;
-    left: 0px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
+    left: 2vw;
+    width: 10%;
 }
 
 .djs-shape:hover {

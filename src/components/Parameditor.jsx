@@ -13,17 +13,15 @@ function Parameditor(props) {
 
 
     const Editor = () => {
-    return <Text fontSize={{base: "xs", md:"sm"}} textAlign="center" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" textTransform="uppercase">{props.current}</Text>
-                
-            
+    return <Text fontSize={{base: "xs", md:"sm"}} textAlign="center" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" textTransform="uppercase">{props.current}</Text>            
     };
 
 
     const SelectEditor = () =>{
         switch (props.current) {
-            case "Scenario Parameters": return <ResourceParameters/>
+            case "Scenario Parameters": return <ResourceParameters />
             case "Resource Parameters": return <ResourceParameters/>
-            case "Modelbased Parameters": return <ModelbasedParameters selectedObject={props.selectedObject} data={props.data} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario}/>
+            case "Modelbased Parameters": return <ModelbasedParameters setDataObj={props.setDataObj} selectedObject={props.selectedObject} setData={props.setData} getData={props.getData} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario}/>
             default:
                 break;
         }

@@ -10,11 +10,12 @@ import {
 import Navigation from './components/Navigation/Navigation';
 import Parameditor from './components/Parameditor';
 import StartView from './components/StartView';
-import BpmnParser from './BpmnParser';
-import Page from './components/Page';
+import BpmnViewSelector from './components/Background/BpmnViewSelector';
+import ResourcePage from './components/Pages/ResourcePage';
+import ScenarioPage from './components/Pages/ScenarioPage';
 import BpmnModelParser from './BpmnModelParser';
 import axios from "axios";
-
+import { Redirect, Router } from "@reach/router"
 
 
 function App() {
@@ -200,6 +201,10 @@ function App() {
   }, [data])
   
 
+  useEffect(() => {
+    console.log(currentObject)
+  }, [currentObject])
+
 
   useEffect( () => {
     if(data[0]){
@@ -223,6 +228,25 @@ function App() {
     }
   }, [data])
 
+ const getData = (type) => {
+  switch (type) {
+    case "currentScenario": return data[currentScenario]
+    case "allScenarios": return data
+    case "currentModel": return data[currentScenario].scenario.models[currentBpmn]
+    case "allModels": return data[currentScenario].scenario
+    default:
+      return data
+  }
+ }
+
+ const setDataObj = (type, data) =>{
+  switch (type) {
+    case "activity": setData(data[currentScenario].scenario.models[currentBpmn].parameters.modelParameter.activities = data)
+    default:
+      break;
+  }
+ }
+
 
 
   return (
@@ -237,8 +261,8 @@ function App() {
           <Box zIndex={2} paddingTop={{base: "0", md:"6"}} >
             <Navigation 
               setCurrent={setCurrent}  
-              setStarted={setStarted} 
               current={current} 
+              setStarted={setStarted} 
               bpmns={bpmns} 
               currentBpmn={currentBpmn} 
               setBpmn={setBpmn} 
@@ -247,13 +271,21 @@ function App() {
               setScenario={setScenario}
               scenarios={scenarios}
               />
-            <Parameditor data={data} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />
+            <Parameditor setDataObj={setDataObj} setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />
           </Box>
 
         
           <Container maxW={current === "Modelbased Parameters"? '' : '60vw'}>
             
-              <Page current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />
+          
+            <Router>
+               <Redirect exact from="/" to="/scenario" />
+                <ScenarioPage path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />
+                <BpmnViewSelector path="/modelbased" zIndex={-5} setCurrent={setCurrent}  current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />
+                <ResourcePage path="/resource" current={current} setCurrent={setCurrent}  setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />
+            </Router>
+          
+              {/*<Page current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />*/}
             
          </Container>
         
