@@ -1,8 +1,10 @@
+import { Button } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import BpmnView from './BpmnView'
 
 function BpmnViewSelector(props) {
     const [bpmnViews, setViews] = useState(<></>)
+
 
     useEffect(() => {      
        
@@ -13,12 +15,14 @@ function BpmnViewSelector(props) {
 
 
 
+
+
   return (
-        <>
-          {
-            bpmnViews[props.currentBpmn]
-          }
-        </>
+    <>
+      {
+        bpmnViews[props.currentBpmn]
+      }
+    </>
   )
 }
 
