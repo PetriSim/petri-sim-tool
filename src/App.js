@@ -271,7 +271,9 @@ function App() {
               setScenario={setScenario}
               scenarios={scenarios}
               />
-            <Parameditor setDataObj={setDataObj} setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />
+
+            {current === "Scenario Parameters"? '' : <Parameditor setDataObj={setDataObj} setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />}
+           
           </Box>
 
         
