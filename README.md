@@ -7,7 +7,7 @@ docker pull ghcr.io/petrisim/petri-sim-tool:latest
 Starting a container:
 
 ```console
-docker run -p 3000:3000 -d
+docker run -p 3000:3000 -d petri-sim-tool:latest
 ```
 
 ## Run from source
@@ -22,7 +22,7 @@ docker run -p 3000:3000 -d
 4. Go to the project directory
 
 ```console
-cd petri-sim-tool
+cd petri-sim-tool 
 ```
 
 5. run: 
