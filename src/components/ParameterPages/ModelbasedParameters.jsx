@@ -12,7 +12,7 @@ function ModelbasedParameters(props) {
         <>
           {props.selectedObject.id === undefined  ?
             <>
-            {props.data[props.currentScenario].scenario.models[props.currentBpmn].name}
+            {props.getData("currentModel").name}
             
             
             </>
@@ -21,12 +21,12 @@ function ModelbasedParameters(props) {
           }
 
           {props.selectedObject.id && props.selectedObject.id.includes("Gateway")  ?
-          <Gateway selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
+          <Gateway setData={props.setData} getData={props.getData}  selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
           : <></>
           }
 
           {props.selectedObject.id && props.selectedObject.id.includes("Task")  ?
-          <Activity selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
+          <Activity setData={props.setData} getData={props.getData} selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
           : <></>
           }
         </>

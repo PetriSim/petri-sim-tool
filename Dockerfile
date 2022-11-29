@@ -1,11 +1,14 @@
-FROM node:lts-alpine
-ENV NODE_ENV=production
-ENV CI=true
-WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install --production --silent && mv node_modules ../
+FROM node:16-alpine AS development
+ENV NODE_ENV development
+# Add a work directory
+WORKDIR /app
+# Cache and Install dependencies
+COPY package.json .
+COPY package-lock.json .
+RUN npm install --legacy-peer-deps
+# Copy app files
 COPY . .
+# Expose port
 EXPOSE 3000
-RUN chown -R node /usr/src/app
-USER node
-CMD ["npm", "start"]
+# Start the app
+CMD [ "npm", "start" ]

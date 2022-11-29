@@ -20,7 +20,8 @@ function Field(props) {
             'time': <Time title={props.title} value={props.value} />,
             'number': <Number title={props.title} value={props.value} />,
             'selection': <Selection title={props.title} value={props.value} options={props.options} />,
-            'inputRead': <Input variant="outline" bg="whiteAlpha.900" value={props.value} readOnly isDisabled/>
+            'input': <Input variant="outline" bg="whiteAlpha.900" value={props.value}  onChange={props.onChange} w={props.w}/>,
+            'inputRead': <Input variant="outline" bg="whiteAlpha.900" value={props.value} readOnly isDisabled w={props.w}/>
             }[props.type]
         }  
         </>

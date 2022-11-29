@@ -9,6 +9,8 @@ import {
     MenuButton,
   } from '@chakra-ui/react'
 
+  import { Link as ReachLink } from "@reach/router"
+
 
 
 function NavigationItem(props) {
@@ -19,16 +21,26 @@ function NavigationItem(props) {
         {props.items.map((link, index) => (
         
             <Flex w="100%" key={index}>
-                <Menu placement="right"  w="100%">
-                    <Link
-                        backgroundColor={link.name === props.current? props.clickedColor : props.color }
+                <Menu placement="right" w="100%">
+                    <Link as={ReachLink} to={link.path}
+                
                         p={3}
                         borderRadius={8}
-                        _hover={{ backgroundColor: props.clickedColor }}
+                        _hover={{ backgroundColor: props.clickedcolor }}
                         transition="background-color 400ms linear"
                         w="100%"
+                      
+                        getProps={({ isCurrent }) => {
+                        return {
+                            style: {
+                                backgroundColor: isCurrent ? props.clickedcolor : props.color 
+                            }
+                        };
+                        }}
+
+                        onClick={() => props.setCurrent(link.name)}
                     >
-                        <MenuButton  w="100%"  onClick={() => {props.exitButton? props.setStarted("false") :  props.setCurrent(link.name)}}>
+                        <MenuButton  w="100%"   >
                             <Flex alignItems='center' >
                                 <Flex 
                                     borderRadius='lg' 
