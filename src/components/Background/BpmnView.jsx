@@ -91,6 +91,7 @@ function BpmnView({currentBpmn, setObject}) {
                 console.log("Warnings", warnings);
               }
               modelerRef.get('canvas').zoom('fit-viewport', 'auto');
+              modelerRef.get('zoomScroll').stepZoom(-2)
             })
             .catch((err) => {
               console.log("error", err);
@@ -179,9 +180,10 @@ function BpmnView({currentBpmn, setObject}) {
                     rounded="20"
                     shadow="md" />
                 
-            </ButtonGroup>
+            
             
             <ViewButtons/>
+            </ButtonGroup>
           </Flex>
           
           

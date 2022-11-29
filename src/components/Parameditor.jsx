@@ -19,7 +19,6 @@ function Parameditor(props) {
 
     const SelectEditor = () =>{
         switch (props.current) {
-            case "Scenario Parameters": return <ResourceParameters />
             case "Resource Parameters": return <ResourceParameters/>
             case "Modelbased Parameters": return <ModelbasedParameters setDataObj={props.setDataObj} selectedObject={props.selectedObject} setData={props.setData} getData={props.getData} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario}/>
             default:
