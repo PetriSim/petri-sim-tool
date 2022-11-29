@@ -7,7 +7,7 @@ docker pull ghcr.io/petrisim/petri-sim-tool:latest
 Starting a container:
 
 ```console
-docker run -p 3000:3000 -d petri-sim-tool:latest
+docker run -p 3000:3000 -d ghcr.io/petrisim/petri-sim-tool:latest
 ```
 
 ## Run from source
