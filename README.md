@@ -1,3 +1,15 @@
+### Installation via Docker
+
+```console
+docker pull ghcr.io/petrisim/petri-sim-tool:latest
+```
+
+Starting a container:
+
+```console
+docker run -p 3000:3000 -d
+```
+
 1. Install node
 
 2. Install npm 
