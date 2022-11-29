@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import Modeler from "bpmn-js/lib/Modeler";
 import "bpmn-js/dist/assets/diagram-js.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
+import ViewButtons from "../Navigation/ViewButtons";
 import axios from "axios";
 
 import {
   ButtonGroup,
   IconButton,
   Flex,
-  Box
+  Box,
+  Button
 } from '@chakra-ui/react'
 
 import { MinusIcon, AddIcon } from '@chakra-ui/icons'
@@ -18,6 +20,7 @@ function BpmnView({currentBpmn, setObject}) {
         const [container, setContainer] = useState(null)
         const [clickedElement, clickedSet] = useState({});
         const [modelerRef, setModeler] = useState(null)
+        
         
 
         useEffect(() => {
@@ -145,10 +148,11 @@ function BpmnView({currentBpmn, setObject}) {
       
       
         return (
-         
          <Flex>
+            
           <Box id="container" w="100vw" pos="absolute" h="100vh">
           </Box>
+          
 
             <ButtonGroup 
                 size='md' 
@@ -159,6 +163,8 @@ function BpmnView({currentBpmn, setObject}) {
                 bottom="20px" 
                 left="0px" 
                 right="0px">
+                  
+                
                 <IconButton onClick={zoomIn} 
                     icon={<AddIcon color="RGBA(0, 0, 0, 0.64)" />}  
                     bg="white"  
@@ -172,9 +178,13 @@ function BpmnView({currentBpmn, setObject}) {
                     _hover={{bg: "blackAlpha.100", color: "RGBA(0, 0, 0, 0.94)"}}
                     rounded="20"
                     shadow="md" />
+                
             </ButtonGroup>
-      
+            
+            <ViewButtons/>
           </Flex>
+          
+          
         );
 }
 

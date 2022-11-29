@@ -4,7 +4,7 @@ import {
      
   } from '@chakra-ui/react'
 import { FiChevronDown, FiChevronsDown, FiFile, FiFilePlus, FiMenu, FiUnderline } from 'react-icons/fi';
-
+{/* To use this file Uploader just import it and write <FileUpload title = 'Writer your title' />*/}
 
 
 function FileUpload(props) {
