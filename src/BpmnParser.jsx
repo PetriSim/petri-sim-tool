@@ -100,6 +100,7 @@ import axios from "axios";
                 }
 
                 if(element.type.includes("Sequence")){
+                  
                   internal.sequences.push(
                     {
                       "id": element.id,

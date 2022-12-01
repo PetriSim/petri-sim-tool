@@ -1,5 +1,5 @@
 import Modeler from "bpmn-js/lib/Modeler";
-import axios from "axios";
+
 
 
 
@@ -45,7 +45,9 @@ async function BpmnModelParser(bpmnFile) {
                     "duration": 5,
                     "unit": "mins",
                     "cost": 2,
-                    "currency": "euro"
+                    "currency": "euro",
+                    "incoming": element.incoming.map(seq => seq.id),
+                    "outgoing": element.outgoing.map(seq => seq.id)
                 })
             }
 
@@ -57,7 +59,9 @@ async function BpmnModelParser(bpmnFile) {
                     "duration": 5,
                     "unit": "mins",
                     "cost": 2,
-                    "currency": "euro"
+                    "currency": "euro",
+                    "incoming": element.incoming.map(seq => seq.id),
+                    "outgoing": element.outgoing.map(seq => seq.id),
                 })
             }
 

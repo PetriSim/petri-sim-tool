@@ -47,3 +47,14 @@ input[type='file'] {
     cursor: pointer;
     border-radius: 8px;
 }
+
+.navi {
+    padding: 9px;
+    border-radius: 8px;
+    width: 100%;
+    transition: 400ms linear;
+}
+
+.navi:hover {
+    background-color: rgb(174, 200, 202) !important;
+}
