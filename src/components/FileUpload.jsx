@@ -4,22 +4,38 @@ import {
      
   } from '@chakra-ui/react'
 import { FiChevronDown, FiChevronsDown, FiFile, FiFilePlus, FiMenu, FiUnderline } from 'react-icons/fi';
+
 {/* To use this file Uploader just import it and write <FileUpload title = 'Writer your title' />*/}
 
 
+
 function FileUpload(props) {
+    onchange = () => {
+        const selectedFile = document.getElementById('file-upload')
+        const firstFile = selectedFile.files[0];
+        {console.log(firstFile)}
+    }
+        
+    
 
     return (
-        <Flex width = '90%' flexDir = 'column'>
-            <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > {props.title} </Text>
-            <InputGroup width = "100%">
-            <label for='file-upload' class = 'custom-file-upload'>
-            Select file 
-            </label>
-            <Input id = 'file-upload' type = 'file'/>            
-            <InputRightElement pointerEvents='none' children={<FiFile />} />
-            </InputGroup>
+        
+        
+            <Flex width = '90%' flexDir = 'column'>
+                
+                <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > {props.title} </Text>
+                <InputGroup width = "100%">
+                <label for='file-upload' class = 'custom-file-upload'>
+                Select file 
+                </label>
+                <Input id = 'file-upload' type = 'file'  accept={props.accept}/> 
+                <InputRightElement pointerEvents='none' children={<FiFile />} />
+                </InputGroup>
+    
             </Flex>
+            
     )
+    
+    
 }
 export default FileUpload;
