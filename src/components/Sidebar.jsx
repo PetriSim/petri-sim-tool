@@ -36,7 +36,7 @@ function Sidebar(props) {
             }}
 
             position="absolute"
-            h={hidden ? "" : {base: "100vh", md:"95vh"}}
+            h={hidden ? "" : {base: "100%", md:"95vh"}}
             rounded={hidden ? "xl" : {base: "none", md:"2xl"}}
             left={props.side === "left" ? {base: "0vh", md:"2vh"} : ""}
             right={props.side === "right" ? {base: "0vh", md:"2vh"} : ""}

@@ -5,7 +5,7 @@ WORKDIR /app
 # Cache and Install dependencies
 COPY package.json .
 COPY package-lock.json .
-RUN npm install --legacy-peer-deps
+RUN npm install 
 # Copy app files
 COPY . .
 # Expose port

@@ -6,6 +6,8 @@ import {
     Box,
     Button
   } from '@chakra-ui/react'
+  import { Link } from "react-router-dom";
+
 
 function ViewButtons(props){
     const [view, setview] = useState(false)
@@ -50,7 +52,8 @@ function ViewButtons(props){
               >
                 XML
               </Button>
-              <Button 
+              <Button as={Link} to="/modelbased/tableview"
+             
                 bg = 'white'
                 position = 'absolute'
                 bottom = '40px'
