@@ -40,6 +40,7 @@ async function BpmnModelParser(bpmnFile) {
             if (element.type.includes("Task")) {
                 internal.activities.push({
                     "id": element.id,
+                    "name": element.businessObject.name,
                     "type": element.type,
                     "resource": "Courier",
                     "duration": 5,

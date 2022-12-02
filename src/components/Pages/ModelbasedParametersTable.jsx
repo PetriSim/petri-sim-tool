@@ -1,25 +1,42 @@
-import { Input, FormControl, FormLabelTable,
+import { Input, Select, FormControl, FormLabelTable,
+    Editable,
+    EditableInput,
+    EditableTextarea,
+    EditablePreview,
     Table,
     Thead,
     Tbody,
     Tfoot,Tr,Th,Td,
-    TableContainer,Card, CardHeader, CardBody, Heading, Text, VStack} from '@chakra-ui/react';
+    TableContainer,Card, CardHeader, CardBody, Heading, Text, VStack, Button} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 
 
 
 function ModelbasedParametersTable(props){
-  
+
+    const [editable, setEditable] = useState(false)
+
+    useEffect(() =>{
+        console.log(props.currentBpmn)
+    }, [props.currentBpmn])
+
+    
+    function handleChange(event, index, type){
+
+        props.getData("currentModel").parameters.modelParameter.activities[index][type] = event.target.value
+        
+    }
+
       return ( 
         <>
 
     <VStack
-
     spacing={5}
-
     >
 
-    { props.parsed? 
+        <Button onClick={() => setEditable(!editable)}>Edit mode</Button>
+
+    { props.parsed ? 
     <>
         <Card bg="white" w="80vw" >
         <CardHeader>
@@ -34,6 +51,7 @@ function ModelbasedParametersTable(props){
                     <Table variant='simple'>
                         <Thead>
                         <Tr>
+                            <Th>ID</Th>
                             <Th>Activity</Th>
                             <Th>Resource</Th>
                             <Th>Duration</Th>
@@ -44,15 +62,26 @@ function ModelbasedParametersTable(props){
                         </Thead>
                         <Tbody>
 
-                            {props.getData("currentModel").parameters.modelParameter.activities.map((element) => {
+                            {props.getData("currentModel").parameters.modelParameter.activities.map((element, index) => {
+                              
                                 return <Tr>
                                             <Td>{element.id}</Td>
+                                            <Td>{element.name}</Td>
                                             <Td>{element.resource}</Td>
-                                            <Td>{element.duration}</Td>
-                                            <Td>{element.unit}</Td>
-                                            <Td>{element.cost}</Td>
-                                            <Td>{element.currency}</Td>
+                                            <Td>{editable? <Input defaultValue={props.getData("currentModel").parameters.modelParameter.activities[index].duration} onChange={(event) => handleChange(event, index, "duration")}/> : element.duration}</Td>
+                                            <Td>{editable?  <Select name="unit" defaultValue={element.unit} onChange={(event) => handleChange(event, index, "unit")}>
+                                                                <option value='secs'>Seconds</option>
+                                                                <option value='mins'>Minutes</option>
+                                                            </Select> : element.unit}
+                                            </Td>
+                                            <Td>{editable? <Input defaultValue={element.cost} onChange={(event) => handleChange(event, index, "cost")}/> : element.cost}</Td>
+                                            <Td>{editable? <Select name="currency"  defaultValue={element.currency} onChange={(event) => handleChange(event, index, "currency")}>
+                                                <option value='euro'>euro</option>
+                                                <option value='dollar'>dollar</option>
+                                            </Select> : element.currency}
+                                            </Td>
                                         </Tr>
+                                     
 
                             })}
                         </Tbody>
@@ -81,7 +110,7 @@ function ModelbasedParametersTable(props){
                         </Thead>
                         <Tbody>
 
-                            {props.getData("currentModel").parameters.modelParameter.gateways.map((element) => {
+                            { props.getData("currentModel").parameters.modelParameter.gateways.map((element) => {
                                 return <Tr>
                                             <Td>{element.id}</Td>
                                             <Td>{element.outgoing.map((out) => {

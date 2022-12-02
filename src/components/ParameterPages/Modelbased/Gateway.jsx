@@ -44,11 +44,18 @@ class Gateway extends React.Component {
             {this.props.getData("currentModel").parameters.modelParameter.gateways.find((value) => value.id === this.props.selectedObject.id).outgoing.map((element, index) =>{
                 
                 return <>
-                <Field type="inputRead" value={element} w="65%" />
+                <Field 
+                  type="inputRead" 
+                  value={element} 
+                  w="65%" />
                 <Input 
                 onChange={this.handleprobability.bind(this, index, element)}
                 value={this.state.probabilities[index]} 
-                bg="white"  w="30%" marginLeft="4%" marginBottom="10px" /></>
+                bg="white"  
+                w="30%" 
+                marginLeft="4%" 
+                marginBottom="10px" />
+                </>
             })}
         </FormControl>
             
