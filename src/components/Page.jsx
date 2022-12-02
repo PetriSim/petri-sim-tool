@@ -2,35 +2,37 @@ import React from 'react'
 import BpmnViewSelector from './Background/BpmnViewSelector';
 import ResourcePage from './Pages/ResourcePage';
 import ScenarioPage from './Pages/ScenarioPage';
+import OverviewPage from './Pages/OverviewPage';
 
 function Page(props){
- 
+
     const Switcher = () => {
-     
+
         switch (props.current) {
-            case "Modelbased Parameters":  return <BpmnViewSelector current={props.current} currentScenario={props.currentScenario} data={props.data} currentBpmn={props.currentBpmn} bpmns={props.bpmns} setObject={props.setObject} zIndex={-5} />        
+            case "Modelbased Parameters":  return <BpmnViewSelector current={props.current} currentScenario={props.currentScenario} data={props.data} currentBpmn={props.currentBpmn} bpmns={props.bpmns} setObject={props.setObject} zIndex={-5} />
             case "Resource Parameters": return <ResourcePage currentScenario={props.currentScenario} data={props.data} currentBpmn={props.currentBpmn}/>
             case "Scenario Parameters": return <ScenarioPage currentScenario={props.currentScenario} data={props.data} currentBpmn={props.currentBpmn}/>
-            default:
+            case "Scenario Overview": return <OverviewPage currentScenario={props.currentScenario} data={props.data} currentBpmn={props.currentBpmn} />
+                default:
                 break;
         }
-      
 
-        
+
+
     }
 
-return (
+    return (
 
-    <Switcher/>
+        <Switcher/>
 
-    /*
-    {
-        "Scenario Parameters": <ScenarioPage/>,
-        "Resource Parameters": <ResourcePage/>,
-        "Modelbased Parameters":  <BpmnViewSelector current={props.current} currentBpmn={props.currentBpmn} bpmns={props.bpmns} setObject={props.setObject} zIndex={-5} />
-    }[props.current]
-    */
-)
+        /*
+        {
+            "Scenario Parameters": <ScenarioPage/>,
+            "Resource Parameters": <ResourcePage/>,
+            "Modelbased Parameters":  <BpmnViewSelector current={props.current} currentBpmn={props.currentBpmn} bpmns={props.bpmns} setObject={props.setObject} zIndex={-5} />
+        }[props.current]
+        */
+    )
 }
 
 export default Page;

@@ -16,6 +16,7 @@ import ScenarioPage from './components/Pages/ScenarioPage';
 import BpmnModelParser from './BpmnModelParser';
 import axios from "axios";
 import { Redirect, Router } from "@reach/router"
+import OverviewPage from './components/Pages/OverviewPage';
 
 
 function App() {
@@ -282,6 +283,7 @@ function App() {
           
             <Router>
                <Redirect exact from="/" to="/scenario" />
+                <OverviewPage path="/overview"/>
                 <ScenarioPage path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />
                 <BpmnViewSelector path="/modelbased" zIndex={-5} setCurrent={setCurrent}  current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />
                 <ResourcePage path="/resource" current={current} setCurrent={setCurrent}  setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />
