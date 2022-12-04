@@ -288,7 +288,7 @@ function App() {
           </Box>
 
         
-          <Container maxW={current === "Modelbased Parameters"? '' : '40vw'}>
+          <Container maxW={current === "Modelbased Parameters"? '' : ''}>
             
           
             <Routes>
