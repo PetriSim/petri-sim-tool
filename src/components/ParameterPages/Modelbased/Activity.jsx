@@ -7,13 +7,33 @@ class Activity extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
+        /*
         duration: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).duration,
         unit: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).unit,
         cost: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).cost,
         currency: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).currency
-    };
+    */
+
+        duration: "",
+        unit: "",
+        cost: "",
+        currency: ""
+      };
   
-      this.handleInputChange = this.handleInputChange.bind(this);
+
+    }
+
+    componentDidMount(){
+      if(this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id)){
+        console.log(this.props.selectedObject.id)
+        this.setState({
+            duration: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).duration,
+            unit: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).unit,
+            cost: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).cost,
+            currency: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).currency
+          
+          })
+      }
     }
   
     handleInputChange(event) {
@@ -26,11 +46,15 @@ class Activity extends React.Component {
       });
 
       this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id)[name] = target.value
-      console.log(this.props.getData(""))
+    
     }
   
+
+    
     render() {
       return ( 
+        <>
+        {this.state.duration?
         <>
          <FormControl>
             <FormLabel>Selected Activity:</FormLabel>
@@ -39,12 +63,12 @@ class Activity extends React.Component {
 
         <FormControl>
             <FormLabel>Duration:</FormLabel>
-            <Input name="duration" type="input" value={this.state.duration} onChange={this.handleInputChange}  bg="white"/>
+            <Input name="duration" type="input" value={this.state.duration} onChange={(event) => this.handleInputChange(event)}  bg="white"/>
         </FormControl>
             
         <FormControl>
             <FormLabel>Time Unit:</FormLabel>
-            <Select name="unit" placeholder={this.state.unit} onChange={this.handleInputChange} bg="white">
+            <Select name="unit" placeholder={this.state.unit} onChange={(event) => this.handleInputChange(event)} bg="white">
                 <option value='secs'>Seconds</option>
                 <option value='mins'>Minutes</option>
             </Select>
@@ -52,16 +76,16 @@ class Activity extends React.Component {
 
         <FormControl>
             <FormLabel>Fix costs:</FormLabel>
-            <Input name="cost" type="input" value={this.state.cost} onChange={this.handleInputChange} bg="white"/>
+            <Input name="cost" type="input" value={this.state.cost} onChange={(event) => this.handleInputChange(event)} bg="white"/>
         </FormControl>
 
         <FormControl>
             <FormLabel>Currency:</FormLabel>
-            <Select name="currency" placeholder={this.state.currency} onChange={this.handleInputChange} bg="white">
+            <Select name="currency" placeholder={this.state.currency} onChange={(event) => this.handleInputChange(event)} bg="white">
                 <option value='euro'>euro</option>
                 <option value='dollar'>dollar</option>
             </Select>
-        </FormControl>
+        </FormControl> </>: ""}
             
         </>
       );

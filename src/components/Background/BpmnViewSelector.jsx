@@ -1,4 +1,3 @@
-import { Button } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import BpmnView from './BpmnView'
 
@@ -8,9 +7,8 @@ function BpmnViewSelector(props) {
 
     useEffect(() => { 
         props.setCurrent("Modelbased Parameters")
-        console.log("current:" + props.currentBpmn)
         setViews(props.data[props.currentScenario].scenario.models.map((x, index) => <BpmnView key={index} currentBpmn={x} setObject={props.setObject} />))
-    },[props.currentBpmn, props.currentScenario, props.setObject, props.data])
+    },[props.currentBpmn, props.currentScenario, props.setObject, props.data, props])
 
 
 
