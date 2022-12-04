@@ -1,32 +1,69 @@
-import { Input, Select, FormControl, FormLabelTable,
-    Editable,
-    EditableInput,
-    EditableTextarea,
-    EditablePreview,
+import { Input, Select,
     Table,
     Thead,
     Tbody,
-    Tfoot,Tr,Th,Td,
+    Tr,Th,Td,
     TableContainer,Card, CardHeader, CardBody, Heading, Text, VStack, Button} from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 
 
-function ModelbasedParametersTable(props){
+class ModelbasedParametersTable extends React.Component {
 
-    const [editable, setEditable] = useState(false)
+    constructor(props) {
+        super(props);
+        this.state = {
+            editable: false,
+            activities: {},
+            parsed: false
+        };
+      }
 
-    useEffect(() =>{
-        console.log(props.currentBpmn)
-    }, [props.currentBpmn])
 
+      componentDidMount(){
+        if(this.props.parsed){
+            this.setState({
+                parsed:true,
+                activities: this.props.getData("currentModel").parameters.modelParameter.activities})
+        }
+      }
+
+      componentDidUpdate(prevProps) {
+       
+        if(prevProps.currentScenario !== this.props.currentScenario | prevProps.currentBpmn !== this.props.currentBpmn){
+            console.log(this.props.getData("currentModel").parameters.modelParameter.activities)
+            this.setState({activities: this.props.getData("currentModel").parameters.modelParameter.activities})
+        }
+
+        if(prevProps.parsed !== this.props.parsed ){
+            this.setState({
+                parsed:true,
+                activities: this.props.getData("currentModel").parameters.modelParameter.activities})
+        }
+
+      }
     
-    function handleChange(event, index, type){
 
-        props.getData("currentModel").parameters.modelParameter.activities[index][type] = event.target.value
+     handleChange = (event, index, type) =>{
+
+        console.log(index)
+        console.log(event)
+        console.log(type)
+
+        let value = event.target.value
+
+        let copy = this.props.getData("currentModel").parameters.modelParameter.activities
+        copy[index][type] = value
+        
+        this.setState({activities: copy})
+
+        this.props.getData("currentModel").parameters.modelParameter.activities = copy
+        
+        console.log(this.state.activities)
         
     }
 
+    render() {
       return ( 
         <>
 
@@ -34,9 +71,9 @@ function ModelbasedParametersTable(props){
     spacing={5}
     >
 
-        <Button onClick={() => setEditable(!editable)}>Edit mode</Button>
+        <Button onClick={() => this.setState({editable: !this.state.editable})}>{this.state.editable? "View mode" : "Edit mode"}</Button>
 
-    { props.parsed ? 
+    { this.state.parsed ? 
     <>
         <Card bg="white" w="80vw" >
         <CardHeader>
@@ -44,9 +81,6 @@ function ModelbasedParametersTable(props){
         </CardHeader>
         <CardBody>
 
-                <Text  fontSize='sm'>
-                View a summary of all your clients over the last month.
-                </Text>
                 <TableContainer>
                     <Table variant='simple'>
                         <Thead>
@@ -62,20 +96,20 @@ function ModelbasedParametersTable(props){
                         </Thead>
                         <Tbody>
 
-                            {props.getData("currentModel").parameters.modelParameter.activities.map((element, index) => {
+                            {this.state.activities.map((element, index) => {
                               
                                 return <Tr>
                                             <Td>{element.id}</Td>
                                             <Td>{element.name}</Td>
                                             <Td>{element.resource}</Td>
-                                            <Td>{editable? <Input defaultValue={props.getData("currentModel").parameters.modelParameter.activities[index].duration} onChange={(event) => handleChange(event, index, "duration")}/> : element.duration}</Td>
-                                            <Td>{editable?  <Select name="unit" defaultValue={element.unit} onChange={(event) => handleChange(event, index, "unit")}>
+                                            <Td>{this.state.editable? <Input value={this.state.activities[index].duration} onChange={(event) => this.handleChange(event, index, "duration")}/> : element.duration}</Td>
+                                            <Td>{this.state.editable?  <Select name="unit" value={this.state.activities[index].unit} onChange={(event) => this.handleChange(event, index, "unit")}>
                                                                 <option value='secs'>Seconds</option>
                                                                 <option value='mins'>Minutes</option>
                                                             </Select> : element.unit}
                                             </Td>
-                                            <Td>{editable? <Input defaultValue={element.cost} onChange={(event) => handleChange(event, index, "cost")}/> : element.cost}</Td>
-                                            <Td>{editable? <Select name="currency"  defaultValue={element.currency} onChange={(event) => handleChange(event, index, "currency")}>
+                                            <Td>{this.state.editable? <Input value={this.state.activities[index].cost} onChange={(event) => this.handleChange(event, index, "cost")}/> : element.cost}</Td>
+                                            <Td>{this.state.editable? <Select name="currency"  value={this.state.activities[index].currency} onChange={(event) => this.handleChange(event, index, "currency")}>
                                                 <option value='euro'>euro</option>
                                                 <option value='dollar'>dollar</option>
                                             </Select> : element.currency}
@@ -96,9 +130,6 @@ function ModelbasedParametersTable(props){
         </CardHeader>
         <CardBody>
 
-                <Text  fontSize='sm'>
-                View a summary of all your clients over the last month.
-                </Text>
                 <TableContainer>
                     <Table variant='simple'>
                         <Thead>
@@ -110,14 +141,14 @@ function ModelbasedParametersTable(props){
                         </Thead>
                         <Tbody>
 
-                            { props.getData("currentModel").parameters.modelParameter.gateways.map((element) => {
+                            { this.props.getData("currentModel").parameters.modelParameter.gateways.map((element) => {
                                 return <Tr>
                                             <Td>{element.id}</Td>
                                             <Td>{element.outgoing.map((out) => {
-                                                return <Text>{[... props.getData("currentModel").parameters.modelParameter.activities, ... props.getData("currentModel").parameters.modelParameter.gateways, ... props.getData("currentModel").parameters.modelParameter.events].find(x => x.incoming.includes(out)).id}</Text>
+                                                return <Text>{[...this.props.getData("currentModel").parameters.modelParameter.activities, ...this.props.getData("currentModel").parameters.modelParameter.gateways, ...this.props.getData("currentModel").parameters.modelParameter.events].find(x => x.incoming.includes(out)).id}</Text>
                                             })}</Td>
                                                <Td>{element.outgoing.map((prob) => {
-                                                return <Text>{props.getData("currentModel").parameters.modelParameter.sequences.find((seqq) => seqq.id === prob).probability}</Text>
+                                                return <Text>{this.props.getData("currentModel").parameters.modelParameter.sequences.find((seqq) => seqq.id === prob).probability}</Text>
                                             })}</Td>
                                         </Tr>
 
@@ -134,9 +165,6 @@ function ModelbasedParametersTable(props){
         </CardHeader>
         <CardBody>
 
-                <Text  fontSize='sm'>
-                View a summary of all your clients over the last month.
-                </Text>
                 <TableContainer>
                     <Table variant='simple'>
                         <Thead>
@@ -146,7 +174,7 @@ function ModelbasedParametersTable(props){
                         </Thead>
                         <Tbody>
 
-                            {props.getData("currentModel").parameters.modelParameter.events.map((element) => {
+                            {this.props.getData("currentModel").parameters.modelParameter.events.map((element) => {
                                 return <Tr>
                                             <Td>{element.id}</Td>
                                             
@@ -164,6 +192,7 @@ function ModelbasedParametersTable(props){
         </VStack>
         </>
       );
+    }
   }
 
 
