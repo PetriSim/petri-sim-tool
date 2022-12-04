@@ -1,11 +1,9 @@
 import React from "react";
-import { Flex, Spacer } from '@chakra-ui/react'
-import { Box } from '@chakra-ui/react'
+import { Flex} from '@chakra-ui/react'
 import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
@@ -18,16 +16,9 @@ function OverviewTable(props){
 
     return(
         <React.Fragment>
-
-            <Box as='button' borderRadius='md' bg='white' color='C6C6C6' px={10} h={10}>
-                Compare scenarious
-            </Box>
-                <gap />
-        <Box maxW='max-content' borderWidth='1px' borderRadius='lg' overflow='hidden' >
-                <Box display='flex' alignItems='baseline'>
-
-        <TableContainer>
-            <Table variant='simple'>
+            <Flex >
+            <TableContainer ml="40px" mt="25px">
+              <Table variant='simple'>
                 <TableCaption>Simulation parameters</TableCaption>
                 <Thead>
                     <Tr>
@@ -53,10 +44,8 @@ function OverviewTable(props){
                 </Tbody>
             </Table>
         </TableContainer>
-        </Box>
-        </Box>
-
-
+                {props.data}
+</Flex>
         </React.Fragment>
     )
 }
