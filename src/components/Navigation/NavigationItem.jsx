@@ -1,20 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import {
     Flex,
     Text,
-    Link,
+    Link as WarapLink,
     Icon,
     Menu,
     MenuButton,
   } from '@chakra-ui/react'
 
-  import { Link as ReachLink } from "@reach/router"
-
+  import { NavLink } from "react-router-dom";
 
 
 function NavigationItem(props) {
 
+    useEffect(() => {
+console.log(props.current)
+    }, [props.current])
 
   return (
         <>
@@ -22,25 +24,13 @@ function NavigationItem(props) {
         
             <Flex w="100%" key={index}>
                 <Menu placement="right" w="100%">
-                    <Link as={ReachLink} to={link.path}
-                
-                        p={3}
-                        borderRadius={8}
-                        _hover={{ backgroundColor: props.clickedcolor }}
-                        transition="background-color 400ms linear"
-                        w="100%"
-                      
-                        getProps={({ isCurrent }) => {
-                        return {
-                            style: {
-                                backgroundColor: isCurrent ? props.clickedcolor : props.color 
-                            }
-                        };
-                        }}
-
-                        onClick={() => props.setCurrent(link.name)}
+                    <NavLink to={link.path} onClick={() => props.setCurrent(link.name)} 
+                     style={({ isActive }) => isActive ? { backgroundColor: props.clickedcolor} : { backgroundColor: props.color} }
+                    className="navi"
                     >
-                        <MenuButton  w="100%"   >
+                        <MenuButton                       
+                    
+                        w="100%">
                             <Flex alignItems='center' >
                                 <Flex 
                                     borderRadius='lg' 
@@ -63,7 +53,9 @@ function NavigationItem(props) {
                                 </Text>
                             </Flex>
                         </MenuButton>
-                    </Link>
+                        
+                    </NavLink>
+             
                     </Menu>
                 </Flex>
         

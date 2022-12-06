@@ -21,7 +21,7 @@ a {
     z-index: 100;
     color: #404040;
     justify-content: center;
-    left: 2vw;
+    left: 22vw;
     width: 10%;
 }
 
@@ -46,4 +46,15 @@ input[type='file'] {
     padding: 6px 12px;
     cursor: pointer;
     border-radius: 8px;
+}
+
+.navi {
+    padding: 9px;
+    border-radius: 8px;
+    width: 100%;
+    transition: 400ms linear;
+}
+
+.navi:hover {
+    background-color: rgb(174, 200, 202) !important;
 }
