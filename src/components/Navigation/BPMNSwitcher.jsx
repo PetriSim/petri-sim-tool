@@ -30,6 +30,7 @@ function BPMNSwitcher(props) {
                   bg="blackAlpha.200" 
                   _hover="blackAlpha.200" 
                   fontSize={{base: "2xs", md:"sm"}}
+                  aria-label="bpmn name"
                   />
 
             <MenuButton 
@@ -42,6 +43,7 @@ function BPMNSwitcher(props) {
                   base: '100%', 
                   md: '30%',
                 }}
+                aria-label="bpmn switcher"
                 
                 >
                     <Text fontSize={{base: "2xs", md:"sm"}} color="RGBA(0, 0, 0, 0.64)" fontWeight="bold">Change</Text>
