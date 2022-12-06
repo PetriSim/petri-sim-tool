@@ -81,7 +81,7 @@ class ModelbasedParametersTable extends React.Component {
 
     render() {
       return ( 
-        <Box h="100vh" overflowY="scroll" w="100%">
+        <Box h="100vh" overflowY="scroll" w="80vw" marginLeft="18vw">
 
     <VStack
     spacing={5}

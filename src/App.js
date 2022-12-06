@@ -15,9 +15,10 @@ import ResourcePage from './components/Pages/ResourcePage';
 import ScenarioPage from './components/Pages/ScenarioPage';
 import BpmnModelParser from './BpmnModelParser';
 
+import startData from './startdata.json'
+
 import axios from "axios";
-import {
-  BrowserRouter, Routes, Route
+import {Routes, Route
 } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import ModelbasedParametersTable from './components/Pages/ModelbasedParametersTable';
@@ -27,24 +28,7 @@ function App() {
   const [current, setCurrent] = useState("Scenario Parameters")
 
   const [projectStarted, setStarted] = useState(sessionStorage.getItem('st') || "false")
-  const [bpmns, setBpmns] = useState([{
-                                        name: "Warenversand",
-                                        file : "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn" 
-                                      },
-                                      {
-                                        name: "Schufascoring",
-                                        file : "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn"
-                                      },
-                                      {
-                                        name: "Selbstbedienung",
-                                        file : "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/04-Selbstbedienungsrestaurant/03-Musterl%C3%B6sung/selbstbedienungsrestaurant.bpmn"
-                                      }])
-  const [scenarios, setscenarios] = useState([{
-                                        name: "Scenario 1",
-                                      },
-                                      {
-                                        name: "Scenario 2",
-                                      }])
+
                                       
   const [currentBpmn, setBpmn] = useState(0)
   const [currentScenario, setScenario] = useState(0)
@@ -54,149 +38,15 @@ function App() {
 
   const [data, setData] = useState(
     [
-      { 
-        scenarioName: "Scenario 1",
-        startingDate: "14-11-2022",
-        startingTieme: "12:00",
-        numberOfInstances: 2,
-        scenario: {
-          "models": [{
-                  "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
-                  "name": "Warenversand",
-                  "parameters": {
-                      "simulation": {
-                          "startingTime": "12:00",
-                          "StartingDate": "22-11-2022",
-                          "instanceNumber": 2
-                      },
-                      "resource": [{
-                          "role": "Top Management",
-                          "resources": [{
-                              "name": "Management Board",
-                              "schedules": "40h",
-                              "costHour": 20
-                          }]
-                      }],
-                      "modelParameter": null,
-                      
-                      "roles": [{
-                              "name": "Management Board",
-                              "parent": 0
-                          },
-                          {
-                              "name": "Management Directory",
-                              "parent": 1
-                          }
-                      ]
-                  }
-              },
-              {
-                "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
-                "name": "Schufascoring",
-                "parameters": {
-                    "simulation": {
-                        "startingTime": "12:00",
-                        "StartingDate": "22-11-2022",
-                        "instanceNumber": 2
-                    },
-                    "resource": [{
-                        "role": "Top Management",
-                        "resources": [{
-                            "name": "Management Board",
-                            "schedules": "40h",
-                            "costHour": 20
-                        }]
-                    }],
-                    "modelParameter": null,
-                    
-                    "roles": [{
-                            "name": "Management Board",
-                            "parent": 0
-                        },
-                        {
-                            "name": "Management Directory",
-                            "parent": 1
-                        }
-                    ]
-                }
-            }
-          ]
-        }
-      
-    },
-    {
-      scenarioName: "Scenario 2",
-      startingDate: "14-11-2022",
-      startingTieme: "12:00",
-      numberOfInstances: 2,
-      scenario: {
-        "models": [{
-                "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
-                "name": "Warenversand",
-                "parameters": {
-                    "simulation": {
-                        "startingTime": "12:00",
-                        "StartingDate": "22-11-2022",
-                        "instanceNumber": 2
-                    },
-                    "resource": [{
-                        "role": "Top Management",
-                        "resources": [{
-                            "name": "Management Board",
-                            "schedules": "40h",
-                            "costHour": 20
-                        }]
-                    }],
-                    "modelParameter": null,
-                    
-                    "roles": [{
-                            "name": "Management Board",
-                            "parent": 0
-                        },
-                        {
-                            "name": "Management Directory",
-                            "parent": 1
-                        }
-                    ]
-                }
-            },
-            {
-              "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
-              "name": "Schufascoring",
-              "parameters": {
-                  "simulation": {
-                      "startingTime": "12:00",
-                      "StartingDate": "22-11-2022",
-                      "instanceNumber": 2
-                  },
-                  "resource": [{
-                      "role": "Top Management",
-                      "resources": [{
-                          "name": "Management Board",
-                          "schedules": "40h",
-                          "costHour": 20
-                      }]
-                  }],
-                  "modelParameter": null,
-                  
-                  "roles": [{
-                          "name": "Management Board",
-                          "parent": 0
-                      },
-                      {
-                          "name": "Management Directory",
-                          "parent": 1
-                      }
-                  ]
-              }
-          }
-        ]
-      }
-    
-  }
   ]
 )
   
+
+// Initial Data Array is created by copying data from startdata.json
+useEffect(() =>{
+    setData(JSON.parse(JSON.stringify(startData)))
+}, [])
+
 
   useEffect(() => {
     sessionStorage.setItem('st', projectStarted);
@@ -247,20 +97,12 @@ function App() {
   }
  }
 
- const setDataObj = (type, data) =>{
-  switch (type) {
-    case "activity": setData(data[currentScenario].scenario.models[currentBpmn].parameters.modelParameter.activities = data)
-    default:
-      break;
-  }
- }
-
 
 
   return (
     <ChakraProvider theme={theme}>
-      {/*<BpmnParser currentBpmn={currentBpmn} bpmns={bpmns} data={data} setData={setData} /> */}
 
+      {data[0] && 
       <Flex bg="#F9FAFC" h="100%" zIndex={-3} minH="100vh">
         {projectStarted === "false"?
           <StartView setStarted={setStarted}/>
@@ -271,19 +113,18 @@ function App() {
               setCurrent={setCurrent}  
               current={current} 
               setStarted={setStarted} 
-              bpmns={bpmns} 
               currentBpmn={currentBpmn} 
               setBpmn={setBpmn} 
               currentScenario={currentScenario}
               data={data} 
               setScenario={setScenario}
-              scenarios={scenarios}
+          
               />
 
             
             <Routes>
-              <Route path="/resource" element={<Parameditor setDataObj={setDataObj} setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
-              <Route path="/modelbased" element={<Parameditor setDataObj={setDataObj} setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
+              <Route path="/resource" element={<Parameditor  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
+              <Route path="/modelbased" element={<Parameditor  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
             </Routes>
           </Box>
 
@@ -292,16 +133,18 @@ function App() {
             
           
             <Routes>
-              <Route path="/scenario" element={<ScenarioPage  path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />} />
-              <Route path="/resource" element={<ResourcePage  path="/resource" getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />} />
-              <Route path="/modelbased" element={ <BpmnViewSelector zIndex={-5} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />} />
-              <Route path="/modelbased/tableview" element={ <ModelbasedParametersTable parsed={parsed} setData={setData} getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />} />
+              <Route path="/scenario" element={<ScenarioPage  path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
+              <Route path="/resource" element={<ResourcePage  path="/resource" getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
+              <Route path="/modelbased" element={ <BpmnViewSelector zIndex={-5} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
+              <Route path="/modelbased/tableview" element={ <ModelbasedParametersTable parsed={parsed} setData={setData} getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}   data={data} currentScenario={currentScenario} />} />
               <Route path='*' element={<Navigate to='/scenario' />} />
             </Routes>
          </Container>
         </>
         }
       </Flex>
+
+      }
     </ChakraProvider>
   );
 }

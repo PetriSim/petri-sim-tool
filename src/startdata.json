@@ -1,0 +1,141 @@
+[{
+        "scenarioName": "Scenario 1",
+        "startingDate": "14-11-2022",
+        "startingTieme": "12:00",
+        "numberOfInstances": 2,
+        "scenario": {
+            "models": [{
+                    "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
+                    "name": "Warenversand",
+                    "parameters": {
+                        "simulation": {
+                            "startingTime": "12:00",
+                            "StartingDate": "22-11-2022",
+                            "instanceNumber": 2
+                        },
+                        "resource": [{
+                            "role": "Top Management",
+                            "resources": [{
+                                "name": "Management Board",
+                                "schedules": "40h",
+                                "costHour": 20
+                            }]
+                        }],
+                        "modelParameter": null,
+
+                        "roles": [{
+                                "name": "Management Board",
+                                "parent": 0
+                            },
+                            {
+                                "name": "Management Directory",
+                                "parent": 1
+                            }
+                        ]
+                    }
+                },
+                {
+                    "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
+                    "name": "Schufascoring",
+                    "parameters": {
+                        "simulation": {
+                            "startingTime": "12:00",
+                            "StartingDate": "22-11-2022",
+                            "instanceNumber": 2
+                        },
+                        "resource": [{
+                            "role": "Top Management",
+                            "resources": [{
+                                "name": "Management Board",
+                                "schedules": "40h",
+                                "costHour": 20
+                            }]
+                        }],
+                        "modelParameter": null,
+
+                        "roles": [{
+                                "name": "Management Board",
+                                "parent": 0
+                            },
+                            {
+                                "name": "Management Directory",
+                                "parent": 1
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+
+    },
+    {
+        "scenarioName": "Scenario 2",
+        "startingDate": "14-11-2022",
+        "startingTieme": "12:00",
+        "numberOfInstances": 2,
+        "scenario": {
+            "models": [{
+                    "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
+                    "name": "Warenversand",
+                    "parameters": {
+                        "simulation": {
+                            "startingTime": "12:00",
+                            "StartingDate": "22-11-2022",
+                            "instanceNumber": 2
+                        },
+                        "resource": [{
+                            "role": "Top Management",
+                            "resources": [{
+                                "name": "Management Board",
+                                "schedules": "40h",
+                                "costHour": 20
+                            }]
+                        }],
+                        "modelParameter": null,
+
+                        "roles": [{
+                                "name": "Management Board",
+                                "parent": 0
+                            },
+                            {
+                                "name": "Management Directory",
+                                "parent": 1
+                            }
+                        ]
+                    }
+                },
+                {
+                    "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
+                    "name": "Schufascoring",
+                    "parameters": {
+                        "simulation": {
+                            "startingTime": "12:00",
+                            "StartingDate": "22-11-2022",
+                            "instanceNumber": 2
+                        },
+                        "resource": [{
+                            "role": "Top Management",
+                            "resources": [{
+                                "name": "Management Board",
+                                "schedules": "40h",
+                                "costHour": 20
+                            }]
+                        }],
+                        "modelParameter": null,
+
+                        "roles": [{
+                                "name": "Management Board",
+                                "parent": 0
+                            },
+                            {
+                                "name": "Management Directory",
+                                "parent": 1
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+
+    }
+]
