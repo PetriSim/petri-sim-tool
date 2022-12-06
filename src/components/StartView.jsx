@@ -69,7 +69,7 @@ function StartView(props) {
             <Text fontSize="xl" textAlign="left" color="#485152" fontWeight="bold" > Start new project</Text>
             <gap />
 
-            <FileUpload title = 'Event log:' />
+            <FileUpload title = 'Event log:' accept = '.pdf'/>
 
             <Flex width = '90%' flexDir = 'column'>
               <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select Discovery Tool:</Text>
@@ -129,8 +129,8 @@ function StartView(props) {
           <gap />
 
 
-          <FileUpload title = 'Parameter file:' />
-          <FileUpload title = 'BPMN file:' />
+          <FileUpload title = 'Parameter file:' accept = '.xml'/>
+          <FileUpload title = 'BPMN file:' accept = '.bpmn'/>
 
 
           {addExistingBPMN ? <></> 
@@ -143,8 +143,8 @@ function StartView(props) {
           {addExistingBPMN ?
           <>
           <Divider borderColor="#485152" width = '90%'/>
-          <FileUpload title = 'Parameter file:' />
-          <FileUpload title = 'BPMN file:' />
+          <FileUpload title = 'Parameter file:' accept = '.xml'/>
+          <FileUpload title = 'BPMN file:' accept = '.bpmn'/>
 
           <Button color = 'grey' alignSelf= 'end' backgroundColor= '#F0F0F1' as = 'u' onClick={(()=> setExistingBPMN(false))}> 
             - remove BPMN
