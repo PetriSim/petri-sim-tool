@@ -4,8 +4,18 @@ import OverviewTable from '../Background/OverviewTable';
 import { Card, CardHeader, CardBody, Heading} from '@chakra-ui/react'
 import TabBar from "../Background/TabBar";
 import OverviewResourceTable from "../Background/OverviewResourceTable";
+ import {
+   Modal,
+   ModalOverlay,
+   ModalContent,
+   ModalHeader,
+   ModalFooter,
+   ModalBody,
+   ModalCloseButton,
+ } from '@chakra-ui/react'
 
 function OverviewPage(props) {
+
     const [tabs] = useState([
         {
             tabname: "Scenario 1 ",
@@ -76,5 +86,6 @@ function OverviewPage(props) {
         </>
     )
 }
+
 
 export default OverviewPage;

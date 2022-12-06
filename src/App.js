@@ -283,7 +283,7 @@ function App() {
           
             <Router>
                <Redirect exact from="/" to="/scenario" />
-                <OverviewPage path="/overview"/>
+                <OverviewPage path="/overview" setCurrent={setCurrent} current={current} setObject={setObject} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns}  currentScenario={currentScenario}   />
                 <ScenarioPage path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />
                 <BpmnViewSelector path="/modelbased" zIndex={-5} setCurrent={setCurrent}  current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />
                 <ResourcePage path="/resource" current={current} setCurrent={setCurrent}  setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />

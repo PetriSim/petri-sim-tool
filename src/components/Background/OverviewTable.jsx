@@ -25,7 +25,7 @@ function OverviewTable(props){
                         <Th>Simalation</Th>
                         <Th>Starting day</Th>
                         <Th>Starting time</Th>
-                        <Th isNumeric>Replications/Number of process instances</Th>
+                        <Th isNumeric>Replications</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
