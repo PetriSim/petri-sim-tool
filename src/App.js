@@ -14,9 +14,14 @@ import BpmnViewSelector from './components/Background/BpmnViewSelector';
 import ResourcePage from './components/Pages/ResourcePage';
 import ScenarioPage from './components/Pages/ScenarioPage';
 import BpmnModelParser from './BpmnModelParser';
+
 import axios from "axios";
-import { Redirect, Router } from "@reach/router"
-import OverviewPage from './components/Pages/OverviewPage';
+import {
+  BrowserRouter, Routes, Route
+} from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import ModelbasedParametersTable from './components/Pages/ModelbasedParametersTable';
+import OverviewPage from "./components/Pages/OverviewPage";
 
 
 function App() {
@@ -45,6 +50,8 @@ function App() {
   const [currentBpmn, setBpmn] = useState(0)
   const [currentScenario, setScenario] = useState(0)
   const [currentObject, setObject] = useState({})
+
+  const [parsed, setParsed] = useState(false)
 
   const [data, setData] = useState(
     [
@@ -219,6 +226,7 @@ function App() {
           .then(async (r) => {
             var x = data[indexscen].scenario.models[indexmodel]
               x.parameters.modelParameter = await BpmnModelParser(r.data)
+              setParsed(true)
             
             })
           .catch((err) => {
@@ -254,7 +262,7 @@ function App() {
     <ChakraProvider theme={theme}>
       {/*<BpmnParser currentBpmn={currentBpmn} bpmns={bpmns} data={data} setData={setData} /> */}
 
-      <Flex bg="#F9FAFC" h="100vh" zIndex={-3}>
+      <Flex bg="#F9FAFC" h="100%" zIndex={-3} minH="100vh">
         {projectStarted === "false"?
           <StartView setStarted={setStarted}/>
         :
@@ -273,26 +281,26 @@ function App() {
               scenarios={scenarios}
               />
 
-            {current === "Scenario Parameters"? '' : <Parameditor setDataObj={setDataObj} setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />}
-           
+            
+            <Routes>
+              <Route path="/resource" element={<Parameditor setDataObj={setDataObj} setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
+              <Route path="/modelbased" element={<Parameditor setDataObj={setDataObj} setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
+            </Routes>
           </Box>
 
         
-          <Container maxW={current === "Modelbased Parameters"? '' : '60vw'}>
+          <Container maxW={current === "Modelbased Parameters"? '' : ''}>
             
           
-            <Router>
-               <Redirect exact from="/" to="/scenario" />
-                <OverviewPage path="/overview" setCurrent={setCurrent} current={current} setObject={setObject} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns}  currentScenario={currentScenario}   />
-                <ScenarioPage path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />
-                <BpmnViewSelector path="/modelbased" zIndex={-5} setCurrent={setCurrent}  current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />
-                <ResourcePage path="/resource" current={current} setCurrent={setCurrent}  setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />
-            </Router>
-          
-              {/*<Page current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />*/}
-            
+            <Routes>
+                <Route path="/overview" element={<OverviewPage  path="/overview" setData={setData} getData={getData} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />} />
+              <Route path="/scenario" element={<ScenarioPage  path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />} />
+              <Route path="/resource" element={<ResourcePage  path="/resource" getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />} />
+              <Route path="/modelbased" element={ <BpmnViewSelector zIndex={-5} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />} />
+              <Route path="/modelbased/tableview" element={ <ModelbasedParametersTable parsed={parsed} setData={setData} getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}  bpmns={bpmns} data={data} currentScenario={currentScenario} />} />
+              <Route path='*' element={<Navigate to='/scenario' />} />
+            </Routes>
          </Container>
-        
         </>
         }
       </Flex>

@@ -1,4 +1,4 @@
-import { Input, FormControl, FormLabel, Select } from '@chakra-ui/react';
+import { Input, FormControl, FormLabel } from '@chakra-ui/react';
 import React from 'react'
 import Field from '../../Field';
 
@@ -7,14 +7,28 @@ class Gateway extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        probabilities: this.props.getData("currentModel").parameters.modelParameter.gateways.find((value) => value.id === this.props.selectedObject.id).outgoing.map((element, index) => this.props.getData("currentModel").parameters.modelParameter.sequences.find((value) => value.id === element).probability)
+        probabilities: [],
+        outgoing: []
        
     };
   
     }
+
+    componentDidMount(){
+      if(this.props.getData("currentModel").parameters.modelParameter.gateways.find((value) => value.id === this.props.selectedObject.id)){
+        this.setState({
+           probabilities: this.props.getData("currentModel").parameters.modelParameter.gateways.find((value) => value.id === this.props.selectedObject.id).outgoing.map((element, index) => this.props.getData("currentModel").parameters.modelParameter.sequences.find((value) => value.id === element).probability),
+           outgoing: this.props.getData("currentModel").parameters.modelParameter.gateways.find((value) => value.id === this.props.selectedObject.id).outgoing
+          })
+      }
+    }
   
 
-    handleprobability(index, seq, event) {
+    handleprobability(event, index, seq) {
+
+      console.log(event)
+      console.log(index)
+      console.log(seq)
 
         const target = event.target;
         const value = target.value;
@@ -41,14 +55,21 @@ class Gateway extends React.Component {
 
         <FormControl>
             <FormLabel>Probability:</FormLabel>
-            {this.props.getData("currentModel").parameters.modelParameter.gateways.find((value) => value.id === this.props.selectedObject.id).outgoing.map((element, index) =>{
+            {this.state.outgoing.map((element, index) =>{
                 
                 return <>
-                <Field type="inputRead" value={element} w="65%" />
+                <Field 
+                  type="inputRead" 
+                  value={element} 
+                  w="65%" />
                 <Input 
-                onChange={this.handleprobability.bind(this, index, element)}
+                onChange={(event) => this.handleprobability(event, index, element)}
                 value={this.state.probabilities[index]} 
-                bg="white"  w="30%" marginLeft="4%" marginBottom="10px" /></>
+                bg="white"  
+                w="30%" 
+                marginLeft="4%" 
+                marginBottom="10px" />
+                </>
             })}
         </FormControl>
             

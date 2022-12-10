@@ -25,7 +25,9 @@ function ResourcePage(props) {
     return (
         <>
             <TabBar items={tabs}/>
-            {props.data[props.currentScenario].scenario.models[props.currentBpmn].parameters.resource[0].role}
+            {props.getData("currentModel").parameters.roles.map((element) => {
+                    return <Text>{element.name}</Text>
+            })}
         </>
     )
 }

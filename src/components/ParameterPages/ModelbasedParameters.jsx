@@ -1,16 +1,22 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 
 import Activity from './Modelbased/Activity';
+import Event from './Modelbased/Event';
 import Gateway from './Modelbased/Gateway';
 
 
 function ModelbasedParameters(props) {
   
+useEffect(() => {
+  
+console.log(props.currentBpmn)
+
+}, [props.currentBpmn])
 
 
     return (
         <>
-          {props.selectedObject.id === undefined  ?
+          {props.selectedObject.$type === undefined  ?
             <>
             {props.getData("currentModel").name}
             
@@ -20,13 +26,18 @@ function ModelbasedParameters(props) {
           : <></>
           }
 
-          {props.selectedObject.id && props.selectedObject.id.includes("Gateway")  ?
+          {props.selectedObject.$type && props.selectedObject.$type.includes("Gateway")  ?
           <Gateway setData={props.setData} getData={props.getData}  selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
           : <></>
           }
 
-          {props.selectedObject.id && props.selectedObject.id.includes("Task")  ?
+          {props.selectedObject.$type && props.selectedObject.$type.includes("Task")  ?
           <Activity setData={props.setData} getData={props.getData} selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
+          : <></>
+          }
+
+          {props.selectedObject.$type && props.selectedObject.$type.includes("Event")  ?
+          <Event setData={props.setData} getData={props.getData} selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
           : <></>
           }
         </>

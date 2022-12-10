@@ -12,7 +12,7 @@ function Page(props){
             case "Modelbased Parameters":  return <BpmnViewSelector current={props.current} currentScenario={props.currentScenario} data={props.data} currentBpmn={props.currentBpmn} bpmns={props.bpmns} setObject={props.setObject} zIndex={-5} />
             case "Resource Parameters": return <ResourcePage currentScenario={props.currentScenario} data={props.data} currentBpmn={props.currentBpmn}/>
             case "Scenario Parameters": return <ScenarioPage currentScenario={props.currentScenario} data={props.data} currentBpmn={props.currentBpmn}/>
-            case "Scenario Overview": return <OverviewPage current={props.current} currentScenario={props.currentScenario} data={props.data} currentBpmn={props.currentBpmn} bpmns={props.bpmns} setObject={props.setObject} zIndex={-5} />
+            case "Scenario Overview": return <OverviewPage current={props.current} currentScenario={props.currentScenario} data={props.data} currentBpmn={props.currentBpmn} bpmns={props.bpmns} setObject={props.setObject} zIndex={-5}/>
                 default:
                 break;
         }
