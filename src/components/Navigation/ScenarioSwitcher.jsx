@@ -17,7 +17,7 @@ function ScenarioSwitcher(props) {
     <Menu>
         <Text ml={2} fontSize={{base: "2xs", md:"sm"}} textAlign="left" color="RGBA(0, 0, 0, 0.64)" fontWeight="bold" display="flex">Current Scenario:</Text>      
         <Flex gap={{base: "3", md:"3"}} flexDirection={{base: "column", md:"row"}} w="100%">                      
-            <Input placeholder={props.scenarios[props.currentScenario].name} 
+            <Input placeholder={props.data[props.currentScenario].scenarioName} 
                   variant="filled" 
                   isDisabled 
                   w={{
@@ -44,8 +44,8 @@ function ScenarioSwitcher(props) {
             </MenuButton>
         
         <MenuList>
-            {props.scenarios.map((scenario, index) => {
-                return  <MenuItem key={index} onClick={() =>  props.setScenario(index)}>{scenario.name}</MenuItem>
+            {props.data.map((scenario, index) => {
+                return  <MenuItem key={index} onClick={() =>  props.setScenario(index)}>{scenario.scenarioName}</MenuItem>
             })
 
             }

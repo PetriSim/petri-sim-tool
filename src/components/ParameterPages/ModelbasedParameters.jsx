@@ -36,7 +36,7 @@ console.log(props.currentBpmn)
           : <></>
           }
 
-          {props.selectedObject.$type && props.selectedObject.$type.includes("Event")  ?
+          {props.selectedObject.$type && props.selectedObject.$type.includes("Event") && !props.selectedObject.$type.includes("Gateway")  ?
           <Event setData={props.setData} getData={props.getData} selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
           : <></>
           }
