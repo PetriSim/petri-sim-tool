@@ -29,12 +29,14 @@ function OverviewTable(props){
                     </Tr>
                 </Thead>
                 <Tbody>
+
                         <Tr>
-                            <Td> Scenario1</Td>
+                            <Td>Scenario1 </Td>
                             <Td>14.11.2022</Td>
                             <Td>12:00</Td>
                             <Td isNumeric>20</Td>
                         </Tr>
+
                 </Tbody>
             </Table>
         </TableContainer>
