@@ -95,7 +95,14 @@ useEffect(() =>{
     default:
       return data
   }
+
  }
+ const allFiles = [];
+  
+  const addFile = (File) => {
+    allFiles.push(File);
+    console.log(allFiles)
+  }
 
 
 
@@ -105,7 +112,7 @@ useEffect(() =>{
       {data[0] && 
       <Flex bg="#F9FAFC" h="100%" zIndex={-3} minH="100vh">
         {projectStarted === "false"?
-          <StartView setStarted={setStarted}/>
+          <StartView setStarted={setStarted} giveApp={addFile}/>
         :
         <>
           <Box zIndex={2} paddingTop={{base: "0", md:"6"}} >
