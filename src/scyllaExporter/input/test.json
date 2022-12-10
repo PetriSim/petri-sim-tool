@@ -1,0 +1,1224 @@
+[
+  {
+    "scenarioName": "Scenario 1",
+    "startingDate": "14-11-2022",
+    "startingTieme": "12:00",
+    "numberOfInstances": 2,
+    "scenario": {
+      "models": [
+        {
+          "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
+          "name": "Warenversand",
+          "parameters": {
+            "simulation": {
+              "startingTime": "12:00",
+              "StartingDate": "22-11-2022",
+              "instanceNumber": 2
+            },
+            "resource": [
+              {
+                "role": "Top Management",
+                "resources": [
+                  {
+                    "name": "Management Board",
+                    "schedules": "40h",
+                    "costHour": 20
+                  }
+                ]
+              }
+            ],
+            "modelParameter": {
+              "activities": [
+                {
+                  "id": "Task_0vaxgaa",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": "23",
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_0e6hvnj",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_0s79ile",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_05ftug5",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_0sl26uo",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_0jsoxba",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_12j0pib",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                }
+              ],
+              "gateways": [
+                {
+                  "id": "InclusiveGateway_0p2e5vq",
+                  "type": "bpmn:InclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_0iu9po7"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_1j94oja",
+                    "SequenceFlow_1dlbln9"
+                  ]
+                },
+                {
+                  "id": "InclusiveGateway_1dgb4sg",
+                  "type": "bpmn:InclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_0kz5g1t",
+                    "SequenceFlow_0mp5byl"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_0buzwss"
+                  ]
+                },
+                {
+                  "id": "ParallelGateway_02fgrfq",
+                  "type": "bpmn:ParallelGateway",
+                  "incoming": [
+                    "SequenceFlow_14a0oky"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_023hzxi",
+                    "SequenceFlow_1ujhfx4"
+                  ]
+                },
+                {
+                  "id": "ExclusiveGateway_1mpgzhg",
+                  "type": "bpmn:ExclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_1rss71o"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_0iu9po7",
+                    "SequenceFlow_1xv6wk4"
+                  ]
+                },
+                {
+                  "id": "ExclusiveGateway_1ouv9kf",
+                  "type": "bpmn:ExclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_0ajhekx",
+                    "SequenceFlow_0buzwss"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_035vf60"
+                  ]
+                },
+                {
+                  "id": "ExclusiveGateway_0z5sib0",
+                  "type": "bpmn:ExclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_035vf60",
+                    "SequenceFlow_0b2nw5c"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_06kfaev"
+                  ]
+                }
+              ],
+              "events": [
+                {
+                  "id": "StartEvent_1",
+                  "type": "bpmn:StartEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "EndEvent_1fx9yp3",
+                  "type": "bpmn:EndEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                }
+              ],
+              "sequences": [
+                {
+                  "id": "SequenceFlow_0iu9po7",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1j94oja",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0kz5g1t",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_14a0oky",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_023hzxi",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1rss71o",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1xv6wk4",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1pq8ub3",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0ajhekx",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0buzwss",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_035vf60",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0b2nw5c",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_06kfaev",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0v64x8b",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1ujhfx4",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0mp5byl",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1dlbln9",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                }
+              ]
+            },
+            "roles": [
+              {
+                "name": "Management Board",
+                "parent": 0
+              },
+              {
+                "name": "Management Directory",
+                "parent": 1
+              }
+            ]
+          }
+        },
+        {
+          "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
+          "name": "Schufascoring",
+          "parameters": {
+            "simulation": {
+              "startingTime": "12:00",
+              "StartingDate": "22-11-2022",
+              "instanceNumber": 2
+            },
+            "resource": [
+              {
+                "role": "Top Management",
+                "resources": [
+                  {
+                    "name": "Management Board",
+                    "schedules": "40h",
+                    "costHour": 20
+                  }
+                ]
+              }
+            ],
+            "modelParameter": {
+              "activities": [
+                {
+                  "id": "Task_16winvj",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_1fzfxey",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_0l942o9",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_1r15hqs",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_02m68xj",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_06dqs9t",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_07vbn2i",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_01ouvha",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                }
+              ],
+              "gateways": [
+                {
+                  "id": "ExclusiveGateway_11dldcm",
+                  "type": "bpmn:ExclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_1i1amgb",
+                    "SequenceFlow_1fy80l7"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_12a77en"
+                  ]
+                },
+                {
+                  "id": "EventBasedGateway_1aqzm1h",
+                  "type": "bpmn:EventBasedGateway",
+                  "incoming": [
+                    "SequenceFlow_0kzld4o"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_1emaqh0",
+                    "SequenceFlow_1ccde6h"
+                  ]
+                },
+                {
+                  "id": "ExclusiveGateway_125lzox",
+                  "type": "bpmn:ExclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_1xqy47o",
+                    "SequenceFlow_0dkbeo7"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_0t0wbx3"
+                  ]
+                },
+                {
+                  "id": "ExclusiveGateway_0rtdod4",
+                  "type": "bpmn:ExclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_1nznlgx"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_052bcer",
+                    "SequenceFlow_0jh32vv"
+                  ]
+                }
+              ],
+              "events": [
+                {
+                  "id": "EndEvent_0rp5trg",
+                  "type": "bpmn:EndEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "IntermediateCatchEvent_0ujob24",
+                  "type": "bpmn:IntermediateCatchEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "IntermediateCatchEvent_0yg7cuh",
+                  "type": "bpmn:IntermediateCatchEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "IntermediateCatchEvent_0a8iz14",
+                  "type": "bpmn:IntermediateCatchEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "StartEvent_1els7eb",
+                  "type": "bpmn:StartEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "EventBasedGateway_1aqzm1h",
+                  "type": "bpmn:EventBasedGateway",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "StartEvent_0o849un",
+                  "type": "bpmn:StartEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "EndEvent_0khk0tq",
+                  "type": "bpmn:EndEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                }
+              ],
+              "sequences": [
+                {
+                  "id": "SequenceFlow_0rrtx7k",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_08fsgff",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1i1amgb",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_12a77en",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1nyeozm",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1fy80l7",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0rf5cxd",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0kzld4o",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1emaqh0",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1ccde6h",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_158pur5",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1nznlgx",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1yiajt6",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_08jl5se",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1xqy47o",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0dkbeo7",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0t0wbx3",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_052bcer",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0jh32vv",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                }
+              ]
+            },
+            "roles": [
+              {
+                "name": "Management Board",
+                "parent": 0
+              },
+              {
+                "name": "Management Directory",
+                "parent": 1
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "scenarioName": "Scenario 2",
+    "startingDate": "14-11-2022",
+    "startingTieme": "12:00",
+    "numberOfInstances": 2,
+    "scenario": {
+      "models": [
+        {
+          "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
+          "name": "Warenversand",
+          "parameters": {
+            "simulation": {
+              "startingTime": "12:00",
+              "StartingDate": "22-11-2022",
+              "instanceNumber": 2
+            },
+            "resource": [
+              {
+                "role": "Top Management",
+                "resources": [
+                  {
+                    "name": "Management Board",
+                    "schedules": "40h",
+                    "costHour": 20
+                  }
+                ]
+              }
+            ],
+            "modelParameter": {
+              "activities": [
+                {
+                  "id": "Task_0vaxgaa",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_0e6hvnj",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_0s79ile",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_05ftug5",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_0sl26uo",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_0jsoxba",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_12j0pib",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                }
+              ],
+              "gateways": [
+                {
+                  "id": "InclusiveGateway_0p2e5vq",
+                  "type": "bpmn:InclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_0iu9po7"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_1j94oja",
+                    "SequenceFlow_1dlbln9"
+                  ]
+                },
+                {
+                  "id": "InclusiveGateway_1dgb4sg",
+                  "type": "bpmn:InclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_0kz5g1t",
+                    "SequenceFlow_0mp5byl"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_0buzwss"
+                  ]
+                },
+                {
+                  "id": "ParallelGateway_02fgrfq",
+                  "type": "bpmn:ParallelGateway",
+                  "incoming": [
+                    "SequenceFlow_14a0oky"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_023hzxi",
+                    "SequenceFlow_1ujhfx4"
+                  ]
+                },
+                {
+                  "id": "ExclusiveGateway_1mpgzhg",
+                  "type": "bpmn:ExclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_1rss71o"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_0iu9po7",
+                    "SequenceFlow_1xv6wk4"
+                  ]
+                },
+                {
+                  "id": "ExclusiveGateway_1ouv9kf",
+                  "type": "bpmn:ExclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_0ajhekx",
+                    "SequenceFlow_0buzwss"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_035vf60"
+                  ]
+                },
+                {
+                  "id": "ExclusiveGateway_0z5sib0",
+                  "type": "bpmn:ExclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_035vf60",
+                    "SequenceFlow_0b2nw5c"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_06kfaev"
+                  ]
+                }
+              ],
+              "events": [
+                {
+                  "id": "StartEvent_1",
+                  "type": "bpmn:StartEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "EndEvent_1fx9yp3",
+                  "type": "bpmn:EndEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                }
+              ],
+              "sequences": [
+                {
+                  "id": "SequenceFlow_0iu9po7",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1j94oja",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0kz5g1t",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_14a0oky",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_023hzxi",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1rss71o",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1xv6wk4",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1pq8ub3",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0ajhekx",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0buzwss",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_035vf60",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0b2nw5c",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_06kfaev",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0v64x8b",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1ujhfx4",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0mp5byl",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1dlbln9",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                }
+              ]
+            },
+            "roles": [
+              {
+                "name": "Management Board",
+                "parent": 0
+              },
+              {
+                "name": "Management Directory",
+                "parent": 1
+              }
+            ]
+          }
+        },
+        {
+          "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
+          "name": "Schufascoring",
+          "parameters": {
+            "simulation": {
+              "startingTime": "12:00",
+              "StartingDate": "22-11-2022",
+              "instanceNumber": 2
+            },
+            "resource": [
+              {
+                "role": "Top Management",
+                "resources": [
+                  {
+                    "name": "Management Board",
+                    "schedules": "40h",
+                    "costHour": 20
+                  }
+                ]
+              }
+            ],
+            "modelParameter": {
+              "activities": [
+                {
+                  "id": "Task_16winvj",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_1fzfxey",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_0l942o9",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_1r15hqs",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_02m68xj",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_06dqs9t",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_07vbn2i",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "Task_01ouvha",
+                  "type": "bpmn:Task",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                }
+              ],
+              "gateways": [
+                {
+                  "id": "ExclusiveGateway_11dldcm",
+                  "type": "bpmn:ExclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_1i1amgb",
+                    "SequenceFlow_1fy80l7"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_12a77en"
+                  ]
+                },
+                {
+                  "id": "EventBasedGateway_1aqzm1h",
+                  "type": "bpmn:EventBasedGateway",
+                  "incoming": [
+                    "SequenceFlow_0kzld4o"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_1emaqh0",
+                    "SequenceFlow_1ccde6h"
+                  ]
+                },
+                {
+                  "id": "ExclusiveGateway_125lzox",
+                  "type": "bpmn:ExclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_1xqy47o",
+                    "SequenceFlow_0dkbeo7"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_0t0wbx3"
+                  ]
+                },
+                {
+                  "id": "ExclusiveGateway_0rtdod4",
+                  "type": "bpmn:ExclusiveGateway",
+                  "incoming": [
+                    "SequenceFlow_1nznlgx"
+                  ],
+                  "outgoing": [
+                    "SequenceFlow_052bcer",
+                    "SequenceFlow_0jh32vv"
+                  ]
+                }
+              ],
+              "events": [
+                {
+                  "id": "EndEvent_0rp5trg",
+                  "type": "bpmn:EndEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "IntermediateCatchEvent_0ujob24",
+                  "type": "bpmn:IntermediateCatchEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "IntermediateCatchEvent_0yg7cuh",
+                  "type": "bpmn:IntermediateCatchEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "IntermediateCatchEvent_0a8iz14",
+                  "type": "bpmn:IntermediateCatchEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "StartEvent_1els7eb",
+                  "type": "bpmn:StartEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "EventBasedGateway_1aqzm1h",
+                  "type": "bpmn:EventBasedGateway",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "StartEvent_0o849un",
+                  "type": "bpmn:StartEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                },
+                {
+                  "id": "EndEvent_0khk0tq",
+                  "type": "bpmn:EndEvent",
+                  "resource": "Courier",
+                  "duration": 5,
+                  "unit": "mins",
+                  "cost": 2,
+                  "currency": "euro"
+                }
+              ],
+              "sequences": [
+                {
+                  "id": "SequenceFlow_0rrtx7k",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_08fsgff",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1i1amgb",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_12a77en",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1nyeozm",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1fy80l7",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0rf5cxd",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0kzld4o",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1emaqh0",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1ccde6h",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_158pur5",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1nznlgx",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1yiajt6",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_08jl5se",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_1xqy47o",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0dkbeo7",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0t0wbx3",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_052bcer",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                },
+                {
+                  "id": "SequenceFlow_0jh32vv",
+                  "type": "bpmn:SequenceFlow",
+                  "probability": 0.25
+                }
+              ]
+            },
+            "roles": [
+              {
+                "name": "Management Board",
+                "parent": 0
+              },
+              {
+                "name": "Management Directory",
+                "parent": 1
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simulationConfiguration startDateTime="2022-11-22T12:00+01:00" processInstances="2" xmlns="https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn" targetname="Warenversand">
+	<Task id="Task_0vaxgaa">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_0e6hvnj">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_0s79ile">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_05ftug5">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_0sl26uo">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_0jsoxba">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_12j0pib">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<bpmn:InclusiveGateway id="InclusiveGateway_1dgb4sg">
+		<outgoingSequenceFlow id="SequenceFlow_0buzwss">
+			<branchingProbability>0.25</branchingProbability>
+		</outgoingSequenceFlow>
+	</bpmn:InclusiveGateway>
+	<bpmn:ParallelGateway id="ParallelGateway_02fgrfq">
+		<outgoingSequenceFlow id="SequenceFlow_023hzxi">
+			<branchingProbability>0.25</branchingProbability>
+		</outgoingSequenceFlow>
+		<outgoingSequenceFlow id="SequenceFlow_1ujhfx4">
+			<branchingProbability>0.25</branchingProbability>
+		</outgoingSequenceFlow>
+	</bpmn:ParallelGateway>
+	<bpmn:ExclusiveGateway id="ExclusiveGateway_0z5sib0">
+		<outgoingSequenceFlow id="SequenceFlow_06kfaev">
+			<branchingProbability>0.25</branchingProbability>
+		</outgoingSequenceFlow>
+	</bpmn:ExclusiveGateway>
+</simulationConfiguration>

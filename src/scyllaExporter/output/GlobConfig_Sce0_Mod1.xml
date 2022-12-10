@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<globalConfiguration xmlns="https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn" targetname="Schufascoring">
+	<resourceData>
+		<dynamicResource name="Management Board" defaultTimetableId="40h" defaultCost="20"/>
+	</resourceData>
+	<timetables/>
+</globalConfiguration>

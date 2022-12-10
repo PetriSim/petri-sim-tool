@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simulationConfiguration startDateTime="2022-11-22T12:00+01:00" processInstances="2" xmlns="https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn" targetname="Schufascoring">
+	<Task id="Task_16winvj">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_1fzfxey">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_0l942o9">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_1r15hqs">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_02m68xj">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_06dqs9t">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_07vbn2i">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<Task id="Task_01ouvha">
+		<duration/>
+		<resources>
+			<resource id="Courier" amount="1"/>
+		</resources>
+	</Task>
+	<bpmn:ExclusiveGateway id="ExclusiveGateway_0rtdod4">
+		<outgoingSequenceFlow id="SequenceFlow_052bcer">
+			<branchingProbability>0.25</branchingProbability>
+		</outgoingSequenceFlow>
+		<outgoingSequenceFlow id="SequenceFlow_0jh32vv">
+			<branchingProbability>0.25</branchingProbability>
+		</outgoingSequenceFlow>
+	</bpmn:ExclusiveGateway>
+	<bpmn:EventBasedGateway id="EventBasedGateway_1aqzm1h">
+		<outgoingSequenceFlow id="SequenceFlow_1emaqh0">
+			<branchingProbability>0.25</branchingProbability>
+		</outgoingSequenceFlow>
+		<outgoingSequenceFlow id="SequenceFlow_1ccde6h">
+			<branchingProbability>0.25</branchingProbability>
+		</outgoingSequenceFlow>
+	</bpmn:EventBasedGateway>
+</simulationConfiguration>
