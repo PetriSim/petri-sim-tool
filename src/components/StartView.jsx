@@ -11,6 +11,10 @@ function StartView(props) {
   const [addExistingBPMN, setExistingBPMN] = useState(false);
   const [startNewProject, setNewProject] = useState(false);
   const [startExistingProject, setExistingProject] = useState(false);
+  
+  const pushToApp = (File) => {
+    props.giveApp(File)
+  }
 
   const startNewProjectNow = () => {
     setNewProject(true)
@@ -69,7 +73,7 @@ function StartView(props) {
             <Text fontSize="xl" textAlign="left" color="#485152" fontWeight="bold" > Start new project</Text>
             <gap />
 
-            <FileUpload title = 'Event log:' accept = '.pdf'/>
+            <FileUpload title = 'Event log:' accept = '.pdf' getFile={pushToApp}/>
 
             <Flex width = '90%' flexDir = 'column'>
               <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select Discovery Tool:</Text>
@@ -129,8 +133,10 @@ function StartView(props) {
           <gap />
 
 
-          <FileUpload title = 'Parameter file:' accept = '.xml'/>
-          <FileUpload title = 'BPMN file:' accept = '.bpmn'/>
+          <FileUpload title = 'Parameter file:' accept = '.xml' getFile={pushToApp}/>
+
+          <FileUpload title = 'BPMN file:' accept = '.bpmn' getFile={pushToApp}/>
+        
 
 
           {addExistingBPMN ? <></> 
@@ -143,8 +149,9 @@ function StartView(props) {
           {addExistingBPMN ?
           <>
           <Divider borderColor="#485152" width = '90%'/>
-          <FileUpload title = 'Parameter file:' accept = '.xml'/>
-          <FileUpload title = 'BPMN file:' accept = '.bpmn'/>
+
+          <FileUpload title = 'Parameter file:' accept = '.bpmn' getFile={pushToApp}/>
+          <FileUpload title = 'BPMN file:' accept = '.bpmn' getFile={pushToApp}/>
 
           <Button color = 'grey' alignSelf= 'end' backgroundColor= '#F0F0F1' as = 'u' onClick={(()=> setExistingBPMN(false))}> 
             - remove BPMN

@@ -9,9 +9,10 @@ import { FiCheck, FiChevronDown, FiChevronsDown, FiFile, FiFilePlus, FiMenu, FiU
 
 
 
-function FileUpload(props) {
+function FileUpload(props, ) {
     const [fileUploaded, setFileUplaoded] = useState(false);
     var thisFile;
+    const [thisFile2, setThisFile2] = useState();
     
     onchange = () => {
         const selectedFile = document.getElementById('file-upload')
@@ -20,21 +21,29 @@ function FileUpload(props) {
         :
         setFileUplaoded(true)
         }
-        {console.log(thisFile)}
+        setThisFile2(thisFile);
+        props.getFile(thisFile)
+        
     }
         
     
 
     return (
         
-        
             <Flex width = '90%' flexDir = 'column'>
                 
                 <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > {props.title} </Text>
                 <InputGroup width = "100%">
+                {fileUploaded ?
+                <label for='file-upload' class = 'custom-file-upload'>
+                {thisFile2.name + ''} 
+                </label>
+                :
                 <label for='file-upload' class = 'custom-file-upload'>
                 Select file 
                 </label>
+                }
+                
                 <Input id = 'file-upload' type = 'file'  accept={props.accept}/> 
                 {fileUploaded ?
                 <InputRightElement pointerEvents='none' children={<FiCheck />} />
