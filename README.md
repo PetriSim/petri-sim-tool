@@ -1,3 +1,6 @@
+![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/main.yml/badge.svg)
+![Docker](https://github.com/PetriSim/petri-sim-tool/actions/workflows/docker-image.yml/badge.svg)
+
 ## Run with Docker
 
 ```console
@@ -18,6 +21,9 @@ docker run -p 3000:3000 -d ghcr.io/petrisim/petri-sim-tool:latest
 
 3. Clone git repository
 
+```console
+git clone https://github.com/PetriSim/petri-sim-tool.git
+```
 
 4. Go to the project directory
 

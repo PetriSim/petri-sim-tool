@@ -35,12 +35,15 @@ function Sidebar(props) {
               md: "10 !important"
             }}
 
-            position="absolute"
+           
             h={hidden ? "" : {base: "100%", md:"95vh"}}
             rounded={hidden ? "xl" : {base: "none", md:"2xl"}}
             left={props.side === "left" ? {base: "0vh", md:"2vh"} : ""}
             right={props.side === "right" ? {base: "0vh", md:"2vh"} : ""}
-            overflowY="scroll"
+            position="relative"
+            float={props.side}
+            overflowY="auto"
+            overflowX="hidden"
   
         >
         <Flex alignItems="center" >

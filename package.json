@@ -31,12 +31,13 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
+        "build": "CI=false && react-scripts build",
+        "test": "cypress open",
         "eject": "react-scripts eject",
         "start-electron": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
         "package": "electron-builder build --mac --win -c.extraMetadata.main=build/electron.js --publish never",
-        "publish": "electron-builder build --mac --win --publish always"
+        "publish": "electron-builder build --mac --win --publish always",
+        "cypress:open": "cypress open"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -68,6 +69,8 @@
         }
     },
     "devDependencies": {
+        "@testing-library/cypress": "^8.0.7",
+        "cypress": "^12.0.0",
         "react-router-dom": "^6.4.3"
     }
 }
