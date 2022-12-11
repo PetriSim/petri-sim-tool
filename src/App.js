@@ -130,7 +130,7 @@ useEffect(() =>{
           </Box>
 
         
-          <Container maxWidth="100%" p="10">
+          <Container maxWidth="100%" padding={{base: "0", md:"10"}}>
             <Routes>
               <Route path="/scenario" element={<ScenarioPage  path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
               <Route path="/resource" element={<ResourcePage  path="/resource" getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
