@@ -127,18 +127,10 @@ useEffect(() =>{
               setScenario={setScenario}
           
               />
-
-            
-            <Routes>
-              <Route path="/resource" element={<Parameditor  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
-              <Route path="/modelbased" element={<Parameditor  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
-            </Routes>
           </Box>
 
         
-          <Container maxW={current === "Modelbased Parameters"? '' : ''}>
-            
-          
+          <Container maxWidth="100%" p="10">
             <Routes>
               <Route path="/scenario" element={<ScenarioPage  path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
               <Route path="/resource" element={<ResourcePage  path="/resource" getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
@@ -147,6 +139,13 @@ useEffect(() =>{
               <Route path='*' element={<Navigate to='/scenario' />} />
             </Routes>
          </Container>
+
+         <Box zIndex={2} paddingTop={{base: "0", md:"6"}} >
+            <Routes>
+              <Route path="/resource" element={<Parameditor  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
+              <Route path="/modelbased" element={<Parameditor  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
+            </Routes>
+          </Box>
         </>
         }
       </Flex>

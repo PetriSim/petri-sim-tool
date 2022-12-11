@@ -81,7 +81,7 @@ class ModelbasedParametersTable extends React.Component {
 
     render() {
       return ( 
-        <Box h="100vh" overflowY="scroll" w="80vw" marginLeft="18vw">
+        <Box h="100vh" overflowY="auto" >
 
     <VStack
     spacing={5}
@@ -91,7 +91,7 @@ class ModelbasedParametersTable extends React.Component {
 
     { this.state.parsed ? 
     <>
-        <Card bg="white" w="80vw" >
+        <Card bg="white"  w="100%" >
         <CardHeader>
             <Heading size='md'>Activities</Heading>
         </CardHeader>
@@ -140,7 +140,7 @@ class ModelbasedParametersTable extends React.Component {
         </CardBody>
         </Card>
 
-        <Card bg="white" w="80vw">
+        <Card bg="white"  w="100%">
         <CardHeader>
             <Heading size='md'>Gateways</Heading>
         </CardHeader>
@@ -201,7 +201,7 @@ class ModelbasedParametersTable extends React.Component {
         </CardBody>
         </Card>
 
-        <Card bg="white" w="80vw">
+        <Card bg="white" w="100%">
         <CardHeader>
             <Heading size='md'>Events</Heading>
         </CardHeader>

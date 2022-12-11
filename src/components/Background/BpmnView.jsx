@@ -151,7 +151,7 @@ function BpmnView({currentBpmn, setObject}) {
         return (
          <Flex>
             
-          <Box id="container" w="100vw" pos="absolute" h="100vh">
+          <Box id="container" w="100%" maxWidth="100%" h="90vh">
           </Box>
           
 
@@ -161,7 +161,7 @@ function BpmnView({currentBpmn, setObject}) {
                 variant='unstyled' 
                 position="absolute" 
                 justifyContent="center" 
-                bottom="20px" 
+                bottom="10" 
                 left="0px" 
                 right="0px">
                   
