@@ -1,5 +1,6 @@
 ![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/CI.yml/badge.svg)
 
+
 ## Run with Docker
 
 ```console
