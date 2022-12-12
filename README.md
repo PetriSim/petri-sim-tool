@@ -1,5 +1,4 @@
-![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/main.yml/badge.svg)
-![Docker](https://github.com/PetriSim/petri-sim-tool/actions/workflows/docker-image.yml/badge.svg)
+![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/ci.yml/badge.svg)
 
 ## Run with Docker
 
