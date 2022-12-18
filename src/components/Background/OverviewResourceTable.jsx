@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from '@chakra-ui/react'
+import {Flex, Text} from '@chakra-ui/react'
 import {
     Table,
     Thead,
@@ -16,6 +16,9 @@ function OverviewResourceTable(props){
 
     return(
         <React.Fragment>
+
+
+
             <Flex >
             <TableContainer ml="40px" mt="25px">
               <Table variant='simple'>

@@ -1,5 +1,19 @@
-import {Button, Spacer, Stack} from '@chakra-ui/react';
-import {React, useState} from 'react'
+import {
+    Flex,
+    Button,
+    Spacer,
+    Stack,
+    Table,
+    TableCaption,
+    TableContainer,
+    Tbody,
+    Td,
+    Text,
+    Th,
+    Thead,
+    Tr
+} from '@chakra-ui/react';
+import {React, useEffect, useState} from 'react'
 import OverviewTable from '../Background/OverviewTable';
 import { Card, CardHeader, CardBody, Heading} from '@chakra-ui/react'
 import TabBar from "../Background/TabBar";
@@ -22,9 +36,11 @@ import { Switch } from '@chakra-ui/react'
    ModalCloseButton,
  } from '@chakra-ui/react'
 
+
 function OverviewPage(props) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
+
     const [tabs] = useState([
         {
             tabname: "Scenario 1 ",
@@ -34,9 +50,11 @@ function OverviewPage(props) {
         },],
     )
 
+
     return (
         <>
-            <Stack direction='row' spacing={4} ml="300px" mt="25px" w="70vw" >
+
+            <Stack direction='row' spacing={4}  w="70vw" >
                 <Button colorScheme='#ECF4F4'
                         variant='outline'
                         border='1px'
@@ -95,23 +113,25 @@ function OverviewPage(props) {
                     Delete scenario
                 </Button>
             </Stack>
-            <Card bg="white" w="70vw" ml="300px" mt="25px" >
+            <Card bg="white" w="70vw" mt="25px" >
                 <CardHeader>
                     <Heading size='md'>Scenario Overview</Heading>
                 </CardHeader>
                 <CardBody>
-                    <OverviewTable pt/>
+                                <OverviewTable hello = {props.getData}/>
                 </CardBody>
             </Card>
-            <Stack direction='row' ml="300px" mt="25px" w="70vw" >
-                <TabBar items={tabs}/>
+            <Stack direction='row' mt="25px" w="70vw" >
+                <TabBar items={props.getData("allScenarios").map((element) => {
+                        return {tabname: element.scenarioName} }) }/>
             </Stack>
-            <Card bg="white" w="70vw" ml="300px" mt="25px" >
+            <Card bg="white" w="70vw" mt="25px" >
                 <CardHeader>
                     <Heading size='md'>Resource Overview</Heading>
+                    <Text>{props.getData("currentModel").parameters.roles.name}</Text>
                 </CardHeader>
                 <CardBody>
-                    <OverviewResourceTable/>
+                   < OverviewResourceTable />
                 </CardBody>
             </Card>
 

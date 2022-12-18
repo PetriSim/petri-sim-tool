@@ -23,20 +23,20 @@ function OverviewTable(props){
                 <Thead>
                     <Tr>
                         <Th>Simalation</Th>
-                        <Th>Starting day</Th>
+                        <Th>Starting date</Th>
                         <Th>Starting time</Th>
                         <Th isNumeric>Replications</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
-
-                        <Tr>
-                            <Td>Scenario1 </Td>
-                            <Td>14.11.2022</Td>
-                            <Td>12:00</Td>
-                            <Td isNumeric>20</Td>
+                    {props.hello("allScenarios").map((element) => {
+                        return <Tr>
+                            <Td>{element.scenarioName} </Td>
+                            <Td>{element.startingDate}</Td>
+                            <Td>{element.startingTieme}</Td>
+                            <Td isNumeric>{element.numberOfInstances}</Td>
                         </Tr>
-
+                    })}
                 </Tbody>
             </Table>
         </TableContainer>
