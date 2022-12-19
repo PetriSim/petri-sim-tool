@@ -73,7 +73,7 @@ function StartView(props) {
             <Text fontSize="xl" textAlign="left" color="#485152" fontWeight="bold" > Start new project</Text>
             <gap />
 
-            <FileUpload title = 'Event log:' accept = '.json' getFile={pushToApp}/>
+            <FileUpload title = 'Event log:' accept = '.pdf' getFile={pushToApp}/>
 
             <Flex width = '90%' flexDir = 'column'>
               <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select Discovery Tool:</Text>

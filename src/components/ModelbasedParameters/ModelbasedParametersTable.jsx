@@ -3,8 +3,9 @@ import { Input, Select,
     Thead,
     Tbody,
     Tr,Th,Td,
-    TableContainer,Card, CardHeader, CardBody, Heading, Text, VStack, Button, Box} from '@chakra-ui/react';
+    TableContainer,Card, CardHeader, CardBody, Heading, Text, VStack, Button, Box, Spacer} from '@chakra-ui/react';
 import React from 'react'
+import ViewButtons from './ViewButtons';
 
 
 
@@ -27,10 +28,10 @@ class ModelbasedParametersTable extends React.Component {
         if(this.props.parsed){
             this.setState({
                 parsed:true,
-                activities: this.props.getData("currentModel").parameters.modelParameter.activities,
-                gateways: this.props.getData("currentModel").parameters.modelParameter.gateways,
-                events: this.props.getData("currentModel").parameters.modelParameter.events,
-                sequences:  this.props.getData("currentModel").parameters.modelParameter.sequences
+                activities: this.props.getData("currentModel").modelParameter.activities,
+                gateways: this.props.getData("currentModel").modelParameter.gateways,
+                events: this.props.getData("currentModel").modelParameter.events,
+                sequences:  this.props.getData("currentModel").modelParameter.sequences
             
             })
         }
@@ -39,22 +40,22 @@ class ModelbasedParametersTable extends React.Component {
       componentDidUpdate(prevProps) {
        
         if(prevProps.currentScenario !== this.props.currentScenario | prevProps.currentBpmn !== this.props.currentBpmn){
-            console.log(this.props.getData("currentModel").parameters.modelParameter.activities)
+            console.log(this.props.getData("currentModel").modelParameter.activities)
             this.setState({
-                activities: this.props.getData("currentModel").parameters.modelParameter.activities,
-                gateways: this.props.getData("currentModel").parameters.modelParameter.gateways,
-                events: this.props.getData("currentModel").parameters.modelParameter.events,
-                sequences:  this.props.getData("currentModel").parameters.modelParameter.sequences
+                activities: this.props.getData("currentModel").modelParameter.activities,
+                gateways: this.props.getData("currentModel").modelParameter.gateways,
+                events: this.props.getData("currentModel").modelParameter.events,
+                sequences:  this.props.getData("currentModel").modelParameter.sequences
             })
         }
 
         if(prevProps.parsed !== this.props.parsed ){
             this.setState({
                 parsed:true,
-                activities: this.props.getData("currentModel").parameters.modelParameter.activities,
-                gateways: this.props.getData("currentModel").parameters.modelParameter.gateways,
-                events: this.props.getData("currentModel").parameters.modelParameter.events,
-                sequences:  this.props.getData("currentModel").parameters.modelParameter.sequences
+                activities: this.props.getData("currentModel").modelParameter.activities,
+                gateways: this.props.getData("currentModel").modelParameter.gateways,
+                events: this.props.getData("currentModel").modelParameter.events,
+                sequences:  this.props.getData("currentModel").modelParameter.sequences
             })
         }
 
@@ -64,30 +65,32 @@ class ModelbasedParametersTable extends React.Component {
      handleChange = (event, index, group, type) =>{
         let value = event.target.value
 
-        let copy = this.props.getData("currentModel").parameters.modelParameter[group]
+
+        let copy = this.props.getData("currentModel").modelParameter[group]
         copy[index][type] = value
         
         this.setState({
-            activities: group === "activities" ? copy : this.props.getData("currentModel").parameters.modelParameter.activities,
-            gateways: group === "gateways" ? copy : this.props.getData("currentModel").parameters.modelParameter.gateways,
-            events: group === "events" ? copy : this.props.getData("currentModel").parameters.modelParameter.events,
-            sequences:  this.props.getData("currentModel").parameters.modelParameter.sequences
+            activities: group === "activities" ? copy : this.props.getData("currentModel").modelParameter.activities,
+            gateways: group === "gateways" ? copy : this.props.getData("currentModel").modelParameter.gateways,
+            events: group === "events" ? copy : this.props.getData("currentModel").modelParameter.events,
+            sequences:  this.props.getData("currentModel").modelParameter.sequences
         })
 
-        this.props.getData("currentModel").parameters.modelParameter[group] = copy
+        this.props.getData("currentModel").modelParameter[group] = copy
         
     }
 
     render() {
       return ( 
-        <Box h="100vh" overflowY="auto" >
+        <Box h="93vh" overflowY="auto" >
 
     <VStack
     spacing={5}
     >
 
-        <Button onClick={() => this.setState({editable: !this.state.editable})}>{this.state.editable? "View mode" : "Edit mode"}</Button>
-
+    <Box display="flex" justifyContent="flex-end" w="100%">
+        <Button variant="outline" bg="#FFFF" onClick={() => this.setState({editable: !this.state.editable})}><Text color="RGBA(0, 0, 0, 0.64)" fontWeight="bold">{this.state.editable? "View mode" : "Edit mode"}</Text></Button>
+    </Box>
     { this.state.parsed ? 
     <>
         <Card bg="white"  w="100%" >
@@ -215,7 +218,7 @@ class ModelbasedParametersTable extends React.Component {
                         </Thead>
                         <Tbody>
 
-                            {this.props.getData("currentModel").parameters.modelParameter.events.map((element) => {
+                            {this.props.getData("currentModel").modelParameter.events.map((element) => {
                                 return <Tr>
                                             <Td>{element.id}</Td>
                                             
@@ -230,6 +233,11 @@ class ModelbasedParametersTable extends React.Component {
         </>
         :
         ""}
+
+            <Spacer />
+            <Spacer />
+            <Spacer />
+            <ViewButtons/>
         </VStack>
         </Box>
       );

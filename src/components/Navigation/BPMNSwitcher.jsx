@@ -20,7 +20,7 @@ function BPMNSwitcher(props) {
     <Menu>
         <Text ml={2} fontSize={{base: "2xs", md:"sm"}} textAlign="left" color="RGBA(0, 0, 0, 0.64)" fontWeight="bold" display="flex">Current BPMN Model:</Text>      
         <Flex gap={{base: "3", md:"3"}} flexDirection={{base: "column", md:"row"}} w="100%">                      
-            <Input placeholder={props.data[props.currentScenario].scenario.models[props.currentBpmn].name} 
+            <Input placeholder={props.data[props.currentScenario].models[props.currentBpmn].name} 
                   variant="filled" 
                   isDisabled 
                   w={{
@@ -51,7 +51,7 @@ function BPMNSwitcher(props) {
         
         <MenuList>
           
-            {props.data[props.currentScenario].scenario.models.map((bpmn, index) => {
+            {props.data[props.currentScenario].models.map((bpmn, index) => {
                 return  <MenuItem key={index} onClick={() =>  props.setBpmn(index)}>{bpmn.name + " " + index}</MenuItem>
             })
 

@@ -14,9 +14,9 @@ import {
     Tr
 } from '@chakra-ui/react';
 import {React, useEffect, useState} from 'react'
-import OverviewTable from '../Background/OverviewTable';
+import OverviewTable from '../Background/ScenarioOverviewTable';
 import { Card, CardHeader, CardBody, Heading} from '@chakra-ui/react'
-import TabBar from "../Background/TabBar";
+import TabBar from "../TabBar";
 import { useDisclosure } from '@chakra-ui/react'
 import OverviewResourceTable from "../Background/OverviewResourceTable";
 import {
@@ -123,12 +123,17 @@ function OverviewPage(props) {
             </Card>
             <Stack direction='row' mt="25px" w="70vw" >
                 <TabBar items={props.getData("allScenarios").map((element) => {
-                        return {tabname: element.scenarioName} }) }/>
+                        return {tabname: element.scenarioName,
+                                content: element.scenarioName
+                                
+                        } 
+
+                        }) }/>
             </Stack>
             <Card bg="white" w="70vw" mt="25px" >
                 <CardHeader>
                     <Heading size='md'>Resource Overview</Heading>
-                    <Text>{props.getData("currentModel").parameters.roles.name}</Text>
+                  
                 </CardHeader>
                 <CardBody>
                    < OverviewResourceTable />

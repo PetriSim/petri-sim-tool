@@ -1,6 +1,5 @@
 import { Input, FormControl, FormLabel, Select } from '@chakra-ui/react';
 import React from 'react'
-import Field from '../../Field';
 
 
 class Activity extends React.Component {
@@ -24,13 +23,13 @@ class Activity extends React.Component {
     }
 
     componentDidMount(){
-      if(this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id)){
+      if(this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id)){
         console.log(this.props.selectedObject.id)
         this.setState({
-            duration: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).duration,
-            unit: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).unit,
-            cost: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).cost,
-            currency: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).currency
+            duration: this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).duration,
+            unit: this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).unit,
+            cost: this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).cost,
+            currency: this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).currency
           
           })
       }
@@ -45,7 +44,7 @@ class Activity extends React.Component {
         [name]: value
       });
 
-      this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id)[name] = target.value
+      this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id)[name] = target.value
     
     }
   
@@ -58,7 +57,7 @@ class Activity extends React.Component {
         <>
          <FormControl>
             <FormLabel>Selected Activity:</FormLabel>
-            <Field title="Test date" value={this.props.selectedObject.name? this.props.selectedObject.name : "" } type="inputRead" />
+            <Input title="Test date" value={this.props.selectedObject.name? this.props.selectedObject.name : "" } type="inputRead" />
         </FormControl>
 
         <FormControl>

@@ -20,7 +20,6 @@ function OverviewResourceTable(props){
 
 
             <Flex >
-            <TableContainer ml="40px" mt="25px">
               <Table variant='simple'>
                 <TableCaption>Resource parameters</TableCaption>
                 <Thead>
@@ -40,7 +39,7 @@ function OverviewResourceTable(props){
                     </Tr>
                 </Tbody>
             </Table>
-        </TableContainer>
+   
                 {props.data}
 </Flex>
         </React.Fragment>

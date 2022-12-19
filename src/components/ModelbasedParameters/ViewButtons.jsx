@@ -69,7 +69,7 @@ function ViewButtons(props){
               >
                 Table
               </Button>
-              <Button
+              <Button as={Link} to="/modelbased"
               bg = 'white'
                 position = 'absolute'
                 bottom = '70px'

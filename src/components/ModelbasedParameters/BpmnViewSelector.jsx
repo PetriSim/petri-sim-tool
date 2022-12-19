@@ -7,7 +7,7 @@ function BpmnViewSelector(props) {
 
     useEffect(() => { 
         props.setCurrent("Modelbased Parameters")
-        setViews(props.data[props.currentScenario].scenario.models.map((x, index) => <BpmnView key={index} currentBpmn={x} setObject={props.setObject} />))
+        setViews(props.data[props.currentScenario].models.map((x, index) => <BpmnView key={index} currentBpmn={x} setObject={props.setObject} />))
     },[props.currentBpmn, props.currentScenario, props.setObject, props.data, props])
 
 

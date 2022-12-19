@@ -8,12 +8,13 @@ import {
   Container
 } from '@chakra-ui/react';
 import Navigation from './components/Navigation/Navigation';
-import Parameditor from './components/Parameditor';
-import StartView from './components/StartView';
-import BpmnViewSelector from './components/Background/BpmnViewSelector';
+import EditorSidebar from './components/EditorSidebar/EditorSidebar';
+import StartView from './components/StartView/StartView';
+import BpmnViewSelector from './components/ModelbasedParameters/BpmnViewSelector';
 import ResourcePage from './components/Pages/ResourcePage';
 import ScenarioPage from './components/Pages/ScenarioPage';
 import BpmnModelParser from './BpmnModelParser';
+import OverviewPage from './components/Pages/OverviewPage'
 
 import startData from './startdata.json'
 
@@ -21,8 +22,7 @@ import axios from "axios";
 import {Routes, Route
 } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import ModelbasedParametersTable from './components/Pages/ModelbasedParametersTable';
-import OverviewPage from "./components/Pages/OverviewPage";
+import ModelbasedParametersTable from './components/ModelbasedParameters/ModelbasedParametersTable';
 
 
 function App() {
@@ -37,15 +37,14 @@ function App() {
 
   const [parsed, setParsed] = useState(false)
 
-  const [data, setData] = useState(
-    [
-  ]
-)
+  const [data, setData] = useState([])
   
 
 // Initial Data Array is created by copying data from startdata.json
 useEffect(() =>{
-    setData(JSON.parse(JSON.stringify(startData)))
+  var parsedData = JSON.parse(JSON.stringify(startData))
+   
+   setData(parsedData)
 }, [])
 
 
@@ -68,14 +67,14 @@ useEffect(() =>{
     if(data[0]){
       data.forEach((scen, indexscen) => {
         
-        scen.scenario.models.forEach((element, indexmodel) =>{
+        scen.models.forEach((element, indexmodel) =>{
           axios
           .get(
-            data[indexscen].scenario.models[indexmodel].BPMN
+            data[indexscen].models[indexmodel].BPMN
           )
           .then(async (r) => {
-            var x = data[indexscen].scenario.models[indexmodel]
-              x.parameters.modelParameter = await BpmnModelParser(r.data)
+            var x = data[indexscen].models[indexmodel]
+              x.modelParameter = await BpmnModelParser(r.data)
               setParsed(true)
             
             })
@@ -86,22 +85,24 @@ useEffect(() =>{
       })
     }
   }, [data])
+  
 
  const getData = (type) => {
   switch (type) {
     case "currentScenario": return data[currentScenario]
     case "allScenarios": return data
-    case "currentModel": return data[currentScenario].scenario.models[currentBpmn]
-    case "allModels": return data[currentScenario].scenario
+    case "currentModel": return data[currentScenario].models[currentBpmn]
+    case "allModels": return data[currentScenario]
     default:
       return data
   }
 
  }
+ const allFiles = [];
   
   const addFile = (File) => {
-    setData(JSON.parse(JSON.stringify(eval(File))))
-
+    allFiles.push(File);
+    console.log(allFiles)
   }
 
 
@@ -143,8 +144,8 @@ useEffect(() =>{
 
          <Box zIndex={2} paddingTop={{base: "0", md:"6"}} >
             <Routes>
-              <Route path="/resource" element={<Parameditor  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
-              <Route path="/modelbased" element={<Parameditor  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
+              <Route path="/resource" element={<EditorSidebar  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
+              <Route path="/modelbased" element={<EditorSidebar  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
             </Routes>
           </Box>
         </>

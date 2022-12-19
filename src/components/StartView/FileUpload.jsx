@@ -8,36 +8,23 @@ import { FiCheck, FiChevronDown, FiChevronsDown, FiFile, FiFilePlus, FiMenu, FiU
 {/* To use this file Uploader just import it and write <FileUpload title = 'Writer your title' />*/}
 
 
-function FileUpload(props) {
+
+function FileUpload(props, ) {
     const [fileUploaded, setFileUplaoded] = useState(false);
     var thisFile;
-    const [thisFile2, setThisFile2] = useState("");
-    const [thisFile3, setThisFile3] = useState();
-
+    const [thisFile2, setThisFile2] = useState();
     
-   const handleChange = e => {
-        
+    onchange = () => {
         const selectedFile = document.getElementById('file-upload')
-     
         thisFile = selectedFile.files[selectedFile.files.length -1];
+        {thisFile == null ? <></>
+        :
+        setFileUplaoded(true)
+        }
+        setThisFile2(thisFile);
+        props.getFile(thisFile)
         
-        setThisFile3(thisFile);
-
-    const fileReader = new FileReader();
-    fileReader.readAsText(e.target.files[0], "UTF-8");
-    fileReader.onload = e => {
-      console.log("e.target.result", e.target.result);
-      var myFile = e.target.result
-      setThisFile2(e.target.result);
-   //   setThisFile2(e.target.result);
-
-      setFileUplaoded(true)
-      props.getFile(myFile)
-
     }
-    }
-
-   
         
     
 
@@ -49,15 +36,15 @@ function FileUpload(props) {
                 <InputGroup width = "100%">
                 {fileUploaded ?
                 <label for='file-upload' class = 'custom-file-upload'>
-                {thisFile3.name + ''} 
+                {thisFile2.name + ''} 
                 </label>
                 :
                 <label for='file-upload' class = 'custom-file-upload'>
                 Select file 
                 </label>
                 }
-           
-                <Input id = 'file-upload' type = 'file'  accept={props.accept} onChange={handleChange}/> 
+                
+                <Input id = 'file-upload' type = 'file'  accept={props.accept}/> 
                 {fileUploaded ?
                 <InputRightElement pointerEvents='none' children={<FiCheck />} />
                 :

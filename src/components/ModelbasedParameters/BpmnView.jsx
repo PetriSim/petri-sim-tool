@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modeler from "bpmn-js/lib/Modeler";
 import "bpmn-js/dist/assets/diagram-js.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
-import ViewButtons from "../Navigation/ViewButtons";
+import ViewButtons from "./ViewButtons";
 import axios from "axios";
 
 import {

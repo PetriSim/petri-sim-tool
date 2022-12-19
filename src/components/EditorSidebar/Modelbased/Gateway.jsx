@@ -1,6 +1,5 @@
 import { Input, FormControl, FormLabel } from '@chakra-ui/react';
 import React from 'react'
-import Field from '../../Field';
 
 
 class Gateway extends React.Component {
@@ -15,10 +14,10 @@ class Gateway extends React.Component {
     }
 
     componentDidMount(){
-      if(this.props.getData("currentModel").parameters.modelParameter.gateways.find((value) => value.id === this.props.selectedObject.id)){
+      if(this.props.getData("currentModel").modelParameter.gateways.find((value) => value.id === this.props.selectedObject.id)){
         this.setState({
-           probabilities: this.props.getData("currentModel").parameters.modelParameter.gateways.find((value) => value.id === this.props.selectedObject.id).outgoing.map((element, index) => this.props.getData("currentModel").parameters.modelParameter.sequences.find((value) => value.id === element).probability),
-           outgoing: this.props.getData("currentModel").parameters.modelParameter.gateways.find((value) => value.id === this.props.selectedObject.id).outgoing
+           probabilities: this.props.getData("currentModel").modelParameter.gateways.find((value) => value.id === this.props.selectedObject.id).outgoing.map((element, index) => this.props.getData("currentModel").modelParameter.sequences.find((value) => value.id === element).probability),
+           outgoing: this.props.getData("currentModel").modelParameter.gateways.find((value) => value.id === this.props.selectedObject.id).outgoing
           })
       }
     }
@@ -40,7 +39,7 @@ class Gateway extends React.Component {
             probabilities: copy
           });
        
-        this.props.getData("currentModel").parameters.modelParameter.sequences.find((seqq) => seqq.id === seq).probability = this.state.probabilities[index]
+        this.props.getData("currentModel").modelParameter.sequences.find((seqq) => seqq.id === seq).probability = this.state.probabilities[index]
         
         console.log(this.props.getData("f"))
       }
@@ -50,7 +49,7 @@ class Gateway extends React.Component {
         <>
          <FormControl>
             <FormLabel>Selected Gateway:</FormLabel>
-            <Field title="Test date" value={this.props.selectedObject.id? this.props.selectedObject.id : "" } type="inputRead" />
+            <Input title="Test date" value={this.props.selectedObject.id? this.props.selectedObject.id : "" } type="inputRead" />
         </FormControl>
 
         <FormControl>
@@ -58,7 +57,7 @@ class Gateway extends React.Component {
             {this.state.outgoing.map((element, index) =>{
                 
                 return <>
-                <Field 
+                <Input 
                   type="inputRead" 
                   value={element} 
                   w="65%" />
