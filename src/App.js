@@ -98,11 +98,10 @@ useEffect(() =>{
   }
 
  }
- const allFiles = [];
   
   const addFile = (File) => {
-    allFiles.push(File);
-    console.log(allFiles)
+    setData(JSON.parse(JSON.stringify(eval(File))))
+
   }
 
 
