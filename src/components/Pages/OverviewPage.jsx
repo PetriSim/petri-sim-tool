@@ -118,7 +118,7 @@ function OverviewPage(props) {
                     <Heading size='md'>Scenario Overview</Heading>
                 </CardHeader>
                 <CardBody>
-                                <OverviewTable hello = {props.getData}/>
+                                <OverviewTable scenarioData = {props.getData}/>
                 </CardBody>
             </Card>
             <Stack direction='row' mt="25px" w="70vw" >

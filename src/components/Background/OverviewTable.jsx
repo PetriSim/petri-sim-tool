@@ -29,11 +29,11 @@ function OverviewTable(props){
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {props.hello("allScenarios").map((element) => {
+                    {props.scenarioData("allScenarios").map((element) => {
                         return <Tr>
                             <Td>{element.scenarioName} </Td>
                             <Td>{element.startingDate}</Td>
-                            <Td>{element.startingTieme}</Td>
+                            <Td>{element.startingTime}</Td>
                             <Td isNumeric>{element.numberOfInstances}</Td>
                         </Tr>
                     })}
