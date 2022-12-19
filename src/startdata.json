@@ -1,7 +1,7 @@
 [{
         "scenarioName": "Scenario 1",
         "startingDate": "14-11-2022",
-        "startingTieme": "12:00",
+        "startingTime": "12:00",
         "numberOfInstances": 2,
         "scenario": {
             "models": [{
@@ -39,9 +39,9 @@
                     "name": "Schufascoring",
                     "parameters": {
                         "simulation": {
-                            "startingTime": "12:00",
-                            "StartingDate": "22-11-2022",
-                            "instanceNumber": 2
+                            "startingTime": "08:00",
+                            "StartingDate": "15-11-2022",
+                            "instanceNumber": 20
                         },
                         "resource": [{
                             "role": "Top Management",
@@ -71,7 +71,7 @@
     {
         "scenarioName": "Scenario 2",
         "startingDate": "14-11-2022",
-        "startingTieme": "12:00",
+        "startingTime": "12:00",
         "numberOfInstances": 2,
         "scenario": {
             "models": [{

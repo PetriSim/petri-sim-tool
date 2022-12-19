@@ -64,7 +64,6 @@ class ModelbasedParametersTable extends React.Component {
      handleChange = (event, index, group, type) =>{
         let value = event.target.value
 
-
         let copy = this.props.getData("currentModel").parameters.modelParameter[group]
         copy[index][type] = value
         
