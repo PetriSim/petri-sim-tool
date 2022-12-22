@@ -35,6 +35,7 @@ import { Switch } from '@chakra-ui/react'
    ModalBody,
    ModalCloseButton,
  } from '@chakra-ui/react'
+import ModelBasedOverview from "../Background/ModelBasedOverview";
 
 
 function OverviewPage(props) {
@@ -118,28 +119,27 @@ function OverviewPage(props) {
                     <Heading size='md'>Scenario Overview</Heading>
                 </CardHeader>
                 <CardBody>
-                                <OverviewTable hello = {props.getData}/>
+                                <OverviewTable getSimulData = {props.getData}/>
                 </CardBody>
             </Card>
             <Stack direction='row' mt="25px" w="70vw" >
                 <TabBar items={props.getData("allScenarios").map((element) => {
                         return {tabname: element.scenarioName,
-                                content: element.scenarioName
+                                content:  <Card bg="white" w="70vw" mt="25px" >
+                                            <CardHeader>
+                                                 <Heading size='md'>Resource Overview</Heading>
+                                             </CardHeader>
+                                            <CardBody>
+                                                < OverviewResourceTable getResourceData = {props.getData} />
+                                             </CardBody>
+                                            </Card>
+
                                 
                         } 
 
                         }) }/>
             </Stack>
-            <Card bg="white" w="70vw" mt="25px" >
-                <CardHeader>
-                    <Heading size='md'>Resource Overview</Heading>
-                  
-                </CardHeader>
-                <CardBody>
-                   < OverviewResourceTable />
-                </CardBody>
-            </Card>
-
+            {/*< ModelBasedOverview getModelData = {props.getData} />*/}
         </>
     )
 }
