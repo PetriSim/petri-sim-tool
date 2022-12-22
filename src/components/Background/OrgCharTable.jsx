@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardBody, Table, TableCaption, TableContainer, Thead } from '@chakra-ui/react'
+import { Text, Card, CardBody, Table, TableContainer, Thead } from '@chakra-ui/react'
 import {
   Tbody,
   Tr,
@@ -7,43 +7,34 @@ import {
   Td,
 } from '@chakra-ui/react'
 
-function OrgCharTable(){
+function OrgCharTable(props){
 
     return(
-        <Card bg="white" w="70vw" mt="25px">
-            <CardBody>
-            <TableContainer ml="40px" mt="25px">
-                <Table variant='simple'>
-                    <Thead>
-                        <Tr>
-                            <Th>Role 1</Th>
-                            <Th>Role 2</Th>
-                            <Th> Role 3</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody> 
-                        <Tr>
-                            <Td>Tutku</Td>
-                            <Td>Lana</Td>
-                            <Td>Furat</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Alex</Td>
-                            <Td>Laura</Td>
-                            <Td>Luise</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Sarah</Td>
-                            <Td>Sam</Td>
-                            <Td>Andre</Td>
-                            
-                        </Tr>
-                    </Tbody>
-                </Table>
-            </TableContainer>
-            </CardBody>
-        </Card>
+
+            <Card bg="white" w="70vw" mt="25px">
+                <CardBody>
+                    <TableContainer ml="40px" mt="25px">
+                        <Table variant='simple'>
+                            <Thead>
+                                <Tr>
+                                {props.getData("currentScenario").resourceParameters.roles.map((element) => {
+                                        return <Th>{element.id}</Th>
+                                })} </Tr>
+                            </Thead>
+                            <Tbody> 
+                                <Tr>
+                                {props.getData("currentScenario").resourceParameters.roles.map((element) => {
+                                return <Td>{element.resources.map((resource) => {
+                                   return <Text> {resource.id} </Text>
+                                })}</Td>
+                                })} </Tr>
+                            </Tbody>
+                        </Table>
+                    </TableContainer>
+                </CardBody>
+            </Card>
+
     )
 }
 
-export default OrgCharTable
+export default OrgCharTable;

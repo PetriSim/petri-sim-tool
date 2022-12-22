@@ -1,7 +1,8 @@
 import { Text } from '@chakra-ui/react';
 import {React, useState, useEffect} from 'react'
 import OrgCharTable from '../Background/OrgCharTable';
-import TabBar from '../TabBar';
+import TimetableOverview from '../Background/TimetableOverview';
+import TabBar from '../TabBar'; 
 
 function ResourcePage(props) {
 
@@ -10,25 +11,21 @@ function ResourcePage(props) {
       },[props])
 
 
-    const [tabs, setTabs] = useState([
+    const [tabs] = useState([
         {
         tabname: "Organisational Chart",
-        content: <OrgCharTable/> 
+        content: < OrgCharTable getData = {props.getData}/>
         },
         {
-          tabname: "Timetabel",
-          content: <Text>Timetable content</Text> 
-        },
-    
+          tabname: "Timetable",
+          content: <TimetableOverview getData = {props.getData}/> 
+        }
     ])
 
-
     return (
-        <>
+        <>            
             <TabBar items={tabs}/>
-            {props.getData("currentScenario").resourceParameters.roles.map((element) => {
-                    return <Text>{element.name}</Text>
-            })}
+
         </>
     )
 }

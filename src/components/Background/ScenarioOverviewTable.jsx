@@ -15,7 +15,7 @@ import {
 function OverviewTable(props){
 
     return(
-        <React.Fragment>
+
             <Flex >
            
               <Table variant='simple'>
@@ -38,11 +38,11 @@ function OverviewTable(props){
                         </Tr>
                     })}
                 </Tbody>
-            </Table>
+             </Table>
   
 
-</Flex>
-        </React.Fragment>
+            </Flex>
+
     )
 }
 
