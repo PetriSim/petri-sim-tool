@@ -17,10 +17,10 @@ function OverviewTable(props){
     return(
         <React.Fragment>
             <Flex >
-            <TableContainer ml="40px" mt="25px">
+           
               <Table variant='simple'>
                 <TableCaption>Simulation parameters</TableCaption>
-                <Thead>
+                <Thead w="100%">
                     <Tr>
                         <Th>Simalation</Th>
                         <Th>Starting date</Th>
@@ -29,17 +29,17 @@ function OverviewTable(props){
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {props.scenarioData("allScenarios").map((element) => {
+                    {props.getSimulData("allScenarios").map((element) => {
                         return <Tr>
                             <Td>{element.scenarioName} </Td>
                             <Td>{element.startingDate}</Td>
-                            <Td>{element.startingTime}</Td>
+                            <Td>{element.startingTieme}</Td>
                             <Td isNumeric>{element.numberOfInstances}</Td>
                         </Tr>
                     })}
                 </Tbody>
             </Table>
-        </TableContainer>
+  
 
 </Flex>
         </React.Fragment>

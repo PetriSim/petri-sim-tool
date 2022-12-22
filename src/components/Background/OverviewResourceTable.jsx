@@ -16,32 +16,30 @@ function OverviewResourceTable(props){
 
     return(
         <React.Fragment>
-
-
-
             <Flex >
-            <TableContainer ml="40px" mt="25px">
               <Table variant='simple'>
                 <TableCaption>Resource parameters</TableCaption>
                 <Thead>
                     <Tr>
                         <Th>Role</Th>
-                        <Th>Resource</Th>
+                        <Th>Cost</Th>
+                        <Th>Number</Th>
                         <Th>Timetable</Th>
-                        <Th>Cost/Hour</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
-                    <Tr>
-                        <Td>Top Level Management</Td>
-                        <Td>Management Director</Td>
-                        <Td>40h/week</Td>
-                        <Td>100 euro</Td>
+                    {props.getResourceData("currentScenario").resourceParameters.resources.map((element) => {
+                        return <Tr>
+                        <Td>{element.id}</Td>
+                        <Td>{element.costHour}</Td>
+                        <Td>{element.numberOfInstances}</Td>
+                        <Td>{element.schedule}</Td>
                     </Tr>
+                    })}
                 </Tbody>
             </Table>
-        </TableContainer>
-                {props.data}
+   
+
 </Flex>
         </React.Fragment>
     )

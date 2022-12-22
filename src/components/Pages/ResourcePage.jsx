@@ -1,6 +1,6 @@
 import { Text } from '@chakra-ui/react';
 import {React, useState, useEffect} from 'react'
-import TabBar from '../Background/TabBar';
+import TabBar from '../TabBar';
 
 function ResourcePage(props) {
 
@@ -25,7 +25,7 @@ function ResourcePage(props) {
     return (
         <>
             <TabBar items={tabs}/>
-            {props.getData("currentModel").parameters.roles.map((element) => {
+            {props.getData("currentScenario").resourceParameters.roles.map((element) => {
                     return <Text>{element.name}</Text>
             })}
         </>

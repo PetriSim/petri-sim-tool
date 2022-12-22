@@ -14,9 +14,9 @@ import {
     Tr
 } from '@chakra-ui/react';
 import {React, useEffect, useState} from 'react'
-import OverviewTable from '../Background/OverviewTable';
+import OverviewTable from '../Background/ScenarioOverviewTable';
 import { Card, CardHeader, CardBody, Heading} from '@chakra-ui/react'
-import TabBar from "../Background/TabBar";
+import TabBar from "../TabBar";
 import { useDisclosure } from '@chakra-ui/react'
 import OverviewResourceTable from "../Background/OverviewResourceTable";
 import {
@@ -35,6 +35,7 @@ import { Switch } from '@chakra-ui/react'
    ModalBody,
    ModalCloseButton,
  } from '@chakra-ui/react'
+import ModelBasedOverview from "../Background/ModelBasedOverview";
 
 
 function OverviewPage(props) {
@@ -118,23 +119,27 @@ function OverviewPage(props) {
                     <Heading size='md'>Scenario Overview</Heading>
                 </CardHeader>
                 <CardBody>
-                                <OverviewTable scenarioData = {props.getData}/>
+                                <OverviewTable getSimulData = {props.getData}/>
                 </CardBody>
             </Card>
             <Stack direction='row' mt="25px" w="70vw" >
                 <TabBar items={props.getData("allScenarios").map((element) => {
-                        return {tabname: element.scenarioName} }) }/>
-            </Stack>
-            <Card bg="white" w="70vw" mt="25px" >
-                <CardHeader>
-                    <Heading size='md'>Resource Overview</Heading>
-                    <Text>{props.getData("currentModel").parameters.roles.name}</Text>
-                </CardHeader>
-                <CardBody>
-                   < OverviewResourceTable />
-                </CardBody>
-            </Card>
+                        return {tabname: element.scenarioName,
+                                content:  <Card bg="white" w="70vw" mt="25px" >
+                                            <CardHeader>
+                                                 <Heading size='md'>Resource Overview</Heading>
+                                             </CardHeader>
+                                            <CardBody>
+                                                < OverviewResourceTable getResourceData = {props.getData} />
+                                             </CardBody>
+                                            </Card>
 
+                                
+                        } 
+
+                        }) }/>
+            </Stack>
+            {/*< ModelBasedOverview getModelData = {props.getData} />*/}
         </>
     )
 }

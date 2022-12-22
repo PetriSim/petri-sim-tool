@@ -1,12 +1,12 @@
 import React from 'react'
-import Sidebar from './Sidebar';
+import Sidebar from '../Sidebar';
 
 import {
     Text,
   } from '@chakra-ui/react'
 
-import ResourceParameters from './ParameterPages/ResourceParameters';
-import ModelbasedParameters from './ParameterPages/ModelbasedParameters';
+import ResourceParameters from './ResourceParameters';
+import ModelbasedParameters from './ModelbasedParameters';
 
 
 function Parameditor(props) {
