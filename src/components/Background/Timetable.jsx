@@ -7,7 +7,7 @@ import {
   Td,
 } from '@chakra-ui/react'
 
-function OrgCharTable(){
+function Timetable(){
 
     return(
         <Card bg="white" w="70vw" mt="25px">
@@ -16,9 +16,12 @@ function OrgCharTable(){
                 <Table variant='simple'>
                     <Thead>
                         <Tr>
-                            <Th>Role 1</Th>
-                            <Th>Role 2</Th>
-                            <Th> Role 3</Th>
+                            <Th></Th>
+                            <Th>Name</Th>
+                            <Th>Weekday</Th>
+                            <Th>Time</Th>
+                            <Th></Th>
+                            <Th></Th>
                         </Tr>
                     </Thead>
                     <Tbody> 
@@ -46,4 +49,4 @@ function OrgCharTable(){
     )
 }
 
-export default OrgCharTable
+export default Timetable
