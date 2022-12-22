@@ -25,6 +25,7 @@ import ScenarioSwitcher from './ScenarioSwitcher';
 function Navigation(props) {
 
     const LinkItems = [
+        { name: 'Scenario Overview', icon: FiSettings, path: '/overview' },
         { name: 'Scenario Parameters', icon: FiSettings, path: '/scenario' },
         { name: 'Resource Parameters', icon: FiTrendingUp, path: '/resource' },
         { name: 'Modelbased Parameters', icon: FiStar, path: '/modelbased' },
