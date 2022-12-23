@@ -73,7 +73,7 @@ function StartView(props) {
             <Text fontSize="xl" textAlign="left" color="#485152" fontWeight="bold" > Start new project</Text>
             <gap />
 
-            <FileUpload title = 'Event log:' accept = '.pdf' getFile={pushToApp}/>
+            <FileUpload title = 'Event log:' accept = '.json' getFile={pushToApp}/>
 
             <Flex width = '90%' flexDir = 'column'>
               <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select Discovery Tool:</Text>
@@ -93,7 +93,7 @@ function StartView(props) {
               </Select>
             </Flex>
          
-            <Button color = 'white' colorScheme='teal' variant='solid' width='90%' onClick={() => props.setStarted("true")}>
+            <Button color = 'white' colorScheme='teal' variant='solid' width='90%' onClick={() => props.setStarted("true")} >
               Start parametrization
             </Button>
 
@@ -187,4 +187,3 @@ function StartView(props) {
 }
 
 export default StartView;
-  
