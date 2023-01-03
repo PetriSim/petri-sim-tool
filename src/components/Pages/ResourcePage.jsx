@@ -1,4 +1,3 @@
-import { Text } from '@chakra-ui/react';
 import {React, useState, useEffect} from 'react'
 import OrgCharTable from '../Background/OrgCharTable';
 import TimetableOverview from '../Background/TimetableOverview';

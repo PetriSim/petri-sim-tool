@@ -25,7 +25,7 @@ function OrgCharTable(props){
                                 <Tr>
                                 {props.getData("currentScenario").resourceParameters.roles.map((element) => {
                                 return <Td>{element.resources.map((resource) => {
-                                   return <Text> {resource.id} </Text>
+                                   return <Text> {resource.id} </Text> 
                                 })}</Td>
                                 })} </Tr>
                             </Tbody>
