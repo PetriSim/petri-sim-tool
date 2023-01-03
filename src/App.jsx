@@ -64,6 +64,7 @@ useEffect(() =>{
 
 
   useEffect( () => {
+    console.log(data[0])
     if(data[0]){
       data.forEach((scen, indexscen) => {
         
@@ -98,12 +99,10 @@ useEffect(() =>{
   }
 
  }
- const allFiles = [];
-  
-  const addFile = (File) => {
-    allFiles.push(File);
-    console.log(allFiles)
-  }
+ const addFile = (File) => {
+  setData(JSON.parse(JSON.stringify(eval(File))));
+
+}
 
 
 
