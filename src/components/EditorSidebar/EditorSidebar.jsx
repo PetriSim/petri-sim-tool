@@ -7,6 +7,7 @@ import {
 
 import ResourceParameters from './ResourceParameters';
 import ModelbasedParameters from './ModelbasedParameters';
+import ScenarioParameters from './ScenarioParameters';
 
 
 function Parameditor(props) {
@@ -19,7 +20,7 @@ function Parameditor(props) {
 
     const SelectEditor = () =>{
         switch (props.current) {
-            case "scenario Parameters": return <></>
+            case "Scenario Parameters": return  <ScenarioParameters currentScenario={props.currentScenario} setScenario={props.setScenario} getData={props.getData}/>
             case "Resource Parameters": return <ResourceParameters/>
             case "Modelbased Parameters": return <ModelbasedParameters setDataObj={props.setDataObj} selectedObject={props.selectedObject} setData={props.setData} getData={props.getData} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario}/>
             default:
