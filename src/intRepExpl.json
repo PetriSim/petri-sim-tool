@@ -49,8 +49,8 @@
     },
     {
         "scenarioName": "Scenario 2",
-        "startingDate": "14-11-2022",
-        "startingTime": "12:00",
+        "startingDate": "10-08-2022",
+        "startingTime": "8:00",
         "numberOfInstances": 2,
         "interArrivalTime": {
             "distributionType": "normal",
@@ -68,16 +68,16 @@
         "currency": "euro",
         "resourceParameters": {
             "resources": [{
-                "id": "TopManager",
+                "id": "Developer",
                 "costHour": 20,
-                "numberOfInstances": 3,
+                "numberOfInstances": 1,
                 "schedule": "8hPerWeek"
             }],
             "roles": [{
-                "id": "Top Management",
+                "id": "Development team",
                 "schedule": "8hPerWeek",
                 "resources": [{
-                    "id": "TopManager"
+                    "id": "Developer"
                 }]
             }],
             "timeTables": [{

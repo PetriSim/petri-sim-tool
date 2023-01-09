@@ -1,4 +1,4 @@
-import React from "react";
+import {React,  useState, useEffect} from "react";
 import {Card, CardBody, CardHeader, Flex, Heading, Text} from '@chakra-ui/react'
 import {
     Table,
@@ -14,11 +14,21 @@ import OverviewResourceTable from "./OverviewResourceTable";
 
 
 function ModelBasedOverview(props){
+    const [parsedd, setParsed] = useState(false)
+    useEffect(() => {
+        if(props.parsed){
+            setParsed(true)
+            console.log( props.getModelData("currentModel"))
+        }
+    }, [props.parsed])
+
 
     return(
+        <>
+            { parsedd ?
         <Card bg="white" w="70vw" mt="25px" >
             <CardHeader>
-                <Heading size='md'>Resource Overview</Heading>
+                <Heading size='md'>Modelbased Parameters</Heading>
             </CardHeader>
             <CardBody>
               <Table variant='simple'>
@@ -35,22 +45,27 @@ function ModelBasedOverview(props){
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {props.getModelData("currentModel").map((element) => {
-                        return <Tr>
-                            <Td>{element.modelParameter.activities.id} </Td>
-                            <Td>{element.modelParameter.activities.name}</Td>
-                            <Td>{element.modelParameter.activities.resource}</Td>
-                            <Td >{element.modelParameter.activities.duration}</Td>
-                            <Td >{element.modelParameter.activities.cost}</Td>
-                            <Td >{element.modelParameter.activities.currency}</Td>
-                        </Tr>
-                    })}
+                         {props.getModelData("currentModel").modelParameter.activities.map((element) => {
+                             return <>
+                             <Tr>
+                                   <Td>{element.id}</Td>
+                                      <Td>{element.name}</Td>
+                                      <Td>{element.resource}</Td>
+                                      <Td>{element.duration}</Td>
+                                      <Td>{element.unit}</Td>
+                                     <Td>{element.cost}</Td>
+                                     <Td>{element.currency}</Td>
+                             </Tr>
+                           </>
+
+                            })}
+
                 </Tbody>
             </Table>
             </CardBody>
         </Card>
-
-
+                :""  }
+        </>
     )
 }
 

@@ -56,7 +56,7 @@
     },
     {
         "scenarioName": "Scenario 2",
-        "startingDate": "14-11-2022",
+        "startingDate": "10-11-2022",
         "startingTime": "12:00",
         "numberOfInstances": 2,
         "interArrivalTime": {
