@@ -15,10 +15,7 @@ import {
 function OverviewResourceTable(props){
 
     return(
-        <React.Fragment>
-            <Flex >
               <Table variant='simple'>
-                <TableCaption>Resource parameters</TableCaption>
                 <Thead>
                     <Tr>
                         <Th>Role</Th>
@@ -38,10 +35,7 @@ function OverviewResourceTable(props){
                     })}
                 </Tbody>
             </Table>
-   
 
-</Flex>
-        </React.Fragment>
     )
 }
 

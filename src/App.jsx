@@ -16,13 +16,15 @@ import ScenarioPage from './components/Pages/ScenarioPage';
 import BpmnModelParser from './BpmnModelParser';
 import OverviewPage from './components/Pages/OverviewPage'
 
-import startData from './startdata.json'
+import startData from './startdata.json';
+import initialData from './intRepExpl.json';
 
 import axios from "axios";
 import {Routes, Route
 } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import ModelbasedParametersTable from './components/ModelbasedParameters/ModelbasedParametersTable';
+import ComparePage from "./components/Pages/ComparePage";
 
 
 function App() {
@@ -64,6 +66,7 @@ useEffect(() =>{
 
 
   useEffect( () => {
+    console.log(data[0])
     if(data[0]){
       data.forEach((scen, indexscen) => {
         
@@ -98,12 +101,10 @@ useEffect(() =>{
   }
 
  }
- const allFiles = [];
-  
-  const addFile = (File) => {
-    allFiles.push(File);
-    console.log(allFiles)
-  }
+ const addFile = (File) => {
+  setData(JSON.parse(JSON.stringify(eval(File))));
+
+}
 
 
 
@@ -133,12 +134,13 @@ useEffect(() =>{
         
           <Container maxWidth="100%" padding={{base: "0", md:"10"}}>
             <Routes>
-              <Route path="/overview" element={<OverviewPage path="/overview" getData={getData} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
+              <Route path="/overview" element={<OverviewPage path="/overview" getData={getData} parsed={parsed} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
+              <Route path="/compare" element={<ComparePage path="/overview" getData={getData} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
               <Route path="/scenario" element={<ScenarioPage  path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
               <Route path="/resource" element={<ResourcePage  path="/resource" getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
               <Route path="/modelbased" element={ <BpmnViewSelector zIndex={-5} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
               <Route path="/modelbased/tableview" element={ <ModelbasedParametersTable parsed={parsed} setData={setData} getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}   data={data} currentScenario={currentScenario} />} />
-              <Route path='*' element={<Navigate to='/scenario' />} />
+              <Route path='*' element={<Navigate to='/overview' />} />
             </Routes>
          </Container>
 

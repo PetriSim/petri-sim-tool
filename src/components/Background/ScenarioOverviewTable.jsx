@@ -15,17 +15,14 @@ import {
 function OverviewTable(props){
 
     return(
-        <React.Fragment>
-            <Flex >
-           
+
               <Table variant='simple'>
-                <TableCaption>Simulation parameters</TableCaption>
-                <Thead w="100%">
+                  <Thead w="100%">
                     <Tr>
                         <Th>Simalation</Th>
                         <Th>Starting date</Th>
                         <Th>Starting time</Th>
-                        <Th isNumeric>Replications</Th>
+                        <Th>Replications</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
@@ -33,17 +30,13 @@ function OverviewTable(props){
                         return <Tr>
                             <Td>{element.scenarioName} </Td>
                             <Td>{element.startingDate}</Td>
-                            <Td>{element.startingTieme}</Td>
-                            <Td isNumeric>{element.numberOfInstances}</Td>
+                            <Td>{element.startingTime}</Td>
+                            <Td>{element.numberOfInstances}</Td>
                         </Tr>
                     })}
                 </Tbody>
             </Table>
-  
-
-</Flex>
-        </React.Fragment>
-    )
+                    )
 }
 
 export default OverviewTable

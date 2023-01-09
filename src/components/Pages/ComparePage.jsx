@@ -1,9 +1,17 @@
 import {
     Flex,
-    Text,
     Button,
     Spacer,
-    Stack, Td,
+    Stack,
+    Table,
+    TableCaption,
+    TableContainer,
+    Tbody,
+    Td,
+    Text,
+    Th,
+    Thead,
+    Tr
 } from '@chakra-ui/react';
 
 import {React, useEffect, useState} from 'react'
@@ -12,11 +20,12 @@ import { Card, CardHeader, CardBody, Heading} from '@chakra-ui/react'
 import TabBar from "../TabBar";
 import { useDisclosure } from '@chakra-ui/react'
 import { Link } from "react-router-dom";
-
 import OverviewResourceTable from "../Background/OverviewResourceTable";
 import {
     FormControl,
     FormLabel,
+    FormErrorMessage,
+    FormHelperText,
 } from '@chakra-ui/react'
 import { Switch } from '@chakra-ui/react'
  import {
@@ -35,79 +44,53 @@ import ModelBasedOverview from "../Background/ModelBasedOverview";
 function OverviewPage(props) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const [tabIndex, setTabIndex] = useState(0)
+
 
     return (
         <>
+
             <Stack direction='row' spacing={4}  w="70vw" >
-                <Button colorScheme='#ECF4F4'
+                <Button as={Link} to="/overview"
+                        colorScheme='#ECF4F4'
                         variant='outline'
                         border='1px'
                         borderColor='#B4C7C9'
                         color ='#6E6E6F'
                         onClick={onOpen}
                         _hover={{ bg: '#B4C7C9' }}>
-                    Compare scenarious
+                        Go back
                 </Button>
                 <Spacer />
                 <Spacer />
-                <Button as={Link} to="/scenario"
-                        colorScheme='white'
-                        variant='outline'
-                        border='1px'
-                        borderColor='#B4C7C9'
-                        color ='#6E6E6F'
-                        onClick={() => '/scenario'}
-                        _hover={{ bg: '#B4C7C9' }}>
-                    Add new scenario
-                </Button>
-                <Modal isOpen={isOpen} onClose={onClose}>
-                    <ModalOverlay />
-                    <ModalContent>
-                        <ModalHeader>Scenarious to compare</ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>
-                            {props.getData("allScenarios").map((element) => {
-                                return <FormControl display='flex' alignItems='center'>
-                                <FormLabel htmlFor='email-alerts' mb='0'>
-                                    {element.scenarioName}
-                                </FormLabel>
-                                <Switch id='email-alerts' />
-                            </FormControl>
-                            })}
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button colorScheme='blue' mr={3} onClick={onClose} as={Link} to="/compare">
-                                Compare
-                            </Button>
-                            <Button variant='ghost' onClick={onClose}>Close</Button>
-                        </ModalFooter>
-                    </ModalContent>
-                </Modal>
-                <Button as={Link} to="/scenario"
-                        colorScheme='white'
-                        variant='outline'
-                        border='1px'
-                        borderColor='#B4C7C9'
-                        color ='#6E6E6F'
-                        _hover={{ bg: '#B4C7C9' }}>
-                    Edit
-                </Button>
                 <Button colorScheme='white'
                         variant='outline'
                         border='1px'
                         borderColor='#B4C7C9'
                         color ='#6E6E6F'
                         _hover={{ bg: '#B4C7C9' }}>
-                    Delete scenario
+                    Show differences
+                </Button>
+                <Button colorScheme='white'
+                        variant='outline'
+                        border='1px'
+                        color ='#6E6E6F'
+                        borderColor='#B4C7C9'
+                        _hover={{ bg: '#B4C7C9' }}>
+                    Add new scenario
                 </Button>
             </Stack>
             <Card bg="white" w="70vw" mt="25px" >
                 <CardHeader>
-                    <Heading size='md'>Scenario Overview</Heading>
+                    <Heading size='md'>Simulation Overview</Heading>
                 </CardHeader>
                 <CardBody>
-                                <OverviewTable getSimulData = {props.getData}/>
+                    {props.getData("allScenarios").map((element) => {
+                        <Text> {element.scenarioName} </Text>
+                        if ( element.scenarioName !== props.getData("currentScenario").scenarioName ) {
+                            return  <Text color='tomato'> {element.scenarioName} </Text>
+                        }
+
+                    })}
                 </CardBody>
             </Card>
             <Stack direction='row' mt="25px" w="70vw" >
@@ -126,17 +109,7 @@ function OverviewPage(props) {
 
                         }) }/>
             </Stack>
-           <Stack direction='row' mt="25px" w="70vw" >
-                <TabBar onChange={(index) => setTabIndex(index)} items={props.getData("allModels").models.map((element, index) => {
-                    return {tabname: element.name,
-
-                             content:
-                                 < ModelBasedOverview getModelData = {props.getData} parsed={props.parsed} />
-
-                    }
-                }) }/>
-            </Stack>
-            {/*< ModelBasedOverview getModelData = {props.getData} parsed={props.parsed} />*/}
+            {/*< ModelBasedOverview getModelData = {props.getData} />*/}
         </>
     )
 }
