@@ -19,12 +19,12 @@ class ScenarioParameters extends React.Component {
 
       //if(this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario)){
         //this.setState({
-          //  startingDate: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentScenario).startingDate,
-          // startingTime: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentScenario).startingTime,
-          //  numberOfInstances: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentScenario).numberOfInstances,
-            //interArrivalTime: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentScenario).interArrivalTime,
-            //values: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentScenario).values,
-            //timeUnit: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentScenario).timeUnit
+          //  startingDate: this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario).startingDate,
+          // startingTime: this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario).startingTime,
+          //  numberOfInstances: this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario).numberOfInstances,
+            //interArrivalTime: this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario).interArrivalTime,
+            //values: this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario).values,
+            //timeUnit: this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario).timeUnit
           //})
           //console.log(this.state)
       //}
