@@ -1,9 +1,8 @@
 import React from "react";
 import {
-    Flex, Heading, Card, CardHeader, CardBody, Text, Select, Stack
+    Flex, Heading, Card, CardHeader, CardBody, Text, Select, Stack, Button,
 } from '@chakra-ui/react';
 import { FiChevronDown, FiChevronsDown, FiFile, FiFilePlus, FiMenu, FiUnderline } from 'react-icons/fi';
-import ScenarioSwitcher from "../Navigation/ScenarioSwitcher";
 
 
 function SimulationPage(props){
@@ -21,7 +20,11 @@ function SimulationPage(props){
                         flexDir="column"
                         >
                             <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select scenario:</Text>
-                            <ScenarioSwitcher currentScenario={props.currentScenario} setScenario={props.setScenario} scenarios={props.scenarios} data={props.data}  />
+                            <Select placeholder = 'choose scenario' width = '100%' color="darkgrey" focusBorderColor='teal' backgroundColor= 'white' icon={<FiChevronDown />}>
+                            {props.data.map((scenario, index) => {
+                             return  <option value= {scenario.scenarioName} onClick={() =>  props.setScenario(index)}>{scenario.scenarioName}</option>
+                            })}
+                            </Select>
                         </Flex>
                         <Flex
                         alignItems="left"
@@ -33,6 +36,34 @@ function SimulationPage(props){
                                 <option value='Option 2'>Option 2</option>
                                 <option value='Option 3'>Option 3</option>
                             </Select>
+                        </Flex>
+                        <Flex
+                        alignItems="left"
+                        flexDir="column"
+                        >
+                            <gap></gap>
+                            <Button boxShadow='sm'
+                            rounded = 'md'
+                            backgroundColor="white"
+                            alignItems="center"
+                            flexDir="column"
+                            fontSize="sm" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" border={'grey'}>
+                                Start Simulation
+                            </Button>
+                        </Flex>
+                        <Flex
+                        alignItems="left"
+                        flexDir="column"
+                        >
+                            <gap></gap>
+                            <Button boxShadow='sm'
+                            rounded = 'md'
+                            backgroundColor="white"
+                            alignItems="center"
+                            flexDir="column"
+                            fontSize="sm" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" border={'grey'}>
+                                Abort Simulation
+                            </Button>
                         </Flex>
                     </Stack>
                 </CardBody>
