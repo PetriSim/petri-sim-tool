@@ -22,7 +22,7 @@ function OverviewTable(props){
                 <TableCaption>Simulation parameters</TableCaption>
                 <Thead w="100%">
                     <Tr>
-                        <Th>Simalation</Th>
+                        <Th>Simulation</Th>
                         <Th>Starting date</Th>
                         <Th>Starting time</Th>
                         <Th isNumeric>Replications</Th>

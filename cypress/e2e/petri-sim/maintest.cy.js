@@ -51,7 +51,7 @@ describe('clicking through pages', () => {
    it('shows simulation overview page', () => {
 
         cy.url().should('eq', 'http://localhost:3000/overview')
-        cy.findByText("Simulation Overview").click({force: true})   // TODO: renaming necessary
+        cy.findByText("Simulation Overview").click({force: true})
         cy.url().should('eq', 'http://localhost:3000/overview')
     })
     it('shows scenario parameters page', () => {
@@ -100,13 +100,13 @@ describe('Modelbased Parameters', () => {
 describe('Compare Scenarios', () => {
     beforeEach(() => {
 
-        cy.findByText("Scenario Overview").click({force: true}) //TODO replace with 'simulation'
+        cy.findByText("Simulation Overview").click({force: true})
     })
     it('shows a popup for "compare scenarios', () => {
 
         cy.findByText('Scenarios to compare').should('not.exist')
-        cy.findByText('Compare scenarious').click() // TODO: replace with scenarios
-        cy.findByText('Scenarious to compare').should('be.visible')  // TODO: replace with scenarios
+        cy.findByText('Compare scenarios').click()
+        cy.findByText('Scenarios to compare').should('be.visible')
 
     })
 })

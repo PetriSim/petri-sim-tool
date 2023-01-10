@@ -8,7 +8,7 @@ beforeEach(() => {
 
 describe('Delete Scenarios', () => {
     beforeEach(() => {
-        cy.findByText("Scenario Overview").click({force: true}) //TODO replace with 'simulation'
+        cy.findByText("Simulation Overview").click({force: true})
     })
     it('finds a scenario and deletes it in overview', () => {
         //cy.findAllByRole('menuitem')
