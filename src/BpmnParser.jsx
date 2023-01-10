@@ -3,8 +3,6 @@ import Modeler from "bpmn-js/lib/Modeler";
 import axios from "axios";
 
 
-
-
  function BpmnParser({currentBpmn, bpmns, data, setData }) {
 
         const [diagram, diagramSet] = useState("");

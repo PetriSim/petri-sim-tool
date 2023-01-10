@@ -23,7 +23,6 @@ class ModelbasedParametersTable extends React.Component {
         };
       }
 
-
       componentDidMount(){
         if(this.props.parsed){
             this.setState({
