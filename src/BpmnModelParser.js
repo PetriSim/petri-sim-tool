@@ -1,8 +1,5 @@
 import Modeler from "bpmn-js/lib/Modeler";
 
-
-
-
 async function BpmnModelParser(bpmnFile) {
 
     var diagram = bpmnFile

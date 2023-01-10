@@ -3,7 +3,6 @@ import {
     Flex,
     Divider,
     IconButton
-    
   } from '@chakra-ui/react'
 
   import { FiMenu } from 'react-icons/fi';
