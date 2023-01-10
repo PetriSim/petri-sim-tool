@@ -23,6 +23,7 @@ import {Routes, Route
 } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import ModelbasedParametersTable from './components/ModelbasedParameters/ModelbasedParametersTable';
+import SimulationPage from './components/Pages/SimulationPage';
 
 
 function App() {
@@ -39,7 +40,6 @@ function App() {
 
   const [data, setData] = useState([])
   
-
 // Initial Data Array is created by copying data from startdata.json
 useEffect(() =>{
   var parsedData = JSON.parse(JSON.stringify(startData))
@@ -133,18 +133,21 @@ useEffect(() =>{
           <Container maxWidth="100%" padding={{base: "0", md:"10"}}>
             <Routes>
               <Route path="/overview" element={<OverviewPage path="/overview" getData={getData} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
-              <Route path="/scenario" element={<ScenarioPage  path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
+              <Route path="/scenario" element={<ScenarioPage  path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} setScenario={setScenario}/>} />
               <Route path="/resource" element={<ResourcePage  path="/resource" getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
               <Route path="/modelbased" element={ <BpmnViewSelector zIndex={-5} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
               <Route path="/modelbased/tableview" element={ <ModelbasedParametersTable parsed={parsed} setData={setData} getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}   data={data} currentScenario={currentScenario} />} />
+              <Route path="/simulation" element={<SimulationPage path="/simulation" getData={getData} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
               <Route path='*' element={<Navigate to='/scenario' />} />
             </Routes>
          </Container>
 
          <Box zIndex={2} paddingTop={{base: "0", md:"6"}} >
             <Routes>
+              <Route path="/scenario" element={<EditorSidebar  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} setScenario={setScenario}/>} />
               <Route path="/resource" element={<EditorSidebar  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
               <Route path="/modelbased" element={<EditorSidebar  setData={setData} getData={getData} current={current} currentBpmn={currentBpmn} selectedObject={currentObject}  currentScenario={currentScenario} />} />
+             
             </Routes>
           </Box>
         </>
