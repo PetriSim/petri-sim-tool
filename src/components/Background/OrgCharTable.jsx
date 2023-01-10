@@ -18,14 +18,14 @@ function OrgCharTable(props){
                             <Thead>
                                 <Tr>
                                 {props.getData("currentScenario").resourceParameters.roles.map((element) => {
-                                        return <Th>{element.id}</Th>
+                                        return <Th onClick={() => props.setRole(element.id)}>{element.id}</Th>
                                 })} </Tr>
                             </Thead>
                             <Tbody> 
                                 <Tr>
                                 {props.getData("currentScenario").resourceParameters.roles.map((element) => {
                                 return <Td>{element.resources.map((resource) => {
-                                   return <Text> {resource.id} </Text> 
+                                   return <Text onClick={() => props.setResource(resource.id)}> {resource.id} </Text> 
                                 })}</Td>
                                 })} </Tr>
                             </Tbody>
