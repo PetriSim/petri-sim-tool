@@ -16,7 +16,10 @@ import {
     FiFileText,
     FiTrash2,
     FiDownload,
-    FiLock
+    FiLock,
+    FiPlay,
+    FiPlayCircle,
+    FiAirplay
 
   } from 'react-icons/fi';
 import BPMNSwitcher from './BPMNSwitcher';
@@ -29,6 +32,7 @@ function Navigation(props) {
         { name: 'Scenario Parameters', icon: FiSettings, path: '/scenario' },
         { name: 'Resource Parameters', icon: FiTrendingUp, path: '/resource' },
         { name: 'Modelbased Parameters', icon: FiStar, path: '/modelbased' },
+        { name: 'Run Simulation', icon: FiPlay, path: '/simulation' },
       ];
 
       const LinkItems2 = [
