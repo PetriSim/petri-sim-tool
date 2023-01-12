@@ -108,7 +108,7 @@ class ModelbasedParametersTable extends React.Component {
                             <Th>Duration</Th>
                             <Th>Time Unit</Th>
                             <Th>Cost</Th>
-                            <Th>Curency</Th>
+                            <Th>Currency</Th>
                         </Tr>
                         </Thead>
                         <Tbody>

@@ -47,7 +47,7 @@ function OverviewPage(props) {
                         color ='#6E6E6F'
                         onClick={onOpen}
                         _hover={{ bg: '#B4C7C9' }}>
-                    Compare scenarious
+                    Compare scenarios
                 </Button>
                 <Spacer />
                 <Spacer />
@@ -64,7 +64,7 @@ function OverviewPage(props) {
                 <Modal isOpen={isOpen} onClose={onClose}>
                     <ModalOverlay />
                     <ModalContent>
-                        <ModalHeader>Scenarious to compare</ModalHeader>
+                        <ModalHeader>Scenarios to compare</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
                             {props.getData("allScenarios").map((element) => {

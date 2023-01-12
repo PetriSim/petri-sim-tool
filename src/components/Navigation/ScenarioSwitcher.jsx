@@ -27,6 +27,7 @@ function ScenarioSwitcher(props) {
                   bg="blackAlpha.200" 
                   _hover="blackAlpha.200" 
                   fontSize={{base: "2xs", md:"sm"}}
+                   aria-label="scenario name"
                   />
 
             <MenuButton 
@@ -39,6 +40,7 @@ function ScenarioSwitcher(props) {
                   base: '100%', 
                   md: '30%',
                 }}
+                aria-label="scenario switcher"
                 >
                     <Text fontSize={{base: "2xs", md:"sm"}} color="RGBA(0, 0, 0, 0.64)" fontWeight="bold">Change</Text>
             </MenuButton>

@@ -19,7 +19,7 @@ function OverviewTable(props){
               <Table variant='simple'>
                   <Thead w="100%">
                     <Tr>
-                        <Th>Simalation</Th>
+                        <Th>Simulation</Th>
                         <Th>Starting date</Th>
                         <Th>Starting time</Th>
                         <Th>Replications</Th>

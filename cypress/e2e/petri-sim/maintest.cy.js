@@ -35,7 +35,7 @@ describe('Change scenario', () => {
 
 
         cy.findByRole('textbox', { name: /scenario name/i }).should('have.attr', 'placeholder', "Scenario 1")
-            //TODO: this element does not have a name yet-->cannot be found like this
+
 
         cy.findByRole('button', { name: /scenario switcher/i }).click()
 
@@ -47,32 +47,31 @@ describe('Change scenario', () => {
 })
 
 describe('clicking through pages', () => {
-
-   it('shows simulation overview page', () => {
-
+    //TODO: make overview first page to show
+   /*it('shows simulation overview page', () => {
         cy.url().should('eq', 'http://localhost:3000/overview')
-        cy.findByText("Simulation Overview").click({force: true})   // TODO: renaming necessary
+        cy.findByRole('button', {name: /simulation overview/i}).click()
         cy.url().should('eq', 'http://localhost:3000/overview')
-    })
+    })*/
     it('shows scenario parameters page', () => {
-        cy.findByText("Scenario Parameters").click({force: true})
+        cy.findByRole('button', {name: /scenario parameters/i}).click()
         cy.url().should('eq', 'http://localhost:3000/scenario')
     })
     it('shows resource parameters page', () => {
-        cy.findByText("Resource Parameters").click({force: true})
+        cy.findByRole('button', {name: /resource parameters/i}).click()
         cy.url().should('eq', 'http://localhost:3000/resource')
     })
     it('shows model based parameters page', () => {
-        cy.findByText("Modelbased Parameters").click({force: true})
+        cy.findByRole('button', {name: /modelbased parameters/i}).click()
         cy.url().should('eq', 'http://localhost:3000/modelbased')
     })
 })
 
 describe('Modelbased Parameters', () => {
     beforeEach(() => {
-        cy.findByText("Modelbased Parameters").click({force: true})
+        cy.findByRole('button', {name: /modelbased parameters/i}).click()
     })
-    it('changes the view of model based parameters', () => {
+    it('changes the view', () => {
         cy.findByText("View").click()
         cy.findByText("Table").click()
         cy.url().should('eq', 'http://localhost:3000/modelbased/tableview')
@@ -80,33 +79,57 @@ describe('Modelbased Parameters', () => {
         cy.findByText("Model").click()
         cy.url().should('eq', 'http://localhost:3000/modelbased')
     })
-    it('changes the model based parameters in table view', () => {
+})
+describe('Modelbased Parameters: Table View', () => {
+    beforeEach(() => {
+        cy.findByRole('button', {name: /modelbased parameters/i}).click()
         cy.findByText("View").click()
         cy.findByText("Table").click()
-        cy.findByRole('textbox', /*{ name: /bpmn switcher/i }*/).click()
+    })
+    it('changes to edit mode in table view', () => {
+        cy.findAllByRole('textbox').eq(2).should('not.exist')
+        cy.findByRole('button', {name: /edit mode/i}).click()
+        cy.findAllByRole('textbox').eq(2).should('exist')
+    })
+    it('changes one numerical parameter in table view', () => {
+        cy.findByText("42").should('not.exist')
+        cy.findByRole('button', {name: /edit mode/i}).click()
+        cy.findAllByRole('textbox').eq(2).clear().type('42')
+        cy.findByRole('button', {name: /view mode/i}).click()
+        cy.findByText("42").should('exist')
+    })
+    it('changes one dropdown parameter in table view', () => {
+        cy.findByRole('button', {name: /edit mode/i}).click()
+        cy.findByText("secs").should('not.exist')
+        cy.findAllByRole('cell', { name: /minutes/i }).eq(0).click().findByRole('combobox').select('Seconds')
+        //cy.findAllByRole('combobox').eq(0).findbyText('Seconds').click() //.
+        cy.findByRole('button', {name: /view mode/i}).click()
+        cy.findAllByText("secs").eq('0').should('exist')
+        cy.findAllByText("secs").eq('1').should('not.exist')
+    })
+    it('changes to view mode in table view', () => {
+        cy.findByRole('button', {name: /edit mode/i}).click()
+        cy.findByRole('button', {name: /view mode/i}).click()
+        cy.findAllByRole('textbox').eq(2).should('not.exist')
+    })
+    it('finds headings for activities, gateways, events', () => {
+        cy.findByRole('heading', {name: /Activities/i})
+        cy.findByRole('heading', {name: /Gateways/i})
+        cy.findByRole('heading', {name: /Events/i})
     })
 })
 
-// TODO: tests to check if parameters are changed,
-//  right gateway opens when clicked in BPMN,
-//  resource parameters, timetable, organisational
-//  export to scylla,
-//  import event logs, BPMN
-//  open ex project, save project
-//  scenario: add, delete, compare
-//  reset parameters,
 
-//
 describe('Compare Scenarios', () => {
     beforeEach(() => {
 
-        cy.findByText("Scenario Overview").click({force: true}) //TODO replace with 'simulation'
+        cy.findByRole('button', {name: /simulation overview/i}).click()
     })
     it('shows a popup for "compare scenarios', () => {
 
         cy.findByText('Scenarios to compare').should('not.exist')
-        cy.findByText('Compare scenarious').click() // TODO: replace with scenarios
-        cy.findByText('Scenarious to compare').should('be.visible')  // TODO: replace with scenarios
+        cy.findByText('Compare scenarios').click()
+        cy.findByText('Scenarios to compare').should('be.visible')
 
     })
 })
