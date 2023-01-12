@@ -3,7 +3,7 @@ import {
     Text,
     Button,
     Spacer,
-    Stack, Td,
+    Stack, Td, TableCaption, Thead, Tr, Th, Tbody, Table,
 } from '@chakra-ui/react';
 
 import {React, useEffect, useState} from 'react'
@@ -36,6 +36,11 @@ function OverviewPage(props) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [tabIndex, setTabIndex] = useState(0)
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleChange = () => {
+        setIsChecked(prevIsChecked => !prevIsChecked);
+    };
 
     return (
         <>
@@ -61,7 +66,7 @@ function OverviewPage(props) {
                         _hover={{ bg: '#B4C7C9' }}>
                     Add new scenario
                 </Button>
-                <Modal isOpen={isOpen} onClose={onClose}>
+                <Modal isOpen={isOpen} onClose={onClose}  >
                     <ModalOverlay />
                     <ModalContent>
                         <ModalHeader>Scenarios to compare</ModalHeader>
@@ -72,7 +77,7 @@ function OverviewPage(props) {
                                 <FormLabel htmlFor='email-alerts' mb='0'>
                                     {element.scenarioName}
                                 </FormLabel>
-                                <Switch id='email-alerts' />
+                                <Switch id='email-alerts'  />
                             </FormControl>
                             })}
                         </ModalBody>
@@ -111,14 +116,14 @@ function OverviewPage(props) {
                 </CardBody>
             </Card>
             <Stack direction='row' mt="25px" w="70vw" >
-                <TabBar items={props.getData("allScenarios").map((element) => {
+                <TabBar onClick={(index) => setTabIndex(index)} items={props.getData("allScenarios").map((element, index) => {
                         return {tabname: element.scenarioName,
                                 content:  <Card bg="white" w="70vw" mt="25px" >
                                             <CardHeader>
                                                  <Heading size='md'>Resource Overview</Heading>
                                              </CardHeader>
                                             <CardBody>
-                                                < OverviewResourceTable getResourceData = {props.getData} />
+                                                < OverviewResourceTable getResourceData = {props.getData} scenario_id = {index} />
                                              </CardBody>
                                             </Card>
 
@@ -127,16 +132,17 @@ function OverviewPage(props) {
                         }) }/>
             </Stack>
            <Stack direction='row' mt="25px" w="70vw" >
-                <TabBar onChange={(index) => setTabIndex(index)} items={props.getData("allModels").models.map((element, index) => {
+                <TabBar onClick={(index) => setTabIndex(index)} items={props.getData("allModels").models.map((element, index) => {
                     return {tabname: element.name,
+                            content:
+                                 // < ModelBasedOverview getModelData = {props.getData} parsed={props.parsed} />
+                                  < ModelBasedOverview getModelData = {props.getData} bpmn_id = {index} />
 
-                             content:
-                                 < ModelBasedOverview getModelData = {props.getData} parsed={props.parsed} />
 
                     }
                 }) }/>
             </Stack>
-            {/*< ModelBasedOverview getModelData = {props.getData} parsed={props.parsed} />*/}
+
         </>
     )
 }

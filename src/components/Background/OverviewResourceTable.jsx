@@ -12,29 +12,36 @@ import {
 } from '@chakra-ui/react'
 
 
-function OverviewResourceTable(props){
+function OverviewResourceTable(props) {
 
-    return(
-              <Table variant='simple'>
-                <Thead>
-                    <Tr>
-                        <Th>Role</Th>
-                        <Th>Cost</Th>
-                        <Th>Number</Th>
-                        <Th>Timetable</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {props.getResourceData("currentScenario").resourceParameters.resources.map((element) => {
-                        return <Tr>
+    return (
+        <Table variant='simple'>
+            <Thead>
+                <Tr>
+                    <Th>Department</Th>
+                    <Th>Role</Th>
+                    <Th>Cost</Th>
+                    <Th>Number</Th>
+                    <Th>Timetable</Th>
+                </Tr>
+            </Thead>
+            <Tbody>
+                {props.getResourceData("allScenarios")[props.scenario_id].resourceParameters.roles.map((element) => {
+                    return <Tr>
                         <Td>{element.id}</Td>
-                        <Td>{element.costHour}</Td>
+                        <Td> {element.resources.map((resource) => {
+                            return <Text onClick={() => props.setResource(resource.id)}> {resource.id} </Text>
+                        })} </Td>
+                        {/*<Td> {element.resources.map((resource) => {*/}
+                        {/*    return <Text onClick={() => props.setResource(resource.costHour)}> {resource.costHour} </Text>*/}
+                        {/*})} </Td>*/}
+                        <Td>costHour</Td>
                         <Td>{element.numberOfInstances}</Td>
                         <Td>{element.schedule}</Td>
                     </Tr>
-                    })}
-                </Tbody>
-            </Table>
+                })}
+            </Tbody>
+        </Table>
 
     )
 }
