@@ -1,14 +1,12 @@
 import React from "react";
-import {Flex, Text} from '@chakra-ui/react'
 import {
     Table,
     Thead,
     Tbody,
+    Text,
     Tr,
     Th,
-    Td,
-    TableCaption,
-    TableContainer,
+    Td
 } from '@chakra-ui/react'
 
 

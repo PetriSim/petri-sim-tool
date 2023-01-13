@@ -42,9 +42,9 @@ function App() {
   const [data, setData] = useState([])
   
 
-  const [currentResource, setResource] = useState("Cashier")
+  const [currentResource, setResource] = useState("")
 
-  const [currentRole, setRole] = useState("Finance")
+  const [currentRole, setRole] = useState("")
 
 // Initial Data Array is created by copying data from startdata.json
 useEffect(() =>{
@@ -138,7 +138,7 @@ useEffect(() =>{
         
           <Container maxWidth="100%" padding={{base: "0", md:"10"}}>
             <Routes>
-              <Route path="/overview" element={<OverviewPage path="/overview" getData={getData} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
+              <Route path="/overview" element={<OverviewPage path="/overview" parsed={parsed} getData={getData} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
               <Route path="/resource" element={<ResourcePage  path="/resource" getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} currentResource={currentResource} setResource={setResource} currentRole={currentRole} setRole={setRole} />} />
 
               <Route path="/scenario" element={<ScenarioPage  path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} setScenario={setScenario}/>} />

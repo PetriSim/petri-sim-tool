@@ -1,11 +1,8 @@
 import {
-    Flex,
     Button,
     Spacer,
     Stack,
     Table,
-    TableCaption,
-    TableContainer,
     Tbody,
     Td,
     Text,
@@ -14,31 +11,11 @@ import {
     Tr
 } from '@chakra-ui/react';
 
-import {React, useEffect, useState} from 'react'
-import OverviewTable from '../Background/ScenarioOverviewTable';
+import {React} from 'react'
 import {Card, CardHeader, CardBody, Heading} from '@chakra-ui/react'
-import TabBar from "../TabBar";
 import {useDisclosure} from '@chakra-ui/react'
 import {Link} from "react-router-dom";
-import OverviewResourceTable from "../Background/OverviewResourceTable";
-import {
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-} from '@chakra-ui/react'
-import {Switch} from '@chakra-ui/react'
-import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-} from '@chakra-ui/react'
 
-import ModelBasedOverview from "../Background/ModelBasedOverview";
 
 
 function OverviewPage(props) {

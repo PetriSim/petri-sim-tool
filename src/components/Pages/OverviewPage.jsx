@@ -1,25 +1,9 @@
 import {
-    Flex,
-    Text,
     Button,
     Spacer,
-    Stack, Td, TableCaption, Thead, Tr, Th, Tbody, Table,
-} from '@chakra-ui/react';
-
-import {React, useEffect, useState} from 'react'
-import OverviewTable from '../Background/ScenarioOverviewTable';
-import { Card, CardHeader, CardBody, Heading} from '@chakra-ui/react'
-import TabBar from "../TabBar";
-import { useDisclosure } from '@chakra-ui/react'
-import { Link } from "react-router-dom";
-
-import OverviewResourceTable from "../Background/OverviewResourceTable";
-import {
+    Stack,
     FormControl,
     FormLabel,
-} from '@chakra-ui/react'
-import { Switch } from '@chakra-ui/react'
- import {
    Modal,
    ModalOverlay,
    ModalContent,
@@ -27,7 +11,18 @@ import { Switch } from '@chakra-ui/react'
    ModalFooter,
    ModalBody,
    ModalCloseButton,
+   Card, CardHeader, CardBody, Heading, Switch
  } from '@chakra-ui/react'
+
+
+import {React, useState} from 'react'
+import OverviewTable from '../Background/ScenarioOverviewTable';
+import TabBar from "../TabBar";
+import { useDisclosure } from '@chakra-ui/react'
+import { Link } from "react-router-dom";
+
+import OverviewResourceTable from "../Background/OverviewResourceTable";
+
 
 import ModelBasedOverview from "../Background/ModelBasedOverview";
 
@@ -136,7 +131,7 @@ function OverviewPage(props) {
                     return {tabname: element.name,
                             content:
                                  // < ModelBasedOverview getModelData = {props.getData} parsed={props.parsed} />
-                                  < ModelBasedOverview getModelData = {props.getData} bpmn_id = {index} />
+                                  < ModelBasedOverview getModelData = {props.getData} bpmn_id = {index}  parsed={props.parsed}/>
 
 
                     }

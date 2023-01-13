@@ -1,5 +1,4 @@
-import {React, useState, useEffect} from "react";
-import {Card, CardBody, CardHeader, Flex, Heading, Spacer, Text} from '@chakra-ui/react'
+import {Card, CardBody, CardHeader, Flex, Heading, Text, VStack} from '@chakra-ui/react'
 import {
     Table,
     Thead,
@@ -7,25 +6,46 @@ import {
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
 } from '@chakra-ui/react'
-import {Stack, HStack, VStack} from '@chakra-ui/react'
-import OverviewResourceTable from "./OverviewResourceTable";
+import React from "react";
 
 
-function ModelBasedOverview(props) {
-    const [parsedd, setParsed] = useState(false)
-    useEffect(() => {
-        if (props.parsed) {
-            setParsed(true)
-            console.log(props.getModelData("currentModel"))
+class ModelBasedOverview extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            parsed: false
+        };
+      }
+
+      componentDidMount(){
+        console.log(this.props.parsed)
+        if(this.props.parsed){
+            this.setState({
+                parsed:true,
+            })
         }
-    }, [props.parsed])
+      }
 
+      componentDidUpdate(prevProps) {
+        console.log(this.props.parsed)
+       
+        if(prevProps.parsed !== this.props.parsed ){
+            this.setState({
+                parsed:true
+            })
+        }
+
+      }
+
+
+    render() {
     return (
         <>
-            {/*{ parsedd ?*/}
+            {/* this.props.getModelData("allModels").models[this.props.bpmn_id].modelParameter !== undefined ? */}
+            <>
             <Card bg="white" w="70vw" mt="25px">
                 <CardHeader>
                     <Heading size='md'>Modelbased Parameters.Activities</Heading>
@@ -44,7 +64,7 @@ function ModelBasedOverview(props) {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {props.getModelData("allModels").models[props.bpmn_id].modelParameter.activities.map((element) => {
+                            {this.props.getModelData("allModels").models[this.props.bpmn_id].modelParameter.activities.map((element) => {
                                 return <>
                                     <Tr>
                                         <Td>{element.id}</Td>
@@ -62,7 +82,7 @@ function ModelBasedOverview(props) {
                     </Table>
                 </CardBody>
             </Card>
-            {/*:""  }*/}
+        
             <Card bg="white" w="70vw" mt="25px">
                 <CardHeader>
                     <Heading size='md'>Modelbased Parameters. Gateways</Heading>
@@ -78,7 +98,7 @@ function ModelBasedOverview(props) {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {props.getModelData("currentModel").modelParameter.gateways.map((element) => {
+                            {this.props.getModelData("currentModel").modelParameter.gateways.map((element) => {
                                 return <>
                                     <Tr>
                                         <Td>{element.id}</Td>
@@ -111,7 +131,7 @@ function ModelBasedOverview(props) {
                                     </Tr>
                                 </Thead>
                                 <Tbody>
-                                    {props.getModelData("currentModel").modelParameter.events.map((element) => {
+                                    {this.props.getModelData("currentModel").modelParameter.events.map((element) => {
                                         return <Tr>
                                             <Td>{element.id}</Td>
                                         </Tr>
@@ -121,12 +141,14 @@ function ModelBasedOverview(props) {
                         </TableContainer>
                     </CardBody>
                 </Card>
-                {/*:""  }*/}
+            
             </Flex>
+            </>
+               {/* :""  }*/}
         </>
-    )
+    );
 }
-
+}
 export default ModelBasedOverview
 
 

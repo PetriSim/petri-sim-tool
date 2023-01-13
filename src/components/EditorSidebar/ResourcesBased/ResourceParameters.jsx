@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input, FormControl, FormLabel, Select } from '@chakra-ui/react';
+import { Button, Input, FormControl, FormLabel } from '@chakra-ui/react';
 
 
 
@@ -7,7 +7,7 @@ class ResourceParameters extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        numberOfInstances: "",
+        id: "",
         costHour: "",
         schedule: ""
       };
@@ -17,16 +17,23 @@ class ResourceParameters extends React.Component {
 
 
     componentDidMount(){
-        console.log(this.props.getData("currentScenario").resourceParameters.roles)
-        console.log(this.props.currentResource)
       if(this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource)){
+        console.log("test")
         this.setState({
-            numberOfInstances: this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource).numberOfInstances,
+          id: this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource).id,
             costHour: this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource).costHour,
             schedule: this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource).schedule
           
           })
           console.log(this.state)
+      } else{
+        this.setState({
+          id: this.props.getData("currentScenario").resourceParameters.resources[0].id,
+          costHour: this.props.getData("currentScenario").resourceParameters.resources[0].costHour,
+          schedule: this.props.getData("currentScenario").resourceParameters.resources[0].schedule
+        
+        })
+        console.log(this.state)
       }
     }
 
@@ -60,7 +67,7 @@ render() {
 
          <FormControl >
               <FormLabel>Resource Name:</FormLabel>
-              <Input title="Test date" value={this.props.currentResource} type="inputRead" />
+              <Input title="Test date" value={this.state.id} type="inputRead" />
           </FormControl>
 
           <FormControl>

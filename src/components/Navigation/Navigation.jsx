@@ -17,10 +17,7 @@ import {
     FiTrash2,
     FiDownload,
     FiLock,
-    FiPlay,
-    FiPlayCircle,
-    FiAirplay
-
+    FiPlay
   } from 'react-icons/fi';
 import BPMNSwitcher from './BPMNSwitcher';
 import ScenarioSwitcher from './ScenarioSwitcher';

@@ -1,11 +1,8 @@
 import React, {useState} from 'react'
-import {
-    Flex, Button, Divider, Text, IconButton, Input, InputGroup, InputRightElement, FormLabel, Select, Icon
-     
-  } from '@chakra-ui/react'
-import { FiCheck, FiChevronDown, FiChevronsDown, FiFile, FiFilePlus, FiMenu, FiUnderline, FiUserCheck } from 'react-icons/fi';
+import {Flex,Text, Input, InputGroup, InputRightElement} from '@chakra-ui/react'
+import { FiCheck, FiFile} from 'react-icons/fi';
 
-{/* To use this file Uploader just import it and write <FileUpload title = 'Writer your title' />*/}
+/* To use this file Uploader just import it and write <FileUpload title = 'Writer your title' />*/
 
 
 function FileUpload(props) {

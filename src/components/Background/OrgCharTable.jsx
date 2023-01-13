@@ -1,31 +1,28 @@
-import React from 'react'
-import { Text, Card, CardBody, Table, TableContainer, Thead } from '@chakra-ui/react'
-import {
-  Tbody,
-  Tr,
-  Th,
-  Td,
-} from '@chakra-ui/react'
+import {React, useEffect} from 'react'
+import { Text, Card, CardBody, Table, TableContainer, Thead,  Tbody, Tr, Th, Td, } from '@chakra-ui/react'
 
 function OrgCharTable(props){
 
-    return(
+    useEffect(() => { 
+        props.setCurrent("Resource Parameters")
+    },[ props])
 
-            <Card bg="white" w="70vw" mt="25px">
+    return(
+            <Card bg="white">
                 <CardBody>
-                    <TableContainer ml="40px" mt="25px">
+                    <TableContainer>
                         <Table variant='simple'>
                             <Thead>
                                 <Tr>
                                 {props.getData("currentScenario").resourceParameters.roles.map((element) => {
-                                        return <Th onClick={() => props.setRole(element.id)}>{element.id}</Th>
+                                        return <Th onClick={() => {props.setRole(element.id); props.setCurrent("Resource Parameters for Roles")} }><Text cursor="pointer">{element.id}</Text></Th>
                                 })} </Tr>
                             </Thead>
                             <Tbody> 
                                 <Tr>
                                 {props.getData("currentScenario").resourceParameters.roles.map((element) => {
                                 return <Td>{element.resources.map((resource) => {
-                                   return <Text onClick={() => props.setResource(resource.id)}> {resource.id} </Text> 
+                                   return <Text onClick={() => {props.setResource(resource.id); props.setCurrent("Resource Parameters") }} cursor="pointer"> {resource.id} </Text> 
                                 })}</Td>
                                 })} </Tr>
                             </Tbody>
@@ -33,8 +30,7 @@ function OrgCharTable(props){
                     </TableContainer>
                 </CardBody>
             </Card>
-
-    )
+            )
 }
 
 export default OrgCharTable;

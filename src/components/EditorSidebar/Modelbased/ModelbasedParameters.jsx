@@ -1,8 +1,8 @@
 import {React, useEffect} from 'react'
 
-import Activity from './Modelbased/Activity';
-import Event from './Modelbased/Event';
-import Gateway from './Modelbased/Gateway';
+import Activity from './Activity';
+import Event from './Event';
+import Gateway from './Gateway';
 
 
 function ModelbasedParameters(props) {

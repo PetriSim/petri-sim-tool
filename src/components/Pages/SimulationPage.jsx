@@ -2,7 +2,7 @@ import React from "react";
 import {
     Flex, Heading, Card, CardHeader, CardBody, Text, Select, Stack, Button,
 } from '@chakra-ui/react';
-import { FiChevronDown, FiChevronsDown, FiFile, FiFilePlus, FiMenu, FiUnderline } from 'react-icons/fi';
+import { FiChevronDown } from 'react-icons/fi';
 
 
 function SimulationPage(props){

@@ -1,10 +1,11 @@
 import React from 'react'
-import { Input, FormControl, FormLabel, Select } from '@chakra-ui/react';
+import { Input, FormControl, FormLabel } from '@chakra-ui/react';
 
 class ScenarioParameters extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
+        scenarioName: "",
         startingDate: "",
         startingTime: "",
         numberOfInstances: "",
@@ -15,21 +16,33 @@ class ScenarioParameters extends React.Component {
       
     }
 
-    //componentDidMount(){
+    componentDidMount(){
+        this.setState({
+            scenarioName: this.props.getData("currentScenario").scenarioName,
+            startingDate: this.props.getData("currentScenario").startingDate,
+            startingTime: this.props.getData("currentScenario").startingTime,
+            numberOfInstances: this.props.getData("currentScenario").numberOfInstances,
+            interArrivalTime: this.props.getData("currentScenario").interArrivalTime,
+            values: this.props.getData("currentScenario").values,
+            timeUnit: this.props.getData("currentScenario").timeUnit
+          })
+          console.log(this.state)
+    }
 
-      //if(this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario)){
-        //this.setState({
-          //  startingDate: this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario).startingDate,
-          // startingTime: this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario).startingTime,
-          //  numberOfInstances: this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario).numberOfInstances,
-            //interArrivalTime: this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario).interArrivalTime,
-            //values: this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario).values,
-            //timeUnit: this.props.getData("currentScenario").scenarioName.find((value) => value.id === this.props.currentScenario).timeUnit
-          //})
-          //console.log(this.state)
-      //}
-    //}
+    handleInputChange(resource) {
+      const target = resource.target;
+      const value = target.value;
+      const name = target.name;
+  
+      this.setState({
+        [name]: value
+      });
 
+      this.props.getData("currentScenario")[name] = target.value
+
+      console.log( this.props.getData("currentScenario"))
+    
+    }
 
 
 render() {
@@ -39,37 +52,37 @@ render() {
 
          <FormControl>
               <FormLabel>Scenario Name:</FormLabel>
-              <Input title="Test date" value={this.props.currentScenario} type="inputRead" />
+              <Input title="Test date" value={this.state.scenarioName} bg="white" name="scenarioName" onChange={(event) => this.handleInputChange(event)} />
           </FormControl>
 
           <FormControl>
               <FormLabel>Starting Date:</FormLabel>
-              <Input title="Test date" value={this.state.numberOfInstances} bg="white" type="inputRead" />
+              <Input title="Test date" value={this.state.startingDate} bg="white" type="inputRead" name="startingDate" onChange={(event) => this.handleInputChange(event)}/>
           </FormControl>
 
           <FormControl>
               <FormLabel>Starting time:</FormLabel>
-              <Input title="Test date" value={this.state.costHour} bg="white"  type="inputRead" />
+              <Input title="Test date" value={this.state.startingTime} bg="white"  type="inputRead" name="startingTime" onChange={(event) => this.handleInputChange(event)}/>
           </FormControl>
 
           <FormControl>
               <FormLabel>Number of Process Instances:</FormLabel>
-              <Input title="Test date" value={this.state.schedule} bg="white" type="inputRead"  />
+              <Input title="Test date" value={this.state.numberOfInstances} bg="white" type="inputRead"  name="numberOfInstances" onChange={(event) => this.handleInputChange(event)} />
           </FormControl>
 
           <FormControl>
               <FormLabel>Interarrival Time:</FormLabel>
-              <Input title="Test date" value={this.state.schedule} bg="white" type="inputRead" />
+              <Input title="Test date" value={this.state.interArrivalTime} bg="white" type="inputRead" />
           </FormControl>
 
           <FormControl>
               <FormLabel>Value:</FormLabel>
-              <Input title="Test date" value={this.state.schedule} bg="white" type="inputRead" />
+              <Input title="Test date" value={this.state.values} bg="white" type="inputRead" />
           </FormControl>
 
           <FormControl>
               <FormLabel>Time Unit:</FormLabel>
-              <Input title="Test date" value={this.state.schedule} bg="white" type="inputRead" />
+              <Input title="Test date" value={this.state.timeUnit} bg="white" type="inputRead" name="timeUnit" onChange={(event) => this.handleInputChange(event)} />
           </FormControl>
 
         </>

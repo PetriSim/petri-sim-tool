@@ -5,9 +5,9 @@ import {
     Text,
   } from '@chakra-ui/react'
 
-import ResourceParameters from './ResourceParameters';
-import ModelbasedParameters from './ModelbasedParameters';
-import ResourceParametersForRoles from './ResourceParametersForRoles';
+import ResourceParameters from './ResourcesBased/ResourceParameters';
+import ModelbasedParameters from './Modelbased/ModelbasedParameters';
+import ResourceParametersForRoles from './ResourcesBased/ResourceParametersForRoles';
 import ScenarioParameters from './ScenarioParameters';
 
 

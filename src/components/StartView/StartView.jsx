@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 
 import {
-    Flex, Button, Divider, Text, IconButton, Input, InputGroup, InputRightElement, FormLabel, Select, Icon
+    Flex, Button, Divider, Text,Select
      
   } from '@chakra-ui/react'
-import { FiChevronDown, FiChevronsDown, FiFile, FiFilePlus, FiMenu, FiUnderline } from 'react-icons/fi';
+import { FiChevronDown } from 'react-icons/fi';
 import FileUpload from './FileUpload';
 
 function StartView(props) {

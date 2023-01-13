@@ -9,8 +9,7 @@ import {
   ButtonGroup,
   IconButton,
   Flex,
-  Box,
-  Button
+  Box
 } from '@chakra-ui/react'
 
 import { MinusIcon, AddIcon } from '@chakra-ui/icons'
