@@ -10,6 +10,9 @@ import {
 } from '@chakra-ui/react'
 import React from "react";
 
+function sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
 
 class ModelBasedOverview extends React.Component {
 
@@ -33,9 +36,13 @@ class ModelBasedOverview extends React.Component {
         console.log(this.props.parsed)
        
         if(prevProps.parsed !== this.props.parsed ){
+           sleep(500).then(() => {
             this.setState({
                 parsed:true
             })
+            });
+
+       
         }
 
       }
@@ -44,7 +51,7 @@ class ModelBasedOverview extends React.Component {
     render() {
     return (
         <>
-            {/* this.props.getModelData("allModels").models[this.props.bpmn_id].modelParameter !== undefined ? */}
+            { this.state.parsed ? 
             <>
             <Card bg="white" w="70vw" mt="25px">
                 <CardHeader>
@@ -144,7 +151,7 @@ class ModelBasedOverview extends React.Component {
             
             </Flex>
             </>
-               {/* :""  }*/}
+             :""  }
         </>
     );
 }

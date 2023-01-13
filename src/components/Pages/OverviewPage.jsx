@@ -127,6 +127,8 @@ function OverviewPage(props) {
                         }) }/>
             </Stack>
            <Stack direction='row' mt="25px" w="70vw" >
+        
+
                 <TabBar onClick={(index) => setTabIndex(index)} items={props.getData("allModels").models.map((element, index) => {
                     return {tabname: element.name,
                             content:
@@ -136,6 +138,9 @@ function OverviewPage(props) {
 
                     }
                 }) }/>
+
+            
+
             </Stack>
 
         </>
