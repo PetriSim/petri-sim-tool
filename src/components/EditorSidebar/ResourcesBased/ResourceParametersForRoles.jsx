@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input, FormControl, FormLabel } from '@chakra-ui/react';
+import { Button, Input, FormControl, FormLabel, Divider } from '@chakra-ui/react';
 
 
 
@@ -26,6 +26,7 @@ class ResourceParametersForRoles extends React.Component {
       }
     }
 
+
     handleInputChange(resource) {
         const target = resource.target;
         const value = target.value;
@@ -47,13 +48,25 @@ render() {
     return (
         <>
 
-        <Button colorScheme='#ECF4F4'
+        <Button onClick={() => this.props.setCurrent("Add Resource")}
+                colorScheme='#ECF4F4'
                 variant='outline'
+                w="100%"
                 border='1px'
                 borderColor='#B4C7C9'
                 color ='#6E6E6F'
-                _hover={{ bg: '#B4C7C9' }}> Add Resources </Button> 
+                _hover={{ bg: '#B4C7C9' }}> Add resource </Button> 
 
+        <Button onClick={() => this.props.setCurrent("Add Role")}
+               colorScheme='#ECF4F4'
+                variant='outline'
+                w="100%"
+                border='1px'
+                borderColor='#B4C7C9'
+                color ='#6E6E6F'
+                _hover={{ bg: '#B4C7C9' }}> Add role </Button> 
+
+        <Divider/>
          <FormControl >
               <FormLabel>Role Name:</FormLabel>
               <Input title="Test date" value={this.props.currentRole} type="inputRead" />

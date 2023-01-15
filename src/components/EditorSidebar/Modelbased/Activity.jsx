@@ -32,6 +32,7 @@ class Activity extends React.Component {
             currency: this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).currency
           
           })
+
       }
     }
   

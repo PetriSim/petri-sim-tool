@@ -1,7 +1,5 @@
 import React from 'react'
-import { Button, Input, FormControl, FormLabel } from '@chakra-ui/react';
-
-
+import { Button, Input, FormControl, FormLabel, Divider } from '@chakra-ui/react';
 
 class ResourceParameters extends React.Component {
     constructor(props) {
@@ -10,11 +8,8 @@ class ResourceParameters extends React.Component {
         id: "",
         costHour: "",
         schedule: ""
-      };
-  
+      };  
     }
-
-
 
     componentDidMount(){
       if(this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource)){
@@ -23,19 +18,11 @@ class ResourceParameters extends React.Component {
           id: this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource).id,
             costHour: this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource).costHour,
             schedule: this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource).schedule
-          
           })
           console.log(this.state)
-      } else{
-        this.setState({
-          id: this.props.getData("currentScenario").resourceParameters.resources[0].id,
-          costHour: this.props.getData("currentScenario").resourceParameters.resources[0].costHour,
-          schedule: this.props.getData("currentScenario").resourceParameters.resources[0].schedule
-        
-        })
-        console.log(this.state)
-      }
+      } 
     }
+
 
     handleInputChange(resource) {
         const target = resource.target;
@@ -47,24 +34,35 @@ class ResourceParameters extends React.Component {
         });
   
         this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource)[name] = target.value
-      
       }
 
 
 
 render() {
-
-
     return (
         <>
-
-        <Button colorScheme='#ECF4F4'
+        <Button onClick={() => this.props.setCurrent("Add Resource")}
+                colorScheme='#ECF4F4'
                 variant='outline'
+                w="100%"
                 border='1px'
                 borderColor='#B4C7C9'
                 color ='#6E6E6F'
-                _hover={{ bg: '#B4C7C9' }}> Add Resources </Button> 
+                _hover={{ bg: '#B4C7C9' }}> Add resource </Button> 
 
+        <Button onClick={() => this.props.setCurrent("Add Role")}
+               colorScheme='#ECF4F4'
+                variant='outline'
+                w="100%"
+                border='1px'
+                borderColor='#B4C7C9'
+                color ='#6E6E6F'
+                _hover={{ bg: '#B4C7C9' }}> Add role </Button> 
+
+        <Divider/>
+
+        {this.state.id !== "" ?
+        <>
          <FormControl >
               <FormLabel>Resource Name:</FormLabel>
               <Input title="Test date" value={this.state.id} type="inputRead" />
@@ -79,6 +77,8 @@ render() {
               <FormLabel>Timetable:</FormLabel>
               <Input title="Test date" value={this.state.schedule} bg="white" name = "schedule" onChange={(event) => this.handleInputChange(event)}  />
           </FormControl>
+        </>
+        : ""}
 
         </>
     )

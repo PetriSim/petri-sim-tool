@@ -1,85 +1,76 @@
+
 import React from 'react'
-import { Button,  Text, Stack, Card, CardBody, Table, TableContainer, Thead,Tbody,Tr,Th, Td} from '@chakra-ui/react'
 
-import { CheckCircleIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
+import { Box, Heading, Text, Grid, Card, CardBody, Table,VStack,
+    Thead,
+    Tbody,
+    Tr,Th,Td,Radio,RadioGroup,
+    TableContainer } from "@chakra-ui/react";
+import TimeTable from './TimeTable';
 
-const hours = [ "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" ];
 
-function TimetableOverview(props){
-  
-    return(
+class TimetableOverview extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedTimeTable: 0,
+            timeTableList: []
+        }
+    }
 
-     <Stack direction='column'  >
-        <Card bg="white">
-            <CardBody>
-            <TableContainer>
-                <Table variant='simple'>
-                    <Thead>
-                        <Tr>
-                            <Th></Th>
-                            <Th>Name</Th>
-                            <Th>Weekday</Th>
-                            <Th>Time</Th>
-                            <Th></Th>
-                            <Th></Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody> 
-                            {props.getData("currentScenario").resourceParameters.timeTables.map((element) => {
-                                return <Tr>
-                                    <Td> <CheckCircleIcon /> </Td>
-                                    <Td>{element.id}</Td>
-                                    <Td>{element.timeTableItems.map((timetable) => {
-                                    return <Text> {timetable.startDate} - {timetable.endDate} </Text> })} </Td>
-                                    <Td>{element.timeTableItems.map((timetable) => {
-                                    return <Text> {timetable.startTime} - {timetable.endTime} </Text> })}</Td>
-                                    <Td> <DeleteIcon /> </Td>
-                                    <Td> <EditIcon /> </Td>
-                        </Tr>
-                        })}
-                    </Tbody>
-                </Table>
-            </TableContainer>
-            </CardBody>
-        </Card>
+    componentDidMount() {
+        this.props.setCurrent("Timetable");
+        this.setState({ timeTableList: this.props.getData("currentScenario").resourceParameters.timeTables });
+        console.log(this.props.getData("currentScenario").resourceParameters.timeTables);
+    }
 
-        <Card bg="white"  mt="25px">
-        <CardBody>
-        <TableContainer mt="25px">
-            <Table variant='simple'>
-                <Thead>
-                    <Tr>
-                        <Th></Th>
-                        <Th>Monday</Th>
-                        <Th>Tuesday</Th>
-                        <Th>Wednesday</Th>
-                        <Th>Thursday</Th>
-                        <Th>Friday</Th>
-                        <Th>Saturday</Th>
-                        <Th>Sunday</Th>
-                    </Tr>
-                </Thead>
-                <Tbody> 
-                    {hours.map((element) => {
-                    return <Tr>
-                        <Td>  <Text> {element} </Text> </Td>
-                        <Td> <Button colorScheme='gray' size='xs'> </Button> </Td>
-                        <Td> <Button colorScheme='gray' size='xs'> </Button> </Td>
-                        <Td> <Button colorScheme='gray' size='xs'> </Button> </Td>
-                        <Td> <Button colorScheme='gray' size='xs'> </Button> </Td>
-                        <Td> <Button colorScheme='gray' size='xs'> </Button> </Td>
-                        <Td> <Button colorScheme='gray' size='xs'> </Button> </Td>
-                        <Td> <Button colorScheme='gray' size='xs'> </Button> </Td>
-                        </Tr>
-                    })}
-                </Tbody>
-            </Table>
-        </TableContainer>
-        </CardBody>
-        </Card>
-    </Stack>
+   
 
-    )
+    render() {
+        return (
+            <>
+                <VStack spacing={5} >
+                    <Card bg="white" w="100%">
+                        <CardBody>
+                            <Heading size='md'>Select Timetable</Heading>
+
+                            <TableContainer>
+                                <Table variant='simple'>
+                                    <Thead>
+                                        <Tr>
+                                            <Th></Th>
+                                            <Th>Name</Th>
+                                            <Th>Weekday</Th>
+                                            <Th>Time</Th>
+                                            <Th></Th>
+                                        </Tr>
+                                    </Thead>
+                                    <Tbody>
+                                        {
+                                            this.state.timeTableList.map((timeTable, index) => {
+                                                return <Tr>
+                                                    <Td>
+                                                        <RadioGroup value={this.state.selectedTimeTable} onChange={() => this.setState({ selectedTimeTable: index })}>
+                                                            <Radio value={index} colorScheme="green"></Radio>
+                                                        </RadioGroup>
+                                                    </Td>
+                                                    <Td>{timeTable.id}</Td>
+                                                    <Td>{timeTable.timeTableItems.map((item) => { return <Text>{item.startWeekday + " - " + item.endWeekday} </Text> })}</Td>
+                                                    <Td>{timeTable.timeTableItems.map((item) => { return <Text>{item.startTime + " - " + item.endTime} </Text> })}</Td>
+                                                </Tr>
+                                            })
+                                        }
+                                    </Tbody>
+                                </Table>
+                            </TableContainer>
+                        </CardBody>
+                    </Card>
+
+                    <TimeTable setData={this.props.setData} data={this.props.getData("currentScenario").resourceParameters.timeTables[this.state.selectedTimeTable].timeTableItems} />
+                </VStack>
+            </>
+        );
+    }
 }
 
 export default TimetableOverview;

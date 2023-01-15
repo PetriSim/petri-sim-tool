@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, FormControl, FormLabel } from '@chakra-ui/react';
+import { Input, FormControl, FormLabel, Flex } from '@chakra-ui/react';
 
 class ScenarioParameters extends React.Component {
     constructor(props) {
@@ -12,6 +12,7 @@ class ScenarioParameters extends React.Component {
         interArrivalTime:"",
         values:"",
         timeUnit:"",
+        distributionType: ""
       };
       
     }
@@ -24,7 +25,8 @@ class ScenarioParameters extends React.Component {
             numberOfInstances: this.props.getData("currentScenario").numberOfInstances,
             interArrivalTime: this.props.getData("currentScenario").interArrivalTime,
             values: this.props.getData("currentScenario").values,
-            timeUnit: this.props.getData("currentScenario").timeUnit
+            timeUnit: this.props.getData("currentScenario").timeUnit,
+            distributionType: this.props.getData("currentScenario").interArrivalTime.distributionType
           })
           console.log(this.state)
     }
@@ -72,19 +74,20 @@ render() {
 
           <FormControl>
               <FormLabel>Interarrival Time:</FormLabel>
-              <Input title="Test date" value={this.state.interArrivalTime} bg="white" type="inputRead" />
+              <Input title="Test date" value={this.state.distributionType} bg="white" type="inputRead"  name="distributionType" onChange={(event) => this.handleInputChange(event)}/>
           </FormControl>
 
-          <FormControl>
-              <FormLabel>Value:</FormLabel>
-              <Input title="Test date" value={this.state.values} bg="white" type="inputRead" />
-          </FormControl>
+        <Flex justifyContent="space-between">
+            <FormControl w="47%">
+                <FormLabel>Value:</FormLabel>
+                <Input title="Test date" value={this.state.values} bg="white" type="inputRead" />
+            </FormControl>
 
-          <FormControl>
-              <FormLabel>Time Unit:</FormLabel>
-              <Input title="Test date" value={this.state.timeUnit} bg="white" type="inputRead" name="timeUnit" onChange={(event) => this.handleInputChange(event)} />
-          </FormControl>
-
+            <FormControl w="47%"> 
+                <FormLabel>Time Unit:</FormLabel>
+                <Input title="Test date" value={this.state.timeUnit} bg="white" type="inputRead" name="timeUnit" onChange={(event) => this.handleInputChange(event)} />
+            </FormControl>
+        </Flex>
         </>
     )
 }

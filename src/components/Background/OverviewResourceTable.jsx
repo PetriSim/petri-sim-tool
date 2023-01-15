@@ -14,6 +14,7 @@ function OverviewResourceTable(props) {
 
     return (
         <Table variant='simple'>
+        
             <Thead>
                 <Tr>
                     <Th>Department</Th>
@@ -30,9 +31,6 @@ function OverviewResourceTable(props) {
                         <Td> {element.resources.map((resource) => {
                             return <Text onClick={() => props.setResource(resource.id)}> {resource.id} </Text>
                         })} </Td>
-                        {/*<Td> {element.resources.map((resource) => {*/}
-                        {/*    return <Text onClick={() => props.setResource(resource.costHour)}> {resource.costHour} </Text>*/}
-                        {/*})} </Td>*/}
                         <Td>costHour</Td>
                         <Td>{element.numberOfInstances}</Td>
                         <Td>{element.schedule}</Td>

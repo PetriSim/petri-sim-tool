@@ -30,48 +30,76 @@
             }, {
                 "id": "Cashier1",
                 "costHour": 30
-            },{
+            }, {
                 "id": "Cashier2",
                 "costHour": 50
-            } ],
+            }, {
+                "id": "test",
+                "costHour": 50
+            }],
             "roles": [{
-                "id": "Top Management",
-                "schedule": "8hPerWeek",
-                "numberOfInstances": 3,
-                "resources": [{
-                    "id": "TopManager"
-                }, {
-                    "id": "TopManager2"
-                }, {
-                    "id": "TopManager3"
-                }] } ,
+                    "id": "Top Management",
+                    "schedule": "8hPerWeek",
+                    "numberOfInstances": 3,
+                    "resources": [{
+                        "id": "TopManager"
+                    }, {
+                        "id": "TopManager2"
+                    }, {
+                        "id": "TopManager3"
+                    }]
+                },
                 {
-                "id": "Finance",
-                "schedule": "7/24",
-                "numberOfInstances": 2,
-                "resources": [{
+                    "id": "Finance",
+                    "schedule": "7/24",
+                    "numberOfInstances": 2,
+                    "resources": [{
                         "id": "Cashier1"
                     }, {
                         "id": "Cashier2"
+                    }, {
+                        "id": "Cashier2"
+                    }, {
+                        "id": "Cashier2"
+                    }, {
+                        "id": "Cashier2"
                     }]
-                }],
+                }
+            ],
             "timeTables": [{
-                "id": "8hPerWeek",
-                "timeTableItems": [{
-                    "startDate": "MONDAY",
-                    "startTime": "09:00",
-                    "endDate": "MONDAY",
-                    "endTime": "17:00"
-                }]
-            }, {
-                "id": "7/24",
-                "timeTableItems": [{
-                    "startDate": "MONDAY",
-                    "startTime": "09:00",
-                    "endDate": "FRIDAY",
-                    "endTime": "17:00"
-                }]
-            }]
+                    "id": "8hPerWeek",
+                    "timeTableItems": [{
+                        "startWeekday": "Monday",
+                        "startTime": "09",
+                        "endWeekday": "Monday",
+                        "endTime": "17"
+                    }]
+                }, {
+                    "id": "7/24",
+                    "timeTableItems": [{
+                        "startWeekday": "Monday",
+                        "startTime": "09",
+                        "endWeekday": "Friday",
+                        "endTime": "17"
+                    }]
+                },
+                {
+                    "id": "special",
+                    "timeTableItems": [{
+                            "startWeekday": "Monday",
+                            "startTime": "09",
+                            "endWeekday": "Monday",
+                            "endTime": "17"
+                        },
+                        {
+                            "startWeekday": "Tuesday",
+                            "startTime": "09",
+                            "endWeekday": "Tuesday",
+                            "endTime": "10"
+                        }
+                    ]
+                }
+            ]
         },
         "models": [{
                 "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
@@ -120,14 +148,39 @@
                 }]
             }],
             "timeTables": [{
-                "id": "8hPerWeek",
-                "timeTableItems": [{
-                    "startDate": "MONDAY",
-                    "startTime": "09:00",
-                    "endDate": "MONDAY",
-                    "endTime": "17:00"
-                }]
-            }]
+                    "id": "8hPerWeek",
+                    "timeTableItems": [{
+                        "startWeekday": "Monday",
+                        "startTime": "09",
+                        "endWeekday": "Monday",
+                        "endTime": "17"
+                    }]
+                }, {
+                    "id": "7/24",
+                    "timeTableItems": [{
+                        "startWeekday": "Monday",
+                        "startTime": "09",
+                        "endWeekday": "FRIDAY",
+                        "endTime": "17"
+                    }]
+                },
+                {
+                    "id": "special",
+                    "timeTableItems": [{
+                            "startWeekday": "Monday",
+                            "startTime": "09",
+                            "endWeekday": "Monday",
+                            "endTime": "17"
+                        },
+                        {
+                            "startWeekday": "Tuesday",
+                            "startTime": "09",
+                            "endWeekday": "Tuesday",
+                            "endTime": "10"
+                        }
+                    ]
+                }
+            ]
         },
         "models": [{
                 "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",

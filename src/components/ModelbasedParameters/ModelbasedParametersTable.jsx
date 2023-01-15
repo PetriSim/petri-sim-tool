@@ -34,6 +34,7 @@ class ModelbasedParametersTable extends React.Component {
             
             })
         }
+        console.log("a")
       }
 
       componentDidUpdate(prevProps) {
@@ -58,6 +59,7 @@ class ModelbasedParametersTable extends React.Component {
             })
         }
 
+        console.log(prevProps)
       }
     
 

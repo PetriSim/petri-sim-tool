@@ -1,85 +1,70 @@
 import React from "react";
 import {
-    Flex, Heading, Card, CardHeader, CardBody, Text, Select, Stack, Button,
+    Flex, Heading, Card, CardHeader, CardBody, Text, Select, Stack, Button,Progress, Box, Textarea
 } from '@chakra-ui/react';
 import { FiChevronDown } from 'react-icons/fi';
 
 
 function SimulationPage(props){
     return (
-        <>
-            <Heading size='md'>Run Simulation</Heading>
-            <Card bg="white" w="70vw" mt="25px" >
+        <Stack gap="2">
+        <Heading size='lg' >Run Simulation</Heading>
+        <Card bg="white" p="5" >
+            <Progress hasStripe value={64} colorScheme="green" />
+        </Card>
+            <Card bg="white">
                 <CardHeader>
                     <Heading size='ms'> Simulation settings </Heading>
                 </CardHeader>
                 <CardBody>
-                    <Stack direction='row'>                    
-                        <Flex
-                        alignItems="left"
-                        flexDir="column"
-                        >
-                            <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select scenario:</Text>
-                            <Select placeholder = 'choose scenario' width = '100%' color="darkgrey" focusBorderColor='teal' backgroundColor= 'white' icon={<FiChevronDown />}>
-                            {props.data.map((scenario, index) => {
-                             return  <option value= {scenario.scenarioName} onClick={() =>  props.setScenario(index)}>{scenario.scenarioName}</option>
-                            })}
-                            </Select>
-                        </Flex>
-                        <Flex
-                        alignItems="left"
-                        flexDir="column"
-                        >
-                            <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select simulator:</Text>
-                            <Select placeholder = 'choose simulator' width = '100%' color="darkgrey" focusBorderColor='teal' backgroundColor= 'white' icon={<FiChevronDown />}>
-                                <option value='Simod'>Simod</option>
-                                <option value='Option 2'>Option 2</option>
-                                <option value='Option 3'>Option 3</option>
-                            </Select>
-                        </Flex>
-                        <Flex
-                        alignItems="left"
-                        flexDir="column"
-                        >
-                            <gap></gap>
-                            <Button boxShadow='sm'
-                            rounded = 'md'
-                            backgroundColor="white"
-                            alignItems="center"
-                            flexDir="column"
-                            fontSize="sm" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" border={'grey'}>
-                                Start Simulation
+                  
+                    <Flex
+                        gap="5"
+                        flexDirection="row"
+                        alignItems="end"
+                        mt="-4"
+                        >               
+                            <Box>
+                                <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select scenario:</Text>
+                                <Select placeholder = 'choose scenario' width = '100%' color="darkgrey" backgroundColor= 'white' icon={<FiChevronDown />}>
+                                {props.data.map((scenario, index) => {
+                                return  <option value= {scenario.scenarioName} onClick={() =>  props.setScenario(index)}>{scenario.scenarioName}</option>
+                                })}
+                                </Select>
+                            </Box>
+                            <Box>
+                                <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select simulator:</Text>
+                                <Select placeholder = 'choose simulator' width = '100%' color="darkgrey"  backgroundColor= 'white' icon={<FiChevronDown />}>
+                                    <option value='Simod'>Simod</option>
+                                    <option value='Option 2'>Option 2</option>
+                                    <option value='Option 3'>Option 3</option>
+                                </Select>
+                            </Box>
+
+                            <Button variant="outline" bg="#FFFF">
+                                <Text color="RGBA(0, 0, 0, 0.64)" fontWeight="bold">Start Simulation</Text>
                             </Button>
-                        </Flex>
-                        <Flex
-                        alignItems="left"
-                        flexDir="column"
-                        >
-                            <gap></gap>
-                            <Button boxShadow='sm'
-                            rounded = 'md'
-                            backgroundColor="white"
-                            alignItems="center"
-                            flexDir="column"
-                            fontSize="sm" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" border={'grey'}>
-                                Abort Simulation
+
+                            <Button variant="outline" bg="#FFFF">
+                                <Text color="RGBA(0, 0, 0, 0.64)" fontWeight="bold">Abort Simulation</Text>
                             </Button>
+
                         </Flex>
-                    </Stack>
                 </CardBody>
             </Card>
 
-            <Card bg="white" w="70vw" mt="25px" >
+            <Card bg="white">
                 <CardHeader>
                     <Heading size='ms'> Simulator feedback </Heading>
                 </CardHeader>
                 <CardBody>
+                    <Textarea isDisabled placeholder='Data from scylla' />
                 </CardBody>
             </Card>
             
         
-            {props.data[props.currentScenario].scenarioName}
-        </>
+            
+        </Stack>
     )
 }
 export default SimulationPage;

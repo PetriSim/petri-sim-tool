@@ -9,7 +9,7 @@ function TabBar(props){
             <TabList>
                 {
                     props.items.map((tab) => (
-                        <Tab>{tab.tabname}</Tab>
+                        <Tab onClick={() => props.setCurrent(tab.link)}>{tab.tabname}</Tab>
 
                     ))
                 }
