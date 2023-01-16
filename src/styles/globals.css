@@ -58,3 +58,15 @@ input[type='file'] {
 .navi:hover {
     background-color: rgb(174, 200, 202) !important;
 }
+
+.css-spn4bz:hover,
+.css-spn4bz[data-hover] {
+    border-bottom: solid 2px rgb(99 134 137);
+    color: rgb(99 134 137);
+    transition: 100ms linear;
+    text-decoration: none !important;
+}
+
+.css-spn4bz {
+    border-bottom: solid 2px rgb(255, 255, 255, 0);
+}

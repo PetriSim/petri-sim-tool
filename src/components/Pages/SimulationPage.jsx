@@ -7,6 +7,7 @@ import { FiChevronDown } from 'react-icons/fi';
 
 function SimulationPage(props){
     return (
+        <Box h="93vh" overflowY="auto" p="5" >
         <Stack gap="2">
         <Heading size='lg' >Run Simulation</Heading>
         <Card bg="white" p="5" >
@@ -65,6 +66,7 @@ function SimulationPage(props){
         
             
         </Stack>
+        </Box>
     )
 }
 export default SimulationPage;

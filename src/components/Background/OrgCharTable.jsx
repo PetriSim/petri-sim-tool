@@ -1,6 +1,6 @@
 import {React, useEffect} from 'react'
-import { Text, Card, CardBody, Table, TableContainer, Thead,  Tbody, Tr, Th, Td, Button, Flex, Stack, Heading, } from '@chakra-ui/react'
-
+import { Box, Card, CardBody, Table, TableContainer, Thead,  Tbody, Tr, Th, Td, Button, Flex, Stack, Heading} from '@chakra-ui/react'
+import ResourceNavigation from '../ResourceNavigation';
 function OrgCharTable(props){
 
     useEffect(() => { 
@@ -13,7 +13,11 @@ function OrgCharTable(props){
 
     return(
         <>
+        <Box h="93vh" overflowY="auto" p="5" >
         <Stack gap="3">
+
+        <ResourceNavigation/>
+
             <Card bg="white">
                 <CardBody>
                 <Heading size="md">Allocated resources</Heading>
@@ -56,6 +60,7 @@ function OrgCharTable(props){
                 </CardBody>
             </Card>
             </Stack>
+            </Box>
             </>
 
             )

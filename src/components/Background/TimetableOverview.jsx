@@ -5,8 +5,10 @@ import { Box, Heading, Text, Grid, Card, CardBody, Table,VStack,
     Thead,
     Tbody,
     Tr,Th,Td,Radio,RadioGroup,
-    TableContainer } from "@chakra-ui/react";
+    TableContainer, 
+    Stack} from "@chakra-ui/react";
 import TimeTable from './TimeTable';
+import ResourceNavigation from '../ResourceNavigation';
 
 
 class TimetableOverview extends React.Component {
@@ -29,7 +31,9 @@ class TimetableOverview extends React.Component {
     render() {
         return (
             <>
-                <VStack spacing={5} >
+            <Box h="93vh" overflowY="auto" p="5" >
+                <Stack spacing={5} >
+                    <ResourceNavigation/>
                     <Card bg="white" w="100%">
                         <CardBody>
                             <Heading size='md'>Select Timetable</Heading>
@@ -67,7 +71,8 @@ class TimetableOverview extends React.Component {
                     </Card>
 
                     <TimeTable setData={this.props.setData} data={this.props.getData("currentScenario").resourceParameters.timeTables[this.state.selectedTimeTable].timeTableItems} />
-                </VStack>
+                </Stack>
+            </Box>
             </>
         );
     }

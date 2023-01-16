@@ -11,7 +11,7 @@ import {
    ModalFooter,
    ModalBody,
    ModalCloseButton,
-   Card, CardHeader, CardBody, Heading, Switch
+   Card, CardHeader, CardBody, Heading, Switch, Box
  } from '@chakra-ui/react'
 
 
@@ -39,7 +39,8 @@ function OverviewPage(props) {
 
     return (
         <>
-            <Stack direction='row' spacing={4}  w="70vw" >
+         <Box h="93vh" overflowY="auto" p="5" >
+            <Stack direction='row' spacing={4} >
                 <Button colorScheme='#ECF4F4'
                         variant='outline'
                         border='1px'
@@ -102,7 +103,7 @@ function OverviewPage(props) {
                     Delete scenario
                 </Button>
             </Stack>
-            <Card bg="white" w="70vw" mt="25px" >
+            <Card bg="white" mt="25px" >
                 <CardHeader>
                     <Heading size='md'>Scenario Overview</Heading>
                 </CardHeader>
@@ -110,10 +111,10 @@ function OverviewPage(props) {
                                 <OverviewTable getSimulData = {props.getData}/>
                 </CardBody>
             </Card>
-            <Stack direction='row' mt="25px" w="70vw" >
+            <Stack direction='row' mt="25px" >
                 <TabBar onClick={(index) => setTabIndex(index)} items={props.getData("allScenarios").map((element, index) => {
                         return {tabname: element.scenarioName,
-                                content:  <Card bg="white" w="70vw" mt="25px" >
+                                content:  <Card bg="white"  mt="25px" >
                                             <CardHeader>
                                                  <Heading size='md'>Resource Overview</Heading>
                                              </CardHeader>
@@ -126,7 +127,7 @@ function OverviewPage(props) {
 
                         }) }/>
             </Stack>
-           <Stack direction='row' mt="25px" w="70vw" >
+           <Stack direction='row' mt="25px" >
         
 
                 <TabBar onClick={(index) => setTabIndex(index)} items={props.getData("allModels").models.map((element, index) => {
@@ -142,7 +143,7 @@ function OverviewPage(props) {
             
 
             </Stack>
-
+            </Box>
         </>
     )
 }

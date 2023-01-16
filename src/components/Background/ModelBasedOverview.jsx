@@ -53,7 +53,7 @@ class ModelBasedOverview extends React.Component {
         <>
             { this.state.parsed ? 
             <>
-            <Card bg="white" w="70vw" mt="25px">
+            <Card bg="white"  mt="25px">
                 <CardHeader>
                     <Heading size='md'>Modelbased Parameters.Activities</Heading>
                 </CardHeader>

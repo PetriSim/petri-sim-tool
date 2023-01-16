@@ -13,7 +13,7 @@ import {
 function OverviewResourceTable(props) {
 
     return (
-        <Table variant='simple'>
+        <Table variant='simple' >
         
             <Thead>
                 <Tr>

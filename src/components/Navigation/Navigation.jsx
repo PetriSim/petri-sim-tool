@@ -27,7 +27,7 @@ function Navigation(props) {
     const LinkItems = [
         { name: 'Simulation Overview', icon: FiSettings, path: '/overview' },
         { name: 'Scenario Parameters', icon: FiSettings, path: '/scenario' },
-        { name: 'Resource Parameters', icon: FiTrendingUp, path: '/resource' },
+        { name: 'Resource Parameters', icon: FiTrendingUp, path: '/resource/overview' },
         { name: 'Modelbased Parameters', icon: FiStar, path: '/modelbased' },
         { name: 'Run Simulation', icon: FiPlay, path: '/simulation' },
       ];
