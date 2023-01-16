@@ -29,10 +29,10 @@ function Sidebar(props) {
               '6', 
               '6', 
             ]}
-            paddingRight={hidden ? "" :{
+            paddingRight={hidden ? "" : props.side === "left"? {
               sm: "7 !important",
               md: "10 !important"
-            }}
+            } : {}}
 
            
             h={hidden ? "" : {base: "100%", md:"95vh"}}

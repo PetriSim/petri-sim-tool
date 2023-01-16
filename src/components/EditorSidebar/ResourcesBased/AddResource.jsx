@@ -41,7 +41,7 @@ class AddResource extends React.Component {
           selectedRoles: [...this.state.selectedRoles, value]
         });
       }
-      
+    
     }
 
     clear(){

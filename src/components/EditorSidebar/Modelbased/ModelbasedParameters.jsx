@@ -27,17 +27,17 @@ console.log(props.currentBpmn)
           }
 
           {props.selectedObject.$type && props.selectedObject.$type.includes("Gateway")  ?
-          <Gateway setData={props.setData} getData={props.getData}  selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
+          <Gateway setDataObj={props.setDataObj} selectedObject={props.selectedObject} setData={props.setData} getData={props.getData} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario} value={props.selectedObject.name? props.selectedObject.name : "" }/>
           : <></>
           }
 
           {props.selectedObject.$type && props.selectedObject.$type.includes("Task")  ?
-          <Activity setData={props.setData} getData={props.getData} selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
+          <Activity setDataObj={props.setDataObj} selectedObject={props.selectedObject} setData={props.setData} getData={props.getData} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario} value={props.selectedObject.name? props.selectedObject.name : "" }/>
           : <></>
           }
 
           {props.selectedObject.$type && props.selectedObject.$type.includes("Event") && !props.selectedObject.$type.includes("Gateway")  ?
-          <Event setData={props.setData} getData={props.getData} selectedObject={props.selectedObject} value={props.selectedObject.name? props.selectedObject.name : "" }/>
+          <Event setDataObj={props.setDataObj} selectedObject={props.selectedObject} setData={props.setData} getData={props.getData} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario} value={props.selectedObject.name? props.selectedObject.name : "" }/>
           : <></>
           }
         </>

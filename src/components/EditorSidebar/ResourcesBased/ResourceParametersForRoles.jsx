@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input, FormControl, FormLabel, Divider } from '@chakra-ui/react';
+import { Button, Input, FormControl, FormLabel, Divider, Select, Stack, Box } from '@chakra-ui/react';
 
 
 
@@ -7,9 +7,13 @@ class ResourceParametersForRoles extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
+        id: "",
         numberOfInstances: "",
-        schedule: ""
+        schedule: "",
+        timeTables: props.getData("currentScenario").resourceParameters.timeTables.map(item => item.id)
       };
+
+      this.onSubmit = this.onSubmit.bind(this);
   
     }
 
@@ -20,7 +24,8 @@ class ResourceParametersForRoles extends React.Component {
       if(this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentRole)){
         this.setState({
             numberOfInstances: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentRole).numberOfInstances,
-            schedule: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentRole).schedule
+            schedule: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentRole).schedule,
+            id: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentRole).id
           
           })
       }
@@ -36,7 +41,27 @@ class ResourceParametersForRoles extends React.Component {
           [name]: value
         });
   
-        this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentRole)[name] = target.value
+        //this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentRole)[name] = target.value
+      
+      }
+
+      onSubmit(event){
+        event.preventDefault();
+
+        console.log(this.props)
+        
+        let data = [... this.props.getData("allScenario")]
+
+        console.log(data)
+  
+       
+        data[this.props.currentScenario].resourceParameters.roles.find((value) => value.id === this.props.currentRole).numberOfInstances = this.state.numberOfInstances
+        data[this.props.currentScenario].resourceParameters.roles.find((value) => value.id === this.props.currentRole).schedule = this.state.schedule                                                              
+        data[this.props.currentScenario].resourceParameters.roles.find((value) => value.id === this.props.currentRole).id = this.state.id                                                                                                 
+    
+
+        this.props.setData(data)
+        console.log(data[this.props.currentScenario])
       
       }
 
@@ -47,7 +72,7 @@ render() {
 
     return (
         <>
-
+        
         <Button onClick={() => this.props.setCurrent("Add Resource")}
                 colorScheme='#ECF4F4'
                 variant='outline'
@@ -67,21 +92,42 @@ render() {
                 _hover={{ bg: '#B4C7C9' }}> Add role </Button> 
 
         <Divider/>
+        <Box w="100%">
+        <form onSubmit={this.onSubmit}>
+        <Stack gap="2" mt="4">
          <FormControl >
               <FormLabel>Role Name:</FormLabel>
-              <Input title="Test date" value={this.props.currentRole} type="inputRead" />
+              <Input value={this.state.id} bg="white" name = "id" onChange={(event) => this.handleInputChange(event)} />
           </FormControl>
 
           <FormControl >
               <FormLabel>Number of Instances:</FormLabel>
-              <Input title="Test date" value={this.state.numberOfInstances} bg="white" name = "numberOfInstances" onChange={(event) => this.handleInputChange(event)}  />
+              <Input value={this.state.numberOfInstances} bg="white" name = "numberOfInstances" onChange={(event) => this.handleInputChange(event)}  />
           </FormControl>
+
+
 
           <FormControl >
               <FormLabel>Timetable:</FormLabel>
-              <Input title="Test date" value={this.state.schedule} bg="white" name = "schedule" onChange={(event) => this.handleInputChange(event)}  />
-          </FormControl>
+              <Select value={this.state.schedule} bg="white" name="schedule" onChange={(event) => this.handleInputChange(event)} >
+                {this.state.timeTables.map((id, index) => {
+                    return <option value={id} key={index}>{id}</option>
+                })}
+            </Select>
+         </FormControl>
 
+          <Button 
+              type="submit"
+              colorScheme='#ECF4F4'
+              w="100%"
+              variant='outline'
+              border='1px'
+              borderColor='#B4C7C9'
+              color ='#6E6E6F'
+              _hover={{ bg: '#B4C7C9' }}> Save changes </Button> 
+        </Stack>
+        </form>
+        </Box>
         </>
     )
 }

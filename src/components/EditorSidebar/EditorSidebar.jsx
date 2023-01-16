@@ -22,8 +22,8 @@ function Parameditor(props) {
     const SelectEditor = () =>{
         switch (props.current) {
 
-            case "Resource Parameters": return <ResourceParameters currentResource={props.currentResource} setResource={props.setResource} getData={props.getData} setCurrent={props.setCurrent}/>
-            case "Resource Parameters for Roles": return <ResourceParametersForRoles currentRole={props.currentRole} setRole={props.setRole} getData={props.getData} setCurrent={props.setCurrent}/>
+            case "Resource Parameters": return <ResourceParameters currentResource={props.currentResource} setResource={props.setResource} getData={props.getData} setCurrent={props.setCurrent} currentScenario={props.currentScenario} setData={props.setData}/>
+            case "Resource Parameters for Roles": return <ResourceParametersForRoles currentRole={props.currentRole} setRole={props.setRole} getData={props.getData} setCurrent={props.setCurrent} currentScenario={props.currentScenario} setData={props.setData}/>
             case "Scenario Parameters": return  <ScenarioParameters currentScenario={props.currentScenario} setScenario={props.setScenario} getData={props.getData}/>
             case "Modelbased Parameters": return <ModelbasedParameters setDataObj={props.setDataObj} selectedObject={props.selectedObject} setData={props.setData} getData={props.getData} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario}/>
             case "Timetable": return <Timetable getData={props.getData}  setData={props.setData} currentScenario={props.currentScenario} setScenario={props.setScenario} />
