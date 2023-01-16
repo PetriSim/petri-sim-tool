@@ -8,7 +8,8 @@ import {
     Text,
     Th,
     Thead,
-    Tr
+    Tr,
+    Box
 } from '@chakra-ui/react';
 
 import {React} from 'react'
@@ -77,7 +78,7 @@ function OverviewPage(props) {
 
     return (
         <>
-
+        <Box h="93vh" overflowY="auto" p="5" >
             <Stack direction='row' spacing={4} w="70vw">
                 <Button as={Link} to="/overview"
                         colorScheme='#ECF4F4'
@@ -108,7 +109,7 @@ function OverviewPage(props) {
                     Add new scenario
                 </Button>
             </Stack>
-            <Card bg="white" w="70vw" mt="25px">
+            <Card bg="white" mt="25px">
                 <CardHeader>
                     <Heading size='md'>Simulation Overview</Heading>
                 </CardHeader>
@@ -133,7 +134,7 @@ function OverviewPage(props) {
                     </Table>
                 </CardBody>
             </Card>
-
+        </Box>
         </>
     )
 }

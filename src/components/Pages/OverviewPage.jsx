@@ -40,6 +40,7 @@ function OverviewPage(props) {
     return (
         <>
          <Box h="93vh" overflowY="auto" p="5" >
+         <Stack direction='column' spacing={4} >
             <Stack direction='row' spacing={4} >
                 <Button colorScheme='#ECF4F4'
                         variant='outline'
@@ -102,7 +103,7 @@ function OverviewPage(props) {
                         _hover={{ bg: '#B4C7C9' }}>
                     Delete scenario
                 </Button>
-            </Stack>
+           </Stack>
             <Card bg="white" mt="25px" >
                 <CardHeader>
                     <Heading size='md'>Scenario Overview</Heading>
@@ -111,7 +112,7 @@ function OverviewPage(props) {
                                 <OverviewTable getSimulData = {props.getData}/>
                 </CardBody>
             </Card>
-            <Stack direction='row' mt="25px" >
+            
                 <TabBar onClick={(index) => setTabIndex(index)} items={props.getData("allScenarios").map((element, index) => {
                         return {tabname: element.scenarioName,
                                 content:  <Card bg="white"  mt="25px" >
@@ -126,8 +127,7 @@ function OverviewPage(props) {
                                                        }
 
                         }) }/>
-            </Stack>
-           <Stack direction='row' mt="25px" >
+           
         
 
                 <TabBar onClick={(index) => setTabIndex(index)} items={props.getData("allModels").models.map((element, index) => {
