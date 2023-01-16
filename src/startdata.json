@@ -98,13 +98,13 @@
         "models": [{
                 "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
                 "name": "Warenversand",
-                "modelParameters": null
+                "modelParameter": { "activities": [] }
             },
 
             {
                 "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
                 "name": "Schufascoring",
-                "modelParameters": null
+                "modelParameter": null
             }
         ]
     },
@@ -179,13 +179,13 @@
         "models": [{
                 "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
                 "name": "Warenversand",
-                "modelParameters": null
+                "modelParameter": null
             },
 
             {
                 "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
                 "name": "Schufascoring",
-                "modelParameters": null
+                "modelParameter": null
             }
         ]
     }
