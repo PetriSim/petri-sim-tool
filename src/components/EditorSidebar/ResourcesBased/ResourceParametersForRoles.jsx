@@ -14,7 +14,7 @@ class ResourceParametersForRoles extends React.Component {
       };
 
       this.onSubmit = this.onSubmit.bind(this);
-  
+      this.delete = this.delete.bind(this);
     }
 
 
@@ -40,9 +40,7 @@ class ResourceParametersForRoles extends React.Component {
         this.setState({
           [name]: value
         });
-  
-        //this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentRole)[name] = target.value
-      
+
       }
 
       onSubmit(event){
@@ -66,6 +64,21 @@ class ResourceParametersForRoles extends React.Component {
       }
 
 
+      delete(){
+
+        let data = [... this.props.getData("allScenario")]
+
+   
+
+        data[this.props.currentScenario].resourceParameters.roles = data[this.props.currentScenario].resourceParameters.roles.filter(role => role.id !== this.state.id);
+   
+
+       
+
+        console.log(data[this.props.currentScenario].resourceParameters)
+        this.props.setData(data)
+        
+      }
 
 render() {
 
@@ -125,6 +138,8 @@ render() {
               borderColor='#B4C7C9'
               color ='#6E6E6F'
               _hover={{ bg: '#B4C7C9' }}> Save changes </Button> 
+
+        <Button colorScheme='red' variant='outline' w="100%" onClick={this.delete}>Delete resource</Button>
         </Stack>
         </form>
         </Box>

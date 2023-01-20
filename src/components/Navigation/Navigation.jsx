@@ -17,17 +17,21 @@ import {
     FiTrash2,
     FiDownload,
     FiLock,
-    FiPlay
+    FiPlay,
+    FiEye,
+    FiUser
   } from 'react-icons/fi';
+
+
 import BPMNSwitcher from './BPMNSwitcher';
 import ScenarioSwitcher from './ScenarioSwitcher';
 
 function Navigation(props) {
 
     const LinkItems = [
-        { name: 'Simulation Overview', icon: FiSettings, path: '/overview' },
+        { name: 'Overview', icon: FiEye, path: '/overview' },
         { name: 'Scenario Parameters', icon: FiSettings, path: '/scenario' },
-        { name: 'Resource Parameters', icon: FiTrendingUp, path: '/resource/overview' },
+        { name: 'Resource Parameters', icon: FiUser, path: '/resource' },
         { name: 'Modelbased Parameters', icon: FiStar, path: '/modelbased' },
         { name: 'Run Simulation', icon: FiPlay, path: '/simulation' },
       ];

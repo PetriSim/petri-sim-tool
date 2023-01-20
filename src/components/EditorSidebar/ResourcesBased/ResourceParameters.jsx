@@ -13,7 +13,7 @@ class ResourceParameters extends React.Component {
       };  
       this.onSubmit = this.onSubmit.bind(this);
 
-      
+      this.delete = this.delete.bind(this);
     }
 
     componentDidMount(){
@@ -53,26 +53,22 @@ class ResourceParameters extends React.Component {
         this.setState({
           [name]: value
         });
-  
-        //this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource)[name] = target.value
       }
 
       onSubmit(event){
         event.preventDefault();
 
-        console.log(this.props)
         
         let data = [... this.props.getData("allScenario")]
 
-        console.log(data)
   
        
         data[this.props.currentScenario].resourceParameters.resources.find((value) => value.id === this.props.currentResource).id = this.state.id
-        data[this.props.currentScenario].resourceParameters.resources.find((value) => value.id === this.props.currentResource).costHour = this.state.costHour                                                              
+        data[this.props.currentScenario].resourceParameters.resources.find((value) => value.id === this.state.id).costHour = this.state.costHour                                                              
                                                                                                       
         
         data[this.props.currentScenario].resourceParameters.roles.forEach(obj => {
-          obj.resources = obj.resources.filter(resource => resource.id !== this.state.id);
+          obj.resources = obj.resources.filter(resource => resource.id !== this.props.currentResource);
         });
         
     
@@ -81,9 +77,28 @@ class ResourceParameters extends React.Component {
           data[this.props.currentScenario].resourceParameters.roles.find(x => x.id === item).resources.push({id: this.state.id})
         })
 
+         console.log(data)
+
         this.props.setData(data)
-        console.log(data[this.props.currentScenario])
-      
+
+      }
+
+      delete(){
+
+        let data = [... this.props.getData("allScenario")]
+
+   
+
+        data[this.props.currentScenario].resourceParameters.roles.forEach(obj => {
+          obj.resources = obj.resources.filter(resource => resource.id !== this.state.id);
+        });
+
+        data[this.props.currentScenario].resourceParameters.resources = data[this.props.currentScenario].resourceParameters.resources.filter(resource => resource.id !== this.state.id);
+       
+
+        console.log(data[this.props.currentScenario].resourceParameters)
+        this.props.setData(data)
+        
       }
 
 
@@ -151,6 +166,10 @@ render() {
               borderColor='#B4C7C9'
               color ='#6E6E6F'
               _hover={{ bg: '#B4C7C9' }}> Save changes </Button> 
+
+
+          <Button colorScheme='red' variant='outline' w="100%" onClick={this.delete}>Delete resource</Button>
+        
               </Stack>
         </form>
         

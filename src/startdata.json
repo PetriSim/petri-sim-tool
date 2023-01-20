@@ -71,18 +71,18 @@
                 }, {
                     "id": "7/24",
                     "timeTableItems": [{
-                        "startWeekday": "Monday",
-                        "startTime": "09",
-                        "endWeekday": "Friday",
-                        "endTime": "17"
+                        "startWeekday": "Friday",
+                        "startTime": "03",
+                        "endWeekday": "Saturday",
+                        "endTime": "13"
                     }]
                 },
                 {
                     "id": "special",
                     "timeTableItems": [{
-                            "startWeekday": "Monday",
-                            "startTime": "09",
-                            "endWeekday": "Monday",
+                            "startWeekday": "Friday",
+                            "startTime": "03",
+                            "endWeekday": "Saturday",
                             "endTime": "17"
                         },
                         {
