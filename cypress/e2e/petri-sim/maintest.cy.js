@@ -58,7 +58,7 @@ describe('clicking through pages', () => {
     })
     it('shows resource parameters page', () => {
         cy.findByRole('button', { name: /resource parameters/i }).click()
-        cy.url().should('eq', 'http://localhost:3000/resource/overview')
+        cy.url().should('eq', 'http://localhost:3000/resource')
     })
     it('shows model based parameters page', () => {
         cy.findByRole('button', { name: /modelbased parameters/i }).click()
