@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import {
-    Flex, Button, Divider, Text,Select
+    Flex, Button, Divider, Text,Select, Box, Heading
      
   } from '@chakra-ui/react'
 import { FiChevronDown } from 'react-icons/fi';
 import FileUpload from './FileUpload';
+import axios from 'axios';
 
 function StartView(props) {
   const [addExistingBPMN, setExistingBPMN] = useState(false);
@@ -24,6 +25,37 @@ function StartView(props) {
     setNewProject(false)
     setExistingProject(true)
   }
+
+  const [projectList, setProjetList] = useState([])
+
+  const getFiles = () => {
+         axios.get('http://localhost:8000/getProjects')
+              .then(response => {
+                  setProjetList(response.data);
+              })
+              .catch(error => {
+                  console.log(error);
+              });
+
+   }
+
+   const selectProject = (project) => {
+
+    axios.get(`http://localhost:8000/getFile/${project}`)
+      .then(response => {
+        pushToApp(response.data);
+        props.setStarted("true")
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+   }
+
+  useEffect(() => {
+     getFiles()
+  }, [])
   
     
   return (
@@ -181,6 +213,15 @@ function StartView(props) {
           </Button>
         }
         
+
+        <Flex flexDir="column" gap="5" width="100%" >
+          <Heading size="md">Select existing project</Heading>
+            <Flex h="30vh" overflowY="scroll" flexDir="column" gap="5">
+                {projectList.reverse().map(project => {
+                  return <Button p="4" onClick={() => selectProject(project)}>{project}</Button>
+                })}
+           </Flex>  
+        </Flex>
       </Flex>
     </Flex> 
   )
