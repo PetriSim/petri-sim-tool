@@ -24,12 +24,12 @@ console.log(props.current)
         
             <Flex w="100%" key={index}>
                 <Menu placement="right" w="100%">
-                    <NavLink to={link.path} onClick={() => props.setCurrent(link.name)} 
+                    <NavLink to={link.path} onClick={link.event} 
                      style={({ isActive }) => isActive ? { backgroundColor: props.clickedcolor} : { backgroundColor: props.color} }
                     className="navi"
                     >
                         <MenuButton                       
-                    
+                        
                         w="100%">
                             <Flex alignItems='center' >
                                 <Flex 

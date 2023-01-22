@@ -122,7 +122,7 @@ describe('Modelbased Parameters: Table View', () => {
 describe('Compare Scenarios', () => {
     beforeEach(() => {
 
-        cy.findByRole('button', { name: /simulation overview/i }).click()
+        cy.findByRole('button', { name: /overview/i }).click()
     })
     it('shows a popup for "compare scenarios', () => {
 

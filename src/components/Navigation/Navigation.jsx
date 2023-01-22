@@ -21,34 +21,46 @@ import {
     FiEye,
     FiUser
   } from 'react-icons/fi';
-
-
+  import axios from "axios";
+  import saveAs from 'file-saver';
 import BPMNSwitcher from './BPMNSwitcher';
 import ScenarioSwitcher from './ScenarioSwitcher';
 
 function Navigation(props) {
 
     const LinkItems = [
-        { name: 'Overview', icon: FiEye, path: '/overview' },
-        { name: 'Scenario Parameters', icon: FiSettings, path: '/scenario' },
-        { name: 'Resource Parameters', icon: FiUser, path: '/resource' },
-        { name: 'Modelbased Parameters', icon: FiStar, path: '/modelbased' },
-        { name: 'Run Simulation', icon: FiPlay, path: '/simulation' },
+        { name: 'Overview', icon: FiEye, path: '/overview', event: () =>  props.setCurrent("Overview") },
+        { name: 'Scenario Parameters', icon: FiSettings, path: '/scenario', event: () =>  props.setCurrent("Scenario Parameters") },
+        { name: 'Resource Parameters', icon: FiUser, path: '/resource', event: () =>  props.setCurrent("Resource Parameters") },
+        { name: 'Modelbased Parameters', icon: FiStar, path: '/modelbased', event: () =>  props.setCurrent("Modelbased Parameters") },
+        { name: 'Run Simulation', icon: FiPlay, path: '/simulation', event: () =>  props.setCurrent("Run Simulation") }
       ];
-
+     
       const LinkItems2 = [
-        { name: 'Add BPMN', icon: FiFileText, path: '/scenario' },
-        { name: 'Reset parameters', icon: FiTrash2, path: '/scenario' },
-        { name: 'Export XML files', icon: FiDownload, path: '/scenario' },
-        { name: 'Save parameters', icon: FiLock, path: '/scenario' },
+        { name: 'Add BPMN', icon: FiFileText, path: '#', event: () => {} },
+        { name: 'Reset parameters', icon: FiTrash2, path: '#', event: () => {} },
+        { name: 'Export XML files', icon: FiDownload, path: '/#', event: () => save() },
+        { name: 'Save parameters', icon: FiLock, path: '#', event: () => saveFile() },
       ];
 
+      
     const Nav = () => {
         return <Text fontSize={{base: "xs", md:"sm"}} textAlign="center" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold">PetriSim</Text>
               
       };
 
-
+      const save = () =>{
+        const jsonData = JSON.stringify(props.data);
+        const blob = new Blob([jsonData], { type: "application/json" });
+        saveAs(blob, "data.json");
+      }
+      
+      const saveFile = () => {
+        axios.post('http://localhost:8000/save', props.data)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
+      }
+      
 
 
   return (

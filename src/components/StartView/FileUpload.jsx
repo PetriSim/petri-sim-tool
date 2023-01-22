@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
-import {Flex,Text, Input, InputGroup, InputRightElement} from '@chakra-ui/react'
+import React, {useEffect, useState} from 'react'
+import {Flex,Text, Input, InputGroup, InputRightElement, Box} from '@chakra-ui/react'
 import { FiCheck, FiFile} from 'react-icons/fi';
+
 
 /* To use this file Uploader just import it and write <FileUpload title = 'Writer your title' />*/
 
@@ -20,21 +21,20 @@ function FileUpload(props) {
         
         setThisFile3(thisFile);
 
-    const fileReader = new FileReader();
-    fileReader.readAsText(e.target.files[0], "UTF-8");
-    fileReader.onload = e => {
-      console.log("e.target.result", e.target.result);
-      var myFile = e.target.result
-      setThisFile2(e.target.result);
-   //   setThisFile2(e.target.result);
+        const fileReader = new FileReader();
+        fileReader.readAsText(e.target.files[0], "UTF-8");
 
-      setFileUplaoded(true)
-      props.getFile(myFile)
+        fileReader.onload = e => {
+            console.log("e.target.result", e.target.result);
+            var myFile = e.target.result
+            setThisFile2(e.target.result);
+        //   setThisFile2(e.target.result);
 
-    }
-    }
+            setFileUplaoded(true)
+            props.getFile(myFile)
 
-   
+         }
+    }   
         
     
 
@@ -61,6 +61,8 @@ function FileUpload(props) {
                 <InputRightElement pointerEvents='none' children={<FiFile />} />
                 }
                 </InputGroup>
+
+               
     
             </Flex>
             
