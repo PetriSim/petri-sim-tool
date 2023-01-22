@@ -118,7 +118,7 @@ render() {
               border='1px'
               borderColor='#B4C7C9'
               color ='#6E6E6F'
-              _hover={{ bg: '#B4C7C9' }}> Add timetable </Button> 
+              _hover={{ bg: '#B4C7C9' }}> Add role </Button> 
       
       </Stack>
       </form>

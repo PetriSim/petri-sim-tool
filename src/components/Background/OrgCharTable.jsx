@@ -16,32 +16,28 @@ function OrgCharTable(props){
         <Box h="93vh" overflowY="auto" p="5" >
         <Stack gap="3">
 
-        <ResourceNavigation/>
+        <ResourceNavigation currentTab="overview"/>
 
             <Card bg="white">
                 <CardBody>
-                <Heading size="md">Allocated resources</Heading>
-                    <TableContainer>
+                <Heading size="md">Assigned resources</Heading>
+                    <TableContainer overscrollx="scroll" w="100%">
                         <Table variant='simple'>
                             <Thead>
                                 <Tr>
-                                    <Th>Department: </Th>
-                                {props.getData("currentScenario").resourceParameters.roles.map((element) => {
-                                        return <Th><Flex justifyContent="center"><Button variant="outline" onClick={() => {props.setRole(element.id); props.setCurrent("Resource Parameters for Roles")} }>{element.id}</Button></Flex></Th>
-                                })} 
-                                
+                                    <Th>Role</Th>
+                                    <Th>Asigned ressources</Th>
                                 </Tr>
                             </Thead>
                             <Tbody> 
-                                <Tr>
-                                <Td>Allocated <br/>resources:</Td>
+                            
                                 {props.getData("currentScenario").resourceParameters.roles.map((element) => {
-                                return <Td><Flex alignItems="center" justifyContent="center" gap="4" flexWrap="wrap">{element.resources.map((resource) => {
+                                return <><Tr><Td><Flex><Button variant="outline" onClick={() => {props.setRole(element.id); props.setCurrent("Resource Parameters for Roles")} }>{element.id}</Button></Flex></Td><Td><Flex gap="4" flexWrap="wrap">{element.resources.map((resource) => {
                                    return <Button onClick={() => {props.setResource(resource.id); props.setCurrent("Resource Parameters") }}> {resource.id} </Button> 
-                                })}</Flex></Td>
+                                })}</Flex></Td></Tr></>
                                 })} 
                                 
-                                </Tr>
+                           
                             </Tbody>
                         </Table>
                     </TableContainer>
@@ -50,7 +46,7 @@ function OrgCharTable(props){
 
             <Card bg="white">
                 <CardBody>
-                <Heading size="md">Unallocated resources</Heading>
+                <Heading size="md" mb="5">Unassigned resources</Heading>
                     <Flex alignItems="center"  gap="4" flexWrap="wrap">
                         {
                         difference.map((id) => {

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Input, FormControl, FormLabel, Select, Box, Stack, Switch } from '@chakra-ui/react';
 
 
-class Timetable extends React.Component {
+class AddTimetable extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -97,6 +97,14 @@ render() {
 
     return (
         <>
+<Button onClick={() => this.props.setCurrent("Edit Timetable")}
+                colorScheme='#ECF4F4'
+                variant='outline'
+                w="100%"
+                border='1px'
+                borderColor='#B4C7C9'
+                color ='#6E6E6F'
+                _hover={{ bg: '#B4C7C9' }}> Back </Button> 
 
 <Box w="100%">
         <form onSubmit={this.onSubmit}>
@@ -182,4 +190,4 @@ render() {
     )
 }
 }
-export default Timetable;
+export default AddTimetable;
