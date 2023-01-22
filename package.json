@@ -14,6 +14,7 @@
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^14.4.3",
+        "antd": "^5.1.6",
         "axios": "^0.20.0",
         "bpmn-js": "7.3.0",
         "bpmn-moddle": "^8.0.0",
