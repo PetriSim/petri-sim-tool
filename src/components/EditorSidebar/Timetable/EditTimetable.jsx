@@ -67,6 +67,7 @@ class EditTimetable extends React.Component {
  
       }
 
+  
       clear(){
         this.setState(
             { id: "",

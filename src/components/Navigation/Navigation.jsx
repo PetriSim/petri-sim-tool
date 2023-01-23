@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Sidebar from '../Sidebar';
 
 import {
@@ -39,8 +39,8 @@ function Navigation(props) {
       const LinkItems2 = [
         { name: 'Add BPMN', icon: FiFileText, path: '#', event: () => {} },
         { name: 'Reset parameters', icon: FiTrash2, path: '#', event: () => {} },
-        { name: 'Export XML files', icon: FiDownload, path: '/#', event: () => save() },
-        { name: 'Save parameters', icon: FiLock, path: '#', event: () => saveFile() },
+        { name: 'Download parameters', icon: FiDownload, path: '/#', event: () => save() },
+        { name: 'Save project', icon: FiLock, path: '#', event: () => saveFile() },
       ];
 
       
@@ -61,6 +61,18 @@ function Navigation(props) {
             .catch(err => console.log(err));
       }
       
+      const setupBeforeUnloadListener = () => {
+        window.addEventListener("beforeunload", (ev) => {
+            ev.preventDefault();
+            saveFile()
+            return "test"
+        });
+    };
+
+      useEffect(() => {
+        setupBeforeUnloadListener()
+        console.log("registred")
+      }, [])
 
 
   return (

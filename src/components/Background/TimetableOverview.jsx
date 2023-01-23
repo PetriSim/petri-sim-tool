@@ -31,6 +31,14 @@ class TimetableOverview extends React.Component {
         this.props.setCurrent("Edit Timetable")  
     }
 
+    componentDidUpdate(){
+        if(this.props.getData("currentScenario").resourceParameters.timeTables.length === this.state.selectedTimeTable){
+            this.setState({selectedTimeTable: 0})
+        }
+
+       
+    }
+
     
 
     delete(item){
