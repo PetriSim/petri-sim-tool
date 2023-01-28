@@ -12,7 +12,6 @@ import Navigation from './components/Navigation/Navigation';
 import EditorSidebar from './components/EditorSidebar/EditorSidebar';
 import StartView from './components/StartView/StartView';
 import BpmnViewSelector from './components/ModelbasedParameters/BpmnViewSelector';
-import ResourcePage from './components/Pages/ResourcePage';
 import ScenarioPage from './components/Pages/ScenarioPage';
 import BpmnModelParser from './BpmnModelParser';
 import OverviewPage from './components/Pages/OverviewPage';
@@ -27,8 +26,8 @@ import { Navigate } from 'react-router-dom';
 import ModelbasedParametersTable from './components/ModelbasedParameters/ModelbasedParametersTable';
 import SimulationPage from './components/Pages/SimulationPage';
 import ComparePage from "./components/Pages/ComparePage";
-import TimetableOverview from './components/Background/TimetableOverview';
-import OrgCharTable from './components/Background/OrgCharTable';
+import TimetableOverview from './components/ResourceParameters/TimeTable/TimetableOverview';
+import OrgCharTable from './components/ResourceParameters/Resources/OrgCharTable';
 import saveAs from 'file-saver';
 
 
