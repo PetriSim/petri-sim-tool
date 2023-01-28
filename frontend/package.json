@@ -41,9 +41,7 @@
     "scripts": {
 
 
-        "start": "concurrently \"npm run server\" \"npm run client\"",
-        "server": "node server.js",
-        "client": "react-scripts start",
+        "start": "react-scripts start",
 
         "build": "CI=false && react-scripts build",
         "test": "cypress open",
