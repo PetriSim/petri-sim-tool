@@ -15,7 +15,8 @@ import BpmnViewSelector from './components/ModelbasedParameters/BpmnViewSelector
 import ResourcePage from './components/Pages/ResourcePage';
 import ScenarioPage from './components/Pages/ScenarioPage';
 import BpmnModelParser from './BpmnModelParser';
-import OverviewPage from './components/Pages/OverviewPage'
+import OverviewPage from './components/Pages/OverviewPage';
+import OnlyDifferencesPage from './components/Pages/OnlyDifferencesPage'
 
 import startData from './startdata.json'
 
@@ -154,6 +155,7 @@ useEffect(() =>{
 
               <Route path="/scenario" element={<ScenarioPage  path="/scenario" setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} setScenario={setScenario} scenariosCompare={scenariosCompare} setScenariosCompare={setScenariosCompare}/>} />
               <Route path="/compare" element={<ComparePage path="/overview" getData={getData} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} scenariosCompare={scenariosCompare} setScenariosCompare={setScenariosCompare}/>} />
+              <Route path="/differences" element={<OnlyDifferencesPage path="/differences" getData={getData} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} scenariosCompare={scenariosCompare} setScenariosCompare={setScenariosCompare}/>} />
 
 
               <Route path="/modelbased" element={ <BpmnViewSelector zIndex={-5} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />

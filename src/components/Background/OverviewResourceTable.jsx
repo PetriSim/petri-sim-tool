@@ -20,7 +20,8 @@ function OverviewResourceTable(props) {
                     <Th>Department</Th>
                     <Th>Role</Th>
                     <Th>Cost</Th>
-                    <Th>Number</Th>
+                    <Th>Currency</Th>
+                    <Th>Quantity</Th>
                     <Th>Timetable</Th>
                 </Tr>
             </Thead>
@@ -31,8 +32,15 @@ function OverviewResourceTable(props) {
                         <Td> {element.resources.map((resource) => {
                             return <Text onClick={() => props.setResource(resource.id)}> {resource.id} </Text>
                         })} </Td>
-                        <Td>costHour</Td>
-                        <Td>{element.numberOfInstances}</Td>
+                        <Td>{element.resources.map((res) => {
+                            let resource = props.getResourceData("allScenarios")[props.scenario_id].resourceParameters.resources.find(item => item.id === res.id)
+                            return <Text>{resource.costHour}</Text>
+                        })}</Td>
+                        <Td>{props.getResourceData("allScenarios")[props.scenario_id].currency}</Td>
+                        <Td>{element.resources.map((res1) => {
+                            let resource1 = props.getResourceData("allScenarios")[props.scenario_id].resourceParameters.resources.find(item => item.id === res1.id)
+                            return <Text>{resource1.numberOfInstances}</Text>
+                        })}</Td>
                         <Td>{element.schedule}</Td>
                     </Tr>
                 })}
