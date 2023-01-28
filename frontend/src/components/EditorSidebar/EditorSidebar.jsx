@@ -8,11 +8,12 @@ import {
 import ResourceParameters from './ResourcesBased/ResourceParameters';
 import ModelbasedParameters from './Modelbased/ModelbasedParameters';
 import ResourceParametersForRoles from './ResourcesBased/ResourceParametersForRoles';
-import ScenarioParameters from './ScenarioParameters';
 import AddTimetable from './Timetable/AddTimetable';
 import AddResource from './ResourcesBased/AddResource';
 import AddRole from './ResourcesBased/AddRole';
 import EditTimetable from './Timetable/EditTimetable';
+import AddScenario from './Scenario/AddScenario';
+import EditScenario from './Scenario/EditScenario';
 
 function Parameditor(props) {
     const Editor = () => {
@@ -25,7 +26,8 @@ function Parameditor(props) {
 
             case "Resource Parameters": return <ResourceParameters currentResource={props.currentResource} setResource={props.setResource} getData={props.getData} setCurrent={props.setCurrent} currentScenario={props.currentScenario} setData={props.setData}/>
             case "Resource Parameters for Roles": return <ResourceParametersForRoles currentRole={props.currentRole} setRole={props.setRole} getData={props.getData} setCurrent={props.setCurrent} currentScenario={props.currentScenario} setData={props.setData}/>
-            case "Scenario Parameters": return  <ScenarioParameters currentScenario={props.currentScenario} setScenario={props.setScenario} getData={props.getData}/>
+            case "Add Scenario": return  <AddScenario currentScenario={props.currentScenario} setScenario={props.setScenario} getData={props.getData} setCurrent={props.setCurrent} selectedScenario={props.selectedScenario} setSelectedScenario={props.selectedScenario} setData={props.setData}/>
+            case "Edit Scenario": return  <EditScenario currentScenario={props.currentScenario} setScenario={props.setScenario} getData={props.getData} setCurrent={props.setCurrent} selectedScenario={props.selectedScenario} setSelectedScenario={props.selectedScenario} setData={props.setData}/>
             case "Modelbased Parameters": return <ModelbasedParameters setDataObj={props.setDataObj} selectedObject={props.selectedObject} setData={props.setData} getData={props.getData} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario}/>
             case "Add Timetable": return <AddTimetable getData={props.getData}  setData={props.setData} currentScenario={props.currentScenario} setScenario={props.setScenario} setCurrent={props.setCurrent} currentTimetable={props.currentTimetable} setTimetable={props.setTimetable}/>
             case "Edit Timetable": return <EditTimetable getData={props.getData}  setData={props.setData} currentScenario={props.currentScenario} setScenario={props.setScenario} setCurrent={props.setCurrent} currentTimetable={props.currentTimetable} setTimetable={props.setTimetable} />

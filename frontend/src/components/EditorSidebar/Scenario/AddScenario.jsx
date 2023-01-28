@@ -1,7 +1,7 @@
 import React from 'react'
 import { Input, FormControl, FormLabel, Flex } from '@chakra-ui/react';
 
-class ScenarioParameters extends React.Component {
+class AddScenario extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -95,4 +95,4 @@ render() {
 
 
 
-export default ScenarioParameters;
+export default AddScenario;

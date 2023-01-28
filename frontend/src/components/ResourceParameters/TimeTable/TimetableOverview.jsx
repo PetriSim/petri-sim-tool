@@ -1,15 +1,9 @@
 
 import React from 'react'
 
-import { Box, Heading, Text, Grid, Card, CardBody, Table,VStack,
-    Thead,
-    Tbody,
-    Tr,Th,Td,Radio,RadioGroup,
-    TableContainer, 
-    Stack,
-    Button} from "@chakra-ui/react";
+import { Box, Heading, Text, Card, CardBody, Table,Thead,Tbody, Tr,Th,Td,Radio,RadioGroup, TableContainer, Stack, Button} from "@chakra-ui/react";
 
-    import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
+import { DeleteIcon } from '@chakra-ui/icons'
 import TimeTable from './TimeTable';
 import ResourceNavigation from '../ResourceNavigation';
 
