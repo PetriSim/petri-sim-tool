@@ -1,11 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../Sidebar';
 
 import {
     Text,
     Divider,
-    Spacer
-    
+    Spacer,
+    useToast,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    FormControl,
+    Button,
+    Input,
+    FormLabel,
+    ModalCloseButton,
   } from '@chakra-ui/react'
 import NavigationItem from './NavigationItem';
 
@@ -28,6 +40,8 @@ import ScenarioSwitcher from './ScenarioSwitcher';
 
 function Navigation(props) {
 
+  const toast = useToast()
+
     const LinkItems = [
         { name: 'Overview', icon: FiEye, path: '/overview', event: () =>  props.setCurrent("Overview") },
         { name: 'Scenario Parameters', icon: FiSettings, path: '/scenario', event: () =>  props.setCurrent("Scenario Parameters") },
@@ -40,13 +54,12 @@ function Navigation(props) {
         { name: 'Add BPMN', icon: FiFileText, path: '#', event: () => {} },
         { name: 'Reset parameters', icon: FiTrash2, path: '#', event: () => {} },
         { name: 'Download parameters', icon: FiDownload, path: '/#', event: () => save() },
-        { name: 'Save project', icon: FiLock, path: '#', event: () => saveFile() },
+        { name: 'Save project as', icon: FiLock, path: '#', event: () => onOpen() },
       ];
 
       
     const Nav = () => {
-        return <Text fontSize={{base: "xs", md:"sm"}} textAlign="center" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold">PetriSim</Text>
-              
+        return <Text fontSize={{base: "xs", md:"sm"}} textAlign="center" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold">PetriSim</Text> 
       };
 
       const save = () =>{
@@ -56,9 +69,29 @@ function Navigation(props) {
       }
       
       const saveFile = () => {
-        axios.post('http://localhost:8000/save', props.data)
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err));
+        console.log(name)
+
+        var fullData = {projectname: name, 
+                        data:  props.data
+                      }
+
+
+        axios.post('http://localhost:8000/save', fullData)
+            .then(res => toast({
+              title: 'Saved project.',
+              description: res.data,
+              status: 'success',
+              duration: 9000,
+              isClosable: true,
+            }))
+            .catch(err => toast({
+              title: 'Error',
+              description: 'Could not save the project',
+              status: 'error',
+              duration: 9000,
+              isClosable: true,
+            }));
+
       }
       
       const setupBeforeUnloadListener = () => {
@@ -74,6 +107,11 @@ function Navigation(props) {
         console.log("registred")
       }, [])
 
+      const { isOpen, onOpen, onClose } = useDisclosure()
+
+      const [name, setName] = useState("")
+
+
 
   return (
         <>
@@ -87,14 +125,36 @@ function Navigation(props) {
 
                         <ScenarioSwitcher currentScenario={props.currentScenario} setScenario={props.setScenario} scenarios={props.scenarios} data={props.data}  />
                     <Divider/>
-
-
                     <Spacer/>
-
-
                     <NavigationItem items={LinkItems2} clickedColor="blackAlpha.400" color="blackAlpha.00" bottom="0" setStarted={props.setStarted} exitButton={true} />                    
                     </>
                 } />
+
+
+          <Modal
+            
+            isOpen={isOpen}
+            onClose={onClose}
+          >
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Save project</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody pb={6}>
+                <FormControl>
+                  <FormLabel>Projectname: </FormLabel>
+                  <Input value={name} onChange={(e) => setName(e.target.value)} placeholder='Projectname' />
+                </FormControl>
+              </ModalBody>
+
+              <ModalFooter>
+                <Button colorScheme='blue' mr={3} onClick={saveFile}>
+                  Save
+                </Button>
+                <Button onClick={onClose}>Cancel</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
         </>
   )
 }
