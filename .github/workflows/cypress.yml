@@ -1,0 +1,45 @@
+name: Test App
+
+on: [push]
+
+jobs:
+  build:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+
+
+    strategy:
+      matrix:
+        node-version: [15.x]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run API in background
+        working-directory: backend
+        run: |
+          npm install
+          npm start &
+        env:
+          PORT: 8000
+          
+          
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cypress install
+        working-directory: frontend
+        run: npm install --legacy-peer-deps
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          working-directory: frontend
+          install: false
+          build: npm run build
+          start: npm start
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
