@@ -1,5 +1,6 @@
 
 import {React} from 'react'
+import BpmnView from "../ModelbasedParameters/BpmnView";
 
 
 function ScenarioPage(props) {
@@ -7,8 +8,7 @@ function ScenarioPage(props) {
 
     return (
         <>
-        
-            {props.data[props.currentScenario].scenarioName}
+
         </>
     )
 }

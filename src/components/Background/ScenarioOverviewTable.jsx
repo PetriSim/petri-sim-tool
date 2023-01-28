@@ -5,7 +5,7 @@ import {
     Tbody,
     Tr,
     Th,
-    Td,
+    Td, Text,
 } from '@chakra-ui/react'
 
 
@@ -20,15 +20,23 @@ function OverviewTable(props){
                         <Th>Starting date</Th>
                         <Th>Starting time</Th>
                         <Th>Replications</Th>
+                        <Th>Inter-arrival Time:Distribution</Th>
+                        <Th>Distribution Data</Th>
+                        <Th>Time unit</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
                     {props.getSimulData("allScenarios").map((element) => {
                         return <Tr>
-                            <Td>{element.scenarioName} </Td>
-                            <Td>{element.startingDate}</Td>
-                            <Td>{element.startingTime}</Td>
-                            <Td>{element.numberOfInstances}</Td>
+                            <Td align="left">{element.scenarioName} </Td>
+                            <Td align="left" >{element.startingDate}</Td>
+                            <Td align="left" >{element.startingTime}</Td>
+                            <Td align="left">{element.numberOfInstances}</Td>
+                            <Td align="left">{element.interArrivalTime.distributionType}</Td>
+                            <Td align="left">{element.interArrivalTime.values.map((distribution) => {
+                                return <Text> {distribution.id} : {distribution.value} </Text>
+                            })} </Td>
+                            <Td>{element.timeUnit}</Td>
                         </Tr>
                     })}
                 </Tbody>
