@@ -9,23 +9,41 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/save', (req, res) => {
-    const currentDate = new Date();
-    const weekday = currentDate.toLocaleString('default', { weekday: 'long' });
-    const date = currentDate.toLocaleDateString();
-    const time = currentDate.toLocaleTimeString();
-    const finalDate = `${weekday}, ${date} ${time}`.replaceAll(" ", "_");
+    var files = fs.readdirSync('./projects/');
+    var amount = files.length
 
-    fs.writeFileSync('./public/projects/' + finalDate + '.json', JSON.stringify(req.body));
-    res.send("Data saved successfully")
+    var fullData = JSON.parse(JSON.stringify(req.body))
+    console.log(fullData)
+    var projectname = fullData.projectname
+    var data = fullData.data
+
+    fs.writeFileSync('./projects/' + projectname + '.json', JSON.stringify(data));
+    res.status(200).send("Data saved successfully");
 });
 
 app.get('/getProjects', (req, res) => {
-    var files = fs.readdirSync('./public/projects/');
+
+
+    var dir = './projects/';
+
+    var files = fs.readdirSync(dir);
+    files.sort(function(a, b) {
+        return fs.statSync(dir + a).mtime.getTime() -
+            fs.statSync(dir + b).mtime.getTime();
+    });
+
+
+
+    //var files = fs.readdirSync('./projects/');
     res.send(JSON.stringify(files))
 });
 
 app.get('/getFile/:filename', (req, res) => {
 
+    var files = fs.readFileSync('./projects/' + req.params.filename);
+    res.send(JSON.parse(files))
+
+    /*
     axios.get('http://localhost:3000/projects/' + req.params.filename)
         .then(response => {
             res.status(200).send(response.data);
@@ -33,6 +51,7 @@ app.get('/getFile/:filename', (req, res) => {
         .catch(error => {
             res.status(404).send({ error: "file not found" });
         });
+        */
 });
 
 app.listen(8000, () => {
