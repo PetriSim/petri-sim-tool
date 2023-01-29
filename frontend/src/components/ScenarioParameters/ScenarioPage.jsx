@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import { useToast, Flex, Box, Heading, Text, Card, CardBody, Table, Thead, Tbody, Tr, Th, Td, Radio, RadioGroup, TableContainer, Stack, Button } from "@chakra-ui/react";
+import React, { useEffect } from 'react'
+import { useToast, Flex, Box, Heading, Text, Card, CardBody, Table, Thead, Tbody, Tr, Th, Td, Radio, RadioGroup, TableContainer, Stack, Button, CardHeader } from "@chakra-ui/react";
 import { DeleteIcon } from '@chakra-ui/icons'
 
-const ScenarioPage = (props) => {
-    const [selectedScenario, setSelectedScenario] = useState(0);
+const ScenarioPage = ({ setSelectedScenario, setCurrent, getData, setData, selectedScenario }) => {
     const toast = useToast();
 
     useEffect(() => {
-        props.setSelectedScenario(0)
-        props.setCurrent("Edit Scenario")  
+        setSelectedScenario(0)
+        setCurrent("Edit Scenario")  
     }, [])
 
     const deleteScenario = (index) => {
-        let data = [...props.getData("allScenario")];
+        let data = [...getData("allScenario")];
 
         if (data.length > 1) {
             data.splice(index, 1);
-            props.setData(data);
+            setData(data);
+            setSelectedScenario(0)
         } else {
             toast({
                 title: 'Cannot delete only scenario',
@@ -30,13 +30,15 @@ const ScenarioPage = (props) => {
 
     return (
         <Flex>
-            <Box h="93vh" overflowY="auto" p="5">
+            <Box h="93vh" p="5">
                 <Stack spacing={5}>
-                    <Card bg="white">
-                        <CardBody>
-                            <Heading size='md'>Select Scenario</Heading>
-                
-                                <Table>
+                    <Card bg="white" >
+                        <CardBody >
+                            <CardHeader>
+                                <Heading size='md'>Select Scenario</Heading>
+                            </CardHeader>
+     
+                                <Table variant='simple' size="sm">
                                     <Thead>
                                         <Tr>
                                             <Th></Th>
@@ -52,11 +54,11 @@ const ScenarioPage = (props) => {
                                         </Tr>
                                     </Thead>
                                     <Tbody>
-                                        {props.getData("allScenarios") ?
-                                            props.getData("allScenarios").map((scenario, index) => {
+                                        {getData("allScenarios") ?
+                                            getData("allScenarios").map((scenario, index) => {
                                                 return <Tr key={index}>
                                                     <Td>
-                                                        <RadioGroup value={selectedScenario} onChange={() => { setSelectedScenario(index); props.setCurrent("Edit Scenario"); props.setSelectedScenario(index) }}>
+                                                        <RadioGroup value={selectedScenario} onChange={() => { setCurrent("Edit Scenario"); setSelectedScenario(index) }}>
                                                             <Radio value={index} colorScheme="green"></Radio>
                                                         </RadioGroup>
                                                     </Td>
@@ -77,7 +79,9 @@ const ScenarioPage = (props) => {
                                             })
                                         : ""}
                                     </Tbody>
+                            
                                 </Table>    
+  
                         </CardBody>
                     </Card>
                    
