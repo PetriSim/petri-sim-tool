@@ -29,3 +29,32 @@ beforeEach(() => {
     })
 })*/
 
+describe('Compare Scenarios', () => {
+    beforeEach(() => {
+
+        cy.findByRole('button', {name: /simulation overview/i}).click()
+    })
+    it('shows a popup for "compare scenarios', () => {
+
+        cy.findByText('Scenarios to compare').should('not.exist')
+        cy.findByText('Compare scenarios').click()
+        cy.findByText('Scenarios to compare').should('be.visible')
+        cy.findByRole('dialog', {name: /scenarios to compare/i}).within(($dialog) => {
+            cy.findByText(/scenario 2/i).should('be.visible')
+            cy.findByText(/scenario 1/i).should('be.visible')
+            /*            cy.findAllByRole('checkbox').eq(0).within(($checkbox) => {
+                            cy.should('not.be.checked')
+                            cy.check({force:true})
+                            cy.should('be.checked')
+                        })*/
+            cy.findAllByRole('checkbox').eq(0).should('not.be.checked')
+            cy.findAllByRole('checkbox').eq(0).check({force:true})
+            cy.findAllByRole('checkbox').eq(0).should('be.checked')
+        })
+        //cy.findAllByRole('dialog', {name: /scenarios to compare/i}).findAllByRole('checkbox').eq(0).check({force:true})
+        //cy.findAllByRole('dialog', {name: /scenarios to compare/i}).findAllByRole('checkbox').eq(0).should('be.visible')
+    })
+})
+
+
+
