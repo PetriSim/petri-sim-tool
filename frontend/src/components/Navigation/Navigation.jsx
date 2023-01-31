@@ -54,7 +54,6 @@ function Navigation(props) {
         { name: 'Add BPMN', icon: FiFileText, path: '#', event: () => {} },
         { name: 'Reset parameters', icon: FiTrash2, path: '#', event: () => {} },
         { name: 'Download parameters', icon: FiDownload, path: '/#', event: () => save() },
-        { name: 'Save project as', icon: FiLock, path: '#', event: () => onOpen() },
       ];
 
       
@@ -68,48 +67,8 @@ function Navigation(props) {
         saveAs(blob, "data.json");
       }
       
-      const saveFile = () => {
-        console.log(name)
-
-        var fullData = {projectname: name, 
-                        data:  props.data
-                      }
-
-
-        axios.post('http://localhost:8000/save', fullData)
-            .then(res => toast({
-              title: 'Saved project.',
-              description: res.data,
-              status: 'success',
-              duration: 9000,
-              isClosable: true,
-            }))
-            .catch(err => toast({
-              title: 'Error',
-              description: 'Could not save the project',
-              status: 'error',
-              duration: 9000,
-              isClosable: true,
-            }));
-
-      }
-      
-      const setupBeforeUnloadListener = () => {
-        window.addEventListener("beforeunload", (ev) => {
-            ev.preventDefault();
-            saveFile()
-            return "test"
-        });
-    };
-
-      useEffect(() => {
-        setupBeforeUnloadListener()
-        console.log("registred")
-      }, [])
-
-      const { isOpen, onOpen, onClose } = useDisclosure()
-
-      const [name, setName] = useState("")
+     
+  
 
 
 
@@ -131,31 +90,7 @@ function Navigation(props) {
                 } />
 
 
-          <Modal
-            
-            isOpen={isOpen}
-            onClose={onClose}
-          >
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader>Save project</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody pb={6}>
-                <Text>Provide a projectname under which your data is stored</Text>
-                <FormControl>
-                  <FormLabel>Projectname: </FormLabel>
-                  <Input value={name} onChange={(e) => setName(e.target.value)} placeholder='Projectname' />
-                </FormControl>
-              </ModalBody>
-
-              <ModalFooter>
-                <Button colorScheme='blue' mr={3} onClick={saveFile}>
-                  Save
-                </Button>
-                <Button onClick={onClose}>Cancel</Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
+         
         </>
   )
 }
