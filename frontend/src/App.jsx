@@ -74,6 +74,12 @@ const setData = (d) => {
   setDataInternal(d)
   if(name){
     localStorage.setItem(name, JSON.stringify(d));
+
+    let projects = JSON.parse(localStorage.getItem('projects'))
+    projects = projects.filter(project => project.name !== name)
+
+    localStorage.setItem('projects', JSON.stringify([...projects, {name: name, date: new Date()}]));
+
   }
 }
 
