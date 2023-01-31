@@ -141,6 +141,7 @@ function Navigation(props) {
               <ModalHeader>Save project</ModalHeader>
               <ModalCloseButton />
               <ModalBody pb={6}>
+                <Text>Provide a projectname under which your data is stored</Text>
                 <FormControl>
                   <FormLabel>Projectname: </FormLabel>
                   <Input value={name} onChange={(e) => setName(e.target.value)} placeholder='Projectname' />

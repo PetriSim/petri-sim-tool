@@ -26,7 +26,7 @@ function OrgCharTable(props){
                             <Thead>
                                 <Tr>
                                     <Th>Role</Th>
-                                    <Th>Asigned ressources</Th>
+                                    <Th>Assigned ressources</Th>
                                 </Tr>
                             </Thead>
                             <Tbody> 

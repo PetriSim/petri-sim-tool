@@ -6,29 +6,36 @@ import {
   theme,
   Flex,
   Container,
-  Button
+  Text,
+  useToast,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  FormControl,
+  Button,
+  Input,
+  FormLabel,
+  FormErrorMessage,
+  ModalCloseButton,
 } from '@chakra-ui/react';
 import Navigation from './components/Navigation/Navigation';
 import EditorSidebar from './components/EditorSidebar/EditorSidebar';
 import StartView from './components/StartView/StartView';
 import BpmnViewSelector from './components/ModelbasedParameters/BpmnViewSelector';
 import ScenarioPage from './components/ScenarioParameters/ScenarioPage';
-import BpmnModelParser from './BpmnModelParser';
 import OverviewPage from './components/Pages/OverviewPage';
 import OnlyDifferencesPage from './components/Pages/OnlyDifferencesPage'
-
-import startData from './startdata.json'
-
-import axios from "axios";
-import {Routes, Route
-} from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
 import ModelbasedParametersTable from './components/ModelbasedParameters/ModelbasedParametersTable';
 import SimulationPage from './components/Pages/SimulationPage';
 import ComparePage from "./components/Pages/ComparePage";
 import TimetableOverview from './components/ResourceParameters/TimeTable/TimetableOverview';
 import OrgCharTable from './components/ResourceParameters/Resources/OrgCharTable';
-import saveAs from 'file-saver';
+import axios from "axios";
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 
 function App() {
@@ -41,9 +48,9 @@ function App() {
   const [currentScenario, setScenario] = useState(0)
   const [currentObject, setObject] = useState({})
 
-  const [parsed, setParsed] = useState(false)
+  const [parsed, setParsed] = useState(true)
 
-  const [data, setData] = useState([])
+  const [data, setDataInternal] = useState([])
   
 
   const [currentResource, setResource] = useState("")
@@ -54,53 +61,104 @@ function App() {
 
   const [scenariosCompare, setScenariosCompare] = useState("")
 
-// Initial Data Array is created by copying data from startdata.json
-useEffect(() =>{
-  var parsedData = JSON.parse(JSON.stringify(startData))
-   
-   setData(parsedData)
-}, [])
 
+
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+const [name, setName] = useState(sessionStorage.getItem('currentProject') || "")
+const [nameHelper, setNameHelper] = useState(sessionStorage.getItem('currentProject') || "")
+
+const toast = useToast()
+
+const setData = (d) => {
+  setDataInternal(d)
+  if(name){
+    localStorage.setItem(name, JSON.stringify(d));
+  }
+}
 
   useEffect(() => {
-    sessionStorage.setItem('st', projectStarted);
-  }, [projectStarted]);
+    /*sessionStorage.setItem('st', projectStarted);
 
-  
+    if(name){
+      console.log("has name")
+      setData(JSON.parse(localStorage.getItem(name)))
+    } else{
+      axios
+      .get(
+        "http://127.0.0.1:8000/startdata"
+      )
+      .then(async (r) => {
+          setData(r.data)
+        })
+      .catch((err) => {
+          console.log("error", err);
+      });
+    }
+
+    */
+
+    if(name){
+      console.log("has name")
+      setData(JSON.parse(localStorage.getItem(name)))
+    }
+    
+  }, [projectStarted]);
+    
+
   useEffect(() => {
     console.log(data)
-  }, [data])
+  })
+
+
   
+  const [invalidName, setInvaild] = useState(false)
 
-  useEffect(() => {
-    console.log(currentObject)
-  }, [currentObject])
+  const saveFile = () => {
+    let projects = JSON.parse(localStorage.getItem('projects'))
+
+    if((projects !== null && projects.map(x => x.name).includes(nameHelper))){
+      setInvaild(true)
+    } else{
+      setName(nameHelper)
+      sessionStorage.setItem('currentProject', nameHelper);
 
 
-  useEffect( () => {
-    console.log(data[0])
-    if(data[0]){
-      data.forEach((scen, indexscen) => {
-        
-        scen.models.forEach((element, indexmodel) =>{
-          axios
-          .get(
-            data[indexscen].models[indexmodel].BPMN
-          )
-          .then(async (r) => {
-            var x = data[indexscen].models[indexmodel]
-              x.modelParameter = await BpmnModelParser(r.data)
-              setParsed(true)
-            
-            })
-          .catch((err) => {
-              console.log("error", err);
-          });
-        })
-      })
+      if(projects === null){
+        localStorage.setItem('projects', JSON.stringify([{name: nameHelper, date: new Date()}]));
+      } else{
+        localStorage.setItem('projects', JSON.stringify([...projects, {name: nameHelper, date: new Date()}]));
+      }
+
+        localStorage.setItem(nameHelper, JSON.stringify(data));
+
+
     }
-  }, [data])
+
+/*  
+    var fullData = {projectname: name, 
+                    data:  data
+                  }
   
+  
+    axios.post('http://localhost:8000/save', fullData)
+        .then(res => toast({
+          title: 'Saved project.',
+          description: res.data,
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        }))
+        .catch(err => toast({
+          title: 'Error',
+          description: 'Could not save the project',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        }));
+  
+        */
+  }
 
  const getData = (type) => {
   switch (type) {
@@ -121,15 +179,20 @@ useEffect(() =>{
 
 
 
+
   return (
     <ChakraProvider theme={theme}>
 
-      {data[0] && 
+      
       <Flex bg="#F9FAFC" h="100%" zIndex={-3} minH="100vh">
         {projectStarted === "false"?
-          <StartView setStarted={setStarted} giveApp={addFile}/>
+          <StartView setStarted={setStarted} giveApp={addFile} setName={setName} setData={setData}/>
         :
         <>
+
+
+      {data[0] && 
+       <>
           <Box zIndex={2} paddingTop={{base: "0", md:"6"}} >
             <Navigation 
               setCurrent={setCurrent}  
@@ -146,6 +209,34 @@ useEffect(() =>{
 
         
           <Container maxWidth="100%" padding={{base: "0", md:"5"}}>
+
+          <Modal
+            
+            isOpen={name === ""}
+            onClose={onClose}
+          >
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Save project</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody pb={6}>
+                <Text>Provide a projectname under which your data is stored</Text>
+                <FormControl isInvalid={invalidName}>
+                  <FormLabel>Projectname: </FormLabel>
+                  <Input value={nameHelper} onChange={(e) => setNameHelper(e.target.value)} placeholder='Projectname' />
+                  {invalidName?  <FormErrorMessage>Project with this name already exists</FormErrorMessage> : ""}
+
+                </FormControl>
+              </ModalBody>
+
+              <ModalFooter>
+                <Button colorScheme='blue' mr={3} onClick={saveFile}>
+                  Save
+                </Button>
+                <Button onClick={onClose}>Cancel</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
 
             <Routes>
               <Route path="/overview" element={<OverviewPage path="/overview" parsed={parsed} getData={getData} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} scenariosCompare={scenariosCompare} setScenariosCompare={setScenariosCompare}/>} />
@@ -180,9 +271,11 @@ useEffect(() =>{
           </Box>
         </>
         }
+        </>
+        }
       </Flex>
 
-      }
+      
     </ChakraProvider>
   );
 }

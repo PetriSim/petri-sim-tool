@@ -36,21 +36,37 @@ function StartView(props) {
               .catch(error => {
                   console.log(error);
               });
+             
 
    }
 
-   const selectProject = (project) => {
-
-    axios.get(`http://localhost:8000/getFile/${project}`)
-      .then(response => {
-        pushToApp(response.data);
-        props.setStarted("true")
-        console.log(response.data)
+   const startNewData = () => {  
+    axios
+    .get(
+      "http://127.0.0.1:8000/startdata"
+    )
+    .then(async (r) => {
+      props.setData(r.data)
       })
-      .catch(error => {
-        console.log(error);
-      });
+    .catch((err) => {
+        console.log("error", err);
+    });
 
+  
+
+    props.setStarted("true")
+
+    sessionStorage.setItem('st', true);
+
+   }
+
+
+   const selectProject = (project) => {
+    sessionStorage.setItem('currentProject', project); 
+    props.setData(JSON.parse(localStorage.getItem(project)))
+    props.setName(project)
+    props.setStarted("true")
+    sessionStorage.setItem('st', true);
    }
 
   useEffect(() => {
@@ -125,7 +141,7 @@ function StartView(props) {
               </Select>
             </Flex>
          
-            <Button color = 'white' colorScheme='teal' variant='solid' width='90%' onClick={() => props.setStarted("true")} >
+            <Button color = 'white' colorScheme='teal' variant='solid' width='90%' onClick={startNewData} >
               Start parametrization
             </Button>
 
@@ -160,12 +176,12 @@ function StartView(props) {
         >
           
           <gap />
-          <Text fontSize="xl" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" > Open existing project</Text>
+          <Text fontSize="xl" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" > Open existing project from files</Text>
           <gap />
           <gap />
 
 
-          <FileUpload title = 'Parameter file:' accept = '.xml' getFile={pushToApp}/>
+          <FileUpload title = 'Parameter file:' accept = '.json' getFile={pushToApp}/>
 
           <FileUpload title = 'BPMN file:' accept = '.bpmn' getFile={pushToApp}/>
         
@@ -216,9 +232,9 @@ function StartView(props) {
 
         <Flex flexDir="column" gap="5" width="100%" >
           <Heading size="md">Select existing project</Heading>
-            <Flex h="30vh" overflowY="scroll" flexDir="column" gap="5">
-                {projectList.reverse().map(project => {
-                  return <Button p="4" onClick={() => selectProject(project)}>{project}</Button>
+           <Flex h="30vh" overflowY="scroll" flexDir="column" gap="5">
+                {!JSON.parse(localStorage.getItem('projects')) ? "" : JSON.parse(localStorage.getItem('projects')).map(project => {
+                  return <Button p="4" onClick={() => selectProject(project.name)}>{project.name}</Button>
                 })}
            </Flex>  
         </Flex>
