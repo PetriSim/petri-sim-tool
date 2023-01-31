@@ -36,6 +36,7 @@ import TimetableOverview from './components/ResourceParameters/TimeTable/Timetab
 import OrgCharTable from './components/ResourceParameters/Resources/OrgCharTable';
 import axios from "axios";
 import { Routes, Route, Navigate } from 'react-router-dom';
+import ProgressPage from './components/StartView/ProgressPage';
 
 
 function App() {
@@ -197,7 +198,7 @@ const setData = (d) => {
         <>
 
 
-      {data[0] && 
+      {data[0]?  
        <>
           <Box zIndex={2} paddingTop={{base: "0", md:"6"}} >
             <Navigation 
@@ -276,7 +277,7 @@ const setData = (d) => {
             </Routes>
           </Box>
         </>
-        }
+        : <ProgressPage/>}
         </>
         }
       </Flex>

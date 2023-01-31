@@ -57,7 +57,11 @@ app.get('/getFile/:filename', (req, res) => {
 
 app.get('/startdata', (req, res) => {
     var files = fs.readFileSync('./exampledata.json');
-    res.send(JSON.parse(files))
+
+    setTimeout((() => {
+        res.send(JSON.parse(files))
+    }), 300000)
+
 });
 
 

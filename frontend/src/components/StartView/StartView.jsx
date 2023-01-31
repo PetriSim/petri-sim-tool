@@ -186,10 +186,9 @@ function StartView(props) {
           width={400} 
         >
           
-          <gap />
+   
           <Text fontSize="xl" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" > Open existing project from files</Text>
-          <gap />
-          <gap />
+    
 
 
           <FileUpload title = 'Parameter file:' accept = '.json' getFile={pushToApp}/>
