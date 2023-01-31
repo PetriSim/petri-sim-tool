@@ -84,6 +84,14 @@ const setData = (d) => {
   }
 }
 
+useEffect(() => {
+  if(!sessionStorage.getItem('currentProject')){
+    sessionStorage.setItem('st', false);
+    setStarted("false")
+  }
+  
+} ,[])
+
   useEffect(() => {
     /*sessionStorage.setItem('st', projectStarted);
 
@@ -124,7 +132,7 @@ const setData = (d) => {
   const saveFile = () => {
     let projects = JSON.parse(localStorage.getItem('projects'))
 
-    if((projects !== null && projects.map(x => x.name).includes(nameHelper))){
+    if((projects !== null && projects.map(x => x.name).includes(nameHelper)) || (projects !== null && nameHelper === "projects")){
       setInvaild(true)
     } else{
       setName(nameHelper)
@@ -139,6 +147,13 @@ const setData = (d) => {
 
         localStorage.setItem(nameHelper, JSON.stringify(data));
 
+        toast({
+          title: 'Autosaving',
+          description: 'Autosaving is activated.',
+          status: 'success',
+          duration: 4000,
+          isClosable: true,
+        })
 
     }
 
@@ -230,7 +245,7 @@ const setData = (d) => {
                 <Text>Provide a projectname under which your data is stored</Text>
                 <FormControl isInvalid={invalidName}>
                   <FormLabel>Projectname: </FormLabel>
-                  <Input value={nameHelper} onChange={(e) => setNameHelper(e.target.value)} placeholder='Projectname' />
+                  <Input autoFocus={true}  value={nameHelper} onChange={(e) => setNameHelper(e.target.value)} placeholder='Projectname' />
                   {invalidName?  <FormErrorMessage>Project with this name already exists</FormErrorMessage> : ""}
 
                 </FormControl>

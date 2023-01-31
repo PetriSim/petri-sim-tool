@@ -60,7 +60,7 @@ app.get('/startdata', (req, res) => {
 
     setTimeout((() => {
         res.send(JSON.parse(files))
-    }), 300000)
+    }), 1000)
 
 });
 
