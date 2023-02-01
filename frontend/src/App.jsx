@@ -34,10 +34,11 @@ import SimulationPage from './components/Pages/SimulationPage';
 import ComparePage from "./components/Pages/ComparePage";
 import TimetableOverview from './components/ResourceParameters/TimeTable/TimetableOverview';
 import OrgCharTable from './components/ResourceParameters/Resources/OrgCharTable';
-import axios from "axios";
 import { Routes, Route, Navigate } from 'react-router-dom';
 import ProgressPage from './components/StartView/ProgressPage';
 
+
+const { compare } = require('js-deep-equals')
 
 function App() {
   const [current, setCurrent] = useState("Scenario Parameters")
@@ -72,16 +73,42 @@ const [nameHelper, setNameHelper] = useState(sessionStorage.getItem('currentProj
 const toast = useToast()
 
 const setData = (d) => {
+ 
+
   setDataInternal(d)
+ 
   if(name){
-    localStorage.setItem(name, JSON.stringify(d));
+    
+    if(!compare(JSON.parse(localStorage.getItem(name)), d)){
+      toast({
+        title: 'Saved',
+        description: 'Saved data',
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+      })
+    
+      console.log(JSON.parse(localStorage.getItem(name)))
+      console.log(d)
 
-    let projects = JSON.parse(localStorage.getItem('projects'))
-    projects = projects.filter(project => project.name !== name)
+      localStorage.setItem(name, JSON.stringify(d));
 
-    localStorage.setItem('projects', JSON.stringify([...projects, {name: name, date: new Date()}]));
+      let projects = JSON.parse(localStorage.getItem('projects'))
+      projects = projects.filter(project => project.name !== name)
 
+      localStorage.setItem('projects', JSON.stringify([...projects, {name: name, date: new Date()}]));
+    } else{
+      toast({
+        title: 'Changes',
+        description: 'No changes were detected',
+        status: 'warning',
+        duration: 4000,
+        isClosable: true,
+      })
+    }
+    
   }
+
 }
 
 useEffect(() => {
@@ -93,29 +120,9 @@ useEffect(() => {
 } ,[])
 
   useEffect(() => {
-    /*sessionStorage.setItem('st', projectStarted);
-
     if(name){
       console.log("has name")
-      setData(JSON.parse(localStorage.getItem(name)))
-    } else{
-      axios
-      .get(
-        "http://127.0.0.1:8000/startdata"
-      )
-      .then(async (r) => {
-          setData(r.data)
-        })
-      .catch((err) => {
-          console.log("error", err);
-      });
-    }
-
-    */
-
-    if(name){
-      console.log("has name")
-      setData(JSON.parse(localStorage.getItem(name)))
+      setDataInternal(JSON.parse(localStorage.getItem(name)))
     }
     
   }, [projectStarted]);

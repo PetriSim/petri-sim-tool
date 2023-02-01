@@ -1,4 +1,4 @@
-import { Input, FormControl, FormLabel, Select, Stack, Button, useToast, } from '@chakra-ui/react';
+import { Input, FormControl, FormLabel, Select, Stack, Button } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react'
 
 const Activity = ({ getData, setData, selectedObject, currentScenario, currentBpmn }) => {
@@ -7,7 +7,6 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
   const [cost, setCost] = useState("");
   const [currency, setCurrency] = useState("");
 
-  const toast = useToast()
 
   useEffect(() => {
     const currentActivity = getData("currentModel").modelParameter.activities.find(
@@ -44,13 +43,6 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
 
     setData(data);
 
-    toast({
-      title: 'Saved',
-      description: 'Saved changes!',
-      status: 'success',
-      duration: 4000,
-      isClosable: true,
-    })
   };
 
   return ( 

@@ -21,6 +21,7 @@
         "bpmn-moddle": "^8.0.0",
         "concurrently": "^7.6.0",
         "cors": "^2.8.5",
+        "deep-equal": "^2.2.0",
         "electron": "^21.3.0",
         "electron-builder": "^23.6.0",
         "electron-is-dev": "^2.0.0",
@@ -28,6 +29,7 @@
         "file-saver": "^2.0.5",
         "framer-motion": "^6.5.1",
         "fs": "^0.0.1-security",
+        "js-deep-equals": "^2.1.1",
         "next-routes": "^1.4.2",
         "node-fetch": "^3.3.0",
         "react": "^18.2.0",
@@ -39,10 +41,7 @@
         "web-vitals": "^2.1.4"
     },
     "scripts": {
-
-
         "start": "react-scripts start",
-
         "build": "CI=false && react-scripts build",
         "test": "cypress open",
         "eject": "react-scripts eject",
