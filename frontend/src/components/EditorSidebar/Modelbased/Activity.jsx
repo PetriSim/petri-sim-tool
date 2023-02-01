@@ -1,4 +1,4 @@
-import { Input, FormControl, FormLabel, Select, Stack, Button } from '@chakra-ui/react';
+import { Input, FormControl, FormLabel, Select, Stack, Button, Box } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react'
 
 const Activity = ({ getData, setData, selectedObject, currentScenario, currentBpmn }) => {
@@ -48,6 +48,7 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
   return ( 
     <>
       {duration ? (
+        <Box w="100%">
         <form onSubmit={onSubmit}>
           <Stack gap="2">        
             <FormControl>
@@ -93,6 +94,7 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
               _hover={{ bg: '#B4C7C9' }}> Save changes </Button> 
         </Stack>
         </form>
+        </Box>
         ): ""}
             
         </>

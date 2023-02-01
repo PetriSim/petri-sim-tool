@@ -1,18 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-    Flex, Heading, Card, CardHeader, CardBody, Text, Select, Stack, Button,Progress, Box, Textarea
+    Flex, Heading, Card, CardHeader, CardBody, Text, Select, Stack, Button, Progress, Box, Textarea
 } from '@chakra-ui/react';
 import { FiChevronDown } from 'react-icons/fi';
+import axios from 'axios';
+
 
 
 function SimulationPage(props){
+
+    const [started, setStarted] = useState(false)
+    const [finished, setFinished] = useState(false)
+    const [response, setResponse] = useState({})
+
+
+    const CancelToken = axios.CancelToken;
+
+    const [source, setSource] = useState(null)
+    
+
+    const start = () => {
+    setFinished(false)
+    setStarted(true)
+
+    let s = CancelToken.source()
+
+    setSource(s)
+    try{
+        axios
+        .get(
+            "http://127.0.0.1:8000/startScylla",
+            {
+                cancelToken: s.token
+            }
+        )
+        .then(async (r) => {
+            setResponse(r.data)
+            setFinished(true)
+            setStarted(false)
+            })
+        .catch((err) => {
+            console.log("error", err)
+        })
+    } catch (err) {
+            if (axios.isCancel(err)) {
+                console.log("cancelled")
+            } else {
+                throw err;
+            }
+        }
+    }
+
+    const abort = () => {
+        console.log("abort")
+        source.cancel('Operation canceled by the user.');
+        setStarted(false)
+        setResponse({message: "canceled"})
+    }
+
+
+
     return (
         <Box h="93vh" overflowY="auto" p="5" >
         <Stack gap="2">
         <Heading size='lg' >Run Simulation</Heading>
+
+        {started&& 
         <Card bg="white" p="5" >
-            <Progress hasStripe value={64} colorScheme="green" />
-        </Card>
+            <Progress isIndeterminate isAnimated hasStripe value={100} colorScheme="green" />
+        </Card>}
+
+        {finished&& 
+        <Card bg="white" p="5" >
+            <Progress  hasStripe value={100} colorScheme="green" />
+        </Card>}
             <Card bg="white">
                 <CardHeader>
                     <Heading size='ms'> Simulation settings </Heading>
@@ -41,14 +102,17 @@ function SimulationPage(props){
                                     <option value='Option 3'>Option 3</option>
                                 </Select>
                             </Box>
-
-                            <Button variant="outline" bg="#FFFF">
+                            
+                            {!started&& 
+                            <Button variant="outline" bg="#FFFF" onClick={start} >
                                 <Text color="RGBA(0, 0, 0, 0.64)" fontWeight="bold">Start Simulation</Text>
-                            </Button>
+                            </Button>}
 
-                            <Button variant="outline" bg="#FFFF">
+                            {started&& 
+                            <Button variant="outline" bg="#FFFF" onClick={abort}>
                                 <Text color="RGBA(0, 0, 0, 0.64)" fontWeight="bold">Abort Simulation</Text>
                             </Button>
+                            }
 
                         </Flex>
                 </CardBody>
@@ -59,7 +123,7 @@ function SimulationPage(props){
                     <Heading size='ms'> Simulator feedback </Heading>
                 </CardHeader>
                 <CardBody>
-                    <Textarea isDisabled placeholder='Data from scylla' />
+                    <Textarea isDisabled  value={response.message} />
                 </CardBody>
             </Card>
             

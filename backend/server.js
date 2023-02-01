@@ -65,6 +65,13 @@ app.get('/startdata', (req, res) => {
 });
 
 
+app.get('/startScylla', (req, res) => {
+    setTimeout((() => {
+        res.send({ "message": "succes" })
+    }), 10000)
+
+});
+
 
 
 app.listen(8000, () => {

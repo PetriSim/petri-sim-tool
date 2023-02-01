@@ -1,26 +1,7 @@
 import {React, useState, useEffect} from 'react';
 import './styles/globals.css'
 import {
-  ChakraProvider,
-  Box,
-  theme,
-  Flex,
-  Container,
-  Text,
-  useToast,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  FormControl,
-  Button,
-  Input,
-  FormLabel,
-  FormErrorMessage,
-  ModalCloseButton,
+  ChakraProvider, Box, theme, Flex, Container, Text, useToast, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, FormControl, Button, Input, FormLabel, FormErrorMessage,  ModalCloseButton
 } from '@chakra-ui/react';
 import Navigation from './components/Navigation/Navigation';
 import EditorSidebar from './components/EditorSidebar/EditorSidebar';
@@ -65,7 +46,7 @@ function App() {
 
 
 
-const { isOpen, onOpen, onClose } = useDisclosure()
+const {onClose } = useDisclosure()
 
 const [name, setName] = useState(sessionStorage.getItem('currentProject') || "")
 const [nameHelper, setNameHelper] = useState(sessionStorage.getItem('currentProject') || "")
@@ -163,30 +144,6 @@ useEffect(() => {
         })
 
     }
-
-/*  
-    var fullData = {projectname: name, 
-                    data:  data
-                  }
-  
-  
-    axios.post('http://localhost:8000/save', fullData)
-        .then(res => toast({
-          title: 'Saved project.',
-          description: res.data,
-          status: 'success',
-          duration: 9000,
-          isClosable: true,
-        }))
-        .catch(err => toast({
-          title: 'Error',
-          description: 'Could not save the project',
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        }));
-  
-        */
   }
 
  const getData = (type) => {
@@ -205,14 +162,8 @@ useEffect(() => {
 
 }
 
-
-
-
-
   return (
     <ChakraProvider theme={theme}>
-
-      
       <Flex bg="#F9FAFC" h="100%" zIndex={-3} minH="100vh">
         {projectStarted === "false"?
           <StartView setStarted={setStarted} giveApp={addFile} setName={setName} setData={setData}/>
