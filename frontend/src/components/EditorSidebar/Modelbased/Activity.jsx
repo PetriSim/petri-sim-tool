@@ -1,96 +1,112 @@
-import { Input, FormControl, FormLabel, Select } from '@chakra-ui/react';
-import React from 'react'
+import { Input, FormControl, FormLabel, Select, Stack, Button, useToast, } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react'
 
+const Activity = ({ getData, setData, selectedObject, currentScenario, currentBpmn }) => {
+  const [duration, setDuration] = useState("");
+  const [unit, setUnit] = useState("");
+  const [cost, setCost] = useState("");
+  const [currency, setCurrency] = useState("");
 
-class Activity extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        /*
-        duration: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).duration,
-        unit: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).unit,
-        cost: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).cost,
-        currency: this.props.getData("currentModel").parameters.modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).currency
-    */
+  const toast = useToast()
 
-        duration: "",
-        unit: "",
-        cost: "",
-        currency: ""
-      };
-  
+  useEffect(() => {
+    const currentActivity = getData("currentModel").modelParameter.activities.find(
+      value => value.id === selectedObject.id
+    );
 
+    if (currentActivity) {
+      setDuration(currentActivity.duration);
+      setUnit(currentActivity.unit);
+      setCost(currentActivity.cost);
+      setCurrency(currentActivity.currency);
     }
+  }, [getData, selectedObject.id]);
 
-    componentDidMount(){
-      if(this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id)){
-        console.log(this.props.selectedObject.id)
-        this.setState({
-            duration: this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).duration,
-            unit: this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).unit,
-            cost: this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).cost,
-            currency: this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id).currency
-          
-          })
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    if (name === "duration") setDuration(value);
+    if (name === "unit") setUnit(value);
+    if (name === "cost") setCost(value);
+    if (name === "currency") setCurrency(value);
+  };
 
-      }
-    }
-  
-    handleInputChange(event) {
-      const target = event.target;
-      const value = target.value;
-      const name = target.name;
-  
-      this.setState({
-        [name]: value
-      });
+  const onSubmit = event => {
+    event.preventDefault();
+    const data = [...getData("allScenario")];
+    const currentActivity = data[currentScenario].models[currentBpmn].modelParameter.activities.find(
+      value => value.id === selectedObject.id
+    );
 
-      this.props.getData("currentModel").modelParameter.activities.find((value) => value.id === this.props.selectedObject.id)[name] = target.value
-    
-    }
-  
+    currentActivity.duration = duration;
+    currentActivity.unit = unit;
+    currentActivity.cost = cost;
+    currentActivity.currency = currency;
 
-    
-    render() {
-      return ( 
-        <>
-        {this.state.duration?
-        <>
-         <FormControl>
-            <FormLabel>Selected Activity:</FormLabel>
-            <Input title="Test date" value={this.props.selectedObject.name? this.props.selectedObject.name : "" } type="inputRead" />
-        </FormControl>
+    setData(data);
 
-        <FormControl>
-            <FormLabel>Duration:</FormLabel>
-            <Input name="duration" type="input" value={this.state.duration} onChange={(event) => this.handleInputChange(event)}  bg="white"/>
-        </FormControl>
+    toast({
+      title: 'Saved',
+      description: 'Saved changes!',
+      status: 'success',
+      duration: 4000,
+      isClosable: true,
+    })
+  };
+
+  return ( 
+    <>
+      {duration ? (
+        <form onSubmit={onSubmit}>
+          <Stack gap="2">        
+            <FormControl>
+              <FormLabel>Selected Activity:</FormLabel>
+              <Input title="Test date" value={selectedObject.name || ""} type="inputRead" />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Duration:</FormLabel>
+              <Input name="duration" type="input" value={duration} onChange={handleInputChange}  bg="white"/>
+            </FormControl>
             
-        <FormControl>
-            <FormLabel>Time Unit:</FormLabel>
-            <Select name="unit" placeholder={this.state.unit} onChange={(event) => this.handleInputChange(event)} bg="white">
-                <option value='secs'>Seconds</option>
-                <option value='mins'>Minutes</option>
-            </Select>
-        </FormControl>
+            <FormControl>
+              <FormLabel>Time Unit:</FormLabel>
+              <Select name="unit" placeholder={unit} onChange={handleInputChange} bg="white">
+                  <option value='secs'>Seconds</option>
+                  <option value='mins'>Minutes</option>
+              </Select>
+            </FormControl>
 
-        <FormControl>
-            <FormLabel>Fix costs:</FormLabel>
-            <Input name="cost" type="input" value={this.state.cost} onChange={(event) => this.handleInputChange(event)} bg="white"/>
-        </FormControl>
+            <FormControl>
+              <FormLabel>Fix costs:</FormLabel>
+              <Input name="cost" type="input" value={cost} onChange={handleInputChange} bg="white"/>
+            </FormControl>
 
-        <FormControl>
-            <FormLabel>Currency:</FormLabel>
-            <Select name="currency" placeholder={this.state.currency} onChange={(event) => this.handleInputChange(event)} bg="white">
+            <FormControl>
+              <FormLabel>Currency:</FormLabel>
+              <Select name="currency" placeholder={currency} onChange={handleInputChange} bg="white">
+
                 <option value='euro'>euro</option>
                 <option value='dollar'>dollar</option>
-            </Select>
-        </FormControl> </>: ""}
+              </Select>
+          </FormControl> 
+
+        <Button 
+              type="submit"
+              colorScheme='#ECF4F4'
+              w="100%"
+              variant='outline'
+              border='1px'
+              borderColor='#B4C7C9'
+              color ='#6E6E6F'
+              _hover={{ bg: '#B4C7C9' }}> Save changes </Button> 
+        </Stack>
+        </form>
+        ): ""}
             
         </>
       );
     }
-  }
+  
 
 
 
