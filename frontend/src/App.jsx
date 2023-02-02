@@ -61,13 +61,8 @@ const setData = (d) => {
   if(name){
     
     if(!compare(JSON.parse(localStorage.getItem(name)), d)){
-      toast({
-        title: 'Saved',
-        description: 'Saved data',
-        status: 'success',
-        duration: 4000,
-        isClosable: true,
-      })
+      toasting("success", "Saved", "Saved data")
+     
     
       console.log(JSON.parse(localStorage.getItem(name)))
       console.log(d)
@@ -79,17 +74,22 @@ const setData = (d) => {
 
       localStorage.setItem('projects', JSON.stringify([...projects, {name: name, date: new Date()}]));
     } else{
-      toast({
-        title: 'Changes',
-        description: 'No changes were detected',
-        status: 'warning',
-        duration: 4000,
-        isClosable: true,
-      })
+      toasting("warning", "Changes", "No changes were detected")
     }
     
   }
 
+}
+
+
+const toasting = (type, title, text) =>{
+  toast({
+    title: title,
+    description: text,
+    status: type,
+    duration: 4000,
+    isClosable: true,
+  })
 }
 
 useEffect(() => {
@@ -135,13 +135,8 @@ useEffect(() => {
 
         localStorage.setItem(nameHelper, JSON.stringify(data));
 
-        toast({
-          title: 'Autosaving',
-          description: 'Autosaving is activated.',
-          status: 'success',
-          duration: 4000,
-          isClosable: true,
-        })
+
+        toasting("success", "Autosaving", "Autosaving is activated.")
 
     }
   }
@@ -183,6 +178,7 @@ useEffect(() => {
               currentScenario={currentScenario}
               data={data} 
               setScenario={setScenario}
+              toasting={toasting}
           
               />
           </Box>
@@ -231,7 +227,7 @@ useEffect(() => {
 
               <Route path="/modelbased" element={ <BpmnViewSelector zIndex={-5} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
               <Route path="/modelbased/tableview" element={ <ModelbasedParametersTable parsed={parsed} setData={setData} getData={getData} current={current} setCurrent={setCurrent} setObject={setObject} currentBpmn={currentBpmn}   data={data} currentScenario={currentScenario} />} />
-              <Route path="/simulation" element={<SimulationPage path="/simulation" getData={getData} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} />} />
+              <Route path="/simulation" element={<SimulationPage path="/simulation" getData={getData} setCurrent={setCurrent} current={current} setObject={setObject} currentBpmn={currentBpmn}  data={data} currentScenario={currentScenario} toasting={toasting} />} />
               <Route path='*' element={<Navigate to='/overview' />} />
             </Routes>
          </Container>

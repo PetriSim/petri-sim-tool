@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
     Flex, Heading, Card, CardHeader, CardBody, Text, Select, Stack, Button, Progress, Box, Textarea
 } from '@chakra-ui/react';
@@ -15,45 +15,46 @@ function SimulationPage(props){
 
 
     const CancelToken = axios.CancelToken;
-
-    const [source, setSource] = useState(null)
+    const source = useRef(null)
     
 
+   
+
     const start = () => {
-    setFinished(false)
-    setStarted(true)
+        setResponse({message: ""})
+        setFinished(false)
+        setStarted(true)
 
-    let s = CancelToken.source()
 
-    setSource(s)
-    try{
+    source.current  = CancelToken.source()
         axios
         .get(
             "http://127.0.0.1:8000/startScylla",
             {
-                cancelToken: s.token
+                cancelToken: source.current.token
             }
         )
         .then(async (r) => {
             setResponse(r.data)
             setFinished(true)
             setStarted(false)
-            })
+            props.toasting("success", "Success", "Request was successful")})
+            
         .catch((err) => {
-            console.log("error", err)
-        })
-    } catch (err) {
-            if (axios.isCancel(err)) {
-                console.log("cancelled")
+              if (axios.isCancel(err)) {
+                props.toasting("success", "Success", "Request was canceled")
+            
             } else {
-                throw err;
+                props.toasting("error", "error", "Request was not successful")
+                
             }
-        }
+        })
+    
     }
 
     const abort = () => {
         console.log("abort")
-        source.cancel('Operation canceled by the user.');
+        source.current.cancel('Operation canceled by the user.');
         setStarted(false)
         setResponse({message: "canceled"})
     }
