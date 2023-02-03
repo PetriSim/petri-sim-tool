@@ -822,14 +822,22 @@
         "startingTime": "12:00",
         "numberOfInstances": 2,
         "interArrivalTime": {
-            "distributionType": "fixed",
+            "distributionType": "uniform",
             "values": [{
-                    "id": "mean",
+                    "id": "value1",
                     "value": 4
                 },
                 {
-                    "id": "variance",
+                    "id": "value2",
                     "value": 1
+                },
+                {
+                    "id": "value3",
+                    "value": 10
+                },
+                {
+                    "id": "value4",
+                    "value": 1000
                 }
             ]
         },

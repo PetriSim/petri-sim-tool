@@ -118,14 +118,19 @@
         "startingTime": "12:00",
         "numberOfInstances": 2,
         "interArrivalTime": {
-            "distributionType": "fixed",
+            "distributionType": "uniform",
             "values": [{
-                    "id": "mean",
+                    "id": "Value1",
                     "value": 4.0
                 },
                 {
-                    "id": "variance",
+                    "id": "value2",
                     "value": 1
+                },
+
+                {
+                    "id": "value3",
+                    "value": 2
                 }
             ]
         },
@@ -193,80 +198,80 @@
             }
         ]
     },
-  {
-    "scenarioName": "Scenario 3",
-    "startingDate": "11-11-2022",
-    "startingTime": "16:00",
-    "numberOfInstances": 2,
-    "interArrivalTime": {
-      "distributionType": "normal",
-      "values": [{
-        "id": "mean",
-        "value": 5
-      }]
-    },
-    "timeUnit": "mins",
-    "currency": "euro",
-    "resourceParameters": {
-      "resources": [{
-        "id": "TopManager",
-        "costHour": 20,
-        "numberOfInstances": 3,
-        "schedule": "8hPerWeek"
-      }],
-      "roles": [{
-        "id": "Top Management",
-        "schedule": "8hPerWeek",
-        "resources": [{
-          "id": "TopManager"
-        }]
-      }],
-      "timeTables": [{
-        "id": "8hPerWeek",
-        "timeTableItems": [{
-          "startWeekday": "Monday",
-          "startTime": "09",
-          "endWeekday": "Monday",
-          "endTime": "17"
-        }]
-      }, {
-        "id": "7/24",
-        "timeTableItems": [{
-          "startWeekday": "Monday",
-          "startTime": "09",
-          "endWeekday": "FRIDAY",
-          "endTime": "17"
-        }]
-      },
-        {
-          "id": "special",
-          "timeTableItems": [{
-            "startWeekday": "Monday",
-            "startTime": "09",
-            "endWeekday": "Monday",
-            "endTime": "17"
-          },
-            {
-              "startWeekday": "Tuesday",
-              "startTime": "09",
-              "endWeekday": "Tuesday",
-              "endTime": "10"
-            }
-          ]
-        }
-      ]
-    },
-    "models": [{
-      "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
-      "name": "Warenversand",
-      "modelParameter": null
-    },
+    {
+        "scenarioName": "Scenario 3",
+        "startingDate": "11-11-2022",
+        "startingTime": "16:00",
+        "numberOfInstances": 2,
+        "interArrivalTime": {
+            "distributionType": "normal",
+            "values": [{
+                "id": "mean",
+                "value": 5
+            }]
+        },
+        "timeUnit": "mins",
+        "currency": "euro",
+        "resourceParameters": {
+            "resources": [{
+                "id": "TopManager",
+                "costHour": 20,
+                "numberOfInstances": 3,
+                "schedule": "8hPerWeek"
+            }],
+            "roles": [{
+                "id": "Top Management",
+                "schedule": "8hPerWeek",
+                "resources": [{
+                    "id": "TopManager"
+                }]
+            }],
+            "timeTables": [{
+                    "id": "8hPerWeek",
+                    "timeTableItems": [{
+                        "startWeekday": "Monday",
+                        "startTime": "09",
+                        "endWeekday": "Monday",
+                        "endTime": "17"
+                    }]
+                }, {
+                    "id": "7/24",
+                    "timeTableItems": [{
+                        "startWeekday": "Monday",
+                        "startTime": "09",
+                        "endWeekday": "FRIDAY",
+                        "endTime": "17"
+                    }]
+                },
+                {
+                    "id": "special",
+                    "timeTableItems": [{
+                            "startWeekday": "Monday",
+                            "startTime": "09",
+                            "endWeekday": "Monday",
+                            "endTime": "17"
+                        },
+                        {
+                            "startWeekday": "Tuesday",
+                            "startTime": "09",
+                            "endWeekday": "Tuesday",
+                            "endTime": "10"
+                        }
+                    ]
+                }
+            ]
+        },
+        "models": [{
+                "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
+                "name": "Warenversand",
+                "modelParameter": null
+            },
 
-      {
-        "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
-        "name": "Schufascoring",
-        "modelParameter": null
-      }
-    ]
-  }
+            {
+                "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
+                "name": "Schufascoring",
+                "modelParameter": null
+            }
+        ]
+    }
 ]

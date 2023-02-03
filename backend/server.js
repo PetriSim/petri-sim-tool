@@ -60,7 +60,7 @@ app.get('/startdata', (req, res) => {
 
     setTimeout((() => {
         res.send(JSON.parse(files))
-    }), 1000)
+    }), 600)
 
 });
 
@@ -68,7 +68,7 @@ app.get('/startdata', (req, res) => {
 app.get('/startScylla', (req, res) => {
     setTimeout((() => {
         res.send({ "message": "succes" })
-    }), 10000)
+    }), 600)
 
 });
 

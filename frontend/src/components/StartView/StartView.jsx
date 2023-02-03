@@ -78,7 +78,7 @@ function StartView(props) {
 
     let x = new Date(d)
     var date = x.getDate();
-    var month = x.getMonth() + 1; // Since getMonth() returns month from 0-11 not 1-12
+    var month = x.getMonth() + 1;
     var year = x.getFullYear();
     var hours = x.getHours()
     var minutes = x.getMinutes()
@@ -243,7 +243,7 @@ function StartView(props) {
         <Flex flexDir="column" gap="5" width="100%" >
           <Heading size="md">Select existing project</Heading>
            <Flex h="30vh" overflowY="scroll" flexDir="column" gap="5">
-                {!JSON.parse(localStorage.getItem('projects')) ? "" : JSON.parse(localStorage.getItem('projects')).sort((a, b) => new Date(a.date) - new Date(b.date)).map(project => {
+                {!JSON.parse(localStorage.getItem('projects')) ? "" : JSON.parse(localStorage.getItem('projects')).sort((a, b) => new Date(b.date) - new Date(a.date)).map(project => {
                   return <Button p="4" h="20" onClick={() => selectProject(project.name)}><Flex direction="column" gap="3"><Text fontSize="lg">{project.name}</Text><Text fontSize="sm" color="gray.600">Last change: {dateConverter(project.date)}</Text></Flex></Button>
                 })}
            </Flex>  

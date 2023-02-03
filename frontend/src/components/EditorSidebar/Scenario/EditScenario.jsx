@@ -1,6 +1,6 @@
 import React from 'react'
-import { Input, FormControl, FormLabel, Flex, Button, Stack } from '@chakra-ui/react';
-
+import { Input, FormControl, FormLabel, Flex, Button, Stack, Select, Text, ButtonGroup, IconButton} from '@chakra-ui/react';
+import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 class EditScenario extends React.Component {
     constructor(props) {
       super(props);
@@ -8,42 +8,124 @@ class EditScenario extends React.Component {
         scenarioName: "",
         startingDate: "",
         startingTime: "",
+        currenry: "",
         numberOfInstances: "",
         interArrivalTime:"",
         values:"",
         timeUnit:"",
-        distributionType: ""
+        distributionType: "",
+        distributionTypes: [
+                                {distribution_name: "exponential", distribution_params: ["mean"]},
+                                {distribution_name: "normal", distribution_params: ["mean", "standard deviation"]},
+                                {distribution_name: "uniform", distribution_params: ["min", "max"]},
+                                {distribution_name: "constant", distribution_params: ["constant value"]},
+                                {distribution_name: "erlang", distribution_params: ["order", "mean"]},
+                                {distribution_name: "triangular", distribution_params: ["lower", "peak", "upper"]},
+                                {distribution_name: "binomial", distribution_params: ["probabiliy", "amount"]},
+                                {distribution_name: "arbitraryFiniteProbabilityDistribution", distribution_params: []}
+                             ],
+        distributionValues: []
       };
 
       this.onSubmit = this.onSubmit.bind(this);
-      
+      this.changeValueAmount = this.changeValueAmount.bind(this);
+      this.handleKeyChange = this.handleKeyChange.bind(this); 
+      this.handleInputChange = this.handleInputChange.bind(this);    
     }
 
     componentDidMount(){
+        let newTypes = this.state.distributionTypes
+
+        if(this.props.getData("allData")[this.props.selectedScenario].interArrivalTime.distributionType === "arbitraryFiniteProbabilityDistribution"){
+         newTypes.find(dis => dis.distribution_name === "arbitraryFiniteProbabilityDistribution").distribution_params = this.props.getData("allData")[this.props.selectedScenario].interArrivalTime.values.map(v => v.id) 
+          
+        }
         this.setState({
             scenarioName: this.props.getData("allData")[this.props.selectedScenario].scenarioName,
             startingDate: this.props.getData("allData")[this.props.selectedScenario].startingDate,
             startingTime: this.props.getData("allData")[this.props.selectedScenario].startingTime,
+            currency: this.props.getData("allData")[this.props.selectedScenario].currency,
             numberOfInstances: this.props.getData("allData")[this.props.selectedScenario].numberOfInstances,
             interArrivalTime: this.props.getData("allData")[this.props.selectedScenario].interArrivalTime,
-            values: this.props.getData("allData")[this.props.selectedScenario].values,
+            values: this.props.getData("allData")[this.props.selectedScenario].interArrivalTime.values,
             timeUnit: this.props.getData("allData")[this.props.selectedScenario].timeUnit,
-            distributionType: this.props.getData("allData")[this.props.selectedScenario].interArrivalTime.distributionType
+            distributionType: this.props.getData("allData")[this.props.selectedScenario].interArrivalTime.distributionType,
+            distributionValues: this.props.getData("allData")[this.props.selectedScenario].interArrivalTime.values.map(v => v.value),
+            distributionTypes: newTypes
           })
           console.log(this.state)
+          console.log(this.state.distributionValues)
     }
 
-    handleInputChange(resource) {
+    handleInputChange(resource, index) {
       const target = resource.target;
       const value = target.value;
       const name = target.name;
+
+      console.log(name)
+      console.log(this.state)
+      console.log(this.state.distributionValues)
   
+      if(name === "distributionType"){
+        this.setState({
+            distributionValues: new Array(this.state.distributionTypes.find(dis => dis.distribution_name === value).distribution_params.length).fill(0)
+        })  
+    }
+
+    if(name === "distributionValues"){
+        let newArr = this.state.distributionValues
+        newArr[index] = value
+
+        this.setState({
+            distributionValues: newArr
+        })
+    } else{
+
       this.setState({
         [name]: value
       });
 
+    }
+
     
     }
+
+    changeValueAmount(amount){
+        if(amount === 1){
+            let newTypes = this.state.distributionTypes
+            newTypes.find(dis => dis.distribution_name === "arbitraryFiniteProbabilityDistribution").distribution_params.push("entry" + (this.state.distributionTypes.find(dis => dis.distribution_name === "arbitraryFiniteProbabilityDistribution").distribution_params.length +1))
+           
+
+            this.setState({distributionTypes: newTypes})
+            this.state.distributionValues.push(0)
+        } else{
+
+            let newTypes = this.state.distributionTypes
+            newTypes.find(dis => dis.distribution_name === "arbitraryFiniteProbabilityDistribution").distribution_params.pop()
+           
+
+            this.setState({distributionTypes: newTypes})
+            this.state.distributionValues.pop()
+        }
+      
+    }
+
+    handleKeyChange(resource, index) {
+
+        const target = resource.target;
+        const value = target.value;
+       
+
+        let params = this.state.distributionTypes
+        params.find(dis => dis.distribution_name === this.state.distributionType).distribution_params[index] = value
+
+        this.setState({distributionTypes: params})
+
+
+        console.log(params)
+
+        
+      }
 
     onSubmit(event){
         event.preventDefault();
@@ -54,11 +136,17 @@ class EditScenario extends React.Component {
                   
             let obj = data[this.props.selectedScenario]
 
+            let interArrivalTime = {
+                distributionType: this.state.distributionType,
+                values: this.state.distributionTypes.find(dis => dis.distribution_name === this.state.distributionType).distribution_params.map((key, index) => {return {id: key, value: this.state.distributionValues[index]}})
+            }
+            
             obj.scenarioName = this.state.scenarioName
             obj.startingDate = this.state.startingDate
             obj.startingTime = this.state.startingTime
+            obj.currency = this.state.currency
             obj.numberOfInstances = this.state.numberOfInstances
-            obj.interArrivalTime= this.state.interArrivalTime
+            obj.interArrivalTime= interArrivalTime
             obj.values = this.state.values
             obj.timeUnit = this.state.timeUnit
             obj.distributionType = this.state.distributionType
@@ -114,21 +202,61 @@ render() {
           </FormControl>
 
           <FormControl>
-              <FormLabel>Interarrival Time:</FormLabel>
-              <Input value={this.state.distributionType} bg="white" type="inputRead"  name="distributionType" onChange={(event) => this.handleInputChange(event)}/>
+          <FormLabel>Currency:</FormLabel>
+              <Select name="currency" placeholder={this.state.currency} bg="white" type="inputRead"  onChange={(event) => this.handleInputChange(event)} >
+                <option value='euro'>euro</option>
+                <option value='dollar'>dollar</option>
+              </Select>
+          </FormControl> 
+
+          <Text fontWeight="bold" fontSize="md">Interarrival Time:</Text>
+          <Flex justifyContent="space-between">
+          
+          <FormControl w="47%">
+              <FormLabel>Distribution:</FormLabel>
+              <Select value={this.state.distributionType}  bg="white" name="distributionType" onChange={(event) => this.handleInputChange(event)} >
+                {this.state.distributionTypes.map((distribution, index) => {
+                    return <option value={distribution.distribution_name}>{distribution.distribution_name}</option>
+                })}
+            </Select>
           </FormControl>
 
-        <Flex justifyContent="space-between">
-            <FormControl w="47%">
-                <FormLabel>Value:</FormLabel>
-                <Input value={this.state.values} bg="white" type="inputRead" />
-            </FormControl>
 
-            <FormControl w="47%"> 
+          <FormControl w="47%"> 
                 <FormLabel>Time Unit:</FormLabel>
-                <Input value={this.state.timeUnit} bg="white" type="inputRead" name="timeUnit" onChange={(event) => this.handleInputChange(event)} />
+            <Select name="timeUnit" value={this.state.timeUnit} onChange={(event) => this.handleInputChange(event)} bg="white">
+                  <option value='secs'>secs</option>
+                  <option value='mins'>mins</option>
+              </Select>
+            
             </FormControl>
-        </Flex>
+          </Flex>
+
+          {this.state.distributionType === "arbitraryFiniteProbabilityDistribution" ? 
+             <ButtonGroup size='md' isAttached variant="outline" >
+                <IconButton icon={<MinusIcon />} onClick={() => this.changeValueAmount(-1)} />
+                <IconButton icon={<AddIcon />} onClick={() => this.changeValueAmount(1)} />
+             </ButtonGroup>
+          : ""}
+
+          {this.state.distributionTypes.find((dis) => dis.distribution_name === this.state.distributionType) && this.state.distributionTypes.find(dis => dis.distribution_name === this.state.distributionType).distribution_params.map((key, index) => {
+
+        
+            return <>
+        
+            <Flex justifyContent="space-between">
+                <FormControl w="47%">
+                    <FormLabel>key:</FormLabel>
+                    <Input value={key} bg="white" type="inputRead"  name="distributionKey" onChange={(event) => this.handleKeyChange(event, index)} />
+                </FormControl>
+
+                <FormControl w="47%">
+                    <FormLabel>value:</FormLabel>
+                    <Input value={this.state.distributionValues[index]} bg="white" type="inputRead" name="distributionValues" onChange={(event) => this.handleInputChange(event, index)} />
+                </FormControl>
+            </Flex></>
+
+            })}
 
 
         <Button 
