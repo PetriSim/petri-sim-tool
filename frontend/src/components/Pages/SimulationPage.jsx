@@ -39,14 +39,14 @@ function SimulationPage(props){
             setFinished(true)
             setStarted(false)
             console.log(r.data)
-            props.toasting("success", "Success", "Request was successful")})
+            props.toasting("success", "Success", "Simulation was successful")})
             
         .catch((err) => {
               if (axios.isCancel(err)) {
-                props.toasting("success", "Success", "Request was canceled")
+                props.toasting("success", "Success", "Simulation was canceled")
             
             } else {
-                props.toasting("error", "error", "Request was not successful")
+                props.toasting("error", "error", "Simulation was not successful")
                 
             }
         })
@@ -55,7 +55,7 @@ function SimulationPage(props){
 
     const abort = () => {
         console.log("abort")
-        source.current.cancel('Operation canceled by the user.');
+        source.current.cancel('Simulation was canceled');
         setStarted(false)
         setResponse({message: "canceled"})
     }

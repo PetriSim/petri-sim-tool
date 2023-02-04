@@ -103,9 +103,10 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
             <FormControl>
               <FormLabel>Currency:</FormLabel>
               <Select name="currency" placeholder={currency} onChange={handleInputChange} bg="white">
-
+               
                 <option value='euro'>euro</option>
                 <option value='dollar'>dollar</option>
+                <option value='money unit'>money unit</option>
               </Select>
           </FormControl> 
 
@@ -121,6 +122,7 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
                 return <FormControl>
                   <FormLabel>Resource { (index + 1 )}:</FormLabel>
                   <Select name="resource" placeholder={resource} onChange={(event) => handleResources(index,event.target.value )} bg="white">
+                    <option>select resource</option>
                     {getData("currentScenario").resourceParameters.resources.map(x =>{
                     return  <option value={x.id}>{x.id}</option>
                     } )}

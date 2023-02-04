@@ -120,7 +120,7 @@ class ModelbasedParametersTable extends React.Component {
                                 return <Tr>
                                             <Td>{element.id}</Td>
                                             <Td>{element.name}</Td>
-                                            <Td>{element.resource}</Td>
+                                            <Td>{element.resources.join(",")}</Td>
                                             <Td>{this.state.editable? <Input value={this.state.activities[index].duration} onChange={(event) => this.handleChange(event, index, "activities", "duration")}/> : element.duration}</Td>
                                             <Td>{this.state.editable?  <Select name="unit" value={this.state.activities[index].unit} onChange={(event) => this.handleChange(event, index, "activities", "unit")}>
                                                                 <option value='secs'>Seconds</option>
@@ -131,6 +131,7 @@ class ModelbasedParametersTable extends React.Component {
                                             <Td>{this.state.editable? <Select name="currency"  value={this.state.activities[index].currency} onChange={(event) => this.handleChange(event, index, "activities", "currency")}>
                                                 <option value='euro'>euro</option>
                                                 <option value='dollar'>dollar</option>
+                                                <option value='money unit'>money unit</option>
                                             </Select> : element.currency}
                                             </Td>
                                         </Tr>
