@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import {
-    Flex, Heading, Card, CardHeader, CardBody, Text, Select, Stack, Button, Progress, Box, Textarea
+    Flex, Heading, Card, CardHeader, CardBody, Text, Select, Stack, Button, Progress, Box, Textarea, UnorderedList, ListItem
 } from '@chakra-ui/react';
 import { FiChevronDown } from 'react-icons/fi';
 import axios from 'axios';
@@ -21,7 +21,7 @@ function SimulationPage(props){
    
 
     const start = () => {
-        setResponse({message: ""})
+        setResponse({message: "", files: [{name: "", link:""}]})
         setFinished(false)
         setStarted(true)
 
@@ -38,6 +38,7 @@ function SimulationPage(props){
             setResponse(r.data)
             setFinished(true)
             setStarted(false)
+            console.log(r.data)
             props.toasting("success", "Success", "Request was successful")})
             
         .catch((err) => {
@@ -57,6 +58,19 @@ function SimulationPage(props){
         source.current.cancel('Operation canceled by the user.');
         setStarted(false)
         setResponse({message: "canceled"})
+    }
+
+    const download = (link, name, type) =>{
+        fetch(link)
+      .then(res => {
+        res.blob().then(blob => {
+          let url = window.URL.createObjectURL(blob);
+          let a = document.createElement('a');
+          a.href = url;
+          a.download = sessionStorage.getItem("currentProject") + "_" +  name + `.` + type;
+          a.click();
+        });
+      });
     }
 
 
@@ -98,9 +112,9 @@ function SimulationPage(props){
                             <Box>
                                 <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select simulator:</Text>
                                 <Select placeholder = 'choose simulator' width = '100%' color="darkgrey"  backgroundColor= 'white' icon={<FiChevronDown />}>
-                                    <option value='Simod'>Simod</option>
-                                    <option value='Option 2'>Option 2</option>
-                                    <option value='Option 3'>Option 3</option>
+                                    <option value='Simod'>Scylla</option>
+                                    <option value='SAP'>SAP Simulator 2</option>
+                                    <option value='Prosimos'>Prosimos</option>
                                 </Select>
                             </Box>
                             
@@ -125,6 +139,12 @@ function SimulationPage(props){
                 </CardHeader>
                 <CardBody>
                     <Textarea isDisabled  value={response.message} />
+                    {response.files && response.message && <>
+                        <Heading size='ms' mt={5}>Click on the name of the file to download it:</Heading>
+                        <UnorderedList>
+                        {response.files.map(x => (<ListItem><Button onClick={() => download(x.link, x.name, x.type)} variant="link">{sessionStorage.getItem("currentProject") + "_" + x.name}</Button></ListItem>)) }
+                        </UnorderedList>
+                    </>}
                 </CardBody>
             </Card>
             
