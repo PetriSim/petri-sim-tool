@@ -21,32 +21,104 @@
             "resources": [{
                     "id": "TopManager",
                     "costHour": 20,
-                    "numberOfInstances": 3
+                    "numberOfInstances": 3,
+                    "interArrivalTime": {
+                        "distributionType": "normal",
+                        "values": [{
+                                "id": "mean",
+                                "value": 5
+                            },
+                            {
+                                "id": "variance",
+                                "value": 1
+                            }
+                        ]
+                    }
                 },
                 {
                     "id": "TopManager2",
                     "costHour": 20,
-                    "numberOfInstances": 3
+                    "numberOfInstances": 3,
+                    "interArrivalTime": {
+                        "distributionType": "normal",
+                        "values": [{
+                                "id": "mean",
+                                "value": 5
+                            },
+                            {
+                                "id": "variance",
+                                "value": 1
+                            }
+                        ]
+                    }
                 },
                 {
                     "id": "TopManager3",
                     "costHour": 20,
-                    "numberOfInstances": 3
+                    "numberOfInstances": 3,
+                    "interArrivalTime": {
+                        "distributionType": "normal",
+                        "values": [{
+                                "id": "mean",
+                                "value": 5
+                            },
+                            {
+                                "id": "variance",
+                                "value": 1
+                            }
+                        ]
+                    }
                 },
                 {
                     "id": "Cashier1",
                     "costHour": 30,
-                    "numberOfInstances": 3
+                    "numberOfInstances": 3,
+                    "interArrivalTime": {
+                        "distributionType": "normal",
+                        "values": [{
+                                "id": "mean",
+                                "value": 5
+                            },
+                            {
+                                "id": "variance",
+                                "value": 1
+                            }
+                        ]
+                    }
                 },
                 {
                     "id": "Cashier2",
                     "costHour": 50,
-                    "numberOfInstances": 3
+                    "numberOfInstances": 3,
+                    "interArrivalTime": {
+                        "distributionType": "normal",
+                        "values": [{
+                                "id": "mean",
+                                "value": 5
+                            },
+                            {
+                                "id": "variance",
+                                "value": 1
+                            }
+                        ]
+                    }
                 },
                 {
                     "id": "test",
                     "costHour": 50,
-                    "numberOfInstances": 3
+                    "numberOfInstances": 3,
+                    "interArrivalTime": {
+                        "distributionType": "normal",
+                        "values": [{
+                                "id": "mean",
+                                "value": 5
+                            },
+                            {
+                                "id": "variance",
+                                "value": 1
+                            }
+                        ]
+                    }
                 }
             ],
             "roles": [{
@@ -119,11 +191,23 @@
                             "id": "Task_0vaxgaa",
                             "name": "Versandart\nklären",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
                             "currency": "euro",
+                            "interArrivalTime": {
+                                "distributionType": "normal",
+                                "values": [{
+                                        "id": "mean",
+                                        "value": 5
+                                    },
+                                    {
+                                        "id": "variance",
+                                        "value": 1
+                                    }
+                                ]
+                            },
                             "incoming": [
                                 "SequenceFlow_023hzxi"
                             ],
@@ -135,7 +219,7 @@
                             "id": "Task_0e6hvnj",
                             "name": "Angebote von\n3 Spediteuren\neinholen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -151,7 +235,7 @@
                             "id": "Task_0s79ile",
                             "name": "Spediteur\nbeauftragen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -167,7 +251,7 @@
                             "id": "Task_05ftug5",
                             "name": "Ware verpacken",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -183,7 +267,7 @@
                             "id": "Task_0sl26uo",
                             "name": "Ware bereitstellen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -199,7 +283,7 @@
                             "id": "Task_0jsoxba",
                             "name": "Paketschein ausfüllen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -215,7 +299,7 @@
                             "id": "Task_12j0pib",
                             "name": "Versicherung\nabschließen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -298,11 +382,23 @@
                     "events": [{
                             "id": "StartEvent_1",
                             "type": "bpmn:StartEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
                             "currency": "euro",
+                            "interArrivalTime": {
+                                "distributionType": "normal",
+                                "values": [{
+                                        "id": "mean",
+                                        "value": 5
+                                    },
+                                    {
+                                        "id": "variance",
+                                        "value": 1
+                                    }
+                                ]
+                            },
                             "incoming": [],
                             "outgoing": [
                                 "SequenceFlow_14a0oky"
@@ -311,7 +407,7 @@
                         {
                             "id": "EndEvent_1fx9yp3",
                             "type": "bpmn:EndEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -418,7 +514,7 @@
                             "id": "Task_16winvj",
                             "name": "Scoring-anfrage senden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -435,7 +531,7 @@
                             "id": "Task_1fzfxey",
                             "name": "Schufascore zurückmelden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -452,7 +548,7 @@
                             "id": "Task_0l942o9",
                             "name": "Verzögerung melden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -469,7 +565,7 @@
                             "id": "Task_1r15hqs",
                             "name": "Scoring durchführen (level 1)",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -485,7 +581,7 @@
                             "id": "Task_02m68xj",
                             "name": "Scoring durchführen (level 2)",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -501,7 +597,7 @@
                             "id": "Task_06dqs9t",
                             "name": "Schufascore senden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -518,7 +614,7 @@
                             "id": "Task_07vbn2i",
                             "name": "Schufascore senden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -535,7 +631,7 @@
                             "id": "Task_01ouvha",
                             "name": "Verzögerung melden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -598,7 +694,7 @@
                     "events": [{
                             "id": "EndEvent_0rp5trg",
                             "type": "bpmn:EndEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -611,7 +707,7 @@
                         {
                             "id": "IntermediateCatchEvent_0ujob24",
                             "type": "bpmn:IntermediateCatchEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -627,7 +723,7 @@
                         {
                             "id": "IntermediateCatchEvent_0yg7cuh",
                             "type": "bpmn:IntermediateCatchEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -643,7 +739,7 @@
                         {
                             "id": "IntermediateCatchEvent_0a8iz14",
                             "type": "bpmn:IntermediateCatchEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -659,7 +755,7 @@
                         {
                             "id": "StartEvent_1els7eb",
                             "type": "bpmn:StartEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -674,7 +770,7 @@
                         {
                             "id": "EventBasedGateway_1aqzm1h",
                             "type": "bpmn:EventBasedGateway",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -690,7 +786,7 @@
                         {
                             "id": "StartEvent_0o849un",
                             "type": "bpmn:StartEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -705,7 +801,7 @@
                         {
                             "id": "EndEvent_0khk0tq",
                             "type": "bpmn:EndEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -901,7 +997,7 @@
                             "id": "Task_0vaxgaa",
                             "name": "Versandart\nklären",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -917,7 +1013,7 @@
                             "id": "Task_0e6hvnj",
                             "name": "Angebote von\n3 Spediteuren\neinholen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -933,7 +1029,7 @@
                             "id": "Task_0s79ile",
                             "name": "Spediteur\nbeauftragen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -949,7 +1045,7 @@
                             "id": "Task_05ftug5",
                             "name": "Ware verpacken",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -965,7 +1061,7 @@
                             "id": "Task_0sl26uo",
                             "name": "Ware bereitstellen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -981,7 +1077,7 @@
                             "id": "Task_0jsoxba",
                             "name": "Paketschein ausfüllen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -997,7 +1093,7 @@
                             "id": "Task_12j0pib",
                             "name": "Versicherung\nabschließen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1080,7 +1176,7 @@
                     "events": [{
                             "id": "StartEvent_1",
                             "type": "bpmn:StartEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1093,7 +1189,7 @@
                         {
                             "id": "EndEvent_1fx9yp3",
                             "type": "bpmn:EndEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1200,7 +1296,7 @@
                             "id": "Task_16winvj",
                             "name": "Scoring-anfrage senden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1217,7 +1313,7 @@
                             "id": "Task_1fzfxey",
                             "name": "Schufascore zurückmelden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1234,7 +1330,7 @@
                             "id": "Task_0l942o9",
                             "name": "Verzögerung melden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1251,7 +1347,7 @@
                             "id": "Task_1r15hqs",
                             "name": "Scoring durchführen (level 1)",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1267,7 +1363,7 @@
                             "id": "Task_02m68xj",
                             "name": "Scoring durchführen (level 2)",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1283,7 +1379,7 @@
                             "id": "Task_06dqs9t",
                             "name": "Schufascore senden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1300,7 +1396,7 @@
                             "id": "Task_07vbn2i",
                             "name": "Schufascore senden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1317,7 +1413,7 @@
                             "id": "Task_01ouvha",
                             "name": "Verzögerung melden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1380,7 +1476,7 @@
                     "events": [{
                             "id": "EndEvent_0rp5trg",
                             "type": "bpmn:EndEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1393,7 +1489,7 @@
                         {
                             "id": "IntermediateCatchEvent_0ujob24",
                             "type": "bpmn:IntermediateCatchEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1409,7 +1505,7 @@
                         {
                             "id": "IntermediateCatchEvent_0yg7cuh",
                             "type": "bpmn:IntermediateCatchEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1425,7 +1521,7 @@
                         {
                             "id": "IntermediateCatchEvent_0a8iz14",
                             "type": "bpmn:IntermediateCatchEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1441,7 +1537,7 @@
                         {
                             "id": "StartEvent_1els7eb",
                             "type": "bpmn:StartEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1456,7 +1552,7 @@
                         {
                             "id": "EventBasedGateway_1aqzm1h",
                             "type": "bpmn:EventBasedGateway",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1472,7 +1568,7 @@
                         {
                             "id": "StartEvent_0o849un",
                             "type": "bpmn:StartEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1487,7 +1583,7 @@
                         {
                             "id": "EndEvent_0khk0tq",
                             "type": "bpmn:EndEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1670,7 +1766,7 @@
                             "id": "Task_0vaxgaa",
                             "name": "Versandart\nklären",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1686,7 +1782,7 @@
                             "id": "Task_0e6hvnj",
                             "name": "Angebote von\n3 Spediteuren\neinholen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1702,7 +1798,7 @@
                             "id": "Task_0s79ile",
                             "name": "Spediteur\nbeauftragen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1718,7 +1814,7 @@
                             "id": "Task_05ftug5",
                             "name": "Ware verpacken",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1734,7 +1830,7 @@
                             "id": "Task_0sl26uo",
                             "name": "Ware bereitstellen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1750,7 +1846,7 @@
                             "id": "Task_0jsoxba",
                             "name": "Paketschein ausfüllen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1766,7 +1862,7 @@
                             "id": "Task_12j0pib",
                             "name": "Versicherung\nabschließen",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1849,7 +1945,7 @@
                     "events": [{
                             "id": "StartEvent_1",
                             "type": "bpmn:StartEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1862,7 +1958,7 @@
                         {
                             "id": "EndEvent_1fx9yp3",
                             "type": "bpmn:EndEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1969,7 +2065,7 @@
                             "id": "Task_16winvj",
                             "name": "Scoring-anfrage senden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -1986,7 +2082,7 @@
                             "id": "Task_1fzfxey",
                             "name": "Schufascore zurückmelden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2003,7 +2099,7 @@
                             "id": "Task_0l942o9",
                             "name": "Verzögerung melden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2020,7 +2116,7 @@
                             "id": "Task_1r15hqs",
                             "name": "Scoring durchführen (level 1)",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2036,7 +2132,7 @@
                             "id": "Task_02m68xj",
                             "name": "Scoring durchführen (level 2)",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2052,7 +2148,7 @@
                             "id": "Task_06dqs9t",
                             "name": "Schufascore senden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2069,7 +2165,7 @@
                             "id": "Task_07vbn2i",
                             "name": "Schufascore senden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2086,7 +2182,7 @@
                             "id": "Task_01ouvha",
                             "name": "Verzögerung melden",
                             "type": "bpmn:Task",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2149,7 +2245,7 @@
                     "events": [{
                             "id": "EndEvent_0rp5trg",
                             "type": "bpmn:EndEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2162,7 +2258,7 @@
                         {
                             "id": "IntermediateCatchEvent_0ujob24",
                             "type": "bpmn:IntermediateCatchEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2178,7 +2274,7 @@
                         {
                             "id": "IntermediateCatchEvent_0yg7cuh",
                             "type": "bpmn:IntermediateCatchEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2194,7 +2290,7 @@
                         {
                             "id": "IntermediateCatchEvent_0a8iz14",
                             "type": "bpmn:IntermediateCatchEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2210,7 +2306,7 @@
                         {
                             "id": "StartEvent_1els7eb",
                             "type": "bpmn:StartEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2225,7 +2321,7 @@
                         {
                             "id": "EventBasedGateway_1aqzm1h",
                             "type": "bpmn:EventBasedGateway",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2241,7 +2337,7 @@
                         {
                             "id": "StartEvent_0o849un",
                             "type": "bpmn:StartEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,
@@ -2256,7 +2352,7 @@
                         {
                             "id": "EndEvent_0khk0tq",
                             "type": "bpmn:EndEvent",
-                            "resource": "Courier",
+                            "resources": ["Courier", "Test"],
                             "duration": 5,
                             "unit": "mins",
                             "cost": 2,

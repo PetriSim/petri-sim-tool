@@ -1,11 +1,13 @@
-import { Input, FormControl, FormLabel, Select, Stack, Button, Box } from '@chakra-ui/react';
+import { Input, FormControl, FormLabel, Select, Stack, Button, Box,  ButtonGroup, IconButton, Text } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react'
+import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 
 const Activity = ({ getData, setData, selectedObject, currentScenario, currentBpmn }) => {
   const [duration, setDuration] = useState("");
   const [unit, setUnit] = useState("");
   const [cost, setCost] = useState("");
   const [currency, setCurrency] = useState("");
+  const [resources, setResources] = useState([]);
 
 
   useEffect(() => {
@@ -18,6 +20,7 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
       setUnit(currentActivity.unit);
       setCost(currentActivity.cost);
       setCurrency(currentActivity.currency);
+      setResources(currentActivity.resources);
     }
   }, [getData, selectedObject.id]);
 
@@ -27,6 +30,7 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
     if (name === "unit") setUnit(value);
     if (name === "cost") setCost(value);
     if (name === "currency") setCurrency(value);
+    if (name === "resources") setResources(value);
   };
 
   const onSubmit = event => {
@@ -40,10 +44,32 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
     currentActivity.unit = unit;
     currentActivity.cost = cost;
     currentActivity.currency = currency;
-
+    currentActivity.resources = resources;
     setData(data);
 
   };
+
+
+  const changeValueAmount = (amount) => {
+    let newResources = [...resources]
+    if(amount === 1){
+      newResources.push("")
+    }
+
+    if(amount === -1){
+      newResources.pop()
+    }
+
+    setResources(newResources)
+  }
+
+  const handleResources = (index, value) =>{
+    resources[index] = value
+    console.log(resources)
+  }
+
+  
+
 
   return ( 
     <>
@@ -82,6 +108,31 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
                 <option value='dollar'>dollar</option>
               </Select>
           </FormControl> 
+
+          <Text fontWeight="bold" fontSize="md">Resources:</Text>
+
+            <ButtonGroup size='md' isAttached variant="outline" >
+                <IconButton icon={<MinusIcon />} onClick={() => changeValueAmount(-1)} />
+                <IconButton icon={<AddIcon />} onClick={() => changeValueAmount(1)} />
+             </ButtonGroup>
+
+            {
+              resources.map((resource, index) => {
+                return <FormControl>
+                  <FormLabel>Resource { (index + 1 )}:</FormLabel>
+                  <Select name="resource" placeholder={resource} onChange={(event) => handleResources(index,event.target.value )} bg="white">
+                    {getData("currentScenario").resourceParameters.resources.map(x =>{
+                    return  <option value={x.id}>{x.id}</option>
+                    } )}
+                    
+                  </Select>
+                </FormControl>
+              })
+
+            }
+            
+
+
 
         <Button 
               type="submit"
