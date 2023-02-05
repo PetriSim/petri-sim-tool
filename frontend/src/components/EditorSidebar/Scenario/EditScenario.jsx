@@ -1,5 +1,9 @@
 import React from 'react'
-import { Input, FormControl, FormLabel, Flex, Button, Stack, Select, Text, ButtonGroup, IconButton} from '@chakra-ui/react';
+import { Input, FormControl, FormLabel, Flex, Button, Stack, Select, Text, ButtonGroup, IconButton,  Accordion, Box,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon } from '@chakra-ui/react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 class EditScenario extends React.Component {
     constructor(props) {
@@ -167,7 +171,8 @@ render() {
 
     return (
         <>
-
+        <Box w="100%">
+        <Stack gap="3">
         <Button onClick={() => this.props.setCurrent("Add Scenario")}
                 colorScheme='#ECF4F4'
                 variant='outline'
@@ -180,7 +185,20 @@ render() {
 
         
         <form onSubmit={this.onSubmit}>
-        <Stack gap="2">        
+
+          <Accordion allowToggle>
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box as="span" flex='1' textAlign='left'>
+                    General Parameters
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+              
+         
          <FormControl>
               <FormLabel>Scenario Name:</FormLabel>
               <Input value={this.state.scenarioName} bg="white" name="scenarioName" onChange={(event) => this.handleInputChange(event)} />
@@ -208,9 +226,19 @@ render() {
                 <option value='dollar'>dollar</option>
               </Select>
           </FormControl> 
-
-          <Text fontWeight="bold" fontSize="md">Interarrival Time:</Text>
-          <Flex justifyContent="space-between">
+              </AccordionPanel>
+            </AccordionItem>
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box as="span" flex='1' textAlign='left'>
+                    Interarrival time
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+              <Flex justifyContent="space-between">
           
           <FormControl w="47%">
               <FormLabel>Distribution:</FormLabel>
@@ -258,6 +286,10 @@ render() {
 
             })}
 
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+
 
         <Button 
               type="submit"
@@ -267,10 +299,13 @@ render() {
               border='1px'
               borderColor='#B4C7C9'
               color ='#6E6E6F'
+              mt="5"
               _hover={{ bg: '#B4C7C9' }}> Save changes </Button> 
 
-        </Stack>
+   
             </form>
+            </Stack>
+            </Box>
         </>
     )
 }

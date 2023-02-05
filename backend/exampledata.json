@@ -194,7 +194,18 @@
                         "name": "Versandart\nklären",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -222,7 +233,18 @@
                         "name": "Angebote von\n3 Spediteuren\neinholen",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -238,7 +260,18 @@
                         "name": "Spediteur\nbeauftragen",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -254,7 +287,18 @@
                         "name": "Ware verpacken",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -270,7 +314,18 @@
                         "name": "Ware bereitstellen",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -286,7 +341,18 @@
                         "name": "Paketschein ausfüllen",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -302,7 +368,18 @@
                         "name": "Versicherung\nabschließen",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -529,7 +606,18 @@
                         "name": "Scoring-anfrage senden",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -546,7 +634,18 @@
                         "name": "Schufascore zurückmelden",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -563,7 +662,18 @@
                         "name": "Verzögerung melden",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -580,7 +690,18 @@
                         "name": "Scoring durchführen (level 1)",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -596,7 +717,18 @@
                         "name": "Scoring durchführen (level 2)",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -612,7 +744,18 @@
                         "name": "Schufascore senden",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -629,7 +772,18 @@
                         "name": "Schufascore senden",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -646,7 +800,18 @@
                         "name": "Verzögerung melden",
                         "type": "bpmn:Task",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",

@@ -77,7 +77,7 @@ class ModelBasedOverview extends React.Component {
                                         <Td>{element.id}</Td>
                                         <Td>{element.name}</Td>
                                         <Td>{element.resource}</Td>
-                                        <Td>{element.duration}</Td>
+                                        <Td>{element.duration.values.map((value) => {return <Text>{value.id + ": " + value.value}</Text>})}</Td>
                                         <Td>{element.unit}</Td>
                                         <Td>{element.cost}</Td>
                                         <Td>{element.currency}</Td>

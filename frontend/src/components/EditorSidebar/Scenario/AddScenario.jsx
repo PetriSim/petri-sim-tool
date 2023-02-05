@@ -1,5 +1,9 @@
 import React from 'react'
-import { Input, FormControl, FormLabel, Flex, Button, Stack, Select, Text, ButtonGroup, IconButton} from '@chakra-ui/react';
+import { Input, FormControl, FormLabel, Flex, Button, Stack, Select, Text, ButtonGroup, IconButton,  Accordion, Box,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon } from '@chakra-ui/react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 
 class AddScenario extends React.Component {
@@ -205,7 +209,7 @@ render() {
 
     return (
         <>
-
+<Box w="100%">
         <Button onClick={() => this.props.setCurrent("Edit Scenario")}
                 colorScheme='#ECF4F4'
                 variant='outline'
@@ -218,7 +222,7 @@ render() {
 
         
         <form onSubmit={this.onSubmit}>
-        <Stack gap="2">      
+        <Stack gap="2" mt="2">      
 
         <FormControl >
               <FormLabel>Select startscenario:</FormLabel>
@@ -228,8 +232,19 @@ render() {
                 })}
             </Select>
         </FormControl>
-        <>
-         <FormControl>
+
+        <Accordion allowToggle>
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box as="span" flex='1' textAlign='left'>
+                    General Parameters
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+              <FormControl>
               <FormLabel>Scenario Name:</FormLabel>
               <Input value={this.state.scenarioName} bg="white" name="scenarioName" onChange={(event) => this.handleInputChange(event)} />
           </FormControl>
@@ -257,9 +272,22 @@ render() {
                 <option value='money unit'>money unit</option>
               </Select>
           </FormControl> 
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
 
-          <Text fontWeight="bold" fontSize="md">Interarrival Time:</Text>
-          <Flex justifyContent="space-between">
+          <Accordion allowToggle>
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box as="span" flex='1' textAlign='left'>
+                    Interarrival time
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+              <Flex justifyContent="space-between">
           
           <FormControl w="47%">
               <FormLabel>Distribution:</FormLabel>
@@ -307,6 +335,16 @@ render() {
 
             })} 
 
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+
+
+        <>
+         
+
+          
+          
 
         <Button 
               type="submit"
@@ -323,6 +361,7 @@ render() {
 
         </Stack>
             </form>
+            </Box>
         </>
     )
 }

@@ -41,10 +41,10 @@ class Event extends React.Component {
 
       let newTypes = this.state.distributionTypes
 
-      if(currentEvent.interArrivalTime.distributionType === "arbitraryFiniteProbabilityDistribution"){
-       newTypes.find(dis => dis.distribution_name === "arbitraryFiniteProbabilityDistribution").distribution_params = currentEvent.interArrivalTime.values.map(v => v.id) 
+      
+       newTypes.find(dis => dis.distribution_name === currentEvent.interArrivalTime.distributionType).distribution_params = currentEvent.interArrivalTime.values.map(v => v.id) 
         
-      }
+      
       this.setState({
           interArrivalTime: currentEvent.interArrivalTime,
           values: currentEvent.interArrivalTime.values,
