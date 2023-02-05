@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input, FormControl, FormLabel, Divider,CheckboxGroup, Checkbox, Stack, Box  } from '@chakra-ui/react';
+import { Button, Input, FormControl, FormLabel, Divider,CheckboxGroup, Checkbox, Stack, Box, Select  } from '@chakra-ui/react';
 
 class ResourceParameters extends React.Component {
     constructor(props) {
@@ -8,6 +8,7 @@ class ResourceParameters extends React.Component {
         id: "",
         costHour: "",
         schedule: "",
+        timeTables: props.getData("currentScenario").resourceParameters.timeTables.map(item => item.id),
         roles: props.getData("currentScenario").resourceParameters.roles.map(item => item.id),
         selectedRoles: []
       };  
@@ -65,7 +66,7 @@ class ResourceParameters extends React.Component {
        
         data[this.props.currentScenario].resourceParameters.resources.find((value) => value.id === this.props.currentResource).id = this.state.id
         data[this.props.currentScenario].resourceParameters.resources.find((value) => value.id === this.state.id).costHour = this.state.costHour                                                              
-                                                                                                      
+        data[this.props.currentScenario].resourceParameters.resources.find((value) => value.id === this.state.id).schedule = this.state.schedule                                                                                       
         
         data[this.props.currentScenario].resourceParameters.roles.forEach(obj => {
           obj.resources = obj.resources.filter(resource => resource.id !== this.props.currentResource);
@@ -132,18 +133,22 @@ render() {
          <Stack gap="2" mt="4">
          <FormControl >
               <FormLabel>Resource Name:</FormLabel>
-              <Input title="Test date" value={this.state.id}  bg="white"  name="id" onChange={(event) => this.handleInputChange(event)}/>
+              <Input value={this.state.id}  bg="white"  name="id" onChange={(event) => this.handleInputChange(event)}/>
           </FormControl>
 
           <FormControl>
               <FormLabel>Cost per Hour:</FormLabel>
-              <Input title="Test date" value={this.state.costHour} bg="white"  name="costHour" onChange={(event) => this.handleInputChange(event)} />
+              <Input value={this.state.costHour} bg="white"  name="costHour" onChange={(event) => this.handleInputChange(event)} />
           </FormControl>
 
           <FormControl >
               <FormLabel>Timetable:</FormLabel>
-              <Input title="Test date" value={this.state.schedule} bg="white" name = "schedule" onChange={(event) => this.handleInputChange(event)}  />
-          </FormControl>
+              <Select value={this.state.schedule} bg="white" name="schedule" onChange={(event) => this.handleInputChange(event)} >
+                {this.state.timeTables.map((id, index) => {
+                    return <option value={id} key={index}>{id}</option>
+                })}
+            </Select>
+         </FormControl>
 
           <FormControl >
             <FormLabel>Select roles:</FormLabel>
