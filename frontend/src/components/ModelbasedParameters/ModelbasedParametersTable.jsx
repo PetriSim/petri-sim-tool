@@ -216,6 +216,8 @@ class ModelbasedParametersTable extends React.Component {
                         <Thead>
                         <Tr>
                             <Th>Event ID</Th>
+                            <Th>Interarrival time distribution</Th>
+                            <Th>Distribution data</Th>
                         </Tr>
                         </Thead>
                         <Tbody>
@@ -223,6 +225,8 @@ class ModelbasedParametersTable extends React.Component {
                             {this.props.getData("currentModel").modelParameter.events.map((element) => {
                                 return <Tr>
                                             <Td>{element.id}</Td>
+                                            <Td>{element.interArrivalTime.distributionType}</Td>
+                                            <Td>{element.interArrivalTime.values.map((value) => {return <Text>{value.id + ": " + value.value}</Text>})}</Td>
                                             
                                         </Tr>
 

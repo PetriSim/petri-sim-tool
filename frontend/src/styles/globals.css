@@ -70,3 +70,7 @@ input[type='file'] {
 .css-spn4bz {
     border-bottom: solid 2px rgb(255, 255, 255, 0);
 }
+
+[type="inputRead"] {
+    background-color: rgb(224 224 224) !important
+}

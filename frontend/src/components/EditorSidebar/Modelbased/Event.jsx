@@ -194,12 +194,12 @@ class Event extends React.Component {
             <Flex justifyContent="space-between">
                 <FormControl w="47%">
                     <FormLabel>key:</FormLabel>
-                    <Input value={key} bg="white" type="inputRead"  name="distributionKey" onChange={(event) => this.handleKeyChange(event, index)} />
+                    <Input value={key} bg="white"  name="distributionKey" onChange={(event) => this.handleKeyChange(event, index)} />
                 </FormControl>
 
                 <FormControl w="47%">
                     <FormLabel>value:</FormLabel>
-                    <Input value={this.state.distributionValues[index]} bg="white" type="inputRead" name="distributionValues" onChange={(event) => this.handleInputChange(event, index)} />
+                    <Input value={this.state.distributionValues[index]} bg="white" name="distributionValues" onChange={(event) => this.handleInputChange(event, index)} />
                 </FormControl>
             </Flex></>
 

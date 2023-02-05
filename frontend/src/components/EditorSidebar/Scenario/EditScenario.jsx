@@ -188,22 +188,22 @@ render() {
 
           <FormControl>
               <FormLabel>Starting Date:</FormLabel>
-              <Input value={this.state.startingDate} bg="white" type="inputRead" name="startingDate" onChange={(event) => this.handleInputChange(event)}/>
+              <Input value={this.state.startingDate} bg="white" name="startingDate" onChange={(event) => this.handleInputChange(event)}/>
           </FormControl>
 
           <FormControl>
               <FormLabel>Starting time:</FormLabel>
-              <Input value={this.state.startingTime} bg="white"  type="inputRead" name="startingTime" onChange={(event) => this.handleInputChange(event)}/>
+              <Input value={this.state.startingTime} bg="white"  name="startingTime" onChange={(event) => this.handleInputChange(event)}/>
           </FormControl>
 
           <FormControl>
               <FormLabel>Number of Process Instances:</FormLabel>
-              <Input value={this.state.numberOfInstances} bg="white" type="inputRead"  name="numberOfInstances" onChange={(event) => this.handleInputChange(event)} />
+              <Input value={this.state.numberOfInstances} bg="white"  name="numberOfInstances" onChange={(event) => this.handleInputChange(event)} />
           </FormControl>
 
           <FormControl>
           <FormLabel>Currency:</FormLabel>
-              <Select name="currency" placeholder={this.state.currency} bg="white" type="inputRead"  onChange={(event) => this.handleInputChange(event)} >
+              <Select name="currency" placeholder={this.state.currency} bg="white"  onChange={(event) => this.handleInputChange(event)} >
                 <option value='euro'>euro</option>
                 <option value='dollar'>dollar</option>
               </Select>
@@ -247,12 +247,12 @@ render() {
             <Flex justifyContent="space-between">
                 <FormControl w="47%">
                     <FormLabel>key:</FormLabel>
-                    <Input value={key} bg="white" type="inputRead"  name="distributionKey" onChange={(event) => this.handleKeyChange(event, index)} />
+                    <Input value={key} bg="white"  name="distributionKey" onChange={(event) => this.handleKeyChange(event, index)} />
                 </FormControl>
 
                 <FormControl w="47%">
                     <FormLabel>value:</FormLabel>
-                    <Input value={this.state.distributionValues[index]} bg="white" type="inputRead" name="distributionValues" onChange={(event) => this.handleInputChange(event, index)} />
+                    <Input value={this.state.distributionValues[index]} bg="white" name="distributionValues" onChange={(event) => this.handleInputChange(event, index)} />
                 </FormControl>
             </Flex></>
 
