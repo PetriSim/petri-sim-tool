@@ -60,7 +60,7 @@ app.get('/startdata', (req, res) => {
 
     setTimeout((() => {
         res.send(JSON.parse(files))
-    }), 600)
+    }), 2000)
 
 });
 
@@ -69,18 +69,18 @@ app.get('/startScylla', (req, res) => {
     setTimeout((() => {
         res.send({
             "message": "success",
-            "files": [{ "name": "parameters", "link": "http://localhost:3000/files/1.json", "type": "json" },
-                { "name": "global", "link": "http://localhost:3000/files/2.json", "type": "json" },
-                { "name": "config", "link": "http://localhost:3000/files/3.json", "type": "json" }
+            "files": [{ "name": "parameters", "link": "http://localhost:8000/files/1.json", "type": "json" },
+                { "name": "global", "link": "http://localhost:8000/files/2.json", "type": "json" },
+                { "name": "config", "link": "http://localhost:8000/files/3.json", "type": "json" }
             ]
         })
-    }), 600)
+    }), 1000)
 
 });
 
 app.get("/files/:id", (req, res) => {
     const id = req.params.id;
-    const file = `./files/${id}.json`;
+    const file = `./files/${id}`;
 
     res.download(file);
 });

@@ -132,11 +132,11 @@ function StartView(props) {
             <Text fontSize="xl" textAlign="left" color="#485152" fontWeight="bold" > Start new project</Text>
             <gap />
 
-            <FileUpload title = 'Event log:' accept = '.json' getFile={pushToApp}/>
+            <FileUpload title = 'Event log:' accept = '.xes' getFile={pushToApp}/>
 
             <Flex width = '90%' flexDir = 'column'>
               <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select Discovery Tool:</Text>
-              <Select placeholder = 'choose simulator' width = '100%' color="darkgrey" focusBorderColor='teal' backgroundColor= 'white' icon={<FiChevronDown />}>
+              <Select placeholder = 'choose discovery tool' width = '100%' color="darkgrey" focusBorderColor='teal' backgroundColor= 'white' icon={<FiChevronDown />}>
                 <option value='Simod'>Simod</option>
                 <option value='Option 2'>Option 2</option>
                 <option value='Option 3'>Option 3</option>
@@ -187,7 +187,7 @@ function StartView(props) {
         >
           
    
-          <Text fontSize="xl" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" > Open existing project from files</Text>
+          <Text fontSize="xl" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold" mt="5"> Open existing project from files</Text>
     
 
 
@@ -235,7 +235,7 @@ function StartView(props) {
           width={400} 
           onClick={startExistingProjectNow}
           fontSize="xl" textAlign="left" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold">
-            Open existing project
+            Open project from files
           </Button>
         }
         

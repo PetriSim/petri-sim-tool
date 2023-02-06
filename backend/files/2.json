@@ -1,0 +1,2370 @@
+[{
+        "scenarioName": "Scenario 1",
+        "startingDate": "14-11-2022",
+        "startingTime": "12:00",
+        "numberOfInstances": 2,
+        "interArrivalTime": {
+            "distributionType": "normal",
+            "values": [{
+                    "id": "mean",
+                    "value": 5
+                },
+                {
+                    "id": "variance",
+                    "value": 1
+                }
+            ]
+        },
+        "timeUnit": "mins",
+        "currency": "euro",
+        "resourceParameters": {
+            "resources": [{
+                    "id": "TopManager",
+                    "costHour": 20,
+                    "numberOfInstances": 3
+                },
+                {
+                    "id": "TopManager2",
+                    "costHour": 20,
+                    "numberOfInstances": 3
+                },
+                {
+                    "id": "TopManager3",
+                    "costHour": 20,
+                    "numberOfInstances": 3
+                },
+                {
+                    "id": "Cashier1",
+                    "costHour": 30,
+                    "numberOfInstances": 3
+                },
+                {
+                    "id": "Cashier2",
+                    "costHour": 50,
+                    "numberOfInstances": 3
+                },
+                {
+                    "id": "test",
+                    "costHour": 50,
+                    "numberOfInstances": 3
+                }
+            ],
+            "roles": [{
+                    "id": "Top Management",
+                    "schedule": "8hPerWeek",
+                    "resources": [{
+                            "id": "TopManager"
+                        },
+                        {
+                            "id": "TopManager2"
+                        },
+                        {
+                            "id": "TopManager3"
+                        }
+                    ]
+                },
+                {
+                    "id": "Finance",
+                    "schedule": "7/24",
+                    "resources": [{
+                            "id": "Cashier1"
+                        },
+                        {
+                            "id": "Cashier2"
+                        }
+                    ]
+                }
+            ],
+            "timeTables": [{
+                    "id": "8hPerWeek",
+                    "timeTableItems": [{
+                        "startWeekday": "Monday",
+                        "startTime": "09",
+                        "endWeekday": "Monday",
+                        "endTime": "17"
+                    }]
+                },
+                {
+                    "id": "7/24",
+                    "timeTableItems": [{
+                        "startWeekday": "Friday",
+                        "startTime": "03",
+                        "endWeekday": "Saturday",
+                        "endTime": "13"
+                    }]
+                },
+                {
+                    "id": "special",
+                    "timeTableItems": [{
+                            "startWeekday": "Friday",
+                            "startTime": "03",
+                            "endWeekday": "Saturday",
+                            "endTime": "17"
+                        },
+                        {
+                            "startWeekday": "Tuesday",
+                            "startTime": "09",
+                            "endWeekday": "Tuesday",
+                            "endTime": "10"
+                        }
+                    ]
+                }
+            ]
+        },
+        "models": [{
+                "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
+                "name": "Warenversand",
+                "modelParameter": {
+                    "activities": [{
+                            "id": "Task_0vaxgaa",
+                            "name": "Versandart\nklären",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_023hzxi"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1rss71o"
+                            ]
+                        },
+                        {
+                            "id": "Task_0e6hvnj",
+                            "name": "Angebote von\n3 Spediteuren\neinholen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1xv6wk4"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1pq8ub3"
+                            ]
+                        },
+                        {
+                            "id": "Task_0s79ile",
+                            "name": "Spediteur\nbeauftragen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1pq8ub3"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0ajhekx"
+                            ]
+                        },
+                        {
+                            "id": "Task_05ftug5",
+                            "name": "Ware verpacken",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1ujhfx4"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0b2nw5c"
+                            ]
+                        },
+                        {
+                            "id": "Task_0sl26uo",
+                            "name": "Ware bereitstellen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_06kfaev"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0v64x8b"
+                            ]
+                        },
+                        {
+                            "id": "Task_0jsoxba",
+                            "name": "Paketschein ausfüllen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1dlbln9"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0mp5byl"
+                            ]
+                        },
+                        {
+                            "id": "Task_12j0pib",
+                            "name": "Versicherung\nabschließen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1j94oja"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0kz5g1t"
+                            ]
+                        }
+                    ],
+                    "gateways": [{
+                            "id": "InclusiveGateway_0p2e5vq",
+                            "type": "bpmn:InclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_0iu9po7"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1j94oja",
+                                "SequenceFlow_1dlbln9"
+                            ]
+                        },
+                        {
+                            "id": "InclusiveGateway_1dgb4sg",
+                            "type": "bpmn:InclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_0kz5g1t",
+                                "SequenceFlow_0mp5byl"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0buzwss"
+                            ]
+                        },
+                        {
+                            "id": "ParallelGateway_02fgrfq",
+                            "type": "bpmn:ParallelGateway",
+                            "incoming": [
+                                "SequenceFlow_14a0oky"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_023hzxi",
+                                "SequenceFlow_1ujhfx4"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_1mpgzhg",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_1rss71o"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0iu9po7",
+                                "SequenceFlow_1xv6wk4"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_1ouv9kf",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_0ajhekx",
+                                "SequenceFlow_0buzwss"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_035vf60"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_0z5sib0",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_035vf60",
+                                "SequenceFlow_0b2nw5c"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_06kfaev"
+                            ]
+                        }
+                    ],
+                    "events": [{
+                            "id": "StartEvent_1",
+                            "type": "bpmn:StartEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [],
+                            "outgoing": [
+                                "SequenceFlow_14a0oky"
+                            ]
+                        },
+                        {
+                            "id": "EndEvent_1fx9yp3",
+                            "type": "bpmn:EndEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0v64x8b"
+                            ],
+                            "outgoing": []
+                        }
+                    ],
+                    "sequences": [{
+                            "id": "SequenceFlow_0iu9po7",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1j94oja",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0kz5g1t",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_14a0oky",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_023hzxi",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1rss71o",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1xv6wk4",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1pq8ub3",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0ajhekx",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0buzwss",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_035vf60",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0b2nw5c",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_06kfaev",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0v64x8b",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1ujhfx4",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0mp5byl",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1dlbln9",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        }
+                    ]
+                }
+            },
+            {
+                "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
+                "name": "Schufascoring",
+                "modelParameter": {
+                    "activities": [{
+                            "id": "Task_16winvj",
+                            "name": "Scoring-anfrage senden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0rrtx7k"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0kzld4o",
+                                "MessageFlow_1mm30jd"
+                            ]
+                        },
+                        {
+                            "id": "Task_1fzfxey",
+                            "name": "Schufascore zurückmelden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_12a77en"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1nyeozm",
+                                "MessageFlow_1i21wes"
+                            ]
+                        },
+                        {
+                            "id": "Task_0l942o9",
+                            "name": "Verzögerung melden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0rf5cxd"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_08fsgff",
+                                "MessageFlow_1m6362g"
+                            ]
+                        },
+                        {
+                            "id": "Task_1r15hqs",
+                            "name": "Scoring durchführen (level 1)",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_158pur5"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1nznlgx"
+                            ]
+                        },
+                        {
+                            "id": "Task_02m68xj",
+                            "name": "Scoring durchführen (level 2)",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1yiajt6"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_08jl5se"
+                            ]
+                        },
+                        {
+                            "id": "Task_06dqs9t",
+                            "name": "Schufascore senden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_08jl5se"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0dkbeo7",
+                                "MessageFlow_0bgkr12"
+                            ]
+                        },
+                        {
+                            "id": "Task_07vbn2i",
+                            "name": "Schufascore senden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_052bcer"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1xqy47o",
+                                "MessageFlow_1136yi9"
+                            ]
+                        },
+                        {
+                            "id": "Task_01ouvha",
+                            "name": "Verzögerung melden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0jh32vv"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1yiajt6",
+                                "Association_1ctd4ma",
+                                "MessageFlow_1nwyn8k"
+                            ]
+                        }
+                    ],
+                    "gateways": [{
+                            "id": "ExclusiveGateway_11dldcm",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_1i1amgb",
+                                "SequenceFlow_1fy80l7"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_12a77en"
+                            ]
+                        },
+                        {
+                            "id": "EventBasedGateway_1aqzm1h",
+                            "type": "bpmn:EventBasedGateway",
+                            "incoming": [
+                                "SequenceFlow_0kzld4o"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1emaqh0",
+                                "SequenceFlow_1ccde6h"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_125lzox",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_1xqy47o",
+                                "SequenceFlow_0dkbeo7"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0t0wbx3"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_0rtdod4",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_1nznlgx"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_052bcer",
+                                "SequenceFlow_0jh32vv"
+                            ]
+                        }
+                    ],
+                    "events": [{
+                            "id": "EndEvent_0rp5trg",
+                            "type": "bpmn:EndEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1nyeozm"
+                            ],
+                            "outgoing": []
+                        },
+                        {
+                            "id": "IntermediateCatchEvent_0ujob24",
+                            "type": "bpmn:IntermediateCatchEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1emaqh0",
+                                "MessageFlow_1nwyn8k"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0rf5cxd"
+                            ]
+                        },
+                        {
+                            "id": "IntermediateCatchEvent_0yg7cuh",
+                            "type": "bpmn:IntermediateCatchEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1ccde6h",
+                                "MessageFlow_1136yi9"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1fy80l7"
+                            ]
+                        },
+                        {
+                            "id": "IntermediateCatchEvent_0a8iz14",
+                            "type": "bpmn:IntermediateCatchEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_08fsgff",
+                                "MessageFlow_0bgkr12"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1i1amgb"
+                            ]
+                        },
+                        {
+                            "id": "StartEvent_1els7eb",
+                            "type": "bpmn:StartEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "MessageFlow_1pkfls0"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0rrtx7k"
+                            ]
+                        },
+                        {
+                            "id": "EventBasedGateway_1aqzm1h",
+                            "type": "bpmn:EventBasedGateway",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0kzld4o"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1emaqh0",
+                                "SequenceFlow_1ccde6h"
+                            ]
+                        },
+                        {
+                            "id": "StartEvent_0o849un",
+                            "type": "bpmn:StartEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "MessageFlow_1mm30jd"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_158pur5"
+                            ]
+                        },
+                        {
+                            "id": "EndEvent_0khk0tq",
+                            "type": "bpmn:EndEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0t0wbx3"
+                            ],
+                            "outgoing": []
+                        }
+                    ],
+                    "sequences": [{
+                            "id": "SequenceFlow_0rrtx7k",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_08fsgff",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1i1amgb",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_12a77en",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1nyeozm",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1fy80l7",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0rf5cxd",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0kzld4o",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1emaqh0",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1ccde6h",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_158pur5",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1nznlgx",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1yiajt6",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_08jl5se",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1xqy47o",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0dkbeo7",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0t0wbx3",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_052bcer",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0jh32vv",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "scenarioName": "Scenario 2",
+        "startingDate": "10-11-2022",
+        "startingTime": "12:00",
+        "numberOfInstances": 2,
+        "interArrivalTime": {
+            "distributionType": "uniform",
+            "values": [{
+                    "id": "value1",
+                    "value": 4
+                },
+                {
+                    "id": "value2",
+                    "value": 1
+                },
+                {
+                    "id": "value3",
+                    "value": 10
+                },
+                {
+                    "id": "value4",
+                    "value": 1000
+                }
+            ]
+        },
+        "timeUnit": "mins",
+        "currency": "euro",
+        "resourceParameters": {
+            "resources": [{
+                "id": "TopManager",
+                "costHour": 20,
+                "numberOfInstances": 3,
+                "schedule": "8hPerWeek"
+            }],
+            "roles": [{
+                "id": "Top Management",
+                "schedule": "8hPerWeek",
+                "resources": [{
+                    "id": "TopManager"
+                }]
+            }],
+            "timeTables": [{
+                    "id": "8hPerWeek",
+                    "timeTableItems": [{
+                        "startWeekday": "Monday",
+                        "startTime": "09",
+                        "endWeekday": "Monday",
+                        "endTime": "17"
+                    }]
+                },
+                {
+                    "id": "7/24",
+                    "timeTableItems": [{
+                        "startWeekday": "Monday",
+                        "startTime": "09",
+                        "endWeekday": "FRIDAY",
+                        "endTime": "17"
+                    }]
+                },
+                {
+                    "id": "special",
+                    "timeTableItems": [{
+                            "startWeekday": "Monday",
+                            "startTime": "09",
+                            "endWeekday": "Monday",
+                            "endTime": "17"
+                        },
+                        {
+                            "startWeekday": "Tuesday",
+                            "startTime": "09",
+                            "endWeekday": "Tuesday",
+                            "endTime": "10"
+                        }
+                    ]
+                }
+            ]
+        },
+        "models": [{
+                "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
+                "name": "Warenversand",
+                "modelParameter": {
+                    "activities": [{
+                            "id": "Task_0vaxgaa",
+                            "name": "Versandart\nklären",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_023hzxi"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1rss71o"
+                            ]
+                        },
+                        {
+                            "id": "Task_0e6hvnj",
+                            "name": "Angebote von\n3 Spediteuren\neinholen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1xv6wk4"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1pq8ub3"
+                            ]
+                        },
+                        {
+                            "id": "Task_0s79ile",
+                            "name": "Spediteur\nbeauftragen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1pq8ub3"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0ajhekx"
+                            ]
+                        },
+                        {
+                            "id": "Task_05ftug5",
+                            "name": "Ware verpacken",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1ujhfx4"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0b2nw5c"
+                            ]
+                        },
+                        {
+                            "id": "Task_0sl26uo",
+                            "name": "Ware bereitstellen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_06kfaev"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0v64x8b"
+                            ]
+                        },
+                        {
+                            "id": "Task_0jsoxba",
+                            "name": "Paketschein ausfüllen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1dlbln9"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0mp5byl"
+                            ]
+                        },
+                        {
+                            "id": "Task_12j0pib",
+                            "name": "Versicherung\nabschließen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1j94oja"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0kz5g1t"
+                            ]
+                        }
+                    ],
+                    "gateways": [{
+                            "id": "InclusiveGateway_0p2e5vq",
+                            "type": "bpmn:InclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_0iu9po7"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1j94oja",
+                                "SequenceFlow_1dlbln9"
+                            ]
+                        },
+                        {
+                            "id": "InclusiveGateway_1dgb4sg",
+                            "type": "bpmn:InclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_0kz5g1t",
+                                "SequenceFlow_0mp5byl"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0buzwss"
+                            ]
+                        },
+                        {
+                            "id": "ParallelGateway_02fgrfq",
+                            "type": "bpmn:ParallelGateway",
+                            "incoming": [
+                                "SequenceFlow_14a0oky"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_023hzxi",
+                                "SequenceFlow_1ujhfx4"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_1mpgzhg",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_1rss71o"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0iu9po7",
+                                "SequenceFlow_1xv6wk4"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_1ouv9kf",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_0ajhekx",
+                                "SequenceFlow_0buzwss"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_035vf60"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_0z5sib0",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_035vf60",
+                                "SequenceFlow_0b2nw5c"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_06kfaev"
+                            ]
+                        }
+                    ],
+                    "events": [{
+                            "id": "StartEvent_1",
+                            "type": "bpmn:StartEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [],
+                            "outgoing": [
+                                "SequenceFlow_14a0oky"
+                            ]
+                        },
+                        {
+                            "id": "EndEvent_1fx9yp3",
+                            "type": "bpmn:EndEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0v64x8b"
+                            ],
+                            "outgoing": []
+                        }
+                    ],
+                    "sequences": [{
+                            "id": "SequenceFlow_0iu9po7",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1j94oja",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0kz5g1t",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_14a0oky",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_023hzxi",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1rss71o",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1xv6wk4",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1pq8ub3",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0ajhekx",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0buzwss",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_035vf60",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0b2nw5c",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_06kfaev",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0v64x8b",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1ujhfx4",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0mp5byl",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1dlbln9",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        }
+                    ]
+                }
+            },
+            {
+                "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
+                "name": "Schufascoring",
+                "modelParameter": {
+                    "activities": [{
+                            "id": "Task_16winvj",
+                            "name": "Scoring-anfrage senden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0rrtx7k"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0kzld4o",
+                                "MessageFlow_1mm30jd"
+                            ]
+                        },
+                        {
+                            "id": "Task_1fzfxey",
+                            "name": "Schufascore zurückmelden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_12a77en"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1nyeozm",
+                                "MessageFlow_1i21wes"
+                            ]
+                        },
+                        {
+                            "id": "Task_0l942o9",
+                            "name": "Verzögerung melden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0rf5cxd"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_08fsgff",
+                                "MessageFlow_1m6362g"
+                            ]
+                        },
+                        {
+                            "id": "Task_1r15hqs",
+                            "name": "Scoring durchführen (level 1)",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_158pur5"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1nznlgx"
+                            ]
+                        },
+                        {
+                            "id": "Task_02m68xj",
+                            "name": "Scoring durchführen (level 2)",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1yiajt6"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_08jl5se"
+                            ]
+                        },
+                        {
+                            "id": "Task_06dqs9t",
+                            "name": "Schufascore senden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_08jl5se"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0dkbeo7",
+                                "MessageFlow_0bgkr12"
+                            ]
+                        },
+                        {
+                            "id": "Task_07vbn2i",
+                            "name": "Schufascore senden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_052bcer"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1xqy47o",
+                                "MessageFlow_1136yi9"
+                            ]
+                        },
+                        {
+                            "id": "Task_01ouvha",
+                            "name": "Verzögerung melden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0jh32vv"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1yiajt6",
+                                "Association_1ctd4ma",
+                                "MessageFlow_1nwyn8k"
+                            ]
+                        }
+                    ],
+                    "gateways": [{
+                            "id": "ExclusiveGateway_11dldcm",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_1i1amgb",
+                                "SequenceFlow_1fy80l7"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_12a77en"
+                            ]
+                        },
+                        {
+                            "id": "EventBasedGateway_1aqzm1h",
+                            "type": "bpmn:EventBasedGateway",
+                            "incoming": [
+                                "SequenceFlow_0kzld4o"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1emaqh0",
+                                "SequenceFlow_1ccde6h"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_125lzox",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_1xqy47o",
+                                "SequenceFlow_0dkbeo7"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0t0wbx3"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_0rtdod4",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_1nznlgx"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_052bcer",
+                                "SequenceFlow_0jh32vv"
+                            ]
+                        }
+                    ],
+                    "events": [{
+                            "id": "EndEvent_0rp5trg",
+                            "type": "bpmn:EndEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1nyeozm"
+                            ],
+                            "outgoing": []
+                        },
+                        {
+                            "id": "IntermediateCatchEvent_0ujob24",
+                            "type": "bpmn:IntermediateCatchEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1emaqh0",
+                                "MessageFlow_1nwyn8k"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0rf5cxd"
+                            ]
+                        },
+                        {
+                            "id": "IntermediateCatchEvent_0yg7cuh",
+                            "type": "bpmn:IntermediateCatchEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1ccde6h",
+                                "MessageFlow_1136yi9"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1fy80l7"
+                            ]
+                        },
+                        {
+                            "id": "IntermediateCatchEvent_0a8iz14",
+                            "type": "bpmn:IntermediateCatchEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_08fsgff",
+                                "MessageFlow_0bgkr12"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1i1amgb"
+                            ]
+                        },
+                        {
+                            "id": "StartEvent_1els7eb",
+                            "type": "bpmn:StartEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "MessageFlow_1pkfls0"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0rrtx7k"
+                            ]
+                        },
+                        {
+                            "id": "EventBasedGateway_1aqzm1h",
+                            "type": "bpmn:EventBasedGateway",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0kzld4o"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1emaqh0",
+                                "SequenceFlow_1ccde6h"
+                            ]
+                        },
+                        {
+                            "id": "StartEvent_0o849un",
+                            "type": "bpmn:StartEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "MessageFlow_1mm30jd"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_158pur5"
+                            ]
+                        },
+                        {
+                            "id": "EndEvent_0khk0tq",
+                            "type": "bpmn:EndEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0t0wbx3"
+                            ],
+                            "outgoing": []
+                        }
+                    ],
+                    "sequences": [{
+                            "id": "SequenceFlow_0rrtx7k",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_08fsgff",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1i1amgb",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_12a77en",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1nyeozm",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1fy80l7",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0rf5cxd",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0kzld4o",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1emaqh0",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1ccde6h",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_158pur5",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1nznlgx",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1yiajt6",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_08jl5se",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1xqy47o",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0dkbeo7",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0t0wbx3",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_052bcer",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0jh32vv",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "scenarioName": "Scenario 3",
+        "startingDate": "11-11-2022",
+        "startingTime": "16:00",
+        "numberOfInstances": 2,
+        "interArrivalTime": {
+            "distributionType": "normal",
+            "values": [{
+                "id": "mean",
+                "value": 5
+            }]
+        },
+        "timeUnit": "mins",
+        "currency": "euro",
+        "resourceParameters": {
+            "resources": [{
+                "id": "TopManager",
+                "costHour": 20,
+                "numberOfInstances": 3,
+                "schedule": "8hPerWeek"
+            }],
+            "roles": [{
+                "id": "Top Management",
+                "schedule": "8hPerWeek",
+                "resources": [{
+                    "id": "TopManager"
+                }]
+            }],
+            "timeTables": [{
+                    "id": "8hPerWeek",
+                    "timeTableItems": [{
+                        "startWeekday": "Monday",
+                        "startTime": "09",
+                        "endWeekday": "Monday",
+                        "endTime": "17"
+                    }]
+                },
+                {
+                    "id": "7/24",
+                    "timeTableItems": [{
+                        "startWeekday": "Monday",
+                        "startTime": "09",
+                        "endWeekday": "FRIDAY",
+                        "endTime": "17"
+                    }]
+                },
+                {
+                    "id": "special",
+                    "timeTableItems": [{
+                            "startWeekday": "Monday",
+                            "startTime": "09",
+                            "endWeekday": "Monday",
+                            "endTime": "17"
+                        },
+                        {
+                            "startWeekday": "Tuesday",
+                            "startTime": "09",
+                            "endWeekday": "Tuesday",
+                            "endTime": "10"
+                        }
+                    ]
+                }
+            ]
+        },
+        "models": [{
+                "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/01-Vorbereitung-des-Warenversands/03-Musterl%C3%B6sung/vorbereitung-des-warenversands.bpmn",
+                "name": "Warenversand",
+                "modelParameter": {
+                    "activities": [{
+                            "id": "Task_0vaxgaa",
+                            "name": "Versandart\nklären",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_023hzxi"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1rss71o"
+                            ]
+                        },
+                        {
+                            "id": "Task_0e6hvnj",
+                            "name": "Angebote von\n3 Spediteuren\neinholen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1xv6wk4"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1pq8ub3"
+                            ]
+                        },
+                        {
+                            "id": "Task_0s79ile",
+                            "name": "Spediteur\nbeauftragen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1pq8ub3"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0ajhekx"
+                            ]
+                        },
+                        {
+                            "id": "Task_05ftug5",
+                            "name": "Ware verpacken",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1ujhfx4"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0b2nw5c"
+                            ]
+                        },
+                        {
+                            "id": "Task_0sl26uo",
+                            "name": "Ware bereitstellen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_06kfaev"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0v64x8b"
+                            ]
+                        },
+                        {
+                            "id": "Task_0jsoxba",
+                            "name": "Paketschein ausfüllen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1dlbln9"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0mp5byl"
+                            ]
+                        },
+                        {
+                            "id": "Task_12j0pib",
+                            "name": "Versicherung\nabschließen",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1j94oja"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0kz5g1t"
+                            ]
+                        }
+                    ],
+                    "gateways": [{
+                            "id": "InclusiveGateway_0p2e5vq",
+                            "type": "bpmn:InclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_0iu9po7"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1j94oja",
+                                "SequenceFlow_1dlbln9"
+                            ]
+                        },
+                        {
+                            "id": "InclusiveGateway_1dgb4sg",
+                            "type": "bpmn:InclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_0kz5g1t",
+                                "SequenceFlow_0mp5byl"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0buzwss"
+                            ]
+                        },
+                        {
+                            "id": "ParallelGateway_02fgrfq",
+                            "type": "bpmn:ParallelGateway",
+                            "incoming": [
+                                "SequenceFlow_14a0oky"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_023hzxi",
+                                "SequenceFlow_1ujhfx4"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_1mpgzhg",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_1rss71o"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0iu9po7",
+                                "SequenceFlow_1xv6wk4"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_1ouv9kf",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_0ajhekx",
+                                "SequenceFlow_0buzwss"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_035vf60"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_0z5sib0",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_035vf60",
+                                "SequenceFlow_0b2nw5c"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_06kfaev"
+                            ]
+                        }
+                    ],
+                    "events": [{
+                            "id": "StartEvent_1",
+                            "type": "bpmn:StartEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [],
+                            "outgoing": [
+                                "SequenceFlow_14a0oky"
+                            ]
+                        },
+                        {
+                            "id": "EndEvent_1fx9yp3",
+                            "type": "bpmn:EndEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0v64x8b"
+                            ],
+                            "outgoing": []
+                        }
+                    ],
+                    "sequences": [{
+                            "id": "SequenceFlow_0iu9po7",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1j94oja",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0kz5g1t",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_14a0oky",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_023hzxi",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1rss71o",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1xv6wk4",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1pq8ub3",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0ajhekx",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0buzwss",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_035vf60",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0b2nw5c",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_06kfaev",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0v64x8b",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1ujhfx4",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0mp5byl",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1dlbln9",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        }
+                    ]
+                }
+            },
+            {
+                "BPMN": "https://raw.githubusercontent.com/camunda/bpmn-for-research/master/BPMN%20for%20Research/German/03-Schufascoring/03-Musterl%C3%B6sung/schufascoring-asynchron.bpmn",
+                "name": "Schufascoring",
+                "modelParameter": {
+                    "activities": [{
+                            "id": "Task_16winvj",
+                            "name": "Scoring-anfrage senden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0rrtx7k"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0kzld4o",
+                                "MessageFlow_1mm30jd"
+                            ]
+                        },
+                        {
+                            "id": "Task_1fzfxey",
+                            "name": "Schufascore zurückmelden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_12a77en"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1nyeozm",
+                                "MessageFlow_1i21wes"
+                            ]
+                        },
+                        {
+                            "id": "Task_0l942o9",
+                            "name": "Verzögerung melden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0rf5cxd"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_08fsgff",
+                                "MessageFlow_1m6362g"
+                            ]
+                        },
+                        {
+                            "id": "Task_1r15hqs",
+                            "name": "Scoring durchführen (level 1)",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_158pur5"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1nznlgx"
+                            ]
+                        },
+                        {
+                            "id": "Task_02m68xj",
+                            "name": "Scoring durchführen (level 2)",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1yiajt6"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_08jl5se"
+                            ]
+                        },
+                        {
+                            "id": "Task_06dqs9t",
+                            "name": "Schufascore senden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_08jl5se"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0dkbeo7",
+                                "MessageFlow_0bgkr12"
+                            ]
+                        },
+                        {
+                            "id": "Task_07vbn2i",
+                            "name": "Schufascore senden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_052bcer"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1xqy47o",
+                                "MessageFlow_1136yi9"
+                            ]
+                        },
+                        {
+                            "id": "Task_01ouvha",
+                            "name": "Verzögerung melden",
+                            "type": "bpmn:Task",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0jh32vv"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1yiajt6",
+                                "Association_1ctd4ma",
+                                "MessageFlow_1nwyn8k"
+                            ]
+                        }
+                    ],
+                    "gateways": [{
+                            "id": "ExclusiveGateway_11dldcm",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_1i1amgb",
+                                "SequenceFlow_1fy80l7"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_12a77en"
+                            ]
+                        },
+                        {
+                            "id": "EventBasedGateway_1aqzm1h",
+                            "type": "bpmn:EventBasedGateway",
+                            "incoming": [
+                                "SequenceFlow_0kzld4o"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1emaqh0",
+                                "SequenceFlow_1ccde6h"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_125lzox",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_1xqy47o",
+                                "SequenceFlow_0dkbeo7"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0t0wbx3"
+                            ]
+                        },
+                        {
+                            "id": "ExclusiveGateway_0rtdod4",
+                            "type": "bpmn:ExclusiveGateway",
+                            "incoming": [
+                                "SequenceFlow_1nznlgx"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_052bcer",
+                                "SequenceFlow_0jh32vv"
+                            ]
+                        }
+                    ],
+                    "events": [{
+                            "id": "EndEvent_0rp5trg",
+                            "type": "bpmn:EndEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1nyeozm"
+                            ],
+                            "outgoing": []
+                        },
+                        {
+                            "id": "IntermediateCatchEvent_0ujob24",
+                            "type": "bpmn:IntermediateCatchEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1emaqh0",
+                                "MessageFlow_1nwyn8k"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0rf5cxd"
+                            ]
+                        },
+                        {
+                            "id": "IntermediateCatchEvent_0yg7cuh",
+                            "type": "bpmn:IntermediateCatchEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_1ccde6h",
+                                "MessageFlow_1136yi9"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1fy80l7"
+                            ]
+                        },
+                        {
+                            "id": "IntermediateCatchEvent_0a8iz14",
+                            "type": "bpmn:IntermediateCatchEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_08fsgff",
+                                "MessageFlow_0bgkr12"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1i1amgb"
+                            ]
+                        },
+                        {
+                            "id": "StartEvent_1els7eb",
+                            "type": "bpmn:StartEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "MessageFlow_1pkfls0"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_0rrtx7k"
+                            ]
+                        },
+                        {
+                            "id": "EventBasedGateway_1aqzm1h",
+                            "type": "bpmn:EventBasedGateway",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0kzld4o"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_1emaqh0",
+                                "SequenceFlow_1ccde6h"
+                            ]
+                        },
+                        {
+                            "id": "StartEvent_0o849un",
+                            "type": "bpmn:StartEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "MessageFlow_1mm30jd"
+                            ],
+                            "outgoing": [
+                                "SequenceFlow_158pur5"
+                            ]
+                        },
+                        {
+                            "id": "EndEvent_0khk0tq",
+                            "type": "bpmn:EndEvent",
+                            "resource": "Courier",
+                            "duration": 5,
+                            "unit": "mins",
+                            "cost": 2,
+                            "currency": "euro",
+                            "incoming": [
+                                "SequenceFlow_0t0wbx3"
+                            ],
+                            "outgoing": []
+                        }
+                    ],
+                    "sequences": [{
+                            "id": "SequenceFlow_0rrtx7k",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_08fsgff",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1i1amgb",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_12a77en",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1nyeozm",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1fy80l7",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0rf5cxd",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0kzld4o",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1emaqh0",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1ccde6h",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_158pur5",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1nznlgx",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1yiajt6",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_08jl5se",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_1xqy47o",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0dkbeo7",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0t0wbx3",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_052bcer",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        },
+                        {
+                            "id": "SequenceFlow_0jh32vv",
+                            "type": "bpmn:SequenceFlow",
+                            "probability": 0.25
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+]
