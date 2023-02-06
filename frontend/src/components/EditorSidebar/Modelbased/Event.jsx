@@ -36,6 +36,12 @@ class Event extends React.Component {
         value => value.id === this.props.selectedObject.id
       );
 
+      if(currentEvent === undefined){
+        this.props.setDataObj({})
+        return
+      }
+
+
       this.setState({currentEvent: currentEvent})
 
 

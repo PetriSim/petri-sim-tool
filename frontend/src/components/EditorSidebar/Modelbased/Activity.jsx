@@ -6,7 +6,7 @@ import { Input, FormControl, FormLabel, Select, Stack, Button, Box,  ButtonGroup
 import React, { useState, useEffect } from 'react'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 
-const Activity = ({ getData, setData, selectedObject, currentScenario, currentBpmn }) => {
+const Activity = ({ getData, setData, selectedObject, currentScenario, currentBpmn, setDataObj }) => {
   const [unit, setUnit] = useState("");
   const [cost, setCost] = useState("");
   const [currency, setCurrency] = useState("");
@@ -32,12 +32,23 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
 
 
   useEffect(() => {
+   
+
     const currentActivity = getData("currentModel").modelParameter.activities.find(
       value => value.id === selectedObject.id
     );
 
     let newTypes = distributionTypes;
 
+    console.log("a")
+    console.log(selectedObject)
+    console.log(getData("currentModel").modelParameter.activities)
+    console.log(currentActivity)
+
+    if(currentActivity === undefined){
+      setDataObj({})
+      return
+    }
     
       newTypes.find(
         (dis) => dis.distribution_name === currentActivity.duration.distributionType

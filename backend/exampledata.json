@@ -880,7 +880,18 @@
                         "id": "EndEvent_0rp5trg",
                         "type": "bpmn:EndEvent",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -893,7 +904,18 @@
                         "id": "IntermediateCatchEvent_0ujob24",
                         "type": "bpmn:IntermediateCatchEvent",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -909,7 +931,18 @@
                         "id": "IntermediateCatchEvent_0yg7cuh",
                         "type": "bpmn:IntermediateCatchEvent",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -925,7 +958,18 @@
                         "id": "IntermediateCatchEvent_0a8iz14",
                         "type": "bpmn:IntermediateCatchEvent",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -941,7 +985,18 @@
                         "id": "StartEvent_1els7eb",
                         "type": "bpmn:StartEvent",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -956,7 +1011,18 @@
                         "id": "EventBasedGateway_1aqzm1h",
                         "type": "bpmn:EventBasedGateway",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -972,7 +1038,18 @@
                         "id": "StartEvent_0o849un",
                         "type": "bpmn:StartEvent",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
@@ -987,7 +1064,18 @@
                         "id": "EndEvent_0khk0tq",
                         "type": "bpmn:EndEvent",
                         "resources": ["Courier", "Test"],
-                        "duration": 5,
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
                         "unit": "mins",
                         "cost": 2,
                         "currency": "euro",
