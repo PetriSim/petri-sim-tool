@@ -1,79 +1,26 @@
 {
     "name": "petri-sim-tool",
-    "version": "0.0.1",
-    "main": "./public/electron.js",
-    "author": "Furat Hamdan",
-    "description": "PetriSim",
-    "homepage": "./",
-    "private": true,
-    "dependencies": {
-        "@chakra-ui/icons": "^2.0.12",
-        "@chakra-ui/react": "^2.4.1",
-        "@emotion/react": "^11.10.5",
-        "@emotion/styled": "^11.10.5",
-        "@testing-library/jest-dom": "^5.16.5",
-        "@testing-library/react": "^13.4.0",
-        "@testing-library/user-event": "^14.4.3",
-        "antd": "^5.1.6",
-        "axios": "^0.20.0",
-        "bpmn-js": "7.3.0",
-        "bpmn-moddle": "^8.0.0",
-        "concurrently": "^7.5.0",
-        "electron": "^21.3.0",
-        "electron-builder": "^23.6.0",
-        "electron-is-dev": "^2.0.0",
-        "framer-motion": "^6.5.1",
-        "next-routes": "^1.4.2",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-hook-form": "^7.42.0",
-        "react-icons": "^3.11.0",
-        "react-scripts": "5.0.1",
-        "wait-on": "^6.0.1",
-        "web-vitals": "^2.1.4"
-    },
+    "version": "1.0.0",
+    "description": "![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/cypress.yml/badge.svg) ![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/dockerCompose.yml/badge.svg)",
+    "main": "index.js",
     "scripts": {
-        "start": "react-scripts start",
-        "build": "CI=false && react-scripts build",
-        "test": "cypress open",
-        "eject": "react-scripts eject",
-        "start-electron": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
-        "package": "electron-builder build --mac --win -c.extraMetadata.main=build/electron.js --publish never",
-        "publish": "electron-builder build --mac --win --publish always",
-        "cypress:open": "cypress open"
+        "postinstall": "(cd frontend && npm install); (cd backend && npm install)",
+        "start": "concurrently \"npm run server\" \"npm run client\"",
+        "server": "npm start --prefix backend",
+        "client": "npm start --prefix frontend",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "eslintConfig": {
-        "extends": "react-app"
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PetriSim/petri-sim-tool.git"
     },
-    "browserslist": [
-        ">0.2%",
-        "not dead",
-        "not ie <= 11",
-        "not op_mini all"
-    ],
-    "build": {
-        "appId": "com.electron.myapp",
-        "productName": "My Electron App",
-        "files": [
-            "build/**/*",
-            "node_modules/**/*"
-        ],
-        "directories": {
-            "buildResources": "public"
-        },
-        "mac": {
-            "target": "dmg"
-        },
-        "win": {
-            "target": "nsis"
-        },
-        "linux": {
-            "target": "deb"
-        }
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/PetriSim/petri-sim-tool/issues"
     },
-    "devDependencies": {
-        "@testing-library/cypress": "^8.0.7",
-        "cypress": "^12.0.0",
-        "react-router-dom": "^6.4.3"
+    "homepage": "https://github.com/PetriSim/petri-sim-tool#readme",
+    "dependencies": {
+        "concurrently": "^7.6.0"
     }
 }

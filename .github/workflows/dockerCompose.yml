@@ -1,0 +1,26 @@
+name: Build and push docker
+ 
+on: [push]
+   
+ 
+ 
+jobs:
+  build-images:
+      runs-on: ubuntu-latest
+
+      steps:
+      # Log into github registry    
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin  
+      # Check out the repo    
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Build the images    
+      - name: Build the docker-compose stack  
+        run: docker-compose -f docker-compose.yml build
+      # List images
+      - name: List images
+        run: docker images
+      # Push images
+      - name: Push images
+        run: docker-compose -f docker-compose.yml push --ignore-push-failures

@@ -1,16 +1,23 @@
-![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/CI.yml/badge.svg)
-
+![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/cypress.yml/badge.svg)
+![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/dockerCompose.yml/badge.svg)
 
 ## Run with Docker
 
+1. Clone the repository
 ```console
-docker pull ghcr.io/petrisim/petri-sim-tool:latest
+git clone https://github.com/PetriSim/petri-sim-tool.git
 ```
 
-Starting a container:
+2. Go to the project directory
 
 ```console
-docker run -p 3000:3000 -d ghcr.io/petrisim/petri-sim-tool:latest
+cd petri-sim-tool 
+```
+
+3. Start the docker containers by using docker compose
+
+```console
+docker-compose -f docker-compose.yml up -d
 ```
 
 ## Run from source
