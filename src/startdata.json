@@ -121,7 +121,7 @@
             "distributionType": "fixed",
             "values": [{
                     "id": "mean",
-                    "value": 4.0
+                    "value": 4
                 },
                 {
                     "id": "variance",
@@ -135,12 +135,12 @@
             "resources": [{
                 "id": "TopManager",
                 "costHour": 20,
-                "numberOfInstances": 3,
+                "numberOfInstances": 1,
                 "schedule": "8hPerWeek"
             }],
             "roles": [{
                 "id": "Top Management",
-                "schedule": "8hPerWeek",
+                "schedule": "7/24",
                 "resources": [{
                     "id": "TopManager"
                 }]

@@ -28,47 +28,190 @@ import {
     PopoverCloseButton,
     PopoverBody
 } from '@chakra-ui/react';
+import OverviewTableCompare from "../Background/OverviewTableCompare";
 
 
-function OverviewPage(props) {
+function ComparePage(props) {
 
     const {onOpen, onClose} = useDisclosure()
-    let i, notsameScenario = [], notsameRes = [], valueRes = [];
+    let i, notsameRes = [], valueRes = [], ResourceCompared = [];
     const [isOpen, setIsOpen] = useState(false);
     const [specificValue, setSpecificValue] = useState(null);
-    let distr_values
+    let distr_values = []
     let scenario_name, scenario_date, x
+    const [notsameScenario, notSameScenario] = useState([]);
+    const [scenDiff, myScenDiff] = useState([]);
+    let newItem
+
+    /*    const isPopover1 = (field_id) => {
+            if (notsameScenario.includes(field_id)) {
+                return true
+            } else return false
+        };*/
 
     const isPopover = (field_id) => {
-        if (notsameScenario.includes(field_id)) {
+        if (scenDiff.includes(field_id)) {
             return true
         } else return false
     };
 
+    const isDifferentPopover = (field_id) => {
+        ResourceCompared.map((role) => {
+            if (role.field === field_id) {
+                return true
+            } else return false
+        })
+    };
 
-    const getColor = (field_id) => {
-        if (notsameScenario.includes(field_id)) {
-            return {bg: "#dce5e6"};
-        } else {
-            return {bg: 'white'};
+    const isPopDiff = (field_id, id, value) => {
+        for (let i = 0; i < ResourceCompared.length; i++) {
+            if (ResourceCompared[i].id && ResourceCompared[i].field === field_id && ResourceCompared[i].value === value) {
+                return true;
+            }
         }
-    }
+        return false;
+        /*
+            ResourceCompared.map((role) => {
+                if (role.field === field_id && role.id === id && role.value === value) {
+                    return true
+                } else return false
+            })*/
+    };
 
-    const getColRoles = (field_id) => {
-        if (notsameRes.includes(field_id)) {
-            return {backgroundColor: '#dce5e6'};
-        } else {
-            return {backgroundColor: 'white'};
-        }
-    }
+    const isDiffTextColor = (field_id, id, value) => {
+        ResourceCompared.map((role) => {
+            if (role.field === field_id && role.id === id && role.value === value) {
+                return {color: '#6d0d06'};
+            } else {
+                return {color: 'black'};
+            }
+        })
+    };
 
-    const getColorRes = (field_id, value_res) => {
+    const isPopoverRes = (field_id, value_res) => {
         if (notsameRes.includes(field_id) && valueRes.includes(value_res)) {
-            return {backgroundColor: '#dce5e6'};
+            return true
         } else {
-            return {backgroundColor: 'white'};
+            return false
         }
     }
+    const isPopoverRol = (field_id) => {
+        if (notsameRes.includes(field_id)) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const rolePopover = (role) => {
+        return props.getData("allScenarios").map((element) => {
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                let res = element.resourceParameters.roles.find(item => item.id === role)
+                if (res !== undefined) {
+                    return <div>{element.scenarioName}: {role}</div>
+                }
+                return <Text>{element.scenarioName}: this department is not defined</Text>
+            }
+        })
+    }
+
+    const timetablePopover = (role) => {
+        return props.getData("allScenarios").map((element) => {
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                let res = element.resourceParameters.roles.find(item => item.id === role)
+                if (res !== undefined) {
+                    return <div>{element.scenarioName}: {res.schedule}</div>
+                }
+                return <Text>{element.scenarioName}: this department is not defined</Text>
+            }
+        })
+    }
+    {props.getData("allScenarios").map((element) => {{
+        props.scenariosCompare.includes(element.scenarioName) === true ? element.resourceParameters.resources.map((res) => {
+                x =  element.scenarioName + ":" + " " + res.id + ":" + " " + res.costHour})
+            : x = null }
+        return <div >{x}</div>
+    })}
+let res = []
+    let resource = []
+
+    const costsPopover = (role) => {
+        return props.getData("allScenarios").map((element) => {
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                res = element.resourceParameters.roles.find(item => item.id === role)
+                if (res !== undefined) {
+                   return res.resources.map((ele) => {
+                        resource = element.resourceParameters.resources.find(item => item.id === ele.id)
+                       if (resource !== undefined) {
+                           return <Text>{element.scenarioName}: {resource.id}: {resource.costHour} </Text>
+                       }
+                    })
+                    return <Text>{element.scenarioName}: role is not defined</Text>
+                }
+                return <Text>{element.scenarioName}: this department is not defined</Text>
+            }
+        })
+    }
+
+    const quantityPopover = (role) => {
+        return props.getData("allScenarios").map((element) => {
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                res = element.resourceParameters.roles.find(item => item.id === role)
+                if (res !== undefined) {
+                    return res.resources.map((ele) => {
+                        resource = element.resourceParameters.resources.find(item => item.id === ele.id)
+                        if (resource !== undefined) {
+                            return <Text>{element.scenarioName}: {resource.id}: {resource.numberOfInstances} </Text>
+                        }
+                    })
+                    return <Text>{element.scenarioName}: role is not defined</Text>
+                }
+                return <Text>{element.scenarioName}: this department is not defined</Text>
+            }
+        })
+    }
+
+    const resourcePopover = (role) => {
+        return props.getData("allScenarios").map((element) => {
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                let res = element.resourceParameters.roles.find(item => item.id === role)
+                if (res !== undefined) {
+                    //element.resourceParameters.roles.resources.map((res) => {
+                      //  return <div>{res.id}</div>
+                    return res.resources.map((ele) =><div>{element.scenarioName}: {ele.id}</div>)
+                    //})
+                    //return  <Text>{element.scenarioName}</Text>
+                }
+                  else {
+                  return <Text>{element.scenarioName}: department is not defined</Text>
+                 }
+            }
+                })
+            }
+
+    /*    const getColor = (field_id) => {
+            if (notsameScenario.includes(field_id)) {
+                return {bg: "#dce5e6"};
+            } else {
+                return {bg: 'white'};
+            }
+        }
+
+        const getColRoles = (field_id) => {
+            if (notsameRes.includes(field_id)) {
+                return {backgroundColor: '#dce5e6'};
+            } else {
+                return {backgroundColor: 'white'};
+            }
+        }
+
+        const getColorRes = (field_id, value_res) => {
+            if (notsameRes.includes(field_id) && valueRes.includes(value_res)) {
+                return {backgroundColor: '#dce5e6'};
+            } else {
+                return {backgroundColor: 'white'};
+            }
+        }*/
 
     const getTextColor = (field_id, value_res) => {
         if (notsameRes.includes(field_id) && valueRes.includes(value_res)) {
@@ -80,95 +223,146 @@ function OverviewPage(props) {
 
 
     notsameScenario.length = 0
-
+    let each_scenarioRoles
 
     for (i = 0; i < props.getData("allScenarios").length; i++) {
+        each_scenarioRoles = props.getData("allScenarios")[i].resourceParameters.roles;
         if (props.scenariosCompare.includes(props.getData("allScenarios")[i].scenarioName)) {
             if (props.getData("allScenarios")[i].resourceParameters.roles !== props.getData("currentScenario").resourceParameters.roles) {
-                {
+
+                props.getData("currentScenario").resourceParameters.roles.map((current_element) => {
                     props.getData("allScenarios")[i].resourceParameters.roles.map((element) => {
-                        {
-                            props.getData("currentScenario").resourceParameters.roles.map((current_element) => {
+                        newItem = 0
+                        if (current_element.id !== element.id) {
+                            newItem = {
+                                field: "role_id",
+                                id: current_element.id,
+                                value: current_element.id
+                            }
+                            ResourceCompared.push(newItem);
+                        }
 
-                                if (element.id !== current_element.id) {
-                                    notsameRes.push("id")
-                                    valueRes.push(current_element.id)
-                                }
+                        if (element.schedule !== current_element.schedule) {
+                            notsameRes.push("schedule")
+                            valueRes.push(current_element.schedule)
+                            newItem = {
+                                field: "schedule",
+                                id: current_element.id,
+                                value: current_element.schedule
+                            }
+                            ResourceCompared.push(newItem);
+                        }
 
-                                if (element.numberOfInstances !== current_element.numberOfInstances) {
-                                    notsameRes.push("numberOfInstances")
-                                    valueRes.push(current_element.numberOfInstances)
-                                }
-
-                                if (element.schedule !== current_element.schedule) {
-                                    notsameRes.push("schedule")
-                                    valueRes.push(current_element.schedule)
-                                }
-
-                                if (element.resources !== current_element.resources) {
+                        if (element.resources !== current_element.resources) {
+                            {
+                                element.resources.map((resource1) => {
                                     {
-                                        element.resources.map((resource1) => {
-                                            {
-                                                current_element.resources.map((current_resource) => {
+                                        current_element.resources.map((current_resource) => {
 
-                                                    if (resource1.id !== current_resource.id) {
-                                                        notsameRes.push("resource")
-                                                        valueRes.push(current_resource.id)
-                                                    }
-                                                })
+                                            if (resource1.id !== current_resource.id) {
+                                                notsameRes.push("resource")
+                                                valueRes.push(current_resource.id)
+                                                newItem = {
+                                                    field: "resource",
+                                                    id: current_resource.id,
+                                                    value: current_resource.id
+                                                }
+                                                ResourceCompared.push(newItem);
                                             }
 
+                                            if (resource1.id === current_resource.id) {
+                                                if (resource1.numberOfInstances !== current_resource.numberOfInstances) {
+                                                    ResourceCompared.field.push("quantity")
+                                                    ResourceCompared.id.push(current_resource.id)
+                                                    ResourceCompared.value.push(current_resource.numberOfInstances)
+                                                }
+                                                if (resource1.costHour !== current_resource.costHour) {
+                                                    ResourceCompared.field.push("cost")
+                                                    ResourceCompared.id.push(current_resource.id)
+                                                    ResourceCompared.value.push(current_resource.costHour)
+                                                }
+                                            }
                                         })
                                     }
 
+                                })
+                            }
 
-                                }
 
-
-                            })
                         }
 
                     })
-                }
+                })
             }
+
         } else {
         }
 
     }
 
+    /*  props.getData("allScenarios")[i].resourceParameters.roles.map((element) => {
+
+      if (element.id !== current_element.id) {
+          notsameRes.push("id")
+          valueRes.push(current_element.id)
+          /!* ResourceCompared.field.push("role_id")
+           ResourceCompared.id.push(current_element.id)
+           ResourceCompared.value.push(current_element.id)*!/
+
+      }
+
+
+      if (element.numberOfInstances !== current_element.numberOfInstances) {
+          notsameRes.push("numberOfInstances")
+          valueRes.push(current_element.numberOfInstances)
+
+      }
+*/
 
     for (i = 0; i < props.getData("allScenarios").length; i++) {
 
         if (props.scenariosCompare.includes(props.getData("allScenarios")[i].scenarioName)) {
 
             if (props.getData("allScenarios")[i].scenarioName !== props.getData("currentScenario").scenarioName) {
-                notsameScenario.push("scenarioName")
+                //notsameScenario.push("scenarioName")
+                scenDiff[scenDiff.length] = "scenarioName";
             }
 
             if (props.getData("allScenarios")[i].startingDate !== props.getData("currentScenario").startingDate) {
-                notsameScenario.push("startingDate")
+                // notsameScenario.push("startingDate")
+                scenDiff[scenDiff.length] = "startingDate";
             }
 
             if (props.getData("allScenarios")[i].startingTime !== props.getData("currentScenario").startingTime) {
-                notsameScenario.push("startingTime")
+                // notsameScenario.push("startingTime")
+                scenDiff[scenDiff.length] = "startingTime";
             }
             if (props.getData("allScenarios")[i].numberOfInstances !== props.getData("currentScenario").numberOfInstances) {
-                notsameScenario.push("numberOfInstances")
+                //notsameScenario.push("numberOfInstances")
+                scenDiff[scenDiff.length] = "numberOfInstances";
             }
             if (props.getData("allScenarios")[i].interArrivalTime.distributionType !== props.getData("currentScenario").interArrivalTime.distributionType) {
-                notsameScenario.push("distributionType")
+                // notsameScenario.push("distributionType")
+                scenDiff[scenDiff.length] = "distributionType";
             }
             if (props.getData("allScenarios")[i].timeUnit !== props.getData("currentScenario").timeUnit) {
-                notsameScenario.push("timeUnit")
+                // notsameScenario.push("timeUnit")
+                scenDiff[scenDiff.length] = "timeUnit";
             }
             if (props.getData("allScenarios")[i].interArrivalTime.values !== props.getData("currentScenario").interArrivalTime.values) {
-                notsameScenario.push("distribution")
+                // notsameScenario.push("distribution")
+                scenDiff[scenDiff.length] = "distribution";
+            }
+
+            if (props.getData("allScenarios")[i].currency !== props.getData("currentScenario").currency) {
+                //notsameScenario.push("currency")
+                scenDiff[scenDiff.length] = "currency";
             }
 
         } else {
         }
     }
-
+    props.setNotSameScenario(scenDiff)
 
     return (
         <>
@@ -210,202 +404,8 @@ function OverviewPage(props) {
                         <Heading size='md'>Scenario Overview</Heading>
                     </CardHeader>
                     <CardBody>
-                        <Table variant='simple'>
-                            <Thead w="100%">
-                                <Tr>
-                                    <Th>Scenario</Th>
-                                    <Th>Starting date</Th>
-                                    <Th>Starting time</Th>
-                                    <Th>Replications</Th>
-                                    <Th>Inter-arrival Time:Distribution</Th>
-                                    <Th>Distribution Data</Th>
-                                    <Th>Time unit</Th>
-                                </Tr>
-                            </Thead>
-                            <Tbody>
-                                <Tr>
-                                    <Td>
-                                        {isPopover("scenarioName") === false ?
-                                            <Text>{props.getData("currentScenario").scenarioName}</Text>
-                                            :
-                                            <Popover>
-                                                <PopoverTrigger>
-                                                    <Button>{props.getData("currentScenario").scenarioName}</Button>
-                                                </PopoverTrigger>
-                                                <Portal>
-                                                    <PopoverContent bg='#dce5e6'>
-                                                        <PopoverArrow/>
-                                                        <PopoverCloseButton/>
-                                                        <PopoverBody>
-                                                            {props.getData("allScenarios").map((element) => {{
-                                                                props.scenariosCompare.includes(element.scenarioName) === true ?
-                                                                    scenario_name = element.scenarioName  :
-                                                                    scenario_name = null }
-                                                                return <div>{scenario_name}</div>
-                                                            })
-                                                            }
-
-                                                        </PopoverBody>
-                                                    </PopoverContent>
-                                                </Portal>
-                                            </Popover>
-                                        }
-                                    </Td>
-                                    <Td>
-                                        {isPopover("startingDate") === false ?
-                                            <Text>{props.getData("currentScenario").startingDate}</Text>
-                                            :
-                                            <Popover>
-                                                <PopoverTrigger>
-                                                    <Button>{props.getData("currentScenario").startingDate}</Button>
-                                                </PopoverTrigger>
-                                                <Portal>
-                                                    <PopoverContent bg='#dce5e6'>
-                                                        <PopoverArrow/>
-                                                        <PopoverCloseButton/>
-                                                        <PopoverBody>
-                                                            {props.getData("allScenarios").map((element) => {{
-                                                                props.scenariosCompare.includes(element.scenarioName) === true ? x = element.scenarioName + ":" + element.startingDate  :
-                                                                   x = null }
-                                                               return <div>{x}</div>
-                                                            })
-                                                            }
-                                                        </PopoverBody>
-                                                    </PopoverContent>
-                                                </Portal>
-                                            </Popover>
-                                        }
-                                    </Td>
-                                    <Td>
-                                        {isPopover("startingTime") === false ?
-                                            <Text>{props.getData("currentScenario").startingTime}></Text>
-                                            :
-                                            <Popover>
-                                                <PopoverTrigger>
-                                                    <Button>{props.getData("currentScenario").startingTime}</Button>
-                                                </PopoverTrigger>
-                                                <Portal>
-                                                    <PopoverContent bg='#dce5e6'>
-                                                        <PopoverArrow/>
-                                                        <PopoverCloseButton/>
-                                                        <PopoverBody>
-                                                            {props.getData("allScenarios").map((element) => {
-                                                                return <Text>{element.scenarioName}: {element.startingTime}</Text>
-                                                            })
-                                                            }
-                                                        </PopoverBody>
-                                                    </PopoverContent>
-                                                </Portal>
-                                            </Popover>
-                                        }
-                                    </Td>
-
-                                    <Td>
-                                        {isPopover("numberOfInstances") === false ?
-                                            <Text>{props.getData("currentScenario").numberOfInstances}</Text>
-                                            :
-                                            <Popover>
-                                                <PopoverTrigger>
-                                                    <Button>{props.getData("currentScenario").numberOfInstances}</Button>
-                                                </PopoverTrigger>
-                                                <Portal>
-                                                    <PopoverContent bg='#dce5e6'>
-                                                        <PopoverArrow/>
-                                                        <PopoverCloseButton/>
-                                                        <PopoverBody>
-                                                            {props.getData("allScenarios").map((element) => {
-                                                                return <Text>{element.scenarioName}: {element.numberOfInstances}</Text>
-                                                            })
-                                                            }
-                                                        </PopoverBody>
-                                                    </PopoverContent>
-                                                </Portal>
-                                            </Popover>
-                                        }
-                                    </Td>
-                                    <Td>
-                                        {isPopover("distributionType") === false ?
-                                            <Text>{props.getData("currentScenario").interArrivalTime.distributionType}</Text>
-                                            :
-                                            <Popover>
-                                                <PopoverTrigger>
-                                                    <Button>{props.getData("currentScenario").interArrivalTime.distributionType}</Button>
-                                                </PopoverTrigger>
-                                                <Portal>
-                                                    <PopoverContent bg='#dce5e6'>
-                                                        <PopoverArrow/>
-                                                        <PopoverCloseButton/>
-                                                        <PopoverBody>
-                                                            {props.getData("allScenarios").map((element) => {
-                                                                return <Text>{element.scenarioName}: {element.interArrivalTime.distributionType}</Text>
-                                                            })
-                                                            }
-                                                        </PopoverBody>
-                                                    </PopoverContent>
-                                                </Portal>
-                                            </Popover>
-                                        }
-                                    </Td>
-                                    <Td>
-                                        {isPopover("distribution") === false ?
-                                            props.getData("currentScenario").interArrivalTime.values.map((el) => {
-                                                return <Text>{el.id} : {el.value}</Text>
-                                            })
-                                            :
-                                            <Popover>
-                                                <PopoverTrigger>
-                                                    <Button> {props.getData("currentScenario").interArrivalTime.values.map((elem, index) => {
-                                                        return <Text> {elem.id} : {elem.value} ⠀</Text>
-                                                    })}</Button>
-                                                </PopoverTrigger>
-                                                <Portal>
-                                                    <PopoverContent bg='#dce5e6'>
-                                                        <PopoverArrow/>
-                                                        <PopoverCloseButton/>
-                                                        <PopoverBody>
-                                                            {props.getData("allScenarios").map((element) => {
-                                                                return <Text
-                                                                    fontWeight={"bold"}>{element.scenarioName}: {element.interArrivalTime.values.map((distribution) => {
-                                                                    return <Text
-                                                                        fontWeight={"light"}> {distribution.id} : {distribution.value} </Text>
-                                                                })} </Text>
-                                                            })
-                                                            }
-                                                        </PopoverBody>
-                                                    </PopoverContent>
-                                                </Portal>
-                                            </Popover>
-
-                                        }
-                                    </Td>
-                                    <Td>
-                                        {isPopover("timeUnit") === false ?
-                                            <Text>{props.getData("currentScenario").timeUnit}</Text>
-                                            :
-                                            <Popover>
-                                                <PopoverTrigger>
-                                                    <Text><Highlight
-                                                        query={props.getData("currentScenario").timeUnit}
-                                                        styles={getColor("timeUnit")}>{props.getData("currentScenario").timeUnit}</Highlight></Text>
-                                                </PopoverTrigger>
-                                                <Portal>
-                                                    <PopoverContent bg='#dce5e6'>
-                                                        <PopoverArrow/>
-                                                        <PopoverCloseButton/>
-                                                        <PopoverBody>
-                                                            {props.getData("allScenarios").map((element) => {
-                                                                return <Text>{element.scenarioName}: {element.timeUnit}</Text>
-                                                            })
-                                                            }
-                                                        </PopoverBody>
-                                                    </PopoverContent>
-                                                </Portal>
-                                            </Popover>
-                                        }
-                                    </Td>
-                                </Tr>
-                            </Tbody>
-                        </Table>
+                        <OverviewTableCompare getData={props.getData} scenDiff={scenDiff}
+                                              scenariosCompare={props.scenariosCompare}/>
                     </CardBody>
                 </Card>
 
@@ -419,23 +419,266 @@ function OverviewPage(props) {
                                 <Tr>
                                     <Th>Department</Th>
                                     <Th>Role</Th>
-                                    <Th>Cost</Th>
-                                    <Th>Number</Th>
+                                    <Th>Quantity</Th>
+                                    <Th>Costs</Th>
+                                    <Th>Currency</Th>
                                     <Th>Timetable</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {props.getData("currentScenario").resourceParameters.roles.map((element) => {
+                                {props.getData("currentScenario").resourceParameters.roles.map((role) => {
                                     return <Tr>
-                                        <Td style={getColorRes("id", element.id)}>{element.id}</Td>
+                                        {/*Department*/}
+                                        <Td>
+                                            {/*{isPopoverRes("id", role.id) === false ?*/}
+                                            {isPopDiff("role_id", role.id, role.id) === false ?
+                                                <Text> {role.id} </Text>
+                                                :
+                                                <Popover>
+                                                    <PopoverTrigger>
+                                                        <Button> {role.id}</Button>
+                                                    </PopoverTrigger>
+                                                    <Portal>
+                                                        <PopoverContent bg='#dce5e6' zIndex={4}>
+                                                            <PopoverArrow/>
+                                                            <PopoverCloseButton/>
+                                                            <PopoverBody>{rolePopover(role.id)}</PopoverBody>
+                                                        </PopoverContent>
+                                                    </Portal>
+                                                </Popover>
 
-                                        <Td style={getColRoles("resource")}> {element.resources.map((resource) => {
-                                            return <Text style={getTextColor("resource", resource.id)}
-                                                         onClick={() => props.setResource(resource.id)}> {resource.id} </Text>
-                                        })} </Td>
-                                        <Td>costHour</Td>
-                                        <Td style={getColorRes("numberOfInstances", element.numberOfInstances)}>{element.numberOfInstances}</Td>
-                                        <Td style={getColorRes("schedule", element.schedule)}>{element.schedule}</Td>
+                                            }
+                                        </Td>
+                                        {/*Roles*/}
+                                        <Td>
+                                            {isPopoverRol("resource") === false ?
+                                                role.resources.map((resource) => {
+                                                    return <Text> {resource.id} </Text>
+                                                })
+                                                :
+                                                <>
+                                                    <Stack direction='row'>
+                                                        <Popover>
+                                                            <PopoverTrigger>
+                                                                <Box
+                                                                    as='button'
+                                                                    bg="#e2eaea"
+                                                                    rounded="lg"
+                                                                    minwidth="130px">
+                                                                    {role.resources.map((resource) => {
+                                                                        return<div>  <Text align="left"
+                                                                                           style={getTextColor("resource", resource.id)}
+                                                                                           fontWeight='semibold'> {resource.id} </Text> </div>
+                                                                    })}
+                                                                    {/*<Text fontSize={13}
+                                                                               color='#6E6E6F'>Others</Text>*/}
+                                                                </Box>
+                                                            </PopoverTrigger>
+                                                            <Portal>
+                                                                <PopoverContent bg='#dce5e6'>
+                                                                    <PopoverArrow/>
+                                                                    <PopoverCloseButton/>
+                                                                    <PopoverBody>
+                                                                        {resourcePopover(role.id)}
+                                                                        {/*   {props.getData("allScenarios").map((element) => {{
+                                                                            props.scenariosCompare.includes(element.scenarioName) === true ?
+                                                                                element.resourceParameters.roles.resources.map((res) => {
+                                                                                    x =   res.id})
+                                                                                : x = null }
+                                                                            return <div>{x}</div>
+                                                                        })}*/}
+
+                                                                    </PopoverBody>
+                                                                </PopoverContent>
+                                                            </Portal>
+                                                        </Popover>
+                                                       {/* <Stack direction='column'>
+                                                            {role.resources.map((resource) => {
+                                                                return <Text align="left"
+                                                                             style={getTextColor("resource", resource.id)}
+                                                                             fontWeight='semibold'> {resource.id} </Text>
+                                                            })}
+                                                        </Stack>*/}
+                                                    </Stack>
+                                                </>
+                                            }
+                                        </Td>
+                                        {/*Quantity*/}
+                                        <Td>
+                                            {isDifferentPopover("quantity") === false ?
+                                                role.resources.map((resource) => {
+                                                    return <Text> {resource.numberOfInstances} </Text>
+                                                })
+                                                :
+                                                <>
+                                                    <Stack direction='row'>
+                                                        <Popover>
+                                                            <PopoverTrigger>
+                                                                <Box
+                                                                    as='button'
+                                                                    bg="#e2eaea"
+                                                                    rounded="lg"
+                                                                    width="50px">
+                                                                    {role.resources.map((resource) => {
+                                                                        let resource1 = props.getData("currentScenario").resourceParameters.resources.find(item => item.id === resource.id)
+                                                                        return <Text align="center"
+                                                                                     style={isDiffTextColor("quantity", resource.id, resource1.numberOfInstances)}
+                                                                                     fontWeight='semibold'>{resource1.numberOfInstances}</Text>
+                                                                    })}
+                                                                    {/*<Text fontSize={13}
+                                                                               color='#6E6E6F'>Others</Text>*/}
+                                                                </Box>
+                                                               {/* <Button> <Text fontSize={13}
+                                                                               color='#6E6E6F'>Others</Text>
+                                                                </Button>*/}
+                                                            </PopoverTrigger>
+                                                            <Portal>
+                                                                <PopoverContent bg='#dce5e6'>
+                                                                    <PopoverArrow/>
+                                                                    <PopoverCloseButton/>
+                                                                    <PopoverBody>
+                                                                        {quantityPopover(role.id)}
+                                                                   {/*     {props.getData("allScenarios").map((element) => {{
+                                                                          props.scenariosCompare.includes(element.scenarioName) === true ? element.resourceParameters.resources.map((res) => {
+                                                                        x =  element.scenarioName + ":" + " " + res.id + ":" + " " + res.numberOfInstances})
+                                                                    : x = null}
+                                                                return <div >{x}</div>
+                                                            })}*/}
+                                                                    </PopoverBody>
+                                                                </PopoverContent>
+                                                            </Portal>
+                                                        </Popover>
+                                                        {/*<Stack direction='column'>
+                                                            {role.resources.map((resource) => {
+                                                                let resource1 = props.getData("currentScenario").resourceParameters.resources.find(item => item.id === resource.id)
+                                                                return <Text align="left"
+                                                                             style={isDiffTextColor("quantity", resource.id, resource1.numberOfInstances)}
+                                                                             fontWeight='semibold'>{resource1.numberOfInstances}</Text>
+                                                            })}
+                                                        </Stack>*/}
+                                                    </Stack>
+                                                </>
+                                            }
+                                        </Td>
+
+
+                                        {/*Costs*/}
+                                        <Td>
+                                            {isDifferentPopover("cost") === false ?
+                                                role.resources.map((resource) => {
+                                                    return <Text> {resource.costHour} </Text>
+                                                })
+                                                :
+                                                <>
+                                                    <Stack direction='row'>
+                                                        <Popover>
+                                                            <PopoverTrigger>
+                                                                <Box
+                                                                    as='button'
+                                                                    bg="#e2eaea"
+                                                                    rounded="lg"
+                                                                    width="50px">
+                                                                    {role.resources.map((resource) => {
+                                                                        let resource1 = props.getData("currentScenario").resourceParameters.resources.find(item => item.id === resource.id)
+                                                                        return <Text align="center"
+                                                                                     style={isDiffTextColor("cost", resource.id, resource1.numberOfInstances)}
+                                                                                     fontWeight='semibold'>{resource1.costHour}</Text>
+                                                                    })}
+                                                                    {/*<Text fontSize={13}
+                                                                               color='#6E6E6F'>Others</Text>*/}
+                                                                </Box>
+
+                                                            </PopoverTrigger>
+                                                            <Portal>
+                                                                <PopoverContent bg='#dce5e6'>
+                                                                    <PopoverArrow/>
+                                                                    <PopoverCloseButton/>
+                                                                    <PopoverBody>
+                                                                        {costsPopover(role.id)}
+                                                                        {/* {props.getData("allScenarios").map((element) => {{
+                                                                          props.scenariosCompare.includes(element.scenarioName) === true ? element.resourceParameters.resources.map((res) => {
+                                                                        x =  element.scenarioName + ":" + " " + res.id + ":" + " " + res.costHour})
+                                                                    : x = null }
+                                                                return <div >{x}</div>
+                                                            })}*/}
+                                                                    </PopoverBody>
+                                                                </PopoverContent>
+                                                            </Portal>
+                                                        </Popover>
+                                                       {/* <Stack direction='column'>
+                                                            {role.resources.map((resource) => {
+                                                                let resource1 = props.getData("currentScenario").resourceParameters.resources.find(item => item.id === resource.id)
+                                                                return <Text align="left"
+                                                                             style={isDiffTextColor("cost", resource.id, resource1.numberOfInstances)}
+                                                                             fontWeight='semibold'>{resource1.costHour}</Text>
+                                                            })}
+                                                        </Stack>*/}
+                                                    </Stack>
+                                                </>
+                                            }
+                                        </Td>
+                                        {/*Currency*/}
+                                        <Td>
+                                            {isPopover("currency") === false ?
+                                                <Text> {props.getData("currentScenario").currency} </Text>
+                                                :
+                                                <>
+                                                    <Popover>
+                                                        <PopoverTrigger>
+                                                            <Button> {props.getData("currentScenario").currency}
+                                                            </Button>
+                                                        </PopoverTrigger>
+                                                        <Portal>
+                                                            <PopoverContent bg='#dce5e6'>
+                                                                <PopoverArrow/>
+                                                                <PopoverCloseButton/>
+                                                                <PopoverBody>
+                                                                    {props.getData("allScenarios").map((element) => {
+                                                                        {
+                                                                            x = null
+                                                                            props.scenariosCompare.includes(element.scenarioName) === true ?
+                                                                                x = element.scenarioName + ":" + " " + element.currency
+                                                                                : x = null
+                                                                        }
+                                                                        return <div>{x}</div>
+                                                                    })}
+                                                                </PopoverBody>
+                                                            </PopoverContent>
+                                                        </Portal>
+                                                    </Popover>
+                                                </>
+                                            }
+                                        </Td>
+                                        {/*Timetable*/}
+                                        <Td>
+                                            {isPopoverRes("schedule", role.schedule) === false ?
+                                                <Text> {role.schedule}</Text>
+                                                :
+                                                <Popover>
+                                                    <PopoverTrigger>
+                                                        <Button> {role.schedule}</Button>
+                                                    </PopoverTrigger>
+                                                    <Portal>
+                                                        <PopoverContent bg='#dce5e6'>
+                                                            <PopoverArrow/>
+                                                            <PopoverCloseButton/>
+                                                            <PopoverBody>
+                                                                {timetablePopover(role.id)}
+                                                                {/*{props.getData("allScenarios").map((element) => {
+                                                                    {
+                                                                        props.scenariosCompare.includes(element.scenarioName) === true ?
+                                                                            x = element.scenarioName + ":" + " " + element.schedule
+                                                                            : x = null
+                                                                    }
+                                                                    return <div>{x}</div>
+                                                                })}*/}
+                                                            </PopoverBody>
+                                                        </PopoverContent>
+                                                    </Portal>
+                                                </Popover>
+
+                                            }
+                                        </Td>
                                     </Tr>
                                 })}
 
@@ -449,4 +692,4 @@ function OverviewPage(props) {
 }
 
 
-export default OverviewPage;
+export default ComparePage;
