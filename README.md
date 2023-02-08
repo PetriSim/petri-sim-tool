@@ -1,4 +1,4 @@
-![](/doc/petriSim.svg)
+![](/doc/PetriSimScreenshot.png)
 
 ![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/cypress.yml/badge.svg)
 ![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/dockerCompose.yml/badge.svg)
