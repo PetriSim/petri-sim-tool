@@ -1,5 +1,6 @@
 
 <h2 align="center">:tada: PetriSim [Title] :tada:</h2>
+
 ![image](doc/browser_Kopie2.svg)
 
 ![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/cypress.yml/badge.svg)
