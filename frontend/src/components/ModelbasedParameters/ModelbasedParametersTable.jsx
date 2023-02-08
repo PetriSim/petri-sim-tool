@@ -121,7 +121,7 @@ class ModelbasedParametersTable extends React.Component {
                                             <Td>{element.id}</Td>
                                             <Td>{element.name}</Td>
                                             <Td>{element.resources.join(",")}</Td>
-                                            <Td>{this.state.editable? <Input value={this.state.activities[index].duration} onChange={(event) => this.handleChange(event, index, "activities", "duration")}/> : element.duration}</Td>
+                                            <Td>{element.duration.values.map((value) => {return <Text>{value.id + ": " + value.value}</Text>})}</Td>
                                             <Td>{this.state.editable?  <Select name="unit" value={this.state.activities[index].unit} onChange={(event) => this.handleChange(event, index, "activities", "unit")}>
                                                                 <option value='secs'>Seconds</option>
                                                                 <option value='mins'>Minutes</option>
