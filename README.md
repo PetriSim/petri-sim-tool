@@ -1,6 +1,6 @@
 
 <h2 align="center">:tada: PetriSim [Title] :tada:</h2>
-![](/doc/browser_Kopie2.svg)
+![image](https://github.com/PetriSim/petri-sim-tool/blob/master/doc/browser_Kopie2.svg)
 
 ![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/cypress.yml/badge.svg)
 ![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/dockerCompose.yml/badge.svg)
