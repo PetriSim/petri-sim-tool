@@ -118,7 +118,7 @@ const Event = ({getData, selectedObject,setDataObj, setData }) => {
           <Stack gap="2">        
             <FormControl>
               <FormLabel>Selected Event:</FormLabel>
-              <Input title="Test date" value={selectedObject.name ? selectedObject.name : ""} type="inputRead"  readOnly/>
+              <Input title="Test date" value={selectedObject.name ? selectedObject.name : ""} type="inputRead" readOnly/>
             </FormControl>
 
           <Text fontWeight="bold" fontSize="md">Interarrival Time:</Text>
