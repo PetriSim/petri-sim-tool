@@ -1,47 +1,67 @@
-import {React, useEffect} from 'react'
-
+import React, { useEffect } from 'react';
 import Activity from './Activity';
 import Event from './Event';
 import Gateway from './Gateway';
 
+function ModelbasedParameters({
+  currentBpmn,
+  getData,
+  selectedObject,
+  setData,
+  setDataObj,
+  currentScenario
+}) {
+  useEffect(() => {
+    console.log(currentBpmn);
+  }, [currentBpmn]);
 
-function ModelbasedParameters(props) {
-  
-useEffect(() => {
-  
-console.log(props.currentBpmn)
+  if (selectedObject.$type === undefined) {
+    return <>{getData('currentModel').name}</>;
+  }
 
-}, [props.currentBpmn])
-
-
+  if (selectedObject.$type.includes('Gateway')) {
     return (
-        <>
-          {props.selectedObject.$type === undefined  ?
-            <>
-            {props.getData("currentModel").name}
-            
-            
-            </>
+      <Gateway
+        currentBpmn={currentBpmn}
+        currentScenario={currentScenario}
+        getData={getData}
+        selectedObject={selectedObject}
+        setData={setData}
+        setDataObj={setDataObj}
+        value={selectedObject.name || ''}
+      />
+    );
+  }
 
-          : <></>
-          }
+  if (selectedObject.$type.includes('Task')) {
+    return (
+      <Activity
+        currentBpmn={currentBpmn}
+        currentScenario={currentScenario}
+        getData={getData}
+        selectedObject={selectedObject}
+        setData={setData}
+        setDataObj={setDataObj}
+        value={selectedObject.name || ''}
+      />
+    );
+  }
 
-          {props.selectedObject.$type && props.selectedObject.$type.includes("Gateway")  ?
-          <Gateway setDataObj={props.setDataObj} selectedObject={props.selectedObject} setData={props.setData} getData={props.getData} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario} value={props.selectedObject.name? props.selectedObject.name : "" }/>
-          : <></>
-          }
+  if (selectedObject.$type.includes('Event') && !selectedObject.$type.includes('Gateway')) {
+    return (
+      <Event
+        currentBpmn={currentBpmn}
+        currentScenario={currentScenario}
+        getData={getData}
+        selectedObject={selectedObject}
+        setData={setData}
+        setDataObj={setDataObj}
+        value={selectedObject.name || ''}
+      />
+    );
+  }
 
-          {props.selectedObject.$type && props.selectedObject.$type.includes("Task")  ?
-          <Activity setDataObj={props.setDataObj} selectedObject={props.selectedObject} setData={props.setData} getData={props.getData} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario} value={props.selectedObject.name? props.selectedObject.name : "" }/>
-          : <></>
-          }
-
-          {props.selectedObject.$type && props.selectedObject.$type.includes("Event") && !props.selectedObject.$type.includes("Gateway")  ?
-          <Event setDataObj={props.setDataObj} selectedObject={props.selectedObject} setData={props.setData} getData={props.getData} currentBpmn={props.currentBpmn} currentScenario={props.currentScenario} value={props.selectedObject.name? props.selectedObject.name : "" }/>
-          : <></>
-          }
-        </>
-    )
+  return <></>;
 }
 
 export default ModelbasedParameters;
