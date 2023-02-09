@@ -3,8 +3,8 @@
 
 ![image](doc/browser_Kopie2.svg)
 
-![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/cypress.yml/badge.svg)
-![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/dockerCompose.yml/badge.svg)
+![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/CI.yml/badge.svg)
+
 
 
 ## :rocket: Introduction
@@ -37,6 +37,7 @@ describe the API and the API-calls
 ### 📦️ PetriSim Frontend (Furat)
 - React
 - Chakra-Ui
+- CI
 
  
 ### :heavy_plus_sign: Possible extension of the tool  (Andre,Alex,Tutku,Lana,Furat)
