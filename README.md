@@ -1,5 +1,5 @@
 
-<h2 align="center">:tada: PetriSim [Title] :tada:</h2>
+<h2 align="center">:tada: PetriSim [Parametrization of Business Process Simulation] :tada:</h2>
 
 ![image](doc/browser_Kopie2.svg)
 
@@ -9,7 +9,7 @@
 
 ## :rocket: Introduction
 
-Description:
+Description (Lana): 
 
 ........
 
@@ -17,45 +17,48 @@ Description:
 
 .......
 
+
+
 ## 📦️ Components
 PetriSim consists of multiple components 
 
-.....
+(Image of PetriSim and the other components)
 
 ......
 
 ......
 
-### 📦️ Discovery Tool (Simod)
+### 📦️ Discovery Tool (Simod)   (Tutku/Alex)
 describe the API and the API-calls
 
-### 📦️ Simulator (Scylla)
+### 📦️ Simulator (Scylla) (Andre/Alex)
 describe the API and the API-calls
 
-### 📦️ PetriSim Frontend 
+### 📦️ PetriSim Frontend (Furat)
 - React
 - Chakra-Ui
 
  
-### :heavy_plus_sign: Possible extension of the tool  
-- Add other simulators and discovery tools
+### :heavy_plus_sign: Possible extension of the tool  (Andre,Alex,Tutku,Lana,Furat)
+- Explain how to add other tools
 
-## :technologist: Getting started 
+## :technologist: Getting started (Furat)
 
 ### :star: Run with Docker (recommended) :star:
 In order to run out tool with all related components, we recommend to run it by using docker compose.
 
 :exclamation: Prerequisites:
 - Docker installed
+- Git installed
 
-1. Make sure that docker is running 
+1. Make sure that docker is started and running (check at the dashboard)
 
 2. Clone the repository
 ```console
 git clone https://github.com/PetriSim/petri-sim-tool.git
 ```
 
-3. Go to the project directory
+3. Navigate into the project directory
 ```console
 cd petri-sim-tool 
 ```
@@ -66,7 +69,7 @@ cd petri-sim-tool
 docker-compose -f docker-compose.yml up -d
 ```
 
-Docker compose will start the frontend, the discovery tool and the simulator. Alternatively you can run each docker container seperately.
+Docker compose will start the frontend, the discovery tool and the simulator together. Alternatively you can run each docker container seperately.
 
 
 ### Run from source
@@ -98,4 +101,10 @@ npm install
 npm start
 ```
 
-### 🚨 Troubleshooting
+### 🚨 Troubleshooting 
+
+#### Problems related to docker compose (Furat)
+* Make sure all ports that are used in the docker compose file are not used by other programs.
+
+#### Problems related to running the program from the source (Furat)
+* If your are not able to install the node dependencies with npm install from the root directory, navigate to the backend and frontend directory seperately and do the install (and run) from there 
