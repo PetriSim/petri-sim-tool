@@ -1,4 +1,4 @@
-import { Input, FormControl, FormLabel, Box, Stack, Button } from "@chakra-ui/react";
+import { Input, FormControl, FormLabel, Box, Stack } from "@chakra-ui/react";
 import React from "react";
 
 const Gateway = ({ selectedObject, getData }) => {

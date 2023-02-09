@@ -7,9 +7,9 @@ function OrgCharTable(props){
         props.setCurrent("Resource Parameters")
     },[])
 
-    var a = props.getData("currentScenario").resourceParameters.roles.map(x => x.resources).flat().map(y => y.id)
-    var b = props.getData("currentScenario").resourceParameters.resources.map(x => x.id)
-    let difference = b.filter(o => !a.includes(o));
+    var assignedRessources = props.getData("currentScenario").resourceParameters.roles.map(x => x.resources).flat().map(y => y.id)
+    var allRessources = props.getData("currentScenario").resourceParameters.resources.map(x => x.id)
+    let unassignedRessources = allRessources.filter(ressource => !assignedRessources.includes(ressource));
 
     return(
         <>
@@ -49,7 +49,7 @@ function OrgCharTable(props){
                 <Heading size="md" mb="5">Unassigned resources</Heading>
                     <Flex alignItems="center"  gap="4" flexWrap="wrap">
                         {
-                        difference.map((id) => {
+                        unassignedRessources.map((id) => {
                         return <Button onClick={() => {props.setResource(id); props.setCurrent("Resource Parameters") }}> {id} </Button> 
                     })}
                     </Flex> 

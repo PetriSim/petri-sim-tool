@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useToast, Flex, Box, Heading, Text, Card, CardBody, Table, Thead, Tbody, Tr, Th, Td, Radio, RadioGroup, TableContainer, Stack, Button, CardHeader } from "@chakra-ui/react";
+import { useToast, Flex, Box, Heading, Text, Card, CardBody, Table, Thead, Tbody, Tr, Th, Td, Radio, RadioGroup, Stack, Button, CardHeader } from "@chakra-ui/react";
 import { DeleteIcon } from '@chakra-ui/icons'
 
 const ScenarioPage = ({ setSelectedScenario, setCurrent, getData, setData, selectedScenario }) => {
