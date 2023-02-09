@@ -2,9 +2,7 @@ import { Input, FormControl, FormLabel, Flex, Button, Stack, Select, Box, Button
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 import React, { useState, useEffect } from 'react';
 
-const Event = (props) => {
-  const [interArrivalTime, setInterArrivalTime] = useState("");
-  const [values, setValues] = useState("");
+const Event = ({getData, selectedObject,setDataObj, setData }) => {
   const [unit, setUnit] = useState("");
   const [distributionType, setDistributionType] = useState("");
   const [distributionTypes, setDistributionTypes] = useState([
@@ -18,26 +16,22 @@ const Event = (props) => {
     { distribution_name: "arbitraryFiniteProbabilityDistribution", distribution_params: [] },
   ]);
   const [distributionValues, setDistributionValues] = useState([]);
-  const [currentEvent, setCurrentEvent] = useState({});
 
   useEffect(() => {
-    const currentEvent = props.getData("currentModel").modelParameter.events.find(
-      (value) => value.id === props.selectedObject.id
+    const currentEvent = getData("currentModel").modelParameter.events.find(
+      (value) => value.id === selectedObject.id
     );
 
     if (currentEvent === undefined) {
-      props.setDataObj({});
+      setDataObj({});
       return;
     }
 
-    setCurrentEvent(currentEvent);
 
     let newTypes = distributionTypes;
 
     newTypes.find((dis) => dis.distribution_name === currentEvent.interArrivalTime.distributionType).distribution_params = currentEvent.interArrivalTime.values.map((v) => v.id);
 
-    setInterArrivalTime(currentEvent.interArrivalTime);
-    setValues(currentEvent.interArrivalTime.values);
     setUnit(currentEvent.unit);
     setDistributionType(currentEvent.interArrivalTime.distributionType);
     setDistributionValues(currentEvent.interArrivalTime.values.map((v) => v.value));
@@ -87,45 +81,34 @@ const Event = (props) => {
   }
 
   const handleKeyChange = (resource, index) => {
-
       const target = resource.target;
-      const value = target.value;
-     
+      const value = target.value;     
 
       let params = [... distributionTypes]
       params.find(dis => dis.distribution_name === distributionType).distribution_params[index] = value
-
   
-      setDistributionTypes(params)
-
-      console.log(params)
-
-      
+      setDistributionTypes(params)      
     }
 
   const onSubmit = (event) =>{
       event.preventDefault();
       
-      const data = [...props.getData("allScenario")];
-                
-
+      const data = [...getData("allScenario")];
+              
       let interArrivalTime = {
           distributionType: distributionType,
           values: distributionTypes.find(dis => dis.distribution_name === distributionType).distribution_params.map((key, index) => {return {id: key, value: distributionValues[index]}})
       }
     
-      props.getData("currentModel").modelParameter.events.find(
-        value => value.id === props.selectedObject.id
+      getData("currentModel").modelParameter.events.find(
+        value => value.id === selectedObject.id
       ).interArrivalTime = interArrivalTime
 
-      props.getData("currentModel").modelParameter.events.find(
-        value => value.id === props.selectedObject.id
+      getData("currentModel").modelParameter.events.find(
+        value => value.id === selectedObject.id
       ).unit = unit
      
-
-  
-      props.setData(data)
-      console.log(props.getData("allData"))      
+      setData(data)
     }
 
   
@@ -135,7 +118,7 @@ const Event = (props) => {
           <Stack gap="2">        
             <FormControl>
               <FormLabel>Selected Event:</FormLabel>
-              <Input title="Test date" value={props.selectedObject.name ? props.selectedObject.name : ""} type="inputRead" />
+              <Input title="Test date" value={selectedObject.name ? selectedObject.name : ""} type="inputRead"  readOnly/>
             </FormControl>
 
           <Text fontWeight="bold" fontSize="md">Interarrival Time:</Text>
@@ -144,7 +127,7 @@ const Event = (props) => {
               <FormLabel>Distribution:</FormLabel>
               <Select value={distributionType}  bg="white" name="distributionType" onChange={(event) => handleInputChange(event)} >
                 {distributionTypes.map((distribution, index) => {
-                    return <option value={distribution.distribution_name}>{distribution.distribution_name}</option>
+                    return <option value={distribution.distribution_name} key={index}>{distribution.distribution_name}</option>
                 })}
             </Select>
           </FormControl>
