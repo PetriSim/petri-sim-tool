@@ -113,8 +113,6 @@ function SimulationPage(props){
                                 <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select simulator:</Text>
                                 <Select placeholder = 'choose simulator' width = '100%' color="darkgrey"  backgroundColor= 'white' icon={<FiChevronDown />}>
                                     <option value='Simod'>Scylla</option>
-                                    <option value='SAP'>SAP Simulator 2</option>
-                                    <option value='Prosimos'>Prosimos</option>
                                 </Select>
                             </Box>
                             
@@ -142,7 +140,7 @@ function SimulationPage(props){
                     {response.files && response.message && <>
                         <Heading size='ms' mt={5}>Click on the name of the file to download it:</Heading>
                         <UnorderedList>
-                        {response.files.map(x => (<ListItem><Button onClick={() => download(x.link, x.name, x.type)} variant="link">{sessionStorage.getItem("currentProject") + "_" + x.name}</Button></ListItem>)) }
+                        {response.files.map(x => (<ListItem><Button onClick={() => download(x.link, x.name, x.type)} variant="link">{x.name}</Button></ListItem>)) }
                         </UnorderedList>
                     </>}
                 </CardBody>
