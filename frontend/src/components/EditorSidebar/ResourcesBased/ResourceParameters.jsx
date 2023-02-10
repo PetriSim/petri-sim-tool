@@ -8,6 +8,7 @@ class ResourceParameters extends React.Component {
         id: "",
         costHour: "",
         schedule: "",
+        numberOfInstances: "",
         timeTables: props.getData("currentScenario").resourceParameters.timeTables.map(item => item.id),
         roles: props.getData("currentScenario").resourceParameters.roles.map(item => item.id),
         selectedRoles: []
@@ -21,7 +22,8 @@ class ResourceParameters extends React.Component {
       if(this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource)){
         console.log("test")
         this.setState({
-          id: this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource).id,
+            id: this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource).id,
+            numberOfInstances: this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource).numberOfInstances,
             costHour: this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource).costHour,
             schedule: this.props.getData("currentScenario").resourceParameters.resources.find((value) => value.id === this.props.currentResource).schedule,
             selectedRoles: this.props.getData("currentScenario").resourceParameters.roles.filter(item => item.resources.some(x => x.id === this.props.currentResource)).map(x => x.id),
@@ -67,7 +69,7 @@ class ResourceParameters extends React.Component {
         data[this.props.currentScenario].resourceParameters.resources.find((value) => value.id === this.props.currentResource).id = this.state.id
         data[this.props.currentScenario].resourceParameters.resources.find((value) => value.id === this.state.id).costHour = this.state.costHour                                                              
         data[this.props.currentScenario].resourceParameters.resources.find((value) => value.id === this.state.id).schedule = this.state.schedule                                                                                       
-        
+        data[this.props.currentScenario].resourceParameters.resources.find((value) => value.id === this.state.id).numberOfInstances = this.state.numberOfInstances   
         data[this.props.currentScenario].resourceParameters.roles.forEach(obj => {
           obj.resources = obj.resources.filter(resource => resource.id !== this.props.currentResource);
         });
@@ -139,6 +141,12 @@ render() {
           <FormControl>
               <FormLabel>Cost per Hour:</FormLabel>
               <Input value={this.state.costHour} bg="white"  name="costHour" onChange={(event) => this.handleInputChange(event)} />
+          </FormControl>
+
+
+          <FormControl >
+              <FormLabel>Number of Instances:</FormLabel>
+              <Input value={this.state.numberOfInstances} bg="white" name = "numberOfInstances" onChange={(event) => this.handleInputChange(event)}  />
           </FormControl>
 
           <FormControl >

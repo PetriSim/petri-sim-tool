@@ -8,6 +8,7 @@ class AddResource extends React.Component {
     this.state = {
       id: "",
       costHour: "",
+      numberOfInstances: "",
       timeTables: props.getData("currentScenario").resourceParameters.timeTables.map(item => item.id),
       roles: props.getData("currentScenario").resourceParameters.roles.map(item => item.id),
       selectedRoles: []
@@ -49,7 +50,8 @@ class AddResource extends React.Component {
           {  
             id: "",
             costHour: "",
-            selectedRoles: []
+            selectedRoles: [],
+            numberOfInstances: ""
           })
     }
 
@@ -63,6 +65,7 @@ class AddResource extends React.Component {
         let obj = {
               id: this.state.id,
               costHour: this.state.costHour,
+              numberOfInstances: this.state.numberOfInstances,
             }
 
        
@@ -117,6 +120,11 @@ render() {
           <FormControl>
               <FormLabel>Cost per hour:</FormLabel>
               <Input value={this.state.costHour} bg="white" name="costHour" onChange={(event) => this.handleInputChange(event)} />
+          </FormControl>
+
+          <FormControl>
+              <FormLabel>Number of instances:</FormLabel>
+              <Input value={this.state.numberOfInstances} bg="white" name="numberOfInstances" onChange={(event) => this.handleInputChange(event)} />
           </FormControl>
          
         <FormControl >
