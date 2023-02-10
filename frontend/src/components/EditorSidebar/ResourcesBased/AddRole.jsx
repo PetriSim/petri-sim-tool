@@ -8,7 +8,6 @@ class AddRole extends React.Component {
     this.state = {
       id: "",
       schedule: "",
-      numberOfInstances: "",
       timeTables: props.getData("currentScenario").resourceParameters.timeTables.map(item => item.id)
     };
 
@@ -32,8 +31,7 @@ class AddRole extends React.Component {
       this.setState(
           {  
             id: "",
-            schedule: "",
-            numberOfInstances: ""
+            schedule: ""
           })
     }
 
@@ -47,7 +45,6 @@ class AddRole extends React.Component {
         let obj = {
               id: this.state.id,
               schedule: this.state.schedule,
-              numberOfInstances: this.state.numberOfInstances,
               resources: []
             }
 
@@ -96,14 +93,10 @@ render() {
               <Input value={this.state.id} bg="white" name="id" onChange={(event) => this.handleInputChange(event)} />
           </FormControl>
 
-          <FormControl>
-              <FormLabel>Number of instances:</FormLabel>
-              <Input value={this.state.numberOfInstances} bg="white" name="numberOfInstances" onChange={(event) => this.handleInputChange(event)} />
-          </FormControl>
-         
           <FormControl >
               <FormLabel>Select timetable:</FormLabel>
               <Select value={this.state.schedule} bg="white" name="schedule" onChange={(event) => this.handleInputChange(event)} >
+              <option>Select timetable</option>
                 {this.state.timeTables.map((id, index) => {
                     return <option value={id}>{id}</option>
                 })}

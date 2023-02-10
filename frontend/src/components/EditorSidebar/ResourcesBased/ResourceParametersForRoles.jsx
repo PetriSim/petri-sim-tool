@@ -8,7 +8,6 @@ class ResourceParametersForRoles extends React.Component {
       super(props);
       this.state = {
         id: "",
-        numberOfInstances: "",
         schedule: "",
         timeTables: props.getData("currentScenario").resourceParameters.timeTables.map(item => item.id)
       };
@@ -23,7 +22,6 @@ class ResourceParametersForRoles extends React.Component {
 
       if(this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentRole)){
         this.setState({
-            numberOfInstances: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentRole).numberOfInstances,
             schedule: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentRole).schedule,
             id: this.props.getData("currentScenario").resourceParameters.roles.find((value) => value.id === this.props.currentRole).id
           
@@ -112,12 +110,6 @@ render() {
               <FormLabel>Role Name:</FormLabel>
               <Input value={this.state.id} bg="white" name = "id" onChange={(event) => this.handleInputChange(event)} />
           </FormControl>
-
-          <FormControl >
-              <FormLabel>Number of Instances:</FormLabel>
-              <Input value={this.state.numberOfInstances} bg="white" name = "numberOfInstances" onChange={(event) => this.handleInputChange(event)}  />
-          </FormControl>
-
 
 
           <FormControl >
