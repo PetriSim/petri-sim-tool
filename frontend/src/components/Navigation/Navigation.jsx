@@ -1,46 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Sidebar from '../Sidebar';
 
 import {
     Text,
     Divider,
     Spacer,
-    useToast,
-    useDisclosure,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    FormControl,
-    Button,
-    Input,
-    FormLabel,
-    ModalCloseButton,
+    useToast
   } from '@chakra-ui/react'
 import NavigationItem from './NavigationItem';
 
 import {
-    FiTrendingUp,
     FiStar,
     FiSettings,
     FiFileText,
     FiTrash2,
     FiDownload,
-    FiLock,
     FiPlay,
     FiEye,
     FiUser
   } from 'react-icons/fi';
-  import axios from "axios";
+
   import saveAs from 'file-saver';
 import BPMNSwitcher from './BPMNSwitcher';
 import ScenarioSwitcher from './ScenarioSwitcher';
 
 function Navigation(props) {
 
-  const toast = useToast()
+
 
     const LinkItems = [
         { name: 'Overview', icon: FiEye, path: '/overview', event: () =>  props.setCurrent("Overview") },

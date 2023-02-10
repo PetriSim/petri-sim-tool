@@ -12,7 +12,7 @@ app.use(cors());
 
 
 app.get('/startdata', (req, res) => {
-    var files = fs.readFileSync('./exampledata.json');
+    var files = fs.readFileSync('./new_int_rep_v0.json');
 
     setTimeout((() => {
         res.send(JSON.parse(files))

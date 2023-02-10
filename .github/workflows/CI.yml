@@ -5,55 +5,64 @@ on: [push]
 jobs:
   test:
     name: Cypress Test
+    timeout-minutes: 10
     runs-on: ubuntu-latest
+
+
+    strategy:
+      matrix:
+        node-version: [15.x]
+
     steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run API in background
+        working-directory: backend
+        run: |
+          npm install
+          npm start &
+        env:
+          PORT: 8000
+          
+          
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cypress install
+        working-directory: frontend
         run: npm install --legacy-peer-deps
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
+          working-directory: frontend
           install: false
           build: npm run build
           start: npm start
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           
-  docker:
-      name: Build and publish 
-      runs-on: ubuntu-latest
-      needs: [test]
-      
-      permissions:
-        contents: read
-        packages: write
-        
-      env:
-        REGISTRY: ghcr.io
-        IMAGE_NAME: ${{ github.repository }}
+  build-images:
+    name: Build and publish 
+    runs-on: ubuntu-latest
+    needs: [test]
 
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v3
-
-        - name: Log in to the Container registry
-          uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-          with:
-            registry: ${{ env.REGISTRY }}
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
-
-        - name: Extract metadata (tags, labels) for Docker
-          id: meta
-          uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-          with:
-            images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-            tags: latest
-        - name: Build and push Docker image
-          uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-          with:
-            context: .
-            push: true
-            tags: ${{ steps.meta.outputs.tags }}
-            labels: ${{ steps.meta.outputs.labels }}
+    steps:
+    # Log into github registry    
+    - name: Log into registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin  
+    # Check out the repo    
+    - name: Checkout
+      uses: actions/checkout@v2
+    # Build the images    
+    - name: Build the docker-compose stack  
+      run: docker-compose -f docker-compose.yml build
+    # List images
+    - name: List images
+      run: docker images
+    # Push images
+    - name: Push images
+      run: docker-compose -f docker-compose.yml push --ignore-push-failures
