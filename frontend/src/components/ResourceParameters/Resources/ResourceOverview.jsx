@@ -1,14 +1,14 @@
 import {React, useEffect} from 'react'
 import { Box, Card, CardBody, Table, TableContainer, Thead,  Tbody, Tr, Th, Td, Button, Flex, Stack, Heading} from '@chakra-ui/react'
 import ResourceNavigation from '../ResourceNavigation';
-function ResourceOverview(props){
+function ResourceOverview({setCurrent, getData, setRole, setResource}){
 
     useEffect(() => { 
-        props.setCurrent("Resource Parameters")
-    },[props])
+        setCurrent("Resource Parameters")
+    },[setCurrent])
 
-    var assignedRessources = props.getData("currentScenario").resourceParameters.roles.map(x => x.resources).flat().map(y => y.id)
-    var allRessources = props.getData("currentScenario").resourceParameters.resources.map(x => x.id)
+    var assignedRessources = getData("currentScenario").resourceParameters.roles.map(x => x.resources).flat().map(y => y.id)
+    var allRessources = getData("currentScenario").resourceParameters.resources.map(x => x.id)
     let unassignedRessources = allRessources.filter(ressource => !assignedRessources.includes(ressource));
 
     return(
@@ -31,9 +31,9 @@ function ResourceOverview(props){
                             </Thead>
                             <Tbody> 
                             
-                                {props.getData("currentScenario").resourceParameters.roles.map((element) => {
-                                return <><Tr><Td><Flex><Button variant="outline" onClick={() => {props.setRole(element.id); props.setCurrent("Resource Parameters for Roles")} }>{element.id}</Button></Flex></Td><Td><Flex gap="4" flexWrap="wrap">{element.resources.map((resource) => {
-                                   return <Button onClick={() => {props.setResource(resource.id); props.setCurrent("Resource Parameters") }}> {resource.id} </Button> 
+                                {getData("currentScenario").resourceParameters.roles.map((element) => {
+                                return <><Tr><Td><Flex><Button variant="outline" onClick={() => {setRole(element.id); setCurrent("Resource Parameters for Roles")} }>{element.id}</Button></Flex></Td><Td><Flex gap="4" flexWrap="wrap">{element.resources.map((resource) => {
+                                   return <Button onClick={() => {setResource(resource.id); setCurrent("Resource Parameters") }}> {resource.id} </Button> 
                                 })}</Flex></Td></Tr></>
                                 })} 
                                 
@@ -50,7 +50,7 @@ function ResourceOverview(props){
                     <Flex alignItems="center"  gap="4" flexWrap="wrap">
                         {
                         unassignedRessources.map((id) => {
-                        return <Button onClick={() => {props.setResource(id); props.setCurrent("Resource Parameters") }}> {id} </Button> 
+                        return <Button onClick={() => {setResource(id); setCurrent("Resource Parameters") }}> {id} </Button> 
                     })}
                     </Flex> 
                 </CardBody>

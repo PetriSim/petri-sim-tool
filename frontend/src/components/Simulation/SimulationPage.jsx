@@ -1,78 +1,57 @@
 import React, { useState, useRef } from "react";
-import {
-    Flex, Heading, Card, CardHeader, CardBody, Text, Select, Stack, Button, Progress, Box, Textarea, UnorderedList, ListItem
-} from '@chakra-ui/react';
+import { Flex, Heading, Card, CardHeader, CardBody, Text, Select, Stack, Button, Progress, Box, Textarea, UnorderedList, ListItem } from '@chakra-ui/react';
 import { FiChevronDown } from 'react-icons/fi';
 import axios from 'axios';
 
+const SimulationPage = ({ data, setScenario, toasting }) => {
+  const [started, setStarted] = useState(false);
+  const [finished, setFinished] = useState(false);
+  const [response, setResponse] = useState({});
 
+  const source = useRef(null);
 
-function SimulationPage(props){
+  const start = async () => {
+    setResponse({ message: "", files: [{ name: "", link: "" }] });
+    setFinished(false);
+    setStarted(true);
 
-    const [started, setStarted] = useState(false)
-    const [finished, setFinished] = useState(false)
-    const [response, setResponse] = useState({})
+    source.current = axios.CancelToken.source();
 
-
-    const CancelToken = axios.CancelToken;
-    const source = useRef(null)
-    
-
-   
-
-    const start = () => {
-        setResponse({message: "", files: [{name: "", link:""}]})
-        setFinished(false)
-        setStarted(true)
-
-
-    source.current  = CancelToken.source()
-        axios
-        .get(
-            "http://127.0.0.1:8000/startScylla",
-            {
-                cancelToken: source.current.token
-            }
-        )
-        .then(async (r) => {
-            setResponse(r.data)
-            setFinished(true)
-            setStarted(false)
-            console.log(r.data)
-            props.toasting("success", "Success", "Simulation was successful")})
-            
-        .catch((err) => {
-              if (axios.isCancel(err)) {
-                props.toasting("success", "Success", "Simulation was canceled")
-            
-            } else {
-                props.toasting("error", "error", "Simulation was not successful")
-                
-            }
-        })
-    
-    }
-
-    const abort = () => {
-        console.log("abort")
-        source.current.cancel('Simulation was canceled');
-        setStarted(false)
-        setResponse({message: "canceled"})
-    }
-
-    const download = (link, name, type) =>{
-        fetch(link)
-      .then(res => {
-        res.blob().then(blob => {
-          let url = window.URL.createObjectURL(blob);
-          let a = document.createElement('a');
-          a.href = url;
-          a.download = sessionStorage.getItem("currentProject") + "_" +  name + `.` + type;
-          a.click();
-        });
+    try {
+      const r = await axios.get("http://127.0.0.1:8000/startScylla", {
+        cancelToken: source.current.token
       });
-    }
 
+      setResponse(r.data);
+      setFinished(true);
+      setStarted(false);
+      console.log(r.data);
+      toasting("success", "Success", "Simulation was successful");
+    } catch (err) {
+      if (axios.isCancel(err)) {
+        toasting("success", "Success", "Simulation was canceled");
+      } else {
+        toasting("error", "error", "Simulation was not successful");
+      }
+    }
+  };
+
+  const abort = () => {
+    console.log("abort");
+    source.current.cancel("Simulation was canceled");
+    setStarted(false);
+    setResponse({ message: "canceled" });
+  };
+
+  const download = async (link, name, type) => {
+    const res = await fetch(link);
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${sessionStorage.getItem("currentProject")}_${name}.${type}`;
+    a.click();
+  };
 
 
     return (
@@ -104,8 +83,8 @@ function SimulationPage(props){
                             <Box>
                                 <Text fontSize="s" textAlign="start" color="#485152" fontWeight="bold" > Select scenario:</Text>
                                 <Select placeholder = 'choose scenario' width = '100%' color="darkgrey" backgroundColor= 'white' icon={<FiChevronDown />}>
-                                {props.data.map((scenario, index) => {
-                                return  <option value= {scenario.scenarioName} onClick={() =>  props.setScenario(index)}>{scenario.scenarioName}</option>
+                                {data.map((scenario, index) => {
+                                return  <option value= {scenario.scenarioName} onClick={() =>  setScenario(index)}>{scenario.scenarioName}</option>
                                 })}
                                 </Select>
                             </Box>
