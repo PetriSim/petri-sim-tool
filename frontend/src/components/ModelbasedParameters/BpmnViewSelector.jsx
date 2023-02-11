@@ -1,27 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import BpmnView from './BpmnView'
 
-function BpmnViewSelector(props) {
-    const [bpmnViews, setViews] = useState(<></>)
-
-
-    useEffect(() => { 
-        props.setCurrent("Modelbased Parameters")
-        setViews(props.data[props.currentScenario].models.map((x, index) => <BpmnView key={index} currentBpmn={x} setObject={props.setObject} />))
-    },[props.currentBpmn, props.currentScenario, props.setObject, props.data, props])
-
-
-
-
+function BpmnViewSelector({ data, currentScenario, currentBpmn, setObject, setCurrent }) {
+  useEffect(() => { 
+    setCurrent("Modelbased Parameters")
+  }, [setCurrent])
 
   return (
-    <>
-      {
-        bpmnViews[props.currentBpmn]
-      }
-    </>
+    <BpmnView key={currentBpmn} currentBpmn={data[currentScenario].models[currentBpmn]} setObject={setObject} />
   )
 }
 
 export default BpmnViewSelector;
-  

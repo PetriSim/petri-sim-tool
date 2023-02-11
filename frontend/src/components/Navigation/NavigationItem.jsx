@@ -12,20 +12,20 @@ import {
   import { NavLink } from "react-router-dom";
 
 
-function NavigationItem(props) {
+function NavigationItem({current, items, clickedcolor, color}) {
 
     useEffect(() => {
-console.log(props.current)
-    }, [props.current])
+console.log(current)
+    }, [current])
 
   return (
         <>
-        {props.items.map((link, index) => (
+        {items.map((link, index) => (
         
             <Flex w="100%" key={index}>
                 <Menu placement="right" w="100%">
                     <NavLink to={link.path} onClick={link.event} 
-                     style={({ isActive }) => isActive ? { backgroundColor: props.clickedcolor} : { backgroundColor: props.color} }
+                     style={({ isActive }) => isActive ? { backgroundColor: clickedcolor} : { backgroundColor: color} }
                     className="navi"
                     >
                         <MenuButton                       

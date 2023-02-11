@@ -3,7 +3,7 @@ import Activity from './Activity';
 import Event from './Event';
 import Gateway from './Gateway';
 
-function ModelbasedParameters({
+function TypeSelector({
   currentBpmn,
   getData,
   selectedObject,
@@ -64,4 +64,4 @@ function ModelbasedParameters({
   return <></>;
 }
 
-export default ModelbasedParameters;
+export default TypeSelector;

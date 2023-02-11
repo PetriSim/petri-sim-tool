@@ -1,11 +1,11 @@
 import {React, useEffect} from 'react'
 import { Box, Card, CardBody, Table, TableContainer, Thead,  Tbody, Tr, Th, Td, Button, Flex, Stack, Heading} from '@chakra-ui/react'
 import ResourceNavigation from '../ResourceNavigation';
-function OrgCharTable(props){
+function ResourceOverview(props){
 
     useEffect(() => { 
         props.setCurrent("Resource Parameters")
-    },[])
+    },[props])
 
     var assignedRessources = props.getData("currentScenario").resourceParameters.roles.map(x => x.resources).flat().map(y => y.id)
     var allRessources = props.getData("currentScenario").resourceParameters.resources.map(x => x.id)
@@ -62,4 +62,4 @@ function OrgCharTable(props){
             )
 }
 
-export default OrgCharTable;
+export default ResourceOverview;

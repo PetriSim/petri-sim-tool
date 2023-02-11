@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Input, FormControl, FormLabel, Divider,CheckboxGroup, Checkbox, Stack, Box, Select  } from '@chakra-ui/react';
 
-class ResourceParameters extends React.Component {
+class EditResource extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -194,4 +194,4 @@ render() {
     )
 }
 }
-export default ResourceParameters;
+export default EditResource;

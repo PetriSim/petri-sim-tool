@@ -3,7 +3,7 @@ import { Button, Input, FormControl, FormLabel, Divider, Select, Stack, Box } fr
 
 
 
-class ResourceParametersForRoles extends React.Component {
+class EditRole extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -139,4 +139,4 @@ render() {
     )
 }
 }
-export default ResourceParametersForRoles;
+export default EditRole;
