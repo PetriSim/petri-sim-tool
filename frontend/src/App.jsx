@@ -175,7 +175,7 @@ useEffect(() => {
 
   return (
     <ChakraProvider theme={theme}>
-      <Flex bg="#F9FAFC" h="100%" zIndex={-3} minH="100vh">
+      <Flex bg="#F9FAFC" h="100%" zIndex={-3} minH="100vh" overflowX="hidden">
 
       {/*If not session exists the start view is displayed */}
 
@@ -202,7 +202,7 @@ useEffect(() => {
           </Box>
 
         
-          <Container maxWidth="100%" padding={{base: "0", md:"5"}}>
+          <Container maxWidth="100%" padding={{base: "0", md:"5"}} overflowX="scroll">
 
             {/* Modal is a chakra UI component similar to a popup. Her it is used to save a pproject by its name and display an error if the name already existis  */}
           <Modal
