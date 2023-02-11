@@ -1,93 +1,73 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Input, FormControl, FormLabel, Select, Switch, Stack, Box, Divider,CheckboxGroup, Checkbox } from '@chakra-ui/react';
 
+const AddResource = ({ getData, setData, currentScenario, setCurrent }) => {
+  const [state, setState] = useState({
+    id: "",
+    costHour: "",
+    numberOfInstances: "",
+    timeTables: getData("currentScenario").resourceParameters.timeTables.map(item => item.id),
+    roles: getData("currentScenario").resourceParameters.roles.map(item => item.id),
+    selectedRoles: []
+  });
 
-class AddResource extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: "",
-      costHour: "",
-      numberOfInstances: "",
-      timeTables: props.getData("currentScenario").resourceParameters.timeTables.map(item => item.id),
-      roles: props.getData("currentScenario").resourceParameters.roles.map(item => item.id),
-      selectedRoles: []
-    };
+  const handleInputChange = (resource) => {
+    const target = resource.target;
+    const value = target.value;
+    const name = target.name;
 
-    this.onSubmit = this.onSubmit.bind(this);
-    this.clear = this.clear.bind(this);  
+    setState({
+      ...state,
+      [name]: value
+    });
   }
 
-  handleInputChange(resource) {
-      const target = resource.target;
-      const value = target.value;
-      const name = target.name;
-  
-      this.setState({
-        [name]: value
+  const handleRolesChange = (event) => {
+    let value = event.pop();
+
+    if (state.selectedRoles.includes(value)) {
+      setState({
+        ...state,
+        selectedRoles: [...state.selectedRoles.filter(item => item === value)]
       });
+    } else {
+      setState({
+        ...state,
+        selectedRoles: [...state.selectedRoles, value]
+      });
+    }
+  }
 
-      console.log(this.state)
+  const clear = () => {
+    setState({
+      id: "",
+      costHour: "",
+      selectedRoles: [],
+      numberOfInstances: ""
+    })
+  }
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    let data = [...getData("allScenario")];
+
+    let obj = {
+      id: state.id,
+      costHour: state.costHour,
+      numberOfInstances: state.numberOfInstances,
     }
 
-    handleRolesChange(event){
-      let value = event.pop()
+    data[currentScenario].resourceParameters.resources.push(obj);
 
-      if(this.state.selectedRoles.includes(value)){
-        this.setState({
-          selectedRoles: [...this.state.selectedRoles.filter(item => item === value)]
-        });
-      } else{
-        this.setState({
-          selectedRoles: [...this.state.selectedRoles, value]
-        });
-      }
-    
-    }
+    state.selectedRoles.filter(x => x !== undefined).forEach(item => {
+      data[currentScenario].resourceParameters.roles.find(x => x.id === item).resources.push({ id: state.id })
+    });
 
-    clear(){
-      this.setState(
-          {  
-            id: "",
-            costHour: "",
-            selectedRoles: [],
-            numberOfInstances: ""
-          })
-    }
+    setData(data);
 
-    onSubmit(event){
-      event.preventDefault();
-      
-      let data = [...this.props.getData("allScenario")]
-
-      console.log(this.state.selectedRoles)
-
-        let obj = {
-              id: this.state.id,
-              costHour: this.state.costHour,
-              numberOfInstances: this.state.numberOfInstances,
-            }
-
-       
-        data[this.props.currentScenario].resourceParameters.resources.push(obj)
-
-        this.state.selectedRoles.filter(x => x !== undefined).forEach(item => {
-          data[this.props.currentScenario].resourceParameters.roles.find(x => x.id === item).resources.push({id: this.state.id})
-        })
-      
-        console.log(data)
-
-      this.props.setData(data)
-      console.log(this.props.getData("currentScenario"))
-      
-
-      
-      this.clear()
-    }
-
-
-
-render() {
+    clear();
+  }
 
 
     return (
@@ -96,7 +76,7 @@ render() {
 <Box w="100%">
 
 
-<Button onClick={() => this.props.setCurrent("Resource Parameters")}
+<Button onClick={() => setCurrent("Resource Parameters")}
                 colorScheme='#ECF4F4'
                 variant='outline'
                 w="100%"
@@ -108,30 +88,30 @@ render() {
           <Divider/>
 
           
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={onSubmit}>
         <Stack gap="2" mt="4">
 
 
          <FormControl>
               <FormLabel>Name:</FormLabel>
-              <Input value={this.state.id} bg="white" name="id" onChange={(event) => this.handleInputChange(event)} />
+              <Input value={state.id} bg="white" name="id" onChange={(event) => handleInputChange(event)} />
           </FormControl>
 
           <FormControl>
               <FormLabel>Cost per hour:</FormLabel>
-              <Input value={this.state.costHour} bg="white" name="costHour" onChange={(event) => this.handleInputChange(event)} />
+              <Input value={state.costHour} bg="white" name="costHour" onChange={(event) => handleInputChange(event)} />
           </FormControl>
 
           <FormControl>
               <FormLabel>Number of instances:</FormLabel>
-              <Input value={this.state.numberOfInstances} bg="white" name="numberOfInstances" onChange={(event) => this.handleInputChange(event)} />
+              <Input value={state.numberOfInstances} bg="white" name="numberOfInstances" onChange={(event) => handleInputChange(event)} />
           </FormControl>
          
         <FormControl >
         <FormLabel>Select roles:</FormLabel>
-          <CheckboxGroup colorScheme='green' value={this.state.selectedRoles} name="selectedRoles" onChange={(event) => this.handleRolesChange(event)}>
+          <CheckboxGroup colorScheme='green' value={state.selectedRoles} name="selectedRoles" onChange={(event) => handleRolesChange(event)}>
             <Stack spacing={[1, 5]} direction="column">
-            {this.state.roles.map((id, index) => {
+            {state.roles.map((id, index) => {
                     return <Checkbox value={id}>{id}</Checkbox>
                 })}
             </Stack>
@@ -154,5 +134,5 @@ render() {
         </>
     )
 }
-}
+
 export default AddResource;
