@@ -1,4 +1,4 @@
-import { Input, FormControl, FormLabel, Box, Stack, Button } from "@chakra-ui/react";
+import { Input, FormControl, FormLabel, Box, Stack } from "@chakra-ui/react";
 import React from "react";
 
 const Gateway = ({ selectedObject, getData }) => {
@@ -30,11 +30,12 @@ const Gateway = ({ selectedObject, getData }) => {
     ).probability = newProbabilities[index];
   };
 
+
+  
   
 
   return (
     <Box w="100%">
-        <form >
           <Stack gap="2">        
             <FormControl>
               <FormLabel>Selected Gateway:</FormLabel>
@@ -61,17 +62,7 @@ const Gateway = ({ selectedObject, getData }) => {
                 </>
               ))}
             </FormControl>
-            <Button 
-                    type="submit"
-                    colorScheme='#ECF4F4'
-                    w="100%"
-                    variant='outline'
-                    border='1px'
-                    borderColor='#B4C7C9'
-                    color ='#6E6E6F'
-                    _hover={{ bg: '#B4C7C9' }}> Save changes </Button> 
         </Stack>
-        </form>
         </Box>
   );
 };

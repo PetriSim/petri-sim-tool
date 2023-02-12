@@ -8,55 +8,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post('/save', (req, res) => {
-    var files = fs.readdirSync('./projects/');
-    var amount = files.length
-
-    var fullData = JSON.parse(JSON.stringify(req.body))
-    console.log(fullData)
-    var projectname = fullData.projectname
-    var data = fullData.data
-
-    fs.writeFileSync('./projects/' + projectname + '.json', JSON.stringify(data));
-    res.status(200).send("Data saved successfully");
-});
 
 
-app.get('/getProjects', (req, res) => {
-
-
-    var dir = './projects/';
-
-    var files = fs.readdirSync(dir);
-    files.sort(function(a, b) {
-        return fs.statSync(dir + a).mtime.getTime() -
-            fs.statSync(dir + b).mtime.getTime();
-    });
-
-
-
-    //var files = fs.readdirSync('./projects/');
-    res.send(JSON.stringify(files))
-});
-
-app.get('/getFile/:filename', (req, res) => {
-
-    var files = fs.readFileSync('./projects/' + req.params.filename);
-    res.send(JSON.parse(files))
-
-    /*
-    axios.get('http://localhost:3000/projects/' + req.params.filename)
-        .then(response => {
-            res.status(200).send(response.data);
-        })
-        .catch(error => {
-            res.status(404).send({ error: "file not found" });
-        });
-        */
-});
 
 app.get('/startdata', (req, res) => {
-    var files = fs.readFileSync('./exampledata.json');
+    var files = fs.readFileSync('./files/pizza1.json');
 
     setTimeout((() => {
         res.send(JSON.parse(files))
@@ -68,10 +24,18 @@ app.get('/startdata', (req, res) => {
 app.get('/startScylla', (req, res) => {
     setTimeout((() => {
         res.send({
-            "message": "success",
-            "files": [{ "name": "parameters", "link": "http://localhost:8000/files/1.json", "type": "json" },
-                { "name": "global", "link": "http://localhost:8000/files/2.json", "type": "json" },
-                { "name": "config", "link": "http://localhost:8000/files/3.json", "type": "json" }
+            "message": `[DEBUG] Random seed for whole simulation (if not overriden by simulation configuration): 6997483753198519220
+                        [DEBUG] Element exclusiveGateway of simulation scenario not supported.
+                        [DEBUG] Element endEvent of simulation scenario not supported.
+                        [DEBUG] Element endEvent of simulation scenario not supported.
+                        ***** DESMO-J version 2.5.1c *****
+                        1676022019727 starts at simulation time 0.
+                        ...please wait...
+                        1676022019727 stopped at simulation time 843.
+                        Wrote batch activity statistics to samples/output_23_02_10_10_40_19_947/exBPMN_Sce0_Global_batchactivitystats.txt start serializing log to XES. XML finished serializing log (6 msec.)
+                        The test plugin has been called`,
+            "files": [{ "name": "exBPMN_Scel_Global_resourceutilization.xml", "link": "http://localhost:8000/files/1.json", "type": "xml" },
+                { "name": "newEx.xes", "link": "http://localhost:8000/files/1.json", "type": "xes" }
             ]
         })
     }), 1000)

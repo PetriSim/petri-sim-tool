@@ -1,8 +1,11 @@
 beforeEach(() => {
 
+    // open frontend with new project:
     cy.visit('http://localhost:3000')
     cy.findByText("Start new project").click()
     cy.findByText("Start parametrization").click()
+    cy.findByRole('textbox', { name: /projectname:/i }).type('testProject')
+    cy.findByRole('button', { name: /save/i }).click()
 
 })
 
@@ -10,36 +13,30 @@ beforeEach(() => {
 describe('Change BPMN', () => {
     it('loads successfully', () => {
 
-
         cy.visit('http://localhost:3000/modelbased')
-
-
-
-        cy.findByRole('textbox', { name: /bpmn name/i }).should('have.attr', 'placeholder', "Warenversand")
-
+        cy.findByRole('textbox', { name: /bpmn name/i }).should('have.attr', 'placeholder', "pizza_order (1)")
         cy.findByRole('button', { name: /bpmn switcher/i }).click()
-
-        cy.findByRole('menuitem', { name: /schufascoring 1/i }).click()
-
-        cy.findByRole('textbox', { name: /bpmn name/i }).should('have.attr', 'placeholder', "Schufascoring")
+        cy.findByRole('menuitem', { name: /pizza_order_1/i }).click()
+        cy.findByRole('textbox', { name: /bpmn name/i }).should('have.attr', 'placeholder', "pizza_order_1")
 
     })
 })
-describe('Change scenario', () => {
+describe('add and change scenario', () => {
+
     it('loads successfully', () => {
 
+        // add scenario:
+        cy.findByRole('link', { name: /add new scenario/i }).click()
+        cy.findByRole('button', { name: /add scenario/i }).click()
+        cy.findByText(/general parameters/i).click()
+        cy.findByRole('textbox', { name: /scenario name:/i }).clear().type("Scenario 2")
+        cy.findByRole('button', { name: /add scenario/i }).click()
 
+        // switch to additional scenario
         cy.visit('http://localhost:3000/modelbased')
-
-
-
         cy.findByRole('textbox', { name: /scenario name/i }).should('have.attr', 'placeholder', "Scenario 1")
-
-
         cy.findByRole('button', { name: /scenario switcher/i }).click()
-
         cy.findByRole('menuitem', { name: /Scenario 2/i }).click()
-
         cy.findByRole('textbox', { name: /scenario name/i }).should('have.attr', 'placeholder', "Scenario 2")
 
     })
@@ -71,6 +68,7 @@ describe('Modelbased Parameters', () => {
         cy.findByRole('button', { name: /modelbased parameters/i }).click()
     })
     it('changes the view', () => {
+        // from model based view to table view and back:
         cy.findByText("View").click()
         cy.findByText("Table").click()
         cy.url().should('eq', 'http://localhost:3000/modelbased/tableview')
@@ -101,7 +99,6 @@ describe('Modelbased Parameters: Table View', () => {
         cy.findByRole('button', { name: /edit mode/i }).click()
         cy.findByText("secs").should('not.exist')
         cy.findAllByRole('cell', { name: /minutes/i }).eq(0).click().findByRole('combobox').select('Seconds')
-            //cy.findAllByRole('combobox').eq(0).findbyText('Seconds').click() //.
         cy.findByRole('button', { name: /view mode/i }).click()
         cy.findAllByText("secs").eq('0').should('exist')
         cy.findAllByText("secs").eq('1').should('not.exist')
@@ -121,14 +118,50 @@ describe('Modelbased Parameters: Table View', () => {
 
 describe('Compare Scenarios', () => {
     beforeEach(() => {
-
         cy.findByRole('button', { name: /overview/i }).click()
     })
-    it('shows a popup for "compare scenarios', () => {
 
+    it('shows a popup for "compare scenarios', () => {
         cy.findByText('Scenarios to compare').should('not.exist')
         cy.findByText('Compare scenarios').click()
         cy.findByText('Scenarios to compare').should('be.visible')
 
+    })
+})
+describe('Compare Scenarios', () => {
+    beforeEach(() => {
+        // create 2 additional scenarios:
+        cy.findByRole('button', {name: /overview/i}).click()
+        cy.findByRole('link', { name: /add new scenario/i }).click()
+        cy.findByRole('button', { name: /add scenario/i }).click()
+        cy.findByText(/general parameters/i).click()
+        cy.findByRole('textbox', { name: /scenario name:/i }).clear().type("Scenario 2")
+        cy.findByRole('button', { name: /add scenario/i }).click()
+        cy.findByText(/general parameters/i).click()
+        cy.findByRole('textbox', { name: /scenario name:/i }).clear().type("Scenario 3")
+        cy.findByRole('button', { name: /add scenario/i }).click()
+    })
+    it('shows a popup for "compare scenarios and loads compare page', () => {
+
+        // check that correct scenario is chosen:
+        cy.findByRole('button', {name: /overview/i}).click()
+        cy.findByText('Scenarios to compare').should('not.exist')
+        cy.findByRole('textbox', { name: /scenario name/i }).should('have.attr', 'placeholder', "Scenario 1")
+        cy.findByRole('button', { name: /compare scenarios/i }).click()
+        cy.findByText('Scenarios to compare').should('be.visible')
+
+        // in popup, correct scenarios are shown, and appear checked when clicked:
+        cy.findByRole('dialog', {name: /scenarios to compare/i}).within(($dialog) => {
+            cy.findByText(/scenario 2/i).should('be.visible')
+            cy.findByText(/scenario 3/i).should('be.visible')
+            cy.findByText(/scenario 1/i).should('not.exist')
+            cy.findAllByRole('checkbox').eq(0).should('not.be.checked')
+            cy.findAllByRole('checkbox').eq(1).should('not.be.checked')
+            cy.findAllByRole('checkbox').eq(0).check({force:true})
+            cy.findAllByRole('checkbox').eq(0).should('be.checked')
+            cy.findAllByRole('checkbox').eq(1).should('not.be.checked')
+            cy.findByRole('link', { name: /compare/i }).click()
+            cy.url().should('eq', 'http://localhost:3000/compare')
+        })
     })
 })
