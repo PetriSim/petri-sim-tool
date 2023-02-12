@@ -14,10 +14,10 @@ describe('Change BPMN', () => {
     it('loads successfully', () => {
 
         cy.visit('http://localhost:3000/modelbased')
-        cy.findByRole('textbox', { name: /bpmn name/i }).should('have.attr', 'placeholder', "Warenversand")
+        cy.findByRole('textbox', { name: /bpmn name/i }).should('have.attr', 'placeholder', "pizza_order (1)")
         cy.findByRole('button', { name: /bpmn switcher/i }).click()
-        cy.findByRole('menuitem', { name: /schufascoring 1/i }).click()
-        cy.findByRole('textbox', { name: /bpmn name/i }).should('have.attr', 'placeholder', "Schufascoring")
+        cy.findByRole('menuitem', { name: /pizza_order_1/i }).click()
+        cy.findByRole('textbox', { name: /bpmn name/i }).should('have.attr', 'placeholder', "pizza_order_1")
 
     })
 })
