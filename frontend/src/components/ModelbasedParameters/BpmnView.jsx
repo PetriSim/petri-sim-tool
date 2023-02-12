@@ -4,116 +4,79 @@ import "bpmn-js/dist/assets/diagram-js.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 import ViewButtons from "./ViewButtons";
 import axios from "axios";
-
-import {
-  ButtonGroup,
-  IconButton,
-  Flex,
-  Box
-} from '@chakra-ui/react'
-
+import { ButtonGroup, IconButton, Flex, Box } from '@chakra-ui/react'
 import { MinusIcon, AddIcon } from '@chakra-ui/icons'
 
 function BpmnView({currentBpmn, setObject}) {
-        const [diagram, diagramSet] = useState("");
-        const [container, setContainer] = useState(null)
-        const [clickedElement, clickedSet] = useState({});
-        const [modelerRef, setModeler] = useState(null)
-        
-        
+  const [diagram, setDiagram] = useState("");
+  const [containerRef, setContainerRef] = useState(null);
+  const [clickedElement, setClickedElement] = useState({});
+  const [modeler, setModeler] = useState(null);
 
-        useEffect(() => {
-          setContainer(document.getElementById("container"))
-        }, [])
+  useEffect(() => {
+    setContainerRef(document.getElementById("container"));
+  }, []);
 
-        useEffect(() =>{
-          if (container){
-            container.innerHTML = ""
-            setContainer(document.getElementById("container"))
-            diagramSet("")
-            setModeler("")
-          }
+  useEffect(() => {
+    axios
+      .get(currentBpmn.BPMN)
+      .then(({ data }) => {
+        setDiagram(data);
+      })
+      .catch(console.error);
+  }, [currentBpmn.BPMN]);
 
-        },[container])
+  useEffect(() => {
+    if (!containerRef || !diagram) return;
+
+    containerRef.innerHTML = "";
+    setModeler(
+      new Modeler({
+        container: containerRef,
+        keyboard: {
+          bindTo: document,
+        },
+        additionalModules: [
+          {
+            contextPad: ["value", {}],
+            contextPadProvider: ["value", {}],
+            palette: ["value", {}],
+            paletteProvider: ["value", {}],
+            dragging: ["value", {}],
+            move: ["value", {}],
+            create: ["value", {}],
+          },
+        ],
+      })
+    );
+  }, [containerRef, diagram]);
+
+  useEffect(() => {
+    if (!modeler || !diagram) return;
+
+    modeler
+      .importXML(diagram)
+      .then(({ warnings }) => {
+        if (warnings.length) {
+          console.log("Warnings", warnings);
+        }
+        modeler.get("canvas").zoom("fit-viewport", "auto");
+        modeler.get("zoomScroll").stepZoom(-2);
+      })
+      .catch(console.error);
+  }, [modeler, diagram]);
+
+  useEffect(() => {
+    if (!modeler) return;
+
+    modeler.get("zoomScroll").stepZoom(-1);
+    const eventBus = modeler.get("eventBus");
+    eventBus.on("element.click", (event) => {
+      setClickedElement(event.element.businessObject);
+    });
+  }, [modeler]);
+
        
-        useEffect(() => {
-          if (diagram.length === 0) {
-            axios
-              .get(
-                currentBpmn.BPMN
-              )
-              .then((r) => {
-                diagramSet(r.data)
-              })
-              .catch((e) => {
-                console.log(e);
-              });
-          }
-        }, [diagram, container, currentBpmn.BPMN]);
-      
-      
-        useEffect(() =>{
-
-          if(diagram.length > 0){
-
-            var mod = new Modeler({
-              container,
-              keyboard: {
-                bindTo: document
-              },
-              additionalModules: [
-    
-                {
-                  contextPad: ["value", {}],
-                  contextPadProvider: ["value", {}],
-                  palette: ["value", {}],
-                  paletteProvider: ["value", {}],
-                  dragging: ["value", {}],
-                  move: ["value", {}],
-                  create: ["value", {}],
-            
-                }
-              ],
-            });
-        
-            setModeler(mod)
-          }
-        }, [diagram, container])
-      
-      
-        useEffect(() =>{
-          if(modelerRef && diagram.length > 0){
-            modelerRef
-            .importXML(diagram)
-            .then(({ warnings }) => {
-              if (warnings.length) {
-                console.log("Warnings", warnings);
-              }
-              modelerRef.get('canvas').zoom('fit-viewport', 'auto');
-              modelerRef.get('zoomScroll').stepZoom(-2)
-            })
-            .catch((err) => {
-              console.log("error", err);
-            });
-          }
-        }, [diagram, modelerRef])
-      
-    
-
-        useEffect(() => {
-          if(modelerRef){
-            modelerRef.get('zoomScroll').stepZoom(-1);
-
-            var eventBus = modelerRef.get('eventBus');
-            
-            eventBus.on("element.click", (event) => {
-              clickedSet(event.element.businessObject)
-
-            });
-          }
-      }, [diagram,modelerRef]);
-      
-      
         useEffect(() => {
             if(Object.keys(clickedElement).length !== 0){
               setObject(clickedElement)
@@ -129,21 +92,21 @@ function BpmnView({currentBpmn, setObject}) {
             clearTimeout(timeoutId);
     
             console.log("Resize")
-            timeoutId = setTimeout(() => modelerRef.get('canvas').zoom('fit-viewport', 'auto'), 500);
+            timeoutId = setTimeout(() => modeler.get('canvas').zoom('fit-viewport', 'auto'), 500);
           };
           window.addEventListener('resize', resizeListener);
       
           return () => {
             window.removeEventListener('resize', resizeListener);
           }
-        }, [diagram, modelerRef])
+        }, [diagram, modeler])
 
         function zoomIn(){
-          modelerRef.get('zoomScroll').stepZoom(1)
+          modeler.get('zoomScroll').stepZoom(1)
         }
     
         function zoomOut(){
-          modelerRef.get('zoomScroll').stepZoom(-1)
+          modeler.get('zoomScroll').stepZoom(-1)
         }
       
       

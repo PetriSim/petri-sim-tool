@@ -1,0 +1,572 @@
+[{
+    "scenarioName": "Scenario 1",
+    "startingDate": "14-02-2023",
+    "startingTime": "14:00",
+    "numberOfInstances": 4,
+    "interArrivalTime": {
+        "distributionType": "normal",
+        "values": [{
+                "id": "mean",
+                "value": 10
+            },
+            {
+                "id": "variance",
+                "value": 3
+            }
+        ]
+    },
+    "timeUnit": "mins",
+    "currency": "money unit",
+    "resourceParameters": {
+        "resources": [{
+                "id": "Manager",
+                "costHour": 40,
+                "numberOfInstances": 1,
+                "schedule": "8hPerWeek"
+            },
+            {
+                "id": "PizzaBaker",
+                "costHour": 30,
+                "numberOfInstances": 2,
+                "schedule": "8hPerWeek"
+            },
+            {
+                "id": "Waiter",
+                "costHour": 30,
+                "numberOfInstances": 3,
+                "schedule": "8hPerWeek"
+            },
+            {
+                "id": "Accountant",
+                "costHour": 30,
+                "numberOfInstances": 1,
+                "schedule": "8hPerWeek"
+            }
+        ],
+        "roles": [{
+                "id": "Top Management",
+                "schedule": "8hPerWeek",
+                "resources": [{
+                    "id": "Manager"
+                }]
+            },
+            {
+                "id": "Finance",
+                "schedule": "7/24",
+                "resources": [{
+                    "id": "Accountant"
+                }]
+            },
+            {
+                "id": "Restaurant",
+                "schedule": "7/24",
+                "resources": [{
+                    "id": "Waiter",
+                    "id": "PizzaBaker"
+                }]
+            }
+        ],
+        "timeTables": [{
+                "id": "8hPerWeek",
+                "timeTableItems": [{
+                    "startWeekday": "Monday",
+                    "startTime": "09",
+                    "endWeekday": "Monday",
+                    "endTime": "17"
+                }]
+            },
+            {
+                "id": "7/24",
+                "timeTableItems": [{
+                    "startWeekday": "Friday",
+                    "startTime": "03",
+                    "endWeekday": "Saturday",
+                    "endTime": "13"
+                }]
+            },
+            {
+                "id": "special",
+                "timeTableItems": [{
+                        "startWeekday": "Friday",
+                        "startTime": "03",
+                        "endWeekday": "Saturday",
+                        "endTime": "17"
+                    },
+                    {
+                        "startWeekday": "Tuesday",
+                        "startTime": "09",
+                        "endWeekday": "Tuesday",
+                        "endTime": "10"
+                    }
+                ]
+            }
+        ]
+    },
+    "models": [{
+            "BPMN": "http://localhost:8000/files/pizza_order_1.bpmn",
+            "name": "pizza_order (1)",
+            "modelParameter": {
+                "activities": [{
+                        "id": "Activity_1l5gi07",
+                        "name": "take dough",
+                        "type": "bpmn:Task",
+                        "resources": [
+                            "PizzaBaker"
+                        ],
+                        "unit": "mins",
+                        "cost": 0,
+                        "currency": "euro",
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 1
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 0.1
+                                }
+                            ]
+                        },
+                        "incoming": [
+                            "SequenceFlow_0s080ub"
+                        ],
+                        "outgoing": [
+                            "Flow_1eaqf1h"
+                        ]
+                    },
+                    {
+                        "id": "UserTask_12gn4u1",
+                        "name": "check ingredients stock",
+                        "type": "bpmn:Task",
+                        "resources": [
+                            "Waiter"
+                        ],
+                        "unit": "mins",
+                        "cost": 0,
+                        "currency": "euro",
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 2
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
+                        "incoming": [
+                            "Flow_05eo31w"
+                        ],
+                        "outgoing": [
+                            "SequenceFlow_1xeviwp"
+                        ]
+                    },
+                    {
+                        "id": "Activity_0ef7i1o",
+                        "name": "add tomato sauce",
+                        "type": "bpmn:Task",
+                        "resources": [
+                            "PizzaBaker"
+                        ],
+                        "unit": "mins",
+                        "cost": 0,
+                        "currency": "euro",
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 2
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 0.4
+                                }
+                            ]
+                        },
+                        "incoming": [
+                            "Flow_1eaqf1h"
+                        ],
+                        "outgoing": [
+                            "Flow_18levep"
+                        ]
+                    },
+                    {
+                        "id": "Activity_1mz4zmw",
+                        "name": "add toppings",
+                        "type": "bpmn:Task",
+                        "resources": [
+                            "PizzaBaker"
+                        ],
+                        "unit": "mins",
+                        "cost": 0,
+                        "currency": "euro",
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 4
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 2
+                                }
+                            ]
+                        },
+                        "incoming": [
+                            "Flow_18levep"
+                        ],
+                        "outgoing": [
+                            "Flow_1r4w9r3"
+                        ]
+                    },
+                    {
+                        "id": "Activity_0guqyey",
+                        "name": "bake",
+                        "type": "bpmn:Task",
+                        "resources": [
+                            "PizzaBaker"
+                        ],
+                        "unit": "mins",
+                        "cost": 0,
+                        "currency": "euro",
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 10
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
+                        "incoming": [
+                            "Flow_1r4w9r3"
+                        ],
+                        "outgoing": [
+                            "Flow_0vsr6h1"
+                        ]
+                    }
+                ],
+                "gateways": [{
+                    "id": "ExclusiveGateway_1njun59",
+                    "type": "bpmn:ExclusiveGateway",
+                    "incoming": [
+                        "SequenceFlow_1xeviwp"
+                    ],
+                    "outgoing": [
+                        "SequenceFlow_0s080ub",
+                        "Flow_15g757k"
+                    ]
+                }],
+                "events": [{
+                        "id": "StartEvent_1vcwaly",
+                        "name": "pizza order incoming",
+                        "type": "bpmn:StartEvent",
+                        "unit": "mins",
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
+                        "incoming": [],
+                        "outgoing": [
+                            "Flow_05eo31w"
+                        ]
+                    },
+                    {
+                        "id": "EndEvent_0b4zsh7",
+                        "name": "order refused",
+                        "type": "bpmn:EndEvent",
+                        "unit": "mins",
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
+                        "incoming": [
+                            "Flow_15g757k"
+                        ],
+                        "outgoing": []
+                    },
+                    {
+                        "id": "EndEvent_1cyfi3n",
+                        "name": "pizza ready",
+                        "type": "bpmn:EndEvent",
+                        "unit": "mins",
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
+                        "incoming": [
+                            "Flow_0vsr6h1"
+                        ],
+                        "outgoing": []
+                    }
+                ],
+                "sequences": [{
+                        "id": "SequenceFlow_1xeviwp",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 1.0
+                    },
+                    {
+                        "id": "SequenceFlow_0s080ub",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 0.23
+                    },
+                    {
+                        "id": "Flow_05eo31w",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 1.0
+                    },
+                    {
+                        "id": "Flow_15g757k",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 0.77
+                    },
+                    {
+                        "id": "Flow_1eaqf1h",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 1.0
+                    },
+                    {
+                        "id": "Flow_18levep",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 1.0
+                    },
+                    {
+                        "id": "Flow_1r4w9r3",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 1.0
+                    },
+                    {
+                        "id": "Flow_0vsr6h1",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 1.0
+                    }
+                ]
+            }
+        },
+        {
+            "BPMN": "http://localhost:8000/files/pizza_order_2.bpmn",
+            "name": "pizza_order_1",
+            "modelParameter": {
+                "activities": [{
+                        "id": "Activity_1l5gi07",
+                        "name": "take dough",
+                        "type": "bpmn:Task",
+                        "resources": [
+                            "PizzaBaker"
+                        ],
+                        "unit": "mins",
+                        "cost": 0,
+                        "currency": "euro",
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 1
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 0.1
+                                }
+                            ]
+                        },
+                        "incoming": [
+                            "Flow_14q8akr"
+                        ],
+                        "outgoing": [
+                            "Flow_1eaqf1h"
+                        ]
+                    },
+                    {
+                        "id": "Activity_0ef7i1o",
+                        "name": "add tomato sauce",
+                        "type": "bpmn:Task",
+                        "resources": [
+                            "PizzaBaker"
+                        ],
+                        "unit": "mins",
+                        "cost": 0,
+                        "currency": "euro",
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 2
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 0.4
+                                }
+                            ]
+                        },
+                        "incoming": [
+                            "Flow_1eaqf1h"
+                        ],
+                        "outgoing": [
+                            "Flow_18levep"
+                        ]
+                    },
+                    {
+                        "id": "Activity_1mz4zmw",
+                        "name": "add toppings",
+                        "type": "bpmn:Task",
+                        "resources": [
+                            "PizzaBaker"
+                        ],
+                        "unit": "mins",
+                        "cost": 0,
+                        "currency": "euro",
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 4
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 2
+                                }
+                            ]
+                        },
+                        "incoming": [
+                            "Flow_18levep"
+                        ],
+                        "outgoing": [
+                            "Flow_1r4w9r3"
+                        ]
+                    },
+                    {
+                        "id": "Activity_0guqyey",
+                        "name": "bake",
+                        "type": "bpmn:Task",
+                        "resources": [
+                            "PizzaBaker"
+                        ],
+                        "unit": "mins",
+                        "cost": 0,
+                        "currency": "euro",
+                        "duration": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 10
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
+                        "incoming": [
+                            "Flow_1r4w9r3"
+                        ],
+                        "outgoing": [
+                            "Flow_0vsr6h1"
+                        ]
+                    }
+                ],
+                "gateways": [],
+                "events": [{
+                        "id": "StartEvent_1vcwaly",
+                        "name": "pizza order incoming",
+                        "type": "bpmn:StartEvent",
+                        "unit": "mins",
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
+                        "incoming": [],
+                        "outgoing": [
+                            "Flow_05eo31w"
+                        ]
+                    },
+                    {
+                        "id": "EndEvent_1cyfi3n",
+                        "name": "pizza ready",
+                        "type": "bpmn:EndEvent",
+                        "unit": "mins",
+                        "interArrivalTime": {
+                            "distributionType": "normal",
+                            "values": [{
+                                    "id": "mean",
+                                    "value": 5
+                                },
+                                {
+                                    "id": "variance",
+                                    "value": 1
+                                }
+                            ]
+                        },
+                        "incoming": [
+                            "Flow_0vsr6h1"
+                        ],
+                        "outgoing": []
+                    }
+                ],
+                "sequences": [{
+                        "id": "Flow_1eaqf1h",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 1.0
+                    },
+                    {
+                        "id": "Flow_18levep",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 1.0
+                    },
+                    {
+                        "id": "Flow_1r4w9r3",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 1.0
+                    },
+                    {
+                        "id": "Flow_0vsr6h1",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 1.0
+                    },
+                    {
+                        "id": "Flow_14q8akr",
+                        "type": "bpmn:SequenceFlow",
+                        "probability": 1.0
+                    }
+                ]
+            }
+        }
+    ]
+}]

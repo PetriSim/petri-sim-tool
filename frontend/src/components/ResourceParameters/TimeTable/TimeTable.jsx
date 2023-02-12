@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Box, Heading, Text, Grid, Card, CardBody } from "@chakra-ui/react";
 
@@ -10,7 +10,7 @@ function TimeTable(props) {
 
 
   return (
-    <Card bg="white" w="100%">
+    <Card bg="white" w="100%" overflowX="auto">
     <CardBody>
     <Grid templateColumns="repeat(8, 1fr)" gap={2}>
 
@@ -33,7 +33,7 @@ function TimeTable(props) {
             </Box>
             {days.map((day, i) => {
               let isHighlighted = false;
-              props.data.map(({ startWeekday, startTime, endWeekday, endTime }) => {
+              props.data.forEach(({ startWeekday, startTime, endWeekday, endTime }) => {
                 const startDayIndex = days.indexOf(startWeekday);
                 const endDayIndex = days.indexOf(endWeekday);
                 const currentDayIndex = days.indexOf(day);
@@ -43,11 +43,10 @@ function TimeTable(props) {
                 (hour >= startTime) && (hour < endTime)){
                   isHighlighted = true;
               }
+              
               });
               return (
-                <Box key={i} bg={isHighlighted ? "green.200" : "blackAlpha.100"} borderRadius="4">
-            
-                </Box>
+                <Box key={i} bg={isHighlighted ? "green.200" : "blackAlpha.100"} borderRadius="4"></Box>
               );
             })}
           </React.Fragment>

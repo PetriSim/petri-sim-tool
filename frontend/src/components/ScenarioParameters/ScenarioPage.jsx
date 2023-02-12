@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useToast, Flex, Box, Heading, Text, Card, CardBody, Table, Thead, Tbody, Tr, Th, Td, Radio, RadioGroup, TableContainer, Stack, Button, CardHeader } from "@chakra-ui/react";
+import { useToast, Flex, Box, Heading, Text, Card, CardBody, Table, Thead, Tbody, Tr, Th, Td, Radio, RadioGroup, Stack, Button, CardHeader, TableContainer } from "@chakra-ui/react";
 import { DeleteIcon } from '@chakra-ui/icons'
 
 const ScenarioPage = ({ setSelectedScenario, setCurrent, getData, setData, selectedScenario }) => {
@@ -29,15 +29,15 @@ const ScenarioPage = ({ setSelectedScenario, setCurrent, getData, setData, selec
     }
 
     return (
-        <Flex>
-            <Box h="93vh" p="5">
+        
+            <Box h="93vh" p="5" overflowX="auto">
                 <Stack spacing={5}>
-                    <Card bg="white" >
+                    <Card bg="white" w="100%"  >
                         <CardBody >
                             <CardHeader>
                                 <Heading size='md'>Select Scenario</Heading>
                             </CardHeader>
-     
+                            <TableContainer>
                                 <Table variant='simple' size="sm">
                                     <Thead>
                                         <Tr>
@@ -81,13 +81,14 @@ const ScenarioPage = ({ setSelectedScenario, setCurrent, getData, setData, selec
                                     </Tbody>
                             
                                 </Table>    
+                                </TableContainer>
   
                         </CardBody>
                     </Card>
                    
                 </Stack>
             </Box>
-            </Flex>
+            
         );
     }
 
