@@ -8,7 +8,7 @@ import {
     Td,
     TableContainer,
 } from '@chakra-ui/react'
-import React from "react";
+import React, {useState} from "react";
 
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -21,6 +21,12 @@ class ModelBasedOverview extends React.Component {
         this.state = {
             parsed: false
         };
+        this.gatewayNames = [
+            {id: "bpmn:InclusiveGateway", value: 'Inclusive Gateway'},
+            {id: "bpmn:ParallelGateway", value: 'Parallel Gateway'},
+            {id: "bpmn:ExclusiveGateway", value: 'Exclusive Gateway'},
+        ]
+
       }
 
       componentDidMount(){
@@ -47,6 +53,27 @@ class ModelBasedOverview extends React.Component {
 
       }
 
+    getProbabilities(gateway) {
+
+       /// let gateway = this.props.getModelData("allModels").models[this.props.bpmn_id].gateways.find(item => item.id === gateway_id)
+        if (gateway !== undefined) {
+            return gateway.outgoing.map((out) => {
+            //    this.props.getModelData("allModels").models[this.props.bpmn_id].modelParameter.sequences.map((seq) => {
+                let sequence1 = this.props.getModelData("allModels").models[this.props.bpmn_id].modelParameter.sequences.find(item => item.id === out)
+               if (sequence1 !== undefined) {
+                  return <Text>{sequence1.probability}</Text>
+               }
+           })
+         //  })
+     //   }
+    }}
+
+    getType(type) {
+        let typeName = this.gatewayNames.find(item => item.id === type)
+        if (typeName !== undefined) {
+        return <Text>{typeName.value}</Text>
+    }
+    }
 
     render() {
     return (
@@ -61,7 +88,6 @@ class ModelBasedOverview extends React.Component {
                     <Table variant='simple'>
                         <Thead w="100%">
                             <Tr>
-                                <Th>ID</Th>
                                 <Th>Activity</Th>
                                 <Th>Resource</Th>
                                 <Th>Duration</Th>
@@ -74,9 +100,12 @@ class ModelBasedOverview extends React.Component {
                             {this.props.getModelData("allModels").models[this.props.bpmn_id].modelParameter.activities.map((element) => {
                                 return <>
                                     <Tr>
-                                        <Td>{element.id}</Td>
                                         <Td>{element.name}</Td>
-                                        <Td>{element.resource}</Td>
+                                        <Td>
+                                            {element.resources.map((resource) => {
+                                                return <Text> {resource} </Text>
+                                            })}
+                                        </Td>
                                         <Td>{element.duration.values.map((value) => {return <Text>{value.id + ": " + value.value}</Text>})}</Td>
                                         <Td>{element.unit}</Td>
                                         <Td>{element.cost}</Td>
@@ -101,6 +130,7 @@ class ModelBasedOverview extends React.Component {
                                 <Th>ID</Th>
                                 <Th>Incoming activity</Th>
                                 <Th>Outgoing activity</Th>
+                                <Th>Probabilities</Th>
                                 <Th>Type</Th>
                             </Tr>
                         </Thead>
@@ -116,7 +146,8 @@ class ModelBasedOverview extends React.Component {
                                         <Td><VStack spacing={8} alignItems="left">{element.outgoing.map((out) => {
                                             return <Text>{out}</Text>
                                         })}</VStack></Td>
-                                        <Td>{element.type}</Td>
+                                        <Td>{this.getProbabilities(element)}</Td>
+                                        <Td>{this.getType(element.type)}</Td>
                                     </Tr>
                                 </>
                             })}

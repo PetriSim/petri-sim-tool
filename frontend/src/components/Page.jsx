@@ -1,5 +1,5 @@
 import React from 'react'
-import BpmnViewSelector from './Background/BpmnViewSelector';
+import BpmnViewSelector from './TablesOverviewComparison/BpmnViewSelector';
 import ResourcePage from './Pages/ResourcePage';
 import ScenarioPage from './Pages/ScenarioPage';
 import OverviewPage from './Pages/OverviewPage';

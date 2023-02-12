@@ -49,7 +49,10 @@ function OnlyDifferencesPage(props) {
     let array_dif = props.scenariosCompare.concat(props.getData("currentScenario").scenarioName)
     const diffScenParam = props.notSameScenario
     const distinctArray = [...new Set(props.notSameScenario)];
+    const distinctResource =  [...new Set(props.resourceCompared.map(JSON.stringify))].map(JSON.parse);;
+    // const [arrayDiff, setArrayDiff] = useState([]);
 
+console.log(distinctResource )
     const [tableNames, setTableNames] = useState([
         {id: "startingDate", value: 'Starting date'},
         {id: "startingTime", value: 'Starting time'},
@@ -60,10 +63,50 @@ function OnlyDifferencesPage(props) {
         {id: "currency", value: 'Currency'},
     ]);
 
-    let x, a, array = [], outputData = [], scenTableNames = [], prevScenario, newColumn = []
+    const [tableNamesRes] = useState([
+        {id: "department", value: 'Department'},
+        {id: "id", value: 'Resource'},
+        {id: "numberOfInstances", value: 'Quantity'},
+        {id: "costHour", value: 'Costs'},
+        {id: "schedule", value: 'Timetable'},
+        {id: "currency", value: 'Currency'},
+    ]);
+
+    let x, a, array = [], outputData = [], scenTableNames = [], prevScenario, newColumn = [], test, newRow = [], newRowRes = []
     let last_scenario = props.getData("allScenarios").length
 
     prevScenario = props.getData("allScenarios")[0].scenarioName
+
+    const different_array = props.getData("allScenarios").filter(item => array_dif.includes(item.scenarioName))
+
+    distinctArray.map((element) => {
+        tableNames.map((names) => {
+            if (element === names.id) {
+                let newI = {
+                    id: names.id,
+                    value: names.value
+                }
+                newRow.push(newI)
+            }
+        })
+    })
+console.log(props.resourceCompared)
+    console.log(different_array)
+
+    distinctResource.map((element) => {
+        tableNamesRes.map((names) => {
+            if (element.field === names.id) {
+                let newI = {
+                    id: names.id,
+                    value: names.value,
+                    res_id: element.id,
+                    element_value: element.value
+                }
+                newRowRes.push(newI)
+            }
+        })
+    })
+    console.log(newRowRes)
     props.getData("allScenarios").map((element1) => {
         if (array_dif.includes(element1.scenarioName)) {
             if (prevScenario !== element1.scenarioName) {
@@ -108,69 +151,6 @@ function OnlyDifferencesPage(props) {
     })
 
 
-/*
-    distinctArray.map((element) => {
-        tableNames.map((names) => {
-            if (element === names.id) {
-                // array.push(names.value)
-                props.getData("allScenarios").map((element1) => {
-                        if (array_dif.includes(element1.scenarioName)) {
-                            if (prevScenario !== element1.scenarioName) {
-                                newColumn = {
-                                    id: prevScenario,
-                                    data: temp
-                                }
-                                Colomns.push(newColumn)
-                                temp.length = 0
-                            }
-                            if (element === "distributionType") {
-                                newItem = {
-                                    id: element1.scenarioName,
-                                    field: element1.interArrivalTime.distributionType,
-                                    field_name: names.id,
-                                    value: names.value
-                                };
-                            }
-                            if (element === "distribution") {
-                                element1.interArrivalTime.values.map((distrData) => {
-                                    let distibutionData = distrData.id + ":" + distrData.value
-                                    temp.push(distibutionData)
-                                })
-                                newItem = {
-                                    id: element1.scenarioName,
-                                    field: temp,
-                                    field_name: names.id,
-                                    value: names.value
-                                };
-                            } else {
-                                newItem = {
-                                    id: element1.scenarioName,
-                                    field: element1[names.id],
-                                    field_name: names.id,
-                                    value: names.value
-                                };
-                            }
-                            outputData.push(newItem);
-                            temp.push(newItem)
-                            prevScenario = element1.scenarioName
-                            if (element1.scenarioName === props.getData("currentScenario").scenarioName) {
-                                newColumn = {
-                                    id: props.getData("currentScenario").scenarioName,
-                                    data: temp
-                                }
-                              //  Colomns.push(newColumn)
-                                temp.length = 0
-                            }
-
-                        }
-                    }
-                )
-            }
-        })
-        })
-*/
-
-
     const fillScenDiff = (scenarioName) => {
         return scenTableNames.map((element1) => {
             let scenario = props.getData("allScenarios")[scenarioName]
@@ -194,37 +174,6 @@ function OnlyDifferencesPage(props) {
     })
     return (
         <>
-         {outputData.map((element1) => {
-                return <>
-                    <Text>{element1.value}</Text>
-                    <Text>{element1.field}</Text>
-                </>
-            })}
-==================
-
-            ==========
-            {Colomns.map((column) => {
-                return <Text>{column.id}</Text>
-            })}
-
-            {Colomns.map((column) => {
-                column.data.map((col)  => {
-                return <Text>{col}</Text>
-            })
-            })}
-==========================
-        {array_dif.map((element) => {
-                return <Text>{element}</Text>
-            })}
-
-           {/* {distinctArray.map((element) => {
-                tableNames.map((names) => {
-                    element === names.id ? x = names.value
-                        : x = null
-                })
-                return <Text>{x}</Text>
-            })}*/}
-
             <Box h="93vh" overflowY="auto" p="5">
                 <Stack direction='row' spacing={4} w="70vw">
                     <Button as={Link} to="/compare"
@@ -273,45 +222,27 @@ function OnlyDifferencesPage(props) {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                           {/*   {Colomns.map((element) => {
-                                   return <Tr>
-                                        <Td>{element.id}</Td>
-                                        {outputData.map((data1) => {
-                                            if (data1.id === element.id) {
-                                         return <>  <Td>>{data1.field}</Td>
-                                         </>}
-                                        })}
+                                {newRow.map((table_name) => {
+                                    //  if(Object.keys(different_array[0]).includes(table_name.id)){
+                                    return (<Tr>
+                                            <Th>{table_name.value}</Th>
+                                            {
+                                                different_array.map((item) => {
+                                                    if (table_name.id === 'distributionType') {
+                                                        return <Td>{item.interArrivalTime.distributionType}</Td>
+                                                    } else if (table_name.id === 'distribution') { return (
+                                                        <Td>{item.interArrivalTime.values.map((distr) => {
+                                                            return <Text>{distr.id}: {distr.value} </Text>
+                                                        })}</Td>)
+                                                    } else
+                                                        return <Td>{item[table_name.id]}</Td>
 
-                                    </Tr>
-                                })}
-                                {
-                                ))}
-
-                                  // {array_dif.map((scenarioName) => {
-                                   // return <Tr><Td>{fillScenDiff(scenarioName)}</Td> </Tr>
-                               // })}
-
-                                /!*{distinctArray.map((parameter) => {
-                                    array = tableNames.find(item => item.id === parameter)
-                                    if (array !== undefined) {
-                                        return <Tr>
-                                            <Td>{array.value}</Td>
+                                                })
+                                            }
                                         </Tr>
-                                        {
-                                            outputData.map((scenarioElement) => {
-
-                                            })
-                                        }
-                                    }
-
-                                })}
-
-                           /*    {outputData.map((element1) => {
-                                 return <Tr>
-                                                <Td>{element1.value}</Td>
-                                                {/!*<Td>{element1.field}</Td>*!/}
-                                                </Tr>
-                                    })}*/}
+                                    )
+                                })
+                                }
                             </Tbody>
                         </Table>
                     </CardBody>
@@ -326,7 +257,25 @@ function OnlyDifferencesPage(props) {
 
                             </Thead>
                             <Tbody>
+                            { newRowRes.map((table_name) => {
+                                   //   if(Object.keys(different_array[0]).resourceParameters.resources.includes(table_name.id)){
+                                    return (<Tr>
+                                            <Th>{table_name.res_id}</Th>
+                                            <Th>{table_name.value}</Th>
+                                            <Th>{table_name.element_value}</Th>
+                                           {/* for (let scenario of different_array ) {
+                                                scenario.resourceParameters.map((resource) => {
+                                                let resource_data = resource.find(item => item.id === table_name.res_id)
+                                                if (resource_data !== undefined) {
+                                                return <Th>item[table_name.id]</Th>
+                                            } else return <Th>Resource is not defined</Th>
+                                            })}*/}
 
+                                        </Tr>
+
+                                    )
+                                })
+                                }
 
                             </Tbody>
                         </Table>

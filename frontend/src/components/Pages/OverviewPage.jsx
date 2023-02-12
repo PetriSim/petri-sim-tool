@@ -20,16 +20,16 @@ import {
 import {React, useState} from 'react'
 import { Switch } from '@chakra-ui/react'
 
-import OverviewTable from '../Background/ScenarioOverviewTable';
+import OverviewTable from '../TablesOverviewComparison/ScenarioOverviewTable';
 import TabBar from "../TabBar";
 
 import {useDisclosure} from '@chakra-ui/react'
 import {Link} from "react-router-dom";
 
-import OverviewResourceTable from "../Background/OverviewResourceTable";
+import OverviewResourceTable from "../TablesOverviewComparison/OverviewResourceTable";
 
 
-import ModelBasedOverview from "../Background/ModelBasedOverview";
+import ModelBasedOverview from "../TablesOverviewComparison/ModelBasedOverview";
 
 
 function OverviewPage(props) {

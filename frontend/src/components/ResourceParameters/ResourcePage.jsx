@@ -1,7 +1,7 @@
 import {React, useState, useEffect} from 'react'
-import TimetableOverview from '../Background/TimetableOverview';
+import TimetableOverview from '../TablesOverviewComparison/TimetableOverview';
 import TabBar from '../TabBar'; 
-import OrgCharTable from '../Background/OrgCharTable';
+import OrgCharTable from '../TablesOverviewComparison/OrgCharTable';
 import {Box} from '@chakra-ui/react';
 
 function ResourcePage(props) {
