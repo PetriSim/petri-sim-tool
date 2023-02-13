@@ -225,7 +225,7 @@ render() {
         <Stack gap="2" mt="2">      
 
         <FormControl >
-              <FormLabel>Select startscenario:</FormLabel>
+              <FormLabel>Select the startup scenario:</FormLabel>
               <Select placeholder={this.state.startScenario} defaultValue={this.state.startScenario} bg="white" name="startScenario" onChange={(event) => this.handleInputChange(event)} >
                 {this.props.getData("allData").map((scenario, index) => {
                     return <option value={index}>{scenario.scenarioName}</option>
