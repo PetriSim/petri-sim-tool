@@ -442,7 +442,7 @@ function ComparePage(props) {
         }
 
     }
-
+console.log(ResourceCompared)
     /*  props.getData("allScenarios")[i].resourceParameters.roles.map((element) => {
 
       if (element.id !== current_element.id) {

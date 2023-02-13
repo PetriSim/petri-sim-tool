@@ -31,10 +31,10 @@ function ResourceTableCompare(props) {
             for (let resource of role.resources) {
                 if (resource.id === resource_id) {
                     return department = role.id;
-                }
+                } else  department = "Unassigned"
             }
         }
-
+     return department
     }
     let return_text, currency, x
     const fillDepartment = (resource_id, department_id) => {
@@ -135,7 +135,7 @@ function ResourceTableCompare(props) {
         })
     }
 
-    const quantityPopover = (role) => {
+    const quantityPopover = (resource) => {
         return props.getData("allScenarios").map((element) => {
             if (props.scenariosCompare.includes(element.scenarioName) === true) {
                 res = element.resourceParameters.resources.find(item => item.id === resource)
@@ -213,7 +213,7 @@ function ResourceTableCompare(props) {
                             </Td>
                             {/*Quantity*/}
                             <Td>
-                                {isDifferentPopover("numberOfInstances") === false ?
+                                {isDifferentPopover("numberOfInstances", resource.id, resource.numberOfInstances) === false ?
                                     <Text> {resource.numberOfInstances} </Text>
                                     :
                                     <>
