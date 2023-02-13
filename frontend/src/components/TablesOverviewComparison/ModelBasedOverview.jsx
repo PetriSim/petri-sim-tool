@@ -59,9 +59,9 @@ class ModelBasedOverview extends React.Component {
         if (gateway !== undefined) {
             return gateway.outgoing.map((out) => {
             //    this.props.getModelData("allModels").models[this.props.bpmn_id].modelParameter.sequences.map((seq) => {
-                let sequence1 = this.props.getModelData("allModels").models[this.props.bpmn_id].modelParameter.sequences.find(item => item.id === out)
-               if (sequence1 !== undefined) {
-                  return <Text>{sequence1.probability}</Text>
+                let sequence = this.props.getModelData("allModels").models[this.props.bpmn_id].modelParameter.sequences.find(item => item.id === out)
+               if (sequence !== undefined) {
+                  return <Text>{sequence.probability}</Text>
                }
            })
          //  })
@@ -82,7 +82,7 @@ class ModelBasedOverview extends React.Component {
             <>
             <Card bg="white"  mt="25px">
                 <CardHeader>
-                    <Heading size='md'>Modelbased Parameters.Activities</Heading>
+                    <Heading size='md'>Model-based Parameters - Activities</Heading>
                 </CardHeader>
                 <CardBody>
                     <Table variant='simple'>
@@ -121,7 +121,7 @@ class ModelBasedOverview extends React.Component {
         
             <Card bg="white" mt="25px">
                 <CardHeader>
-                    <Heading size='md'>Modelbased Parameters. Gateways</Heading>
+                    <Heading size='md'>Model-based Parameter - Gateways</Heading>
                 </CardHeader>
                 <CardBody>
                     <Table variant='simple'>
@@ -158,7 +158,7 @@ class ModelBasedOverview extends React.Component {
             <Flex  pt = "20px">
             <Card bg="white" w="100%">
                     <CardHeader>
-                        <Heading size='md'>Modelbased Parameters. Events</Heading>
+                        <Heading size='md'>Model-based Parameters - Events</Heading>
                     </CardHeader>
                     <CardBody>
                         <TableContainer>

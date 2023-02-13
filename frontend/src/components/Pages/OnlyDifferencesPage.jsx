@@ -33,7 +33,7 @@ function OnlyDifferencesPage(props) {
     const {isOpen, onOpen, onClose} = useDisclosure()
     let i, notsameScenario = [], notsameRes = [], valueRes = [], newItem = [], temp = [], first_scenario, Colomns = [];
     // let y, y_time, y_date, y_repl;
-
+    let department
     /*/!* if (props.getData("currentScenario") in props.getData("allScenarios")) {
          y = <Text> {props.getData("currentScenario").scenarioName} </Text>
      } else {
@@ -49,10 +49,11 @@ function OnlyDifferencesPage(props) {
     let array_dif = props.scenariosCompare.concat(props.getData("currentScenario").scenarioName)
     const diffScenParam = props.notSameScenario
     const distinctArray = [...new Set(props.notSameScenario)];
-    const distinctResource =  [...new Set(props.resourceCompared.map(JSON.stringify))].map(JSON.parse);;
+    const distinctResource = [...new Set(props.resourceCompared.map(JSON.stringify))].map(JSON.parse);
+    ;
     // const [arrayDiff, setArrayDiff] = useState([]);
 
-console.log(distinctResource )
+    console.log(distinctResource)
     const [tableNames, setTableNames] = useState([
         {id: "startingDate", value: 'Starting date'},
         {id: "startingTime", value: 'Starting time'},
@@ -64,7 +65,7 @@ console.log(distinctResource )
     ]);
 
     const [tableNamesRes] = useState([
-        {id: "department", value: 'Department'},
+        // {id: "department", value: 'Department'},
         {id: "id", value: 'Resource'},
         {id: "numberOfInstances", value: 'Quantity'},
         {id: "costHour", value: 'Costs'},
@@ -72,7 +73,8 @@ console.log(distinctResource )
         {id: "currency", value: 'Currency'},
     ]);
 
-    let x, a, array = [], outputData = [], scenTableNames = [], prevScenario, newColumn = [], test, newRow = [], newRowRes = []
+    let x, a, array = [], outputData = [], scenTableNames = [], prevScenario, newColumn = [], test, newRow = [],
+        newRowRes = []
     let last_scenario = props.getData("allScenarios").length
 
     prevScenario = props.getData("allScenarios")[0].scenarioName
@@ -90,7 +92,7 @@ console.log(distinctResource )
             }
         })
     })
-console.log(props.resourceCompared)
+    console.log(props.resourceCompared)
     console.log(different_array)
 
     distinctResource.map((element) => {
@@ -209,7 +211,7 @@ console.log(props.resourceCompared)
                 </Stack>
                 <Card bg="white" mt="25px">
                     <CardHeader>
-                        <Heading size='md'>Scenario Overview</Heading>
+                        <Heading size='md'>Different Parametrization - Simulation Scenarios</Heading>
                     </CardHeader>
                     <CardBody>
                         <Table variant='simple' w="100%">
@@ -219,21 +221,23 @@ console.log(props.resourceCompared)
                                     {array_dif.map((element) => {
                                         return <Th letterSpacing="1px">{element}</Th>
                                     })}
+
                                 </Tr>
                             </Thead>
                             <Tbody>
                                 {newRow.map((table_name) => {
                                     //  if(Object.keys(different_array[0]).includes(table_name.id)){
                                     return (<Tr>
-                                            <Th>{table_name.value}</Th>
+                                            <Td>{table_name.value}</Td>
                                             {
                                                 different_array.map((item) => {
                                                     if (table_name.id === 'distributionType') {
                                                         return <Td>{item.interArrivalTime.distributionType}</Td>
-                                                    } else if (table_name.id === 'distribution') { return (
-                                                        <Td>{item.interArrivalTime.values.map((distr) => {
-                                                            return <Text>{distr.id}: {distr.value} </Text>
-                                                        })}</Td>)
+                                                    } else if (table_name.id === 'distribution') {
+                                                        return (
+                                                            <Td>{item.interArrivalTime.values.map((distr) => {
+                                                                return <Text>{distr.id}: {distr.value} </Text>
+                                                            })}</Td>)
                                                     } else
                                                         return <Td>{item[table_name.id]}</Td>
 
@@ -249,27 +253,33 @@ console.log(props.resourceCompared)
                 </Card>
                 <Card bg="white" mt="25px">
                     <CardHeader>
-                        <Heading size='md'>Resource Overview</Heading>
+                        <Heading size='md'>Different Parametrization - Resources</Heading>
                     </CardHeader>
                     <CardBody>
                         <Table variant='simple'>
                             <Thead w="100%">
-
+                                <Tr>
+                                    <Th>Resource</Th>
+                                    <Th>Parameter/Scenario</Th>
+                                    {array_dif.map((element) => {
+                                        return <Th letterSpacing="1px">{element}</Th>
+                                    })}
+                                </Tr>
                             </Thead>
                             <Tbody>
-                            { newRowRes.map((table_name) => {
-                                   //   if(Object.keys(different_array[0]).resourceParameters.resources.includes(table_name.id)){
+                                {newRowRes.map((table_name) => {
+                                    //   if(Object.keys(different_array[0]).resourceParameters.resources.includes(table_name.id)){
                                     return (<Tr>
-                                            <Th>{table_name.res_id}</Th>
-                                            <Th>{table_name.value}</Th>
-                                            <Th>{table_name.element_value}</Th>
-                                           {/* for (let scenario of different_array ) {
-                                                scenario.resourceParameters.map((resource) => {
-                                                let resource_data = resource.find(item => item.id === table_name.res_id)
-                                                if (resource_data !== undefined) {
-                                                return <Th>item[table_name.id]</Th>
-                                            } else return <Th>Resource is not defined</Th>
-                                            })}*/}
+                                            <Td>{table_name.res_id}</Td>
+                                            <Td>{table_name.value}</Td>
+                                            {different_array.map((scenario) => {
+                                                    return scenario.resourceParameters.resources.map((item) => {
+                                                            if (table_name.res_id === item.id)
+                                                                return <Td>{item[table_name.id]}</Td>
+                                                        }
+                                                    )
+                                                }
+                                            )}
 
                                         </Tr>
 

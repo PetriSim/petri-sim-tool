@@ -45,7 +45,7 @@ function BPMNTableCompare(props) {
     const costsPopover = (activity_id) => {
         return props.getData("allScenarios").map((element) => {
             if (props.scenariosCompare.includes(element.scenarioName) === true) {
-                let activity = element.models[0].modelParameter.activities.find(item => item.id === activity_id)
+                let activity = element.models[1].modelParameter.activities.find(item => item.id === activity_id)
                 if (activity !== undefined) {
                     return <div>{element.scenarioName}: {activity.cost} </div>
                 }
@@ -54,6 +54,101 @@ function BPMNTableCompare(props) {
         })
     }
 
+    const timeUnitPopover = (activity_id) => {
+        return props.getData("allScenarios").map((element) => {
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                let activity = element.models[1].modelParameter.activities.find(item => item.id === activity_id)
+                if (activity !== undefined) {
+                    return <div>{element.scenarioName}: {activity.timeUnit} </div>
+                }
+                return <Text>{element.scenarioName}: this activity is not defined</Text>
+            }
+        })
+    }
+
+    const currencyPopover = (activity_id) => {
+        return props.getData("allScenarios").map((element) => {
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                let activity = element.models[1].modelParameter.activities.find(item => item.id === activity_id)
+                if (activity !== undefined) {
+                    return <div>{element.scenarioName}: {activity.currency} </div>
+                }
+                return <Text>{element.scenarioName}: this activity is not defined</Text>
+            }
+        })
+    }
+
+    const activityPopover = (activity_id) => {
+        return props.getData("allScenarios").map((element, index) => {
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                let activity = element.models[1].modelParameter.activities.find(item => item.id === activity_id)
+                if (activity !== undefined) {
+                    return <Text ontWeight='semibold'>{element.scenarioName}: {activity.name}</Text>
+                }
+                return <Text>{element.scenarioName}: this activity is not defined</Text>
+            }
+        })
+    }
+
+    const gatewayPopover = (gateway_id) => {
+        return props.getData("allScenarios").map((element) => {
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                let gateway = element.models[1].modelParameter.gateways.find(item => item.id === gateway_id)
+                if (gateway !== undefined) {
+                    return <Text ontWeight='semibold'>{element.scenarioName}: {gateway.id}</Text>
+                }
+                return <Text>{element.scenarioName}: this activity is not defined</Text>
+            }
+        })
+    }
+
+    const durationPopover = (activity_id) => {
+        return props.getData("allScenarios").map((element, index) => {
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                console.log(index)
+                let activity = element.models[index].modelParameter.activities.find(item => item.id === activity_id)
+                console.log(activity)
+                if (activity !== undefined) {
+                    return <Text
+                        fontWeight='semibold'>{element.scenarioName}: {activity.duration.values.map((param) => {
+                        return <Text fontWeight='normal'>{param.id}: {param.value}</Text>
+                    })}</Text>
+                }
+                return <Text>{element.scenarioName}: this activity is not defined</Text>
+            }
+        })
+    }
+
+    const distributionPopover = (activity_id) => {
+        return props.getData("allScenarios").map((element, index) => {
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                console.log(index)
+                let activity = element.models[index].modelParameter.activities.find(item => item.id === activity_id)
+                console.log(activity)
+                if (activity !== undefined) {
+                    return <Text fontWeight='semibold'>{element.scenarioName}: <Text fontWeight='normal'>{activity.duration.distributionType}</Text></Text>
+                }
+                return <Text>{element.scenarioName}: this activity is not defined</Text>
+            }
+        })
+    }
+
+    const resourcePopover = (activity_id) => {
+        return props.getData("allScenarios").map((element, index) => {
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                console.log(index)
+                let activity = element.models[index].modelParameter.activities.find(item => item.id === activity_id)
+                console.log(activity)
+                if (activity !== undefined) {
+                    return <Text
+                        fontWeight='semibold'>{element.scenarioName}: {activity.resources.map((res) => {
+                        return <Text fontWeight='normal'>{res}</Text>
+                    })}</Text>
+                }
+                return <Text>{element.scenarioName}: this activity is not defined</Text>
+            }
+        })
+    }
     const [gatewayNames] = useState([
         {id: "bpmn:InclusiveGateway", value: 'Inclusive Gateway'},
         {id: "bpmn:ParallelGateway", value: 'Parallel Gateway'},
@@ -73,7 +168,7 @@ function BPMNTableCompare(props) {
 
             <Card bg="white" mt="25px">
                 <CardHeader>
-                    <Heading size='md'>Resource Overview</Heading>
+                    <Heading size='md'>Model-based parameters - Activities</Heading>
                 </CardHeader>
                 <CardBody>
             <Table variant='simple'>
@@ -94,7 +189,7 @@ function BPMNTableCompare(props) {
                         <Tr>
                             {/*Activity*/}
                             <Td>
-                                {!isDifferentPopover("activity", element.id, element.name) ?
+                                {!isDifferentPopover("activity", element.id, element.id) ?
                                     <Text>{element.name}</Text>
                                     :
                                     <Popover>
@@ -106,7 +201,7 @@ function BPMNTableCompare(props) {
                                                 <PopoverArrow/>
                                                 <PopoverCloseButton/>
                                                 <PopoverBody>
-                                                    This element does not exist
+                                                    {activityPopover(element.id)}
                                                 </PopoverBody>
                                             </PopoverContent>
                                         </Portal>
@@ -132,7 +227,7 @@ function BPMNTableCompare(props) {
                                                 <PopoverArrow/>
                                                 <PopoverCloseButton/>
                                                 <PopoverBody>
-                                                    This element does not exist
+                                                    {resourcePopover(element.id)}
                                                 </PopoverBody>
                                             </PopoverContent>
                                         </Portal>
@@ -155,7 +250,7 @@ function BPMNTableCompare(props) {
                                         <PopoverArrow/>
                                         <PopoverCloseButton/>
                                         <PopoverBody>
-                                            This element does not exist
+                                            {distributionPopover(element.id)}
                                         </PopoverBody>
                                     </PopoverContent>
                                 </Portal>
@@ -165,15 +260,16 @@ function BPMNTableCompare(props) {
                         </Td>
                             {/*Distribution Values*/}
                             <Td>
-                                {!isDifferentPopover("durationValues", element.id, element.id) ?
+                                {isDifferentPopover("durationValues", element.id, element.id) ?
                                     element.duration.values.map((item) => {
-                                        return <Text>{item.id}: {item.value} </Text>
+                                        return <Text>{item.id + ": " + item.value}</Text>
                                     })
                                     :
                                     <Popover>
                                         <PopoverTrigger>
                                             <Button>{ element.duration.values.map((item) => {
-                                                return <Text>{item.id}: {item.value} </Text>
+                                                return <Text>{item.id + ": " + item.value}</Text>
+
                                             })}</Button>
                                         </PopoverTrigger>
                                         <Portal>
@@ -181,7 +277,7 @@ function BPMNTableCompare(props) {
                                                 <PopoverArrow/>
                                                 <PopoverCloseButton/>
                                                 <PopoverBody>
-                                                    This element does not exist
+                                                    {durationPopover(element.id)}
                                                 </PopoverBody>
                                             </PopoverContent>
                                         </Portal>
@@ -203,7 +299,7 @@ function BPMNTableCompare(props) {
                                                 <PopoverArrow/>
                                                 <PopoverCloseButton/>
                                                 <PopoverBody>
-                                                    This element does not exist
+                                                    {timeUnitPopover(element.id)}
                                                 </PopoverBody>
                                             </PopoverContent>
                                         </Portal>
@@ -247,7 +343,7 @@ function BPMNTableCompare(props) {
                                                 <PopoverArrow/>
                                                 <PopoverCloseButton/>
                                                 <PopoverBody>
-                                                    This element does not exist
+                                                    {currencyPopover(element.id)}
                                                 </PopoverBody>
                                             </PopoverContent>
                                         </Portal>
@@ -266,7 +362,7 @@ function BPMNTableCompare(props) {
 
             <Card bg="white" mt="25px">
                 <CardHeader>
-                    <Heading size='md'>Gateways</Heading>
+                    <Heading size='md'>Model-based parameters - Gateways</Heading>
                 </CardHeader>
                 <CardBody>
                     <Table variant='simple'>
@@ -283,9 +379,9 @@ function BPMNTableCompare(props) {
                             {props.getData("currentModel").modelParameter.gateways.map((gateway) => {
                                 return <>
                                     <Tr>
-                                        {/*Activity*/}
+                                        {/*Gateway*/}
                                         <Td>
-                                            {!isDifferentPopover("gateway_id", gateway.id, gateway.id) ?
+                                            {!isDifferentPopover("gateway", gateway.id, gateway.id) ?
                                                 <Text>{gateway.id}</Text>
                                                 :
                                                 <Popover>
@@ -297,7 +393,7 @@ function BPMNTableCompare(props) {
                                                             <PopoverArrow/>
                                                             <PopoverCloseButton/>
                                                             <PopoverBody>
-                                                                This element does not exist
+                                                                {gatewayPopover(gateway.id)}
                                                             </PopoverBody>
                                                         </PopoverContent>
                                                     </Portal>

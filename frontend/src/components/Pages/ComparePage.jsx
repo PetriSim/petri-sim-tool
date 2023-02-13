@@ -442,7 +442,7 @@ function ComparePage(props) {
         }
 
     }
-console.log(ResourceCompared)
+    console.log(ResourceCompared)
     /*  props.getData("allScenarios")[i].resourceParameters.roles.map((element) => {
 
       if (element.id !== current_element.id) {
@@ -516,7 +516,7 @@ console.log(ResourceCompared)
 
         props.getData("currentModel").modelParameter.activities.map((current_model) => {
 
-            differentScenarios[i].models[0].modelParameter.activities.map((model) => {
+            differentScenarios[i].models[i].modelParameter.activities.map((model) => {
                 if (current_model.id === model.id) {
                     if (current_model.cost !== model.cost) {
                         newItem = {
@@ -525,7 +525,7 @@ console.log(ResourceCompared)
                             value: current_model.cost
                         }
                         ModelCompared.push(newItem);
-console.log("fv")
+
 
                     }
                     if (current_model.unit !== model.unit) {
@@ -555,31 +555,70 @@ console.log("fv")
                         ModelCompared.push(newItem);
 
                     }
-                    if (current_model.duration.values !== model.duration.values) {
+                    /*  if (current_model.duration.values !== model.duration.values) {
+                          newItem = {
+                              field: "durationValues",
+                              id: current_model.id,
+                              value: current_model.id,
+                          }
+                          ModelCompared.push(newItem);
+                      }*/
+
+                    if (current_model.duration.values.length !== model.duration.values.length) {
                         newItem = {
                             field: "durationValues",
                             id: current_model.id,
                             value: current_model.id,
                         }
                         ModelCompared.push(newItem);
+                    } else {
+
+
+                        for (let cur_dur of current_model.duration.values) {
+                            for (let dur of model.duration.values) {
+                                if (cur_dur.id !== dur.id || cur_dur.value !== dur.value ){
+                                    newItem = {
+                                        field: "durationValues",
+                                        id: current_model.id,
+                                        value: current_model.id,
+                                    }
+                                    ModelCompared.push(newItem);
+                                }
+                            }
+                        }
                     }
-                    if (current_model.resources !== model.resources) {
+                    if (current_model.resources.length !== model.resources.length) {
                         newItem = {
                             field: "resources",
+                            id: current_model.id,
+                            value: "current_model.id",
+                        }
+                        ModelCompared.push(newItem);
+                    } else {
+                        for (let cur_res of current_model.resources) {
+                            for (let res of model.resources) {
+                                if (cur_res !== res){
+                                    newItem = {
+                                        field: "resources",
+                                        id: current_model.id,
+                                        value: current_model.id,
+                                    }
+                                    ModelCompared.push(newItem);
+                                }
+                            }
+                            }
+                    }
+                    differentScenarios[i].models.map((d_models) => {
+                    let activity = d_models.modelParameter.activities.find(item => item.id === current_model.id)
+                    if (activity === undefined) {
+                        newItem = {
+                            field: "activity",
                             id: current_model.id,
                             value: current_model.id,
                         }
                         ModelCompared.push(newItem);
                     }
-                    /*let activity = model[0].find(item => item.id === current_model.id)
-                    if (activity === undefined) {
-                        newItem = {
-                            field: "activity",
-                            id: current_model.id,
-                            value: current_model.name,
-                        }
-                        ModelCompared.push(newItem);
-                    }*/
+                })
                 }
 
             })
@@ -587,7 +626,18 @@ console.log("fv")
     }
     for (i = 0; i < differentScenarios.length; i++) {
         props.getData("currentModel").modelParameter.gateways.map((current_model) => {
-            differentScenarios[i].models[0].modelParameter.gateways.map((model) => {
+            differentScenarios[i].models[i].modelParameter.gateways.map((model) => {
+                differentScenarios[i].models.map((d_models) => {
+                    let gateway = d_models.modelParameter.gateways.find(item => item.id === current_model.id)
+                    if (gateway === undefined) {
+                        newItem = {
+                            field: "gateway",
+                            id: current_model.id,
+                            value: current_model.id,
+                        }
+                        ModelCompared.push(newItem);
+                    }
+                })
                 if (current_model.id === model.id) {
                     if (current_model.type !== model.type) {
                         newItem = {
@@ -636,15 +686,15 @@ console.log("fv")
 
                     }
 
-                  /*  let gateway = model.find(item => item.id === current_model.id)
-                    if (gateway === undefined) {
-                        newItem = {
-                            field: "gateway",
-                            id: current_model.id,
-                            value: current_model.id,
-                        }
-                        ModelCompared.push(newItem);
-                    }*/
+                    /*  let gateway = model.find(item => item.id === current_model.id)
+                      if (gateway === undefined) {
+                          newItem = {
+                              field: "gateway",
+                              id: current_model.id,
+                              value: current_model.id,
+                          }
+                          ModelCompared.push(newItem);
+                      }*/
                 }
 
             })
