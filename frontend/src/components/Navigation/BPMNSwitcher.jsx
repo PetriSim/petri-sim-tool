@@ -3,12 +3,12 @@ import { Flex, Text, Menu, MenuButton, Input, Button, MenuList, MenuItem } from 
 
 function BPMNSwitcher({ data, currentScenario, currentBpmn, setBpmn }) {
   const { name } = data[currentScenario].models[currentBpmn]
-  const fontStyles = { fontSize: { base: "2xs", md: "sm" }, color: "RGBA(0, 0, 0, 0.64)" }
+  const fontStyles = { fontSize: { base: "2xs", md: "sm" }, color: "RGBA(0, 0, 0, 0.64)"}
   const inputStyles = { variant: "filled", isDisabled: true, bg: "blackAlpha.200", _hover: "blackAlpha.200", ...fontStyles, w: { base: "100%", md: "65%" } }
 
   return (
     <Menu>
-      <Text ml={2} textAlign="left" display="flex" {...fontStyles}>
+      <Text ml={2} textAlign="left" display="flex" {...fontStyles} fontWeight="bold">
         Current BPMN Model:
       </Text>
       <Flex gap={{ base: "3", md: "3" }} flexDirection={{ base: "column", md: "row" }} w="100%">

@@ -24,11 +24,7 @@ app.get('/startdata', (req, res) => {
 app.get('/startScylla', (req, res) => {
     setTimeout((() => {
         res.send({
-            "message": `[DEBUG] Random seed for whole simulation (if not overriden by simulation configuration): 6997483753198519220
-                        [DEBUG] Element exclusiveGateway of simulation scenario not supported.
-                        [DEBUG] Element endEvent of simulation scenario not supported.
-                        [DEBUG] Element endEvent of simulation scenario not supported.
-                        ***** DESMO-J version 2.5.1c *****
+            "message": `***** DESMO-J version 2.5.1c *****
                         1676022019727 starts at simulation time 0.
                         ...please wait...
                         1676022019727 stopped at simulation time 843.

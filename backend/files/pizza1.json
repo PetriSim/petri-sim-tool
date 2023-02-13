@@ -375,7 +375,7 @@
         },
         {
             "BPMN": "http://localhost:8000/files/pizza_order_2.bpmn",
-            "name": "pizza_order_1",
+            "name": "pizza_order (2)",
             "modelParameter": {
                 "activities": [{
                         "id": "Activity_1l5gi07",
