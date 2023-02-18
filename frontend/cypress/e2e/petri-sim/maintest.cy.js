@@ -16,8 +16,9 @@ describe('Change BPMN', () => {
         cy.visit('http://localhost:3000/modelbased')
         cy.findByRole('textbox', { name: /bpmn name/i }).should('have.attr', 'placeholder', "pizza_order (1)")
         cy.findByRole('button', { name: /bpmn switcher/i }).click()
-        cy.findByRole('menuitem', { name: /pizza_order_1/i }).click()
-        cy.findByRole('textbox', { name: /bpmn name/i }).should('have.attr', 'placeholder', "pizza_order_1")
+        cy.findByRole('menuitem', {name: /pizza_order \(2\)/i}).click()
+        //cy.findByRole('menuitem', { name: /pizza_order (2)/i })
+        cy.findByRole('textbox', { name: /bpmn name/i }).should('have.attr', 'placeholder', "pizza_order (2)")
 
     })
 })
