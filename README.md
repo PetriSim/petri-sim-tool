@@ -46,11 +46,11 @@ describe the API and the API-calls
 ### 📦️ DockerFile (Scylla) (Tutku)
 Following instructers briefly explains the steps required to start the Flask listener in a Scylla Docker container (to run separately from PetriSim):
 
-First, build the Docker image using the Dockerfile. From this directory, in the terminal, call 'sudo docker build -t "WHAT IS FINAL API NAME- UPDATE HERE" .'
+First, build the Docker image using the Dockerfile. From this directory, in the terminal, call 'sudo docker build -t apiTool .'
 
 This will get Linux, Java, python and all the dependencies and set up the Docker image for later use)
 
-After the Docker image is created, use 'sudo docker run -p 8000:8000 -d "WHAT IS FINAL API NAME- UPDATE HERE"'
+After the Docker image is created, use 'sudo docker run -p 8000:8000 -d apiTool'
 
 This runs the created image and exposes port 8000 for the Flask listener.
 You can use 'sudo docker ps' to see it's tag and 'sudo docker logs <container-tag>' to check what it prints. 
