@@ -6,6 +6,7 @@ function Sidebar({ backgroundColor, side, title, content }) {
 const [hidden, setHidden] = useState(false);
 
 return (
+    /* Sidebar can be parameterized by the backgroundColor, the side on which the sidebar is displayed (left or right) and the content */
     <Flex
         boxShadow="sm"
         backgroundColor={backgroundColor}
@@ -41,7 +42,7 @@ return (
             {!hidden ? title : ''}
       </Flex>
       <Divider display={hidden ? 'none' : 'block'} />
-      {!hidden ? content : ''}
+      {!hidden ? content : '' /* Content is loaded inside the sidebar*/}
     </Flex>
   );
 }

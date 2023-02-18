@@ -3,10 +3,13 @@ import { Box, Card, CardBody, Table, TableContainer, Thead,  Tbody, Tr, Th, Td, 
 import ResourceNavigation from '../ResourceNavigation';
 function ResourceOverview({setCurrent, getData, setRole, setResource}){
 
+    // Run once when the component mounts to set currentPage
+    //setCurrent is important for displaying the right editorsidebar on the right side
     useEffect(() => { 
         setCurrent("Resource Parameters")
     },[setCurrent])
 
+    // select ressources that are assigned to roles and ressources that are not assigned to roles
     var assignedRessources = getData("currentScenario").resourceParameters.roles.map(x => x.resources).flat().map(y => y.id)
     var allRessources = getData("currentScenario").resourceParameters.resources.map(x => x.id)
     let unassignedRessources = allRessources.filter(ressource => !assignedRessources.includes(ressource));
@@ -16,6 +19,7 @@ function ResourceOverview({setCurrent, getData, setRole, setResource}){
         <Box h="93vh" overflowY="auto" p="5" >
         <Stack gap="3">
 
+        {/* Display the Navigation for ressources and set curent Tab to overview */}
         <ResourceNavigation currentTab="overview"/>
 
             <Card bg="white">

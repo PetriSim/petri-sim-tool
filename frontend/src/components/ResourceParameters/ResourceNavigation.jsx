@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 
 
 function ResourceNavigation({currentTab}){
+    // Rendering a Breadcrumb component with two BreadcrumbItems using the currentTab prop to apply a highlighting based on the active tab
 return(
     <Breadcrumb separator=''>
     <BreadcrumbItem isCurrentPage>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import {
     Flex,
@@ -12,11 +12,7 @@ import {
   import { NavLink } from "react-router-dom";
 
 
-function NavigationItem({current, items, clickedcolor, color}) {
-
-    useEffect(() => {
-console.log(current)
-    }, [current])
+function NavigationItem({ items, clickedcolor, color}) {
 
   return (
         <>

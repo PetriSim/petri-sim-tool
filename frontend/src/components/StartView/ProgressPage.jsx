@@ -10,6 +10,7 @@ function ProgressPage() {
  
     
   return (
+    /* Progress page is displayed as long as the app component has not received the data form the discovery tool*/
     <Flex
       backgroundColor="white"
       alignItems="center"
