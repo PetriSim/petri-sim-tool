@@ -11,11 +11,12 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
   const [cost, setCost] = useState("");
   const [currency, setCurrency] = useState("");
   const [resources, setResources] = useState([]);
-  const [values, setValues] = React.useState("");
 
   const [duration, setDuration] = useState("");
-  const [distributionType, setDistributionType] = React.useState("");
-  const [distributionTypes, setDistributionTypes] = React.useState([
+  // Type of distribution for the duration
+  const [distributionType, setDistributionType] = useState("");
+  //Possible types of distribution and their parameters
+  const [distributionTypes, setDistributionTypes] = useState([
     { distribution_name: "exponential", distribution_params: ["mean"] },
     { distribution_name: "normal", distribution_params: ["mean", "standard deviation"] },
     { distribution_name: "uniform", distribution_params: ["min", "max"] },
@@ -28,22 +29,15 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
       distribution_params: [],
     },
   ]);
-  const [distributionValues, setDistributionValues] = React.useState([]);
+  const [distributionValues, setDistributionValues] = useState([]);
 
 
   useEffect(() => {
-   
-
     const currentActivity = getData("currentModel").modelParameter.activities.find(
       value => value.id === selectedObject.id
     );
 
     let newTypes = distributionTypes;
-
-    console.log("a")
-    console.log(selectedObject)
-    console.log(getData("currentModel").modelParameter.activities)
-    console.log(currentActivity)
 
     if(currentActivity === undefined){
       setDataObj({})
@@ -53,10 +47,7 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
       newTypes.find(
         (dis) => dis.distribution_name === currentActivity.duration.distributionType
       ).distribution_params = currentActivity.duration.values.map((v) => v.id);
-    
-
-    
-
+  
     if (currentActivity) {
       setUnit(currentActivity.unit);
       setCost(currentActivity.cost);
@@ -64,7 +55,6 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
       setResources(currentActivity.resources);
 
       setDuration(currentActivity.duration);
-      setValues(currentActivity.duration.values);
       setDistributionType(currentActivity.duration.distributionType);
       setDistributionValues(currentActivity.duration.values.map((v) => v.value));
       setDistributionTypes(newTypes);
@@ -98,10 +88,6 @@ const Activity = ({ getData, setData, selectedObject, currentScenario, currentBp
     if (name === "resources") setResources(value);
 
     };
-
-
-
-
   };
 
   const onSubmit = event => {

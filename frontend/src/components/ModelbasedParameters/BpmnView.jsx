@@ -8,15 +8,22 @@ import { ButtonGroup, IconButton, Flex, Box } from '@chakra-ui/react'
 import { MinusIcon, AddIcon } from '@chakra-ui/icons'
 
 function BpmnView({currentBpmn, setObject}) {
+
+  // State storing the bpmn diagram
   const [diagram, setDiagram] = useState("");
+  //state to sore the refrence of the container that caintins the modeler
   const [containerRef, setContainerRef] = useState(null);
+  // state to store the current clicked elementid of an activity, event or gateway
   const [clickedElement, setClickedElement] = useState({});
+  //state storing the reference of the bpmn modeler
   const [modeler, setModeler] = useState(null);
 
+  // set the container reference wehen component is mounted
   useEffect(() => {
     setContainerRef(document.getElementById("container"));
   }, []);
 
+  // acces bpmn diagram and set bpmn diagram
   useEffect(() => {
     axios
       .get(currentBpmn.BPMN)
@@ -25,6 +32,8 @@ function BpmnView({currentBpmn, setObject}) {
       })
       .catch(console.error);
   }, [currentBpmn.BPMN]);
+
+
 
   useEffect(() => {
     if (!containerRef || !diagram) return;
@@ -36,6 +45,8 @@ function BpmnView({currentBpmn, setObject}) {
         keyboard: {
           bindTo: document,
         },
+
+        // remove sidebar from bpmn.io which is used to add elements to bpmn diagram
         additionalModules: [
           {
             contextPad: ["value", {}],
@@ -51,6 +62,8 @@ function BpmnView({currentBpmn, setObject}) {
     );
   }, [containerRef, diagram]);
 
+
+  // Initialize the BPMN modeler when the container reference and diagram are available
   useEffect(() => {
     if (!modeler || !diagram) return;
 
@@ -66,6 +79,7 @@ function BpmnView({currentBpmn, setObject}) {
       .catch(console.error);
   }, [modeler, diagram]);
 
+  // zoom into diagram after it is initialized
   useEffect(() => {
     if (!modeler) return;
 
@@ -76,7 +90,8 @@ function BpmnView({currentBpmn, setObject}) {
     });
   }, [modeler]);
 
-       
+
+      // set clicked element and pass to App component => selected element is displayed in editorsidebar      
         useEffect(() => {
             if(Object.keys(clickedElement).length !== 0){
               setObject(clickedElement)
@@ -84,6 +99,7 @@ function BpmnView({currentBpmn, setObject}) {
         }, [clickedElement, setObject]);
       
       
+        // ensures that diagram is centered if window is resized
         useEffect(() => {
     
           let timeoutId = null;

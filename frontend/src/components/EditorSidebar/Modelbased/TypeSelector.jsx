@@ -15,10 +15,11 @@ function TypeSelector({
     console.log(currentBpmn);
   }, [currentBpmn]);
 
+  // If no selectedObject is defined, render the name of the current model
   if (selectedObject.$type === undefined) {
     return <>{getData('currentModel').name}</>;
   }
-
+// If the selectedObject is a gateway, render the Gateway component 
   if (selectedObject.$type.includes('Gateway')) {
     return (
       <Gateway
@@ -33,6 +34,7 @@ function TypeSelector({
     );
   }
 
+  // If the selectedObject is a task, render the Activity component 
   if (selectedObject.$type.includes('Task')) {
     return (
       <Activity
@@ -47,6 +49,7 @@ function TypeSelector({
     );
   }
 
+  // If the selectedObject is an event, render the Event 
   if (selectedObject.$type.includes('Event') && !selectedObject.$type.includes('Gateway')) {
     return (
       <Event
@@ -61,6 +64,7 @@ function TypeSelector({
     );
   }
 
+  // If none of the above conditions are met, render nothing
   return <></>;
 }
 
