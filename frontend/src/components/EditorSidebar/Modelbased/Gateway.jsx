@@ -1,5 +1,5 @@
 import { Input, FormControl, FormLabel, Box, Stack } from "@chakra-ui/react";
-import React from "react";
+import {React, useState, useEffect} from "react";
 
 const Gateway = ({ selectedObject, getData }) => {
   const [probabilities, setProbabilities] = useState([]);
