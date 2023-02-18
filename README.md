@@ -29,10 +29,33 @@ PetriSim consists of multiple components
 ......
 
 ### 📦️ Discovery Tool (Simod)   (Tutku/Alex)
-describe the API and the API-calls
+
+Simod integration into PetriSim is still under work and dockerfile needs to be created.
+
+The Simod repository (https://github.com/AutomatedProcessImprovement/Simod) contains two projects, Simod and Simod HTTP, which is created by University of Tartu, Estonia. Simod HTTP is a lightweight web service wrapper around Simod that supports queued job execution. 
+
+Simod HTTP README.md section is available here, https://github.com/AutomatedProcessImprovement/Simod#simod-http.
+
+Simod HTTP source code is located here, https://github.com/AutomatedProcessImprovement/Simod/tree/master/src/simod_http. 
+
+Docker images are available there, https://hub.docker.com/r/nokal/simod-http/tags or https://hub.docker.com/layers/nokal/simod-http/tu-berlin/images/sha256-2cc67052c748a78c610f619778b119af455d7c5027a983295254f6b7c8d574f6?context=explore
 
 ### 📦️ Simulator (Scylla) (Andre/Alex)
 describe the API and the API-calls
+
+### 📦️ DockerFile (Scylla) (Tutku)
+Following instructers briefly explains the steps required to start the Flask listener in a Scylla Docker container (to run separately from PetriSim):
+
+First, build the Docker image using the Dockerfile. From this directory, in the terminal, call 'sudo docker build -t "WHAT IS FINAL API NAME- UPDATE HERE" .'
+
+This will get Linux, Java, python and all the dependencies and set up the Docker image for later use)
+
+After the Docker image is created, use 'sudo docker run -p 8000:8000 -d "WHAT IS FINAL API NAME- UPDATE HERE"'
+
+This runs the created image and exposes port 8000 for the Flask listener.
+You can use 'sudo docker ps' to see it's tag and 'sudo docker logs <container-tag>' to check what it prints. 
+
+! The above instructions assume you compile scylla successfully, using Apache Maven.
 
 ### 📦️ PetriSim Frontend (Furat)
 - React
