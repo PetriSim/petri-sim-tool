@@ -88,6 +88,7 @@ docker-compose -f docker-compose.yml up -d
 
 Docker compose will start the frontend, the discovery tool and the simulator together. Alternatively you can run each docker container seperately.
 
+:exclamation: :exclamation: :exclamation: As there is currently no discovery tool integrated with our tool, the mocker server supplies a parameter file to the frontend. Please ensure that the backend is running before proceeding. The sample parameter file is located in the file directory of the backend, so there is no need to upload an eventlog or specify the discovery or simulation tool. Simply click on "start new project" and then "start parameterization" to begin.
 
 ### Run from source
 
@@ -128,7 +129,8 @@ npm start
 ```
 
 ### 🚨 Troubleshooting (Furat)
-* Please be patient, especially the first time, if the page takes a long time to load.
+* **Frontend takes long time to load:** Please be patient, especially the first time, if the page takes a long time to load.
+* **Dashboard shows data that is not related to the uploaded eventlog:** the tool currently ignores the eventlog that is uploaded and uses sample data from the backend
 
 #### Problems related to docker compose 
 * Make sure all ports that are used in the docker compose file are not used by other programs.
