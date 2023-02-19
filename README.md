@@ -44,7 +44,7 @@ Docker images are available there, https://hub.docker.com/r/nokal/simod-http/tag
 ### 📦️ Simulator (Scylla) 
 Scylla is an extensible BPMN process simulator which relies on the building blocks of discrete event simulation. For its repo please refer: https://github.com/PetriSim/Scylla-container/edit/main/README.md
 
-Please refer the following link for the details of Scylla container, https://github.com/PetriSim/Scylla-container
+Also, please refer the following link for the details of Scylla simulator, API which provides an endpoint to the functionality of this container and a data converter from PetriSim parameters to Scylla global and simulation configuration:  https://github.com/PetriSim/Scylla-container
 
 ### 📦️ PetriSim frontend (Furat)
 The frontend of our web application has been built using the Javascript library React. We have also utilized the Chakra-UI design framework to ensure a modern look for our website. To facilitate deployment and portability, the frontend has been containerized using Docker. 
