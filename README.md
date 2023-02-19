@@ -89,9 +89,11 @@ Docker compose will start the frontend, the discovery tool and the simulator tog
 
 ### Run from source
 
-1. Install node
+:exclamation: Prerequisites:
+- Git installed
+- Npm installed
+- Node installed
 
-2. Install npm 
 
 3. Clone git repository
 
@@ -123,10 +125,10 @@ npm install --legacy-peer-deps
 npm start
 ```
 
-### 🚨 Troubleshooting 
+### 🚨 Troubleshooting (Furat)
 * Please be patient, especially the first time, if the page takes a long time to load.
 
-#### Problems related to docker compose (Furat)
+#### Problems related to docker compose 
 * Make sure all ports that are used in the docker compose file are not used by other programs.
 * You can download the docker containers separately and start them:
 
@@ -152,6 +154,6 @@ docker run -dp 3000:3000 ghcr.io/petrisim/frontend:latest
 docker run -dp 8000:8000 ghcr.io/petrisim/backend:latest
 ```
 
-#### Problems related to running the program from the source (Furat)
+#### Problems related to running the program from the source
 * If your are not able to install the node dependencies with npm install from the root directory, navigate to the backend and frontend directory seperately and do the install (and start) from there 
 
