@@ -111,16 +111,47 @@ cd petri-sim-tool
 npm install
 ```
 
+In order to install all packages successfully, it may be necessary to include the --legacy-peer-deps flag.
+
+```console
+npm install --legacy-peer-deps
+```
+
+
 6. run:
 ```console
 npm start
 ```
 
 ### 🚨 Troubleshooting 
+* Please be patient, especially the first time, if the page takes a long time to load.
 
 #### Problems related to docker compose (Furat)
 * Make sure all ports that are used in the docker compose file are not used by other programs.
+* You can download the docker containers seperately and start them:
+
+1. Download the frontend:
+
+```console
+docker pull ghcr.io/petrisim/frontend:latest
+```
+
+2. Download the other tools / backend:
+
+```console
+docker pull ghcr.io/petrisim/backend:latest
+```
+
+3. Start the frontend:
+```console
+docker run -dp 3000:3000 ghcr.io/petrisim/frontend:latest
+```
+
+4. Start the backend: 
+```console
+docker run -dp 8000:8000 ghcr.io/petrisim/backend:latest
+```
 
 #### Problems related to running the program from the source (Furat)
 * If your are not able to install the node dependencies with npm install from the root directory, navigate to the backend and frontend directory seperately and do the install (and start) from there 
-* 
+
