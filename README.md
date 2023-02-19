@@ -50,10 +50,12 @@ The frontend of our web application has been built using the Javascript library 
 
 With Docker Compose, the frontend can be easily connected to different discovery tools and simulators, although currently the other tools are not finished and hence not connected to the frontend. Instead, we are using a mock server called "backend" which has been written in Javascript and Express to simulate the backend and the API calls between the frontend and the other tools.
 
-To ensure a streamlined development process, we have set up a continuous integration (CI) pipeline with Github Actions. This automates the testing and containerizing of the frontend every time changes are pushed to the Github repository. This ensures that the code is always up-to-date and that any errors are caught early on.
+To ensure a streamlined development process, we have set up a continuous integration (CI) pipeline with Github Actions. This automates the testing and containerizing of the frontend every time changes are pushed to the Github repository. This ensures that the code is always up-to-date and that any errors are caught early on. 
 
 The starting point for the frontend is the App.jsx file, which serves as the entry point to our application. Depending on whether a parameterization session has already been started or not, either the starting page (StartView.jsx) is loaded, or the tool dashboard is displayed.
 The tool dashboard always consists of two main components: a navigation panel on the left side (Navigation.jsx), and a content display component. The content of the page is loaded dynamically based on the route path, which is defined in the App.jsx file. Additionally, depending on the page being accessed, there is a sidebar on the right side of the screen (EditorSidebar.jsx), which contains input fields for editing the parameters of the page.
+
+The frontend utilizes the browser's localStorage and sessionStorage to store data. The sessionStorage stores information about whether a session has already started and which project is currently selected. On the other hand, the localStorage stores all data for each project, including updates of the tool parameters, which are automatically transferred to the localStorage.
 
 
 
