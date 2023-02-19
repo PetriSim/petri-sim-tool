@@ -9,24 +9,23 @@
 
 ## :rocket: Introduction
 
-Description (Lana): 
 
-........
+PetriSim is parametrization and scenario definition tool. It can be used as an intermediary between process discovery tool and business process simulator. User interface allows manual parameter editing and integrated API provides smooth use experience between process discovery and simulation.
 
-........
-
-.......
 
 
 
 ## 📦️ Components
-PetriSim consists of multiple components 
+User interface represented by: 
+ - StartView
+ - Model-based Parameters Page
+ - Scenario Page
+ - Resource Page
+ 
+ The application is connected to the discovery tool - Simod and Business Process Sumulator - Skylla
 
-(Image of PetriSim and the other components)
+![image](https://user-images.githubusercontent.com/116650351/219905608-2426b477-2469-48eb-b0cd-48032be0797d.png)
 
-......
-
-......
 
 ### 📦️ Discovery Tool (Simod)   (Tutku/Alex)
 
