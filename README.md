@@ -128,7 +128,7 @@ npm start
 
 #### Problems related to docker compose (Furat)
 * Make sure all ports that are used in the docker compose file are not used by other programs.
-* You can download the docker containers seperately and start them:
+* You can download the docker containers separately and start them:
 
 1. Download the frontend:
 
