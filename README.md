@@ -22,7 +22,9 @@ User interface represented by:
  - Scenario Page
  - Resource Page
  
- The application is connected to the discovery tool - Simod and Business Process Sumulator - Skylla
+ The application is connected to the discovery tool - Simod and Business Process Sumulator - Scylla
+ 
+ Below software architecture is represented.
 
 ![image](https://user-images.githubusercontent.com/116650351/219905608-2426b477-2469-48eb-b0cd-48032be0797d.png)
 
