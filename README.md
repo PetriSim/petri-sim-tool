@@ -1,7 +1,7 @@
 
 <h2 align="center">:tada: PetriSim [Parametrization of Business Process Simulation] :tada:</h2>
 
-![image](doc/browser_Kopie2.svg)
+![image](doc/screenshot.png)
 
 ![CI](https://github.com/PetriSim/petri-sim-tool/actions/workflows/CI.yml/badge.svg)
 
@@ -58,14 +58,17 @@ You can use 'sudo docker ps' to see it's tag and 'sudo docker logs <container-ta
 
 ! The above instructions assume you compile scylla successfully, using Apache Maven.
 
-### 📦️ PetriSim Frontend (Furat)
-- React
-- Chakra-Ui
-- CI
+### 📦️ PetriSim frontend (Furat)
+The frontend of our web application has been built using the Javascript library React. We have also utilized the Chakra-UI design framework to ensure a modern look for our website. To facilitate deployment and portability, the frontend has been containerized using Docker. 
 
- 
-### :heavy_plus_sign: Possible extension of the tool  (Andre,Alex,Tutku,Lana,Furat)
-- Explain how to add other tools
+With Docker Compose, the frontend can be easily connected to different discovery tools and simulators, although currently the other tools are not finished and hence not connected to the frontend. Instead, we are using a mock server called "backend" which has been written in Javascript and Express to simulate the backend and the API calls between the frontend and the other tools.
+
+To ensure a streamlined development process, we have set up a continuous integration (CI) pipeline with Github Actions. This automates the testing and containerizing of the frontend every time changes are pushed to the Github repository. This ensures that the code is always up-to-date and that any errors are caught early on.
+
+The starting point for the frontend is the App.jsx file, which serves as the entry point to our application. Depending on whether a parameterization session has already been started or not, either the starting page (StartView.jsx) is loaded, or the tool dashboard is displayed.
+The tool dashboard always consists of two main components: a navigation panel on the left side (Navigation.jsx), and a content display component. The content of the page is loaded dynamically based on the route path, which is defined in the App.jsx file. Additionally, depending on the page being accessed, there is a sidebar on the right side of the screen (EditorSidebar.jsx), which contains input fields for editing the parameters of the page.
+
+
 
 ## :technologist: Getting started (Furat)
 
@@ -132,4 +135,5 @@ npm start
 * Make sure all ports that are used in the docker compose file are not used by other programs.
 
 #### Problems related to running the program from the source (Furat)
-* If your are not able to install the node dependencies with npm install from the root directory, navigate to the backend and frontend directory seperately and do the install (and run) from there 
+* If your are not able to install the node dependencies with npm install from the root directory, navigate to the backend and frontend directory seperately and do the install (and start) from there 
+* 
