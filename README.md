@@ -10,21 +10,23 @@
 ## :rocket: Introduction
 
 
-PetriSim is parametrization and scenario definition tool. It can be used as an intermediary between process discovery tool and business process simulator. User interface allows manual parameter editing and integrated API provides smooth use experience between process discovery and simulation.
+PetriSim is a parametrization and scenario definition tool for Business Process Simulations.
+It can be used as an intermediary between a process discovery tool and a business process simulator.
+The user interface allows manual parameter editing and an integrated API provides smooth use experience between process discovery and simulation.
 
 
 
 
 ## 📦️ Components
-User interface represented by: 
+The user interface is represented by: 
  - StartView
  - Model-based Parameters Page
  - Scenario Page
  - Resource Page
  
- The application is connected to the discovery tool - Simod and Business Process Sumulator - Scylla
+ The application is connected to the discovery tool - Simod and the Business Process Simulator - Scylla
  
- Below software architecture is represented.
+ Below the software architecture is represented.
 
 ![image](https://user-images.githubusercontent.com/116650351/219905608-2426b477-2469-48eb-b0cd-48032be0797d.png)
 
@@ -33,7 +35,7 @@ User interface represented by:
 
 Simod integration into PetriSim is still under work and dockerfile needs to be created.
 
-The Simod repository (https://github.com/AutomatedProcessImprovement/Simod) contains two projects, Simod and Simod HTTP, which is created by University of Tartu, Estonia. Simod HTTP is a lightweight web service wrapper around Simod that supports queued job execution. 
+The Simod repository (https://github.com/AutomatedProcessImprovement/Simod) contains two projects, Simod and Simod HTTP, which is created by the University of Tartu, Estonia. Simod HTTP is a lightweight web service wrapper around Simod that supports queued job execution. 
 
 Simod HTTP README.md section is available here, https://github.com/AutomatedProcessImprovement/Simod#simod-http.
 
@@ -47,16 +49,26 @@ Scylla is an extensible BPMN process simulator which relies on the building bloc
 Also, please refer the following link for the details of Scylla simulator, API which provides an endpoint to the functionality of this container and a data converter from PetriSim parameters to Scylla global and simulation configuration:  https://github.com/PetriSim/Scylla-container
 
 ### 📦️ PetriSim frontend (Furat)
-The frontend of our web application has been built using the Javascript library React. We have also utilized the Chakra-UI design framework to ensure a modern look for our website. To facilitate deployment and portability, the frontend has been containerized using Docker. 
+The frontend of our web application has been built using the Javascript library React. 
+We have also utilized the Chakra-UI design framework to ensure a modern look for our website. 
+To facilitate deployment and portability, the frontend has been containerized using Docker. 
 
-With Docker Compose, the frontend can be easily connected to different discovery tools and simulators, although currently the other tools are not finished and hence not connected to the frontend. Instead, we are using a mock server called "backend" which has been written in Javascript and Express to simulate the backend and the API calls between the frontend and the other tools.
+With Docker Compose, the frontend can be easily connected to different discovery tools and simulators, although currently the other tools are not finished and hence not connected to the frontend.
+Instead, we are using a mock server called "backend" which has been written in Javascript and Express to simulate the backend and the API calls between the frontend and the other tools.
 
-To ensure a streamlined development process, we have set up a continuous integration (CI) pipeline with Github Actions. This automates the testing and containerizing of the frontend every time changes are pushed to the Github repository. This ensures that the code is always up-to-date and that any errors are caught early on. 
+To ensure a streamlined development process, we have set up a continuous integration (CI) pipeline with Github Actions.
+This automates the testing and containerizing of the frontend every time changes are pushed to the Github repository.
+This ensures that the code is always up-to-date and that any errors are caught early on. 
 
-The starting point for the frontend is the App.jsx file, which serves as the entry point to our application. Depending on whether a parameterization session has already been started or not, either the starting page (StartView.jsx) is loaded, or the tool dashboard is displayed.
-The tool dashboard always consists of two main components: a navigation panel on the left side (Navigation.jsx), and a content display component. The content of the page is loaded dynamically based on the route path, which is defined in the App.jsx file. Additionally, depending on the page being accessed, there is a sidebar on the right side of the screen (EditorSidebar.jsx), which contains input fields for editing the parameters of the page.
+The starting point for the frontend is the App.jsx file, which serves as the entry point to our application.
+Depending on whether a parameterization session has already been started or not, either the starting page (StartView.jsx) is loaded, or the tool dashboard is displayed.
+The tool dashboard always consists of two main components: a navigation panel on the left side (Navigation.jsx), and a content display component.
+The content of the page is loaded dynamically based on the route path, which is defined in the App.jsx file.
+Additionally, depending on the page being accessed, there is a sidebar on the right side of the screen (EditorSidebar.jsx), which contains input fields for editing the parameters of the page.
 
-The frontend utilizes the browser's localStorage and sessionStorage to store data. The sessionStorage stores information about whether a session has already started and which project is currently selected. On the other hand, the localStorage stores all data for each project, including updates of the tool parameters, which are automatically transferred to the localStorage.
+The frontend utilizes the browser's localStorage and sessionStorage to store data.
+The sessionStorage stores information about if a session has already started and which project is currently selected.
+On the other hand, the localStorage stores all data for each project, including updates of the tool parameters, which are automatically transferred to the localStorage.
 
 
 
@@ -87,9 +99,12 @@ cd petri-sim-tool
 docker-compose -f docker-compose.yml up -d
 ```
 
-Docker compose will start the frontend, the discovery tool and the simulator together. Alternatively you can run each docker container seperately.
+Docker compose will start the frontend, the discovery tool and the simulator together.
+Alternatively you can run each docker container separately.
 
-:exclamation: :exclamation: :exclamation: As there is currently no discovery tool integrated with our tool, the mocker server supplies a parameter file to the frontend. Please ensure that the backend is running before proceeding. The sample parameter file is located in the file directory of the backend, so there is no need to upload an eventlog or specify the discovery or simulation tool. Simply click on "start new project" and then "start parameterization" to begin.
+:exclamation: :exclamation: :exclamation: As there is currently no discovery tool integrated with our tool, the mocker server supplies a parameter file to the frontend.
+Please ensure that the backend is running before proceeding. The sample parameter file is located in the file directory of the backend, so there is no need to upload an eventlog or specify the discovery or simulation tool.
+Simply click on "start new project" and then "start parameterization" to begin.
 
 ### Run from source
 
@@ -160,5 +175,5 @@ docker run -dp 8000:8000 ghcr.io/petrisim/backend:latest
 ```
 
 #### Problems related to running the program from the source
-* If your are not able to install the node dependencies with npm install from the root directory, navigate to the backend and frontend directory seperately and do the install (and start) from there 
+* If you are not able to install the node dependencies with npm install from the root directory, navigate to the backend and frontend directory separately and install them (and start) from there.
 
