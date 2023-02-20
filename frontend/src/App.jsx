@@ -8,11 +8,11 @@ import EditorSidebar from './components/EditorSidebar/EditorSidebar';
 import StartView from './components/StartView/StartView';
 import BpmnViewSelector from './components/ModelbasedParameters/BpmnViewSelector';
 import ScenarioPage from './components/ScenarioParameters/ScenarioPage';
-import OverviewPage from './components/Pages/OverviewPage';
-import OnlyDifferencesPage from './components/Pages/OnlyDifferencesPage'
+import OverviewPage from './components/Overview/OverviewPage';
+import OnlyDifferencesPage from './components/Comparison/OnlyDifferencesPage'
 import ModelbasedParametersTable from './components/ModelbasedParameters/ModelbasedParametersTable';
 import SimulationPage from './components/Simulation/SimulationPage';
-import ComparePage from "./components/Pages/ComparePage";
+import ComparePage from "./components/Comparison/ComparePage";
 import TimetableOverview from './components/ResourceParameters/TimeTable/TimetableOverview';
 import ResourceOverview from './components/ResourceParameters/Resources/ResourceOverview';
 import { Routes, Route, Navigate } from 'react-router-dom';
