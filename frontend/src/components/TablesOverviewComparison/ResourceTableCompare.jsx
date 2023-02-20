@@ -106,7 +106,7 @@ function ResourceTableCompare(props) {
             if (props.scenariosCompare.includes(element.scenarioName) === true) {
                 let res = element.resourceParameters.resources.find(item => item.id === resource)
                 if (res !== undefined) {
-                    return <Text fontWeight='semibold'>{element.scenarioName}: {resource}</Text>
+                    return <Text fontWeight='semibold'>{element.scenarioName}: <Text fontWeight='normal'> {resource}</Text></Text>
                 }
                 return <Text>{element.scenarioName}: this role is not defined</Text>
             }
@@ -164,7 +164,7 @@ function ResourceTableCompare(props) {
                 <Thead w="100%">
                     <Tr>
                         <Th>Department</Th>
-                        <Th>Role</Th>
+                        <Th>Resource</Th>
                         <Th>Quantity</Th>
                         <Th>Costs</Th>
                         <Th>Currency</Th>

@@ -39,13 +39,13 @@ function OverviewPage(props) {
     const [switches_temp] = useState([]);
     const [switchList, setSwitchList] = useState([]);
 
-    // method to handle changing switch state for scnearios comparison
+    // method to handle changing switch state for scenarios comparison
     const handleChange = (id) => {
         setSwitches(switches.map(item => {
             if (item.id === id) {
                 item.value = !item.value;
                 if (switchList.includes(id)) {
-                    setSwitchList(switchList.filter(id => id !== id));
+                    setSwitchList(switchList.filter(id => item.id !== id));
                 } else {
                     setSwitchList([...switchList, id]);
                 }
