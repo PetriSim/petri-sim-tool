@@ -12,7 +12,7 @@ import {
 function OverviewTable(props){
 
     return(
-
+// Displaying of general simulation parameters for all scenarios
               <Table variant='simple'>
                   <Thead w="100%">
                     <Tr>
@@ -26,6 +26,7 @@ function OverviewTable(props){
                     </Tr>
                 </Thead>
                 <Tbody>
+                    {/*Filling in the table*/}
                     {props.getSimulData("allScenarios").map((element) => {
                         return <Tr>
                             <Td align="left">{element.scenarioName} </Td>

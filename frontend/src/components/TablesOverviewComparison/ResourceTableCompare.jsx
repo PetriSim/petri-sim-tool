@@ -19,41 +19,53 @@ import {
 
 
 function ResourceTableCompare(props) {
+    //**POPOVER is a little windows which opens on click of Parameters which are different for the scenario on COmparison page
 
+    /// /*this method checks if pop over window is needed.
+    //      comparison logic: if Simulation Scenario  Parameter differ at any of compared scenarios it is added to scenDiff
+    //      Here method incoming parameter is field_id. If this field_id is in the scenDiff, that means that this parameter
+    //      (field_id) is different in some compared scenarios. That means that we need a window which shows this parameter value
+    //      in all compared scenarios*/
     const isPopover = (field_id) => {
         if (props.scenDiff.includes(field_id)) {
             return true
         } else return false
     };
+
+    // Method finds department for the resource in current scenario
     let department
     const getDepartment = (resource_id) => {
         for (let role of props.getData("currentScenario").resourceParameters.roles) {
             for (let resource of role.resources) {
                 if (resource.id === resource_id) {
                     return department = role.id;
-                } else  department = "Unassigned"
+                } else department = "Unassigned"
             }
         }
-     return department
+        return department
     }
     let return_text, currency, x
+
+    //Filling in Department in Pop over window in other compared scenarios (if department differ for the specific resource)
     const fillDepartment = (resource_id, department_id) => {
         return props.getData("allScenarios").map((element) => {
-        if (props.scenariosCompare.includes(element.scenarioName) === true) {
-               let role = element.resourceParameters.roles.find(item => item.id === department_id)
+            if (props.scenariosCompare.includes(element.scenarioName) === true) {
+                let role = element.resourceParameters.roles.find(item => item.id === department_id)
                 if (role !== undefined) {
                     for (let resource of role.resources) {
                         if (resource.id === resource_id) {
+                            // Role exists, but no at the same department as in current Scenario. Department exists too
                             return return_text = element.scenarioName + ": The Role exist in " + role.id + "."
                         }
-                       // else return_text = element.scenarioName + ": The Role does not exist in the scenario."
-                       // return <div>{return_text}</div>
                     }
                     for (let dep of element.resourceParameters.roles) {
                         for (let res of dep.resources) {
                             if (res.id === resource_id) {
+                                // Resource exists in different department as in current scenario
                                 return return_text = element.scenarioName + ": The Role exist in" + dep.id + "."
-                            } else return_text = element.scenarioName + ": The Role does not exist in the scenario."
+                            }
+                            // Role does not exist neither in department nor in scenario, but department exist in the the scenario
+                            else return_text = element.scenarioName + ": The Role does not exist in the scenario."
                         }
 
                     }
@@ -62,17 +74,22 @@ function ResourceTableCompare(props) {
                     for (let dep of element.resourceParameters.roles) {
                         for (let resource of dep.resources) {
                             if (resource.id === resource_id) {
+                                // department(same as in current scenario) does not exist
                                 return return_text = element.scenarioName + ": The Role exist in" + dep.id + "."
-                            } else return_text = element.scenarioName + ": The Role and the Department do not exist in the scenario."
+                            }
+                            // both role and department do not esist in the scenario
+                            else return_text = element.scenarioName + ": The Role and the Department do not exist in the scenario."
                         }
-                       // return return_text
+                        // return return_text
                     }
-                   // return <div><Text>{return_text}</Text></div>
+                    // return <div><Text>{return_text}</Text></div>
                 }
-                 return <div>{return_text}</div>
+                return <div>{return_text}</div>
             }
         })
     }
+
+    // method to check do we need popover window (if any of resource parameters are  in ResourceCompared, meaning that they differ from current scenario)
     const isDifferentPopover = (field_id, id, value) => {
         let isDifferent = false
         props.ResourceCompared.map((role) => {
@@ -83,23 +100,24 @@ function ResourceTableCompare(props) {
         return isDifferent
     };
 
-
+// Fill in department Pop over window
     const resPopover = (resource) => {
         return props.getData("allScenarios").map((element) => {
             if (props.scenariosCompare.includes(element.scenarioName) === true) {
                 let res = element.resourceParameters.resources.find(item => item.id === resource)
                 if (res !== undefined) {
-                    return <Text ontWeight='semibold'>{element.scenarioName}: {resource}</Text>
+                    return <Text fontWeight='semibold'>{element.scenarioName}: {resource}</Text>
                 }
                 return <Text>{element.scenarioName}: this role is not defined</Text>
             }
         })
     }
 
-    const timetablePopover = (role) => {
+    // Fill in timatable popover window
+    const timetablePopover = (resource) => {
         return props.getData("allScenarios").map((element) => {
             if (props.scenariosCompare.includes(element.scenarioName) === true) {
-                let res = element.resourceParameters.roles.find(item => item.id === role)
+                let res = element.resourceParameters.resources.find(item => item.id === resource)
                 if (res !== undefined) {
                     return <div>{element.scenarioName}: {res.schedule}</div>
                 }
@@ -107,20 +125,9 @@ function ResourceTableCompare(props) {
             }
         })
     }
-  /*  {
-        props.getData("allScenarios").map((element) => {
-            {
-                props.scenariosCompare.includes(element.scenarioName) === true ? element.resourceParameters.resources.map((res) => {
-                        x = element.scenarioName + ":" + " " + res.id + ":" + " " + res.costHour
-                    })
-                    : x = null
-            }
-            return <div>{x}</div>
-        })
-    }*/
-    let res = []
-    let resource = []
 
+    let res = []
+// Fill in cost popover window
     const costsPopover = (resource) => {
         return props.getData("allScenarios").map((element) => {
             if (props.scenariosCompare.includes(element.scenarioName) === true) {
@@ -135,6 +142,7 @@ function ResourceTableCompare(props) {
         })
     }
 
+    //fill in Quantity popover windows
     const quantityPopover = (resource) => {
         return props.getData("allScenarios").map((element) => {
             if (props.scenariosCompare.includes(element.scenarioName) === true) {
@@ -152,7 +160,6 @@ function ResourceTableCompare(props) {
 
     return (
         <>
-            {x}
             <Table variant='simple'>
                 <Thead w="100%">
                     <Tr>
@@ -169,6 +176,12 @@ function ResourceTableCompare(props) {
                         return <Tr>
                             {/*Department*/}
                             <Td>
+                                {/*if isDifferentPopover returns false, we just display Department of the Resource ,
+                        as it is the same among all compared scenarios. If isDifferentPopover returns true we create a button.
+                        Text of this button is value of the Department(role) parameter of current scenario.
+                         If user clicks on button it works like a trigger, and shows values of Department of the Resource of all compared scenarios
+                         The same logic is applied for all Resource parameters
+                  */}
                                 {!isDifferentPopover("department", resource.id, getDepartment(resource.id)) ?
                                     <Text>{getDepartment(resource.id)}</Text>
                                     :

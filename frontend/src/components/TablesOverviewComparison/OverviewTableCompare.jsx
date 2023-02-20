@@ -19,17 +19,24 @@ import {
 } from '@chakra-ui/react'
 
 
-function OverviewTableCompare(props){
-    let scenario_name, scenario_date, x, distr_data = []
+function OverviewTableCompare(props) {
 
+    // declaration of variables
+    let scenario_name, x, distr_data = []
+
+    /*this method checks if pop over window is needed.
+     comparison logic: if Simulation Scenario  Parameter differ at any of compared scenarios it is added to scenDiff
+     Here method incoming parameter is field_id. If this field_id is in the scenDiff, that means that this parameter
+     (field_id) is different in some compared scenarios. That means that we need a window which shows this parameter value
+     in all compared scenarios*/
     const isPopover = (field_id) => {
         if (props.scenDiff.includes(field_id)) {
             return true
         } else return false
     };
 
-    return(
-
+    return (
+        //Table for scenario simulation parameters
         <Table variant='simple'>
             <Thead w="100%">
                 <Tr>
@@ -45,6 +52,12 @@ function OverviewTableCompare(props){
             <Tbody>
                 <Tr>
                     <Td>
+                        {/*if isPopover returns false, we just display scenarioName,
+                        as it is the same among all compared scenarios. If isPopover returns true we create a button.
+                        Text of this button is value of the scenarioName parameter of current scenario.
+                         If user clicks on button it works like a trigger, and shows values of scenarioName of all compared scenarios
+                         The same logic is applied for all simulation scenario parameters
+                  */}
                         {isPopover("scenarioName") === false ?
                             <Text>{props.getData("currentScenario").scenarioName}</Text>
                             :
@@ -57,14 +70,15 @@ function OverviewTableCompare(props){
                                         <PopoverArrow/>
                                         <PopoverCloseButton/>
                                         <PopoverBody>
-                                            {props.getData("allScenarios").map((element) => {{
-                                                props.scenariosCompare.includes(element.scenarioName) === true ?
-                                                    scenario_name = element.scenarioName  :
-                                                    scenario_name = null }
+                                            {props.getData("allScenarios").map((element) => {
+                                                {
+                                                    props.scenariosCompare.includes(element.scenarioName) === true ?
+                                                        scenario_name = element.scenarioName :
+                                                        scenario_name = null
+                                                }
                                                 return <div>{scenario_name}</div>
                                             })
                                             }
-
                                         </PopoverBody>
                                     </PopoverContent>
                                 </Portal>
@@ -72,6 +86,12 @@ function OverviewTableCompare(props){
                         }
                     </Td>
                     <Td>
+                        {/*if isPopover returns false, we just display starting Date,
+                        as it is the same among all compared scenarios. If isPopover returns true we create a button.
+                        Text of this button is value of the startingDate parameter of current scenario.
+                         If user clicks on button it works like a trigger, and shows values of scenarioName of all compared scenarios
+                         The same logic is applied for all simulation scenario parameters
+                  */}
                         {isPopover("startingDate") === false ?
                             <Text>{props.getData("currentScenario").startingDate}</Text>
                             :
@@ -84,10 +104,12 @@ function OverviewTableCompare(props){
                                         <PopoverArrow/>
                                         <PopoverCloseButton/>
                                         <PopoverBody>
-                                            {props.getData("allScenarios").map((element) => {{
-                                                x = null
-                                                props.scenariosCompare.includes(element.scenarioName) === true ? x = element.scenarioName + ":" + " " + element.startingDate  :
-                                                    x = null }
+                                            {props.getData("allScenarios").map((element) => {
+                                                {
+                                                    x = null
+                                                    props.scenariosCompare.includes(element.scenarioName) === true ? x = element.scenarioName + ":" + " " + element.startingDate :
+                                                        x = null
+                                                }
                                                 return <div>{x}</div>
                                             })
                                             }
@@ -110,10 +132,12 @@ function OverviewTableCompare(props){
                                         <PopoverArrow/>
                                         <PopoverCloseButton/>
                                         <PopoverBody>
-                                            {props.getData("allScenarios").map((element) => {{
-                                                x = null
-                                                props.scenariosCompare.includes(element.scenarioName) === true ? x = element.scenarioName + ":" + " " + element.startingTime  :
-                                                    x = null }
+                                            {props.getData("allScenarios").map((element) => {
+                                                {
+                                                    x = null
+                                                    props.scenariosCompare.includes(element.scenarioName) === true ? x = element.scenarioName + ":" + " " + element.startingTime :
+                                                        x = null
+                                                }
                                                 return <div>{x}</div>
                                             })
                                             }
@@ -137,10 +161,12 @@ function OverviewTableCompare(props){
                                         <PopoverArrow/>
                                         <PopoverCloseButton/>
                                         <PopoverBody>
-                                            {props.getData("allScenarios").map((element) => {{
-                                                x = null
-                                                props.scenariosCompare.includes(element.scenarioName) === true ? x = element.scenarioName + ":" + " " + element.numberOfInstances  :
-                                                    x = null }
+                                            {props.getData("allScenarios").map((element) => {
+                                                {
+                                                    x = null
+                                                    props.scenariosCompare.includes(element.scenarioName) === true ? x = element.scenarioName + ":" + " " + element.numberOfInstances :
+                                                        x = null
+                                                }
                                                 return <div>{x}</div>
                                             })
                                             }
@@ -163,10 +189,12 @@ function OverviewTableCompare(props){
                                         <PopoverArrow/>
                                         <PopoverCloseButton/>
                                         <PopoverBody>
-                                            {props.getData("allScenarios").map((element) => {{
-                                                x = null
-                                                props.scenariosCompare.includes(element.scenarioName) === true ? x = element.scenarioName + ":" + " " + element.interArrivalTime.distributionType  :
-                                                    x = null }
+                                            {props.getData("allScenarios").map((element) => {
+                                                {
+                                                    x = null
+                                                    props.scenariosCompare.includes(element.scenarioName) === true ? x = element.scenarioName + ":" + " " + element.interArrivalTime.distributionType :
+                                                        x = null
+                                                }
                                                 return <div>{x}</div>
                                             })
                                             }
@@ -184,7 +212,7 @@ function OverviewTableCompare(props){
                             :
                             <Popover>
                                 <PopoverTrigger>
-                                    <Button> {props.getData("currentScenario").interArrivalTime.values.map((elem, index) => {
+                                    <Button> {props.getData("currentScenario").interArrivalTime.values.map((elem) => {
                                         return <Text> {elem.id} : {elem.value} ⠀</Text>
                                     })}</Button>
                                 </PopoverTrigger>
@@ -193,11 +221,13 @@ function OverviewTableCompare(props){
                                         <PopoverArrow/>
                                         <PopoverCloseButton/>
                                         <PopoverBody>
-                                            {props.getData("allScenarios").map((element) => {{
-                                                props.scenariosCompare.includes(element.scenarioName) === true ? element.interArrivalTime.values.map((distribution) => {
-                                                        distr_data.push(element.scenarioName + ":" + " " + distribution.id + ":"  + " " + distribution.value)  })
-                                                    : x = null }
-
+                                            {props.getData("allScenarios").map((element) => {
+                                                {
+                                                    props.scenariosCompare.includes(element.scenarioName) === true ? element.interArrivalTime.values.map((distribution) => {
+                                                            distr_data.push(element.scenarioName + ":" + " " + distribution.id + ":" + " " + distribution.value)
+                                                        })
+                                                        : x = null
+                                                }
                                             })}
                                             {distr_data.map(item => (
                                                 <div>{item}</div>
@@ -222,10 +252,12 @@ function OverviewTableCompare(props){
                                         <PopoverArrow/>
                                         <PopoverCloseButton/>
                                         <PopoverBody>
-                                            {props.getData("allScenarios").map((element) => {{
-                                                x = null
-                                                props.scenariosCompare.includes(element.scenarioName) === true ? x = element.scenarioName + ":" + " " + element.timeUnit :
-                                                    x = null }
+                                            {props.getData("allScenarios").map((element) => {
+                                                {
+                                                    x = null
+                                                    props.scenariosCompare.includes(element.scenarioName) === true ? x = element.scenarioName + ":" + " " + element.timeUnit :
+                                                        x = null
+                                                }
                                                 return <div>{x}</div>
                                             })
                                             }
@@ -238,7 +270,7 @@ function OverviewTableCompare(props){
                 </Tr>
             </Tbody>
         </Table>
-                    )
+    )
 }
 
 export default OverviewTableCompare

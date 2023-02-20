@@ -13,8 +13,8 @@ import {
 function OverviewResourceTable(props) {
 
     return (
+        // Represenation of Resource Parameters for the chosen in the tabbar scenario
         <Table variant='simple' >
-        
             <Thead>
                 <Tr>
                     <Th>Department</Th>
@@ -26,6 +26,7 @@ function OverviewResourceTable(props) {
                 </Tr>
             </Thead>
             <Tbody>
+                {/*Filling in the table*/}
                 {props.getResourceData("allScenarios")[props.scenario_id].resourceParameters.roles.map((element) => {
                     return <Tr>
                         <Td>{element.id}</Td>
