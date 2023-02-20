@@ -414,13 +414,13 @@ function ComparePage(props) {
                     <Spacer/>
                     <Spacer/>
                     {/*Button Show differences*/}
-                    <Button as={Link} to="/differences"
+                    <Button as={Link} to="/overview/compare/differences"
                             colorScheme='white'
                             variant='outline'
                             border='1px'
                             borderColor='#B4C7C9'
                             color='#6E6E6F'
-                            onClick={() => '/differences'}
+                            onClick={() => '/overview/compare/differences'}
                             _hover={{bg: '#B4C7C9'}}>
                         Show differences
                     </Button>

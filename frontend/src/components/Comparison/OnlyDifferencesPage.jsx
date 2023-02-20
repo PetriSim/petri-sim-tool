@@ -89,7 +89,7 @@ function OnlyDifferencesPage(props) {
             {/*Button Go back*/}
             <Box h="93vh" overflowY="auto" p="5">
                 <Stack direction='row' spacing={4} w="70vw">
-                    <Button as={Link} to="/compare"
+                    <Button as={Link} to="/overview/compare"
                             colorScheme='#ECF4F4'
                             variant='outline'
                             border='1px'

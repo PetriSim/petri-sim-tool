@@ -125,7 +125,7 @@ function OverviewPage(props) {
                                     </Flex>
                                 </ModalBody>
                                 <ModalFooter>
-                                    <Button colorScheme='blue' mr={3} onClick={onClose} as={Link} to="/compare">
+                                    <Button colorScheme='blue' mr={3} onClick={onClose} as={Link} to="/overview/compare">
                                         Compare
                                     </Button>
                                     <Button variant='ghost' onClick={onClose}>Close</Button>
