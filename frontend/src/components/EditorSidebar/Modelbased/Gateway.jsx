@@ -1,11 +1,11 @@
 import { Input, FormControl, FormLabel, Box, Stack } from "@chakra-ui/react";
-import React from "react";
+import {React, useState, useEffect} from "react";
 
 const Gateway = ({ selectedObject, getData }) => {
-  const [probabilities, setProbabilities] = React.useState([]);
-  const [outgoing, setOutgoing] = React.useState([]);
+  const [probabilities, setProbabilities] = useState([]);
+  const [outgoing, setOutgoing] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const selectedGateway = getData("currentModel").modelParameter.gateways.find((value) => value.id === selectedObject.id);
     if (selectedGateway) {
       setProbabilities(

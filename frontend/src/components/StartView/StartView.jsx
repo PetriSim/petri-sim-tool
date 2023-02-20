@@ -26,19 +26,7 @@ function StartView(props) {
     setExistingProject(true)
   }
 
-  const [projectList, setProjetList] = useState([])
 
-  const getFiles = () => {
-         axios.get('http://localhost:8000/getProjects')
-              .then(response => {
-                  setProjetList(response.data);
-              })
-              .catch(error => {
-                  console.log(error);
-              });
-             
-
-   }
 
    const startNewData = () => {  
     axios
@@ -52,26 +40,23 @@ function StartView(props) {
         console.log("error", err);
     });
 
-  
-
+    // Set started to true => dashboard is loaded
     props.setStarted("true")
-
-    sessionStorage.setItem('st', true);
+    sessionStorage.setItem('st', true); // ensures that dashboard is loaded even if the page is reloaded 
 
    }
 
 
+   // Function for selecting an existing project
    const selectProject = (project) => {
-    sessionStorage.setItem('currentProject', project); 
-    props.setData(JSON.parse(localStorage.getItem(project)))
+    sessionStorage.setItem('currentProject', project); // selected project is set as current project
+    props.setData(JSON.parse(localStorage.getItem(project))) // corresponding project data is loaded from local storage
     props.setName(project)
-    props.setStarted("true")
-    sessionStorage.setItem('st', true);
+    props.setStarted("true") // Set started to true => dashboard is loaded
+    sessionStorage.setItem('st', true);  // ensures that dashboard is loaded even if the page is reloaded 
    }
 
-  useEffect(() => {
-     getFiles()
-  }, [])
+
   
 
   function dateConverter(d){

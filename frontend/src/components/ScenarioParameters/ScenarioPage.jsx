@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react'
-import { useToast, Flex, Box, Heading, Text, Card, CardBody, Table, Thead, Tbody, Tr, Th, Td, Radio, RadioGroup, Stack, Button, CardHeader, TableContainer } from "@chakra-ui/react";
+import { useToast, Box, Heading, Text, Card, CardBody, Table, Thead, Tbody, Tr, Th, Td, Radio, RadioGroup, Stack, Button, CardHeader, TableContainer } from "@chakra-ui/react";
 import { DeleteIcon } from '@chakra-ui/icons'
 
 const ScenarioPage = ({ setSelectedScenario, setCurrent, getData, setData, selectedScenario }) => {
     const toast = useToast();
 
+    // Run once when the component mounts to set selected scenario and set currentPage
+    // setCurrent is important for displaying the right editorsidebar on the right side
     useEffect(() => {
         setSelectedScenario(0)
         setCurrent("Edit Scenario")  
     }, [])
 
+    // Define a function to delete a scenario
     const deleteScenario = (index) => {
         let data = [...getData("allScenario")];
 
+        // ensure that at least one scenario exist
         if (data.length > 1) {
             data.splice(index, 1);
             setData(data);

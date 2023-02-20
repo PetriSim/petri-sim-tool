@@ -26,6 +26,7 @@ import {
   function Navigation({setCurrent, data, bpmns,setScenario, currentScenario, setBpmn, scenarios, current, currentBpmn, setStarted}) {
 
 
+    // Define Navigation items that will be displayed at the top of the navigation
 
     const LinkItems = [
         { name: 'Overview', icon: FiEye, path: '/overview', event: () =>  setCurrent("Overview") },
@@ -34,6 +35,8 @@ import {
         { name: 'Modelbased Parameters', icon: FiStar, path: '/modelbased', event: () =>  setCurrent("Modelbased Parameters") },
         { name: 'Run Simulation', icon: FiPlay, path: '/simulation', event: () =>  setCurrent("Run Simulation") }
       ];
+
+      // Define Navigation items that will be displayed at the bottom of the navigation
      
       const LinkItems2 = [
         { name: 'Add BPMN', icon: FiFileText, path: '#', event: () => {} },
@@ -46,6 +49,8 @@ import {
         return <Text fontSize={{base: "xs", md:"sm"}} textAlign="center" color="RGBA(0, 0, 0, 0.80)" fontWeight="bold">PetriSim</Text> 
       };
 
+
+      // function to download the internal data as a json file
       const save = () =>{
         const jsonData = JSON.stringify(data);
         const blob = new Blob([jsonData], { type: "application/json" });

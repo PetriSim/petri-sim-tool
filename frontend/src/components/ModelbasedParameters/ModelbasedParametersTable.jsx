@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import ViewButtons from './ViewButtons';
 
 const ModelbasedParametersTable = ({ currentScenario, currentBpmn, getData }) => {
-  const [editable, setEditable] = useState(false);
+  const [editable, setEditable] = useState(false); // whether the table is in edit mode
+
+  // states store array of activites, gateways, events and sequences
   const [activities, setActivities] = useState([]);
   const [gateways, setGateways] = useState([]);
   const [events, setEvents] = useState([]);
@@ -16,6 +18,8 @@ const ModelbasedParametersTable = ({ currentScenario, currentBpmn, getData }) =>
     setSequences(getData('currentModel').modelParameter.sequences);
   }, [currentScenario, currentBpmn, getData]);
 
+
+  // function to update a value in the table
   const handleChange = (event, index, group, type) => {
     let value = event.target.value;
 
@@ -25,9 +29,7 @@ const ModelbasedParametersTable = ({ currentScenario, currentBpmn, getData }) =>
     console.log(copy)
 
     if(group === 'activities') setActivities(copy)
-    //setActivities(group === 'activities' ? copy : getData('currentModel').modelParameter.activities);
-
-
+  
     setGateways(group === 'gateways' ? copy : getData('currentModel').modelParameter.gateways);
     setEvents(group === 'events' ? copy : getData('currentModel').modelParameter.events);
     setSequences(getData('currentModel').modelParameter.sequences);
@@ -42,6 +44,7 @@ const ModelbasedParametersTable = ({ currentScenario, currentBpmn, getData }) =>
     spacing={5}
     >
 
+ {/* A button to toggle between edit mode and view mode */}
     <Box display="flex" justifyContent="flex-end" w="100%">
         <Button variant="outline" bg="#FFFF" onClick={() => setEditable(!editable)}><Text color="RGBA(0, 0, 0, 0.64)" fontWeight="bold">{editable? "View mode" : "Edit mode"}</Text></Button>
     </Box>
