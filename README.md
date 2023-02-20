@@ -31,12 +31,11 @@ The user interface is represented by:
 ![image](https://user-images.githubusercontent.com/116650351/219905608-2426b477-2469-48eb-b0cd-48032be0797d.png)
 
 
-### 📦️ Discovery Tool (Simod)   (Tutku/Alex)
+### 📦️ Discovery Tool (Simod) 
 
 Simod integration into PetriSim is still under work and dockerfile needs to be created.
-Nevertheless a dataconverter has already been created.
-The data converter takes as an input an .json file and .bpmn file. The dataconverter - which has been written in javaScript - will then translate these two files into 
-a single .json file which will later be used as an input to the PetriSim tool.
+Nevertheless a dataconverter has already been created. Please refer for the repository: https://github.com/PetriSim/Simod_converter
+The data converter takes as an input an .json file and .bpmn file. The dataconverter - which has been written in javaScript - will then translate these two files into a single .json file which will later be used as an input to the PetriSim tool.
 
 The Simod repository (https://github.com/AutomatedProcessImprovement/Simod) contains two projects, Simod and Simod HTTP, which is created by the University of Tartu, Estonia. Simod HTTP is a lightweight web service wrapper around Simod that supports queued job execution. 
 
@@ -51,13 +50,12 @@ Scylla is an extensible BPMN process simulator which relies on the building bloc
 
 Also, please refer the following link for the details of Scylla simulator, API which provides an endpoint to the functionality of this container and a data converter from PetriSim parameters to Scylla global and simulation configuration:  https://github.com/PetriSim/Scylla-container
 
-### 📦️ PetriSim frontend (Furat)
+### 📦️ PetriSim frontend 
 The frontend of our web application has been built using the Javascript library React. 
 We have also utilized the Chakra-UI design framework to ensure a modern look for our website. 
 To facilitate deployment and portability, the frontend has been containerized using Docker. 
 
-With Docker Compose, the frontend can be easily connected to different discovery tools and simulators, although currently the other tools are not finished and hence not connected to the frontend.
-Instead, we are using a mock server called "backend" which has been written in Javascript and Express to simulate the backend and the API calls between the frontend and the other tools.
+With Docker Compose, the frontend can be easily connected to different discovery tools and simulators, although currently Simod container has not yet been finished and hence not connected to the frontend. On the other hand, Scylla converter has been finalised but the integration with the front end app is still missing. Instead, we are using a mock server called "backend" which has been written in Javascript and Express to simulate the backend and the API calls between the frontend and the other tools.
 
 To ensure a streamlined development process, we have set up a continuous integration (CI) pipeline with Github Actions.
 This automates the testing and containerizing of the frontend every time changes are pushed to the Github repository.
@@ -75,7 +73,7 @@ On the other hand, the localStorage stores all data for each project, including 
 
 
 
-## :technologist: Getting started (Furat)
+## :technologist: Getting started 
 
 ### :star: Run with Docker (recommended) :star:
 In order to run out tool with all related components, we recommend to run it by using docker compose.
@@ -147,7 +145,7 @@ npm install --legacy-peer-deps
 npm start
 ```
 
-### 🚨 Troubleshooting (Furat)
+### 🚨 Troubleshooting 
 * **Frontend takes long time to load:** Please be patient, especially the first time, if the page takes a long time to load.
 * **Dashboard shows data that is not related to the uploaded eventlog:** the tool currently ignores the eventlog that is uploaded and uses sample data from the backend
 
