@@ -34,6 +34,9 @@ The user interface is represented by:
 ### 📦️ Discovery Tool (Simod)   (Tutku/Alex)
 
 Simod integration into PetriSim is still under work and dockerfile needs to be created.
+Nevertheless a dataconverter has already been created.
+The data converter takes as an input an .json file and .bpmn file. The dataconverter - which has been written in javaScript - will then translate these two files into 
+a single .json file which will later be used as an input to the PetriSim tool.
 
 The Simod repository (https://github.com/AutomatedProcessImprovement/Simod) contains two projects, Simod and Simod HTTP, which is created by the University of Tartu, Estonia. Simod HTTP is a lightweight web service wrapper around Simod that supports queued job execution. 
 
