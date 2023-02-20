@@ -18,7 +18,7 @@ function OverviewResourceTable(props) {
             <Thead>
                 <Tr>
                     <Th>Department</Th>
-                    <Th>Role</Th>
+                    <Th>Resource</Th>
                     <Th>Cost</Th>
                     <Th>Currency</Th>
                     <Th>Quantity</Th>
