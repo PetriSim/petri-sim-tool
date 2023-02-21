@@ -44,12 +44,7 @@ describe('add and change scenario', () => {
 })
 
 describe('clicking through pages', () => {
-    //TODO: make overview first page to show
-    /*it('shows simulation overview page', () => {
-         cy.url().should('eq', 'http://localhost:3000/overview')
-         cy.findByRole('button', {name: /simulation overview/i}).click()
-         cy.url().should('eq', 'http://localhost:3000/overview')
-     })*/
+
     it('shows scenario parameters page', () => {
         cy.findByRole('button', { name: /scenario parameters/i }).click()
         cy.url().should('eq', 'http://localhost:3000/scenario')
