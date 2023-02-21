@@ -157,7 +157,7 @@ describe('Compare Scenarios', () => {
             cy.findAllByRole('checkbox').eq(0).should('be.checked')
             cy.findAllByRole('checkbox').eq(1).should('not.be.checked')
             cy.findByRole('link', { name: /compare/i }).click()
-            cy.url().should('eq', 'http://localhost:3000/compare')
+            cy.url().should('eq', 'http://localhost:3000/overview/compare')
         })
     })
 })
